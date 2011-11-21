@@ -1,0 +1,7 @@
+tsctp (0.5.0-0ubuntu1) precise; urgency=low
+
+  * New upstream release.
+  * Initial Debian release (Closes: #xxxxxx).
+  * Initial Ubuntu release (LP: #xxxxxx).
+
+ -- Thomas Dreibholz <dreibh@iem.uni-due.de>  Mon, 21 Nov 2011 08:08:08 +0200
