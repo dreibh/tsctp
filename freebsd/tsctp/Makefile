@@ -23,7 +23,7 @@ USE_GMAKE=	no
 LICENSE=	BSD
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-PLIST_FILES=	tsctp
+PLIST_FILES=	bin/tsctp
 MAN8=		tsctp.8
 
 .include <bsd.port.mk>
