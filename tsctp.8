@@ -1,0 +1,58 @@
+.\" $Id$
+.\" ###### Setup ############################################################
+.Dd November 20, 2011
+.Dt tsctp 8
+.Os tsctp
+.\" ###### Name #############################################################
+.Sh NAME
+.Nm tsctp
+.Nd SCTP Test Tool
+.\" ###### Synopsis #########################################################
+.Sh SYNOPSIS
+.Nm tsctp
+.Op Options
+.Op Address
+.\" ###### Description ######################################################
+.Sh DESCRIPTION
+.Nm tsctp
+is an SCTP test tool.
+.Pp
+.\" ###### Arguments ########################################################
+.Sh ARGUMENTS
+The following arguments have to be provided:
+.Bl -tag -width indent
+.It Options
+.Bl -tag -width indent
+.It -4 IPv4 only
+.It -6 IPv6 only
+.It -a set adaptation layer indication
+.It -A chunk type to authenticate
+.It -D turns Nagle off
+.It -f fragmentation point
+.It -l size of send/receive buffer
+.It -L local address
+.It -n number of messages sent (0 means infinite)/received
+.It -p port number
+.It -R socket recv buffer
+.It -S socket send buffer
+.It -T time to send messages
+.It -u use unordered user messages
+.It -v verbose
+.It -V very verbose
+.El
+.It Address
+Destination address.
+.El
+.\" ###### Arguments ########################################################
+.Sh EXAMPLES
+.Bl -tag -width indent
+.It tsctp
+.El
+.\" ###### Authors ##########################################################
+.Sh AUTHORS
+Michael Tüxen, Randall Stewart, Thomas Dreibholz
+.br
+http://www.sctp.de
+.br
+mailto://tuexen@fh-muenster.de
+.br
