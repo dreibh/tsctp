@@ -23,7 +23,6 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $Id$
  */
 
 #include <sys/types.h>
@@ -71,6 +70,9 @@ char Usage[] =
 "        -S      socket send buffer\n"
 "        -T      time to send messages\n"
 "        -u      use unordered user messages\n"
+#if defined(SCTP_REMOTE_UDP_ENCAPS_PORT)
+"        -U      use UDP encapsulation with given port\n"
+#endif
 "        -v      verbose\n"
 "        -V      very verbose\n"
 "        -4      IPv4 only\n"
@@ -164,7 +166,11 @@ int main(int argc, char **argv)
 	unsigned int nr_local_addr = 0;
 	struct timeval start_time, now, diff_time;
 	int length, client;
-	short local_port, remote_port, port;
+	uint16_t local_port, remote_port, port;
+#ifdef SCTP_REMOTE_UDP_ENCAPS_PORT
+	uint16_t udp_port = 0;
+	struct sctp_udpencaps encaps;
+#endif
 	double seconds;
 	double throughput;
 	const int on = 1;
@@ -196,11 +202,15 @@ int main(int argc, char **argv)
 
 	memset((void *) &remote_addr, 0, sizeof(remote_addr));
 
+	while ((c = getopt(argc, argv, "a:"
 #ifdef SCTP_AUTH_CHUNK
-	while ((c = getopt(argc, argv, "a:A:Df:l:L:n:p:R:S:T:uvV46")) != -1)
-#else
-	while ((c = getopt(argc, argv, "a:Df:l:L:n:p:R:S:T:uvV46")) != -1)
+	                               "A:"
 #endif
+	                               "Df:l:L:n:p:R:S:T:u"
+#ifdef SCTP_REMOTE_UDP_ENCAPS_PORT 
+                                   "U:"
+#endif
+                                   "vV46")) != -1)
 		switch(c) {
 			case 'a':
 				ind.ssb_adaptation_ind = atoi(optarg);
@@ -268,6 +278,11 @@ int main(int argc, char **argv)
 			case 'u':
 				unordered = 1;
 				break;
+#ifdef SCTP_REMOTE_UDP_ENCAPS_PORT
+			case 'U':
+				udp_port = atoi(optarg);
+				break;
+#endif
 			case 'v':
 				verbose = 1;
 				break;
@@ -369,9 +384,17 @@ int main(int argc, char **argv)
 	if (setsockopt(fd, IPPROTO_SCTP, SCTP_ADAPTATION_LAYER, (const void*)&ind, (socklen_t)sizeof(struct sctp_setadaptation)) < 0) {
 		perror("setsockopt");
 	}
-	if (!client)
+	if (!client) {
 		setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, (const void*)&on, (socklen_t)sizeof(on));
-
+	}
+#ifdef SCTP_REMOTE_UDP_ENCAPS_PORT
+	memset(&encaps, 0, sizeof(struct sctp_udpencaps));
+	encaps.sue_address.ss_family = (ipv4only ? AF_INET : AF_INET6);
+	encaps.sue_port = htons(udp_port);
+	if (setsockopt(fd, IPPROTO_SCTP, SCTP_REMOTE_UDP_ENCAPS_PORT, (const void*)&encaps, (socklen_t)sizeof(struct sctp_udpencaps)) < 0) {
+		perror("setsockopt");
+	}
+#endif
 	if (nr_local_addr > 0) {
 		if (sctp_bindx(fd, (struct sockaddr *)local_addr, nr_local_addr, SCTP_BINDX_ADD_ADDR) != 0)
 			perror("bind");

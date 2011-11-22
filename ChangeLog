@@ -1,10 +1,123 @@
-? .deps
 ? ChangeLog
-? autom4te.cache
-? tsctp
 
-RCS file: /usr/sctpCVS/APPS/tsctp/Makefile,v
-Working file: Makefile
+RCS file: /usr/local/cvsroot/tsctp/.cvsignore,v
+Working file: .cvsignore
+head: 1.4
+branch:
+locks: strict
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 4;	selected revisions: 4
+description:
+----------------------------
+revision 1.4
+date: 2005-12-13 15:04:13 +0100;  author: tuexen;  state: Exp;  lines: +1 -0;
+Add even more generated files.
+----------------------------
+revision 1.3
+date: 2005-12-13 15:03:30 +0100;  author: tuexen;  state: Exp;  lines: +1 -0;
+Add another generated file.
+----------------------------
+revision 1.2
+date: 2005-12-13 15:02:55 +0100;  author: tuexen;  state: Exp;  lines: +4 -1;
+Add more generated files.
+----------------------------
+revision 1.1
+date: 2005-12-13 15:01:52 +0100;  author: tuexen;  state: Exp;
+Ignore generated files.
+=============================================================================
+
+RCS file: /usr/local/cvsroot/tsctp/Makefile.am,v
+Working file: Makefile.am
+head: 1.5
+branch:
+locks: strict
+access list:
+symbolic names:
+	start: 1.1.1.1
+	tuexen: 1.1.1
+keyword substitution: kv
+total revisions: 6;	selected revisions: 6
+description:
+----------------------------
+revision 1.5
+date: 2010-06-11 15:06:52 +0200;  author: robinseggelmann;  state: Exp;  lines: +1 -2;  commitid: CDSNQX7u7u5PylCu;
+Remove DTLS stuff
+----------------------------
+revision 1.4
+date: 2010-03-01 15:52:01 +0100;  author: robinseggelmann;  state: Exp;  lines: +3 -2;  commitid: zcBLjOiZXFgaqfpu;
+separate tsctp version for dtls
+----------------------------
+revision 1.3
+date: 2006-02-01 21:37:16 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;
+Include batch files in dist.
+----------------------------
+revision 1.2
+date: 2005-12-13 15:31:27 +0100;  author: tuexen;  state: Exp;  lines: +1 -0;
+Get it running on Solaris.
+----------------------------
+revision 1.1
+date: 2005-12-13 14:59:03 +0100;  author: tuexen;  state: Exp;
+branches:  1.1.1;
+Initial revision
+----------------------------
+revision 1.1.1.1
+date: 2005-12-13 14:59:03 +0100;  author: tuexen;  state: Exp;  lines: +0 -0;
+SCTP performance test tool
+=============================================================================
+
+RCS file: /usr/local/cvsroot/tsctp/batch,v
+Working file: batch
+head: 1.9
+branch:
+locks: strict
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 9;	selected revisions: 9
+description:
+----------------------------
+revision 1.9
+date: 2010-03-19 12:33:23 +0100;  author: robinseggelmann;  state: Exp;  lines: +2 -2;  commitid: IZZRFXBPsCd9Kxru;
+read again bug
+----------------------------
+revision 1.8
+date: 2006-10-01 17:13:10 +0200;  author: tuexen;  state: Exp;  lines: +21 -7;
+batch file uses timeout.
+tsctp provides -T timeou parameter.
+----------------------------
+revision 1.7
+date: 2006-05-09 15:43:53 +0200;  author: tuexen;  state: Exp;  lines: +1 -1;
+.le instead of .lt
+----------------------------
+revision 1.6
+date: 2006-01-20 09:00:23 +0100;  author: ruengeler;  state: Exp;  lines: +1 -1;
+set local address
+----------------------------
+revision 1.5
+date: 2005-12-19 17:18:06 +0100;  author: ruengeler;  state: Exp;  lines: +2 -1;
+get batch running on solaris
+----------------------------
+revision 1.4
+date: 2005-12-19 12:35:51 +0100;  author: ruengeler;  state: Exp;  lines: +4 -3;
+change input variables
+----------------------------
+revision 1.3
+date: 2005-12-19 12:29:33 +0100;  author: ruengeler;  state: Exp;  lines: +5 -6;
+*** empty log message ***
+----------------------------
+revision 1.2
+date: 2005-12-19 08:50:26 +0100;  author: ruengeler;  state: Exp;  lines: +1 -1;
+*** empty log message ***
+----------------------------
+revision 1.1
+date: 2005-12-19 08:43:44 +0100;  author: ruengeler;  state: Exp;
+batch file to test automatically
+=============================================================================
+
+RCS file: /usr/local/cvsroot/tsctp/batchLoop,v
+Working file: batchLoop
 head: 1.3
 branch:
 locks: strict
@@ -15,347 +128,114 @@ total revisions: 3;	selected revisions: 3
 description:
 ----------------------------
 revision 1.3
-date: 2011/07/27 13:51:58;  author: randall;  state: Exp;  lines: +317 -171
-.05 from Michael
+date: 2008-01-30 17:44:03 +0100;  author: ruengeler;  state: Exp;  lines: +1 -0;  commitid: zAY1rVRj5qrbvsPs;
+*** empty log message ***
 ----------------------------
 revision 1.2
-date: 2007/09/06 17:39:40;  author: randall;  state: Exp;  lines: +1 -1
-misc changes and updates.
+date: 2008-01-30 17:13:31 +0100;  author: ruengeler;  state: Exp;  lines: +10 -13;  commitid: BFPBcXphH7WEksPs;
+change batchLoop
 ----------------------------
 revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
+date: 2006-01-25 09:11:49 +0100;  author: ruengeler;  state: Exp;
+batch file for loopback
 =============================================================================
 
-RCS file: /usr/sctpCVS/APPS/tsctp/Makefile.am,v
-Working file: Makefile.am
-head: 1.2
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 2;	selected revisions: 2
-description:
-----------------------------
-revision 1.2
-date: 2011/07/27 13:51:59;  author: randall;  state: Exp;  lines: +2 -2
-.05 from Michael
-----------------------------
-revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
-=============================================================================
-
-RCS file: /usr/sctpCVS/APPS/tsctp/Makefile.in,v
-Working file: Makefile.in
-head: 1.2
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 2;	selected revisions: 2
-description:
-----------------------------
-revision 1.2
-date: 2011/07/27 13:51:59;  author: randall;  state: Exp;  lines: +316 -170
-.05 from Michael
-----------------------------
-revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
-=============================================================================
-
-RCS file: /usr/sctpCVS/APPS/tsctp/aclocal.m4,v
-Working file: aclocal.m4
-head: 1.2
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 2;	selected revisions: 2
-description:
-----------------------------
-revision 1.2
-date: 2011/07/27 13:51:59;  author: randall;  state: Exp;  lines: +592 -488
-.05 from Michael
-----------------------------
-revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
-=============================================================================
-
-RCS file: /usr/sctpCVS/APPS/tsctp/batch,v
-Working file: batch
-head: 1.2
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 2;	selected revisions: 2
-description:
-----------------------------
-revision 1.2
-date: 2011/07/27 13:51:59;  author: randall;  state: Exp;  lines: +2 -2
-.05 from Michael
-----------------------------
-revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
-=============================================================================
-
-RCS file: /usr/sctpCVS/APPS/tsctp/batchLoop,v
-Working file: batchLoop
-head: 1.2
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 2;	selected revisions: 2
-description:
-----------------------------
-revision 1.2
-date: 2011/07/27 13:51:59;  author: randall;  state: Exp;  lines: +10 -12
-.05 from Michael
-----------------------------
-revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
-=============================================================================
-
-RCS file: /usr/sctpCVS/APPS/tsctp/bootstrap,v
+RCS file: /usr/local/cvsroot/tsctp/bootstrap,v
 Working file: bootstrap
 head: 1.1
-branch:
+branch: 1.1.1
 locks: strict
 access list:
 symbolic names:
-keyword substitution: kv
-total revisions: 1;	selected revisions: 1
-description:
-----------------------------
-revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
-=============================================================================
-
-RCS file: /usr/sctpCVS/APPS/tsctp/config.guess,v
-Working file: config.guess
-head: 1.2
-branch:
-locks: strict
-access list:
-symbolic names:
+	start: 1.1.1.1
+	tuexen: 1.1.1
 keyword substitution: kv
 total revisions: 2;	selected revisions: 2
 description:
 ----------------------------
-revision 1.2
-date: 2011/07/27 13:51:59;  author: randall;  state: Exp;  lines: +494 -348
-.05 from Michael
-----------------------------
 revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
+date: 2005-12-13 14:59:03 +0100;  author: tuexen;  state: Exp;
+branches:  1.1.1;
+Initial revision
+----------------------------
+revision 1.1.1.1
+date: 2005-12-13 14:59:03 +0100;  author: tuexen;  state: Exp;  lines: +0 -0;
+SCTP performance test tool
 =============================================================================
 
-RCS file: /usr/sctpCVS/APPS/tsctp/config.log,v
-Working file: config.log
-head: 1.4
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 4;	selected revisions: 4
-description:
-----------------------------
-revision 1.4
-date: 2011/07/27 13:51:59;  author: randall;  state: Exp;  lines: +252 -351
-.05 from Michael
-----------------------------
-revision 1.3
-date: 2007/09/06 17:39:40;  author: randall;  state: Exp;  lines: +18 -20
-misc changes and updates.
-----------------------------
-revision 1.2
-date: 2007/05/22 21:24:54;  author: randall;  state: Exp;  lines: +1 -1
-Hmm my updates of iper
-netpipe
-user input can now do packet log stuff
-and a parse log program
-----------------------------
-revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
-=============================================================================
-
-RCS file: /usr/sctpCVS/APPS/tsctp/config.status,v
-Working file: config.status
-head: 1.3
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 3;	selected revisions: 3
-description:
-----------------------------
-revision 1.3
-date: 2011/07/27 13:51:59;  author: randall;  state: Exp;  lines: +627 -636
-.05 from Michael
-----------------------------
-revision 1.2
-date: 2007/09/06 17:39:40;  author: randall;  state: Exp;  lines: +1 -1
-misc changes and updates.
-----------------------------
-revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
-=============================================================================
-
-RCS file: /usr/sctpCVS/APPS/tsctp/config.sub,v
-Working file: config.sub
-head: 1.2
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 2;	selected revisions: 2
-description:
-----------------------------
-revision 1.2
-date: 2011/07/27 13:51:59;  author: randall;  state: Exp;  lines: +242 -86
-.05 from Michael
-----------------------------
-revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
-=============================================================================
-
-RCS file: /usr/sctpCVS/APPS/tsctp/configure,v
-Working file: configure
-head: 1.2
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 2;	selected revisions: 2
-description:
-----------------------------
-revision 1.2
-date: 2011/07/27 13:51:59;  author: randall;  state: Exp;  lines: +2839 -2141
-.05 from Michael
-----------------------------
-revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
-=============================================================================
-
-RCS file: /usr/sctpCVS/APPS/tsctp/configure.in,v
+RCS file: /usr/local/cvsroot/tsctp/configure.in,v
 Working file: configure.in
-head: 1.2
+head: 1.13
 branch:
 locks: strict
 access list:
 symbolic names:
+	start: 1.1.1.1
+	tuexen: 1.1.1
 keyword substitution: kv
-total revisions: 2;	selected revisions: 2
+total revisions: 14;	selected revisions: 14
 description:
+----------------------------
+revision 1.13
+date: 2010-12-07 20:48:48 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;  commitid: VfdfFnEuPI5U1oZu;
+Some cleanups and bug fixes.
+----------------------------
+revision 1.12
+date: 2010-06-11 15:08:55 +0200;  author: robinseggelmann;  state: Exp;  lines: +1 -1;  commitid: QNmaDXLjmfKwzlCu;
+Remove lib/incude paths for OpenSSL
+----------------------------
+revision 1.11
+date: 2010-06-11 15:06:52 +0200;  author: robinseggelmann;  state: Exp;  lines: +1 -5;  commitid: CDSNQX7u7u5PylCu;
+Remove DTLS stuff
+----------------------------
+revision 1.10
+date: 2008-12-12 11:20:17 +0100;  author: robinseggelmann;  state: Exp;  lines: +5 -1;  commitid: MixQJZ7MeHqNbaut;
+dtls support
+----------------------------
+revision 1.9
+date: 2007-11-23 16:20:10 +0100;  author: tuexen;  state: Exp;  lines: +5 -7;
+Check for gcc instead of platform.
+----------------------------
+revision 1.8
+date: 2007-11-23 11:27:55 +0100;  author: tuexen;  state: Exp;  lines: +0 -2;
+Second try...CVS: ----------------------------------------------------------------------
+----------------------------
+revision 1.7
+date: 2007-11-23 11:20:57 +0100;  author: tuexen;  state: Exp;  lines: +7 -1;
+Handle Sun C compiler correctly.
+----------------------------
+revision 1.6
+date: 2006-08-16 16:17:58 +0200;  author: tuexen;  state: Exp;  lines: +1 -1;
+Bump version.
+----------------------------
+revision 1.5
+date: 2006-08-16 15:41:21 +0200;  author: tuexen;  state: Exp;  lines: +2 -2;
+use sctp_recvmsg
+----------------------------
+revision 1.4
+date: 2005-12-16 13:18:49 +0100;  author: ruengeler;  state: Exp;  lines: +2 -0;
+server with threads
+----------------------------
+revision 1.3
+date: 2005-12-13 17:09:33 +0100;  author: tuexen;  state: Exp;  lines: +3 -0;
+Get it running on Linux (hopefully).
 ----------------------------
 revision 1.2
-date: 2011/07/27 13:51:59;  author: randall;  state: Exp;  lines: +5 -3
-.05 from Michael
+date: 2005-12-13 15:39:17 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;
+It runs now on Solaris 10.
 ----------------------------
 revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
+date: 2005-12-13 14:59:03 +0100;  author: tuexen;  state: Exp;
+branches:  1.1.1;
+Initial revision
+----------------------------
+revision 1.1.1.1
+date: 2005-12-13 14:59:03 +0100;  author: tuexen;  state: Exp;  lines: +0 -0;
+SCTP performance test tool
 =============================================================================
 
-RCS file: /usr/sctpCVS/APPS/tsctp/depcomp,v
-Working file: depcomp
-head: 1.2
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 2;	selected revisions: 2
-description:
-----------------------------
-revision 1.2
-date: 2011/07/27 13:51:59;  author: randall;  state: Exp;  lines: +204 -43
-.05 from Michael
-----------------------------
-revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
-=============================================================================
-
-RCS file: /usr/sctpCVS/APPS/tsctp/install-sh,v
-Working file: install-sh
-head: 1.2
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 2;	selected revisions: 2
-description:
-----------------------------
-revision 1.2
-date: 2011/07/27 13:51:59;  author: randall;  state: Exp;  lines: +456 -200
-.05 from Michael
-----------------------------
-revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
-=============================================================================
-
-RCS file: /usr/sctpCVS/APPS/tsctp/missing,v
-Working file: missing
-head: 1.2
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 2;	selected revisions: 2
-description:
-----------------------------
-revision 1.2
-date: 2011/07/27 13:51:59;  author: randall;  state: Exp;  lines: +115 -84
-.05 from Michael
-----------------------------
-revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
-=============================================================================
-
-RCS file: /usr/sctpCVS/APPS/tsctp/mkinstalldirs,v
-Working file: mkinstalldirs
-head: 1.1
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 1;	selected revisions: 1
-description:
-----------------------------
-revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
-=============================================================================
-
-RCS file: /usr/sctpCVS/APPS/tsctp/tsctp.c,v
-Working file: tsctp.c
+RCS file: /usr/local/cvsroot/tsctp/Attic/dtls_tsctp.c,v
+Working file: dtls_tsctp.c
 head: 1.4
 branch:
 locks: strict
@@ -366,18 +246,435 @@ total revisions: 4;	selected revisions: 4
 description:
 ----------------------------
 revision 1.4
-date: 2011/07/27 13:51:59;  author: randall;  state: Exp;  lines: +261 -107
-.05 from Michael
+date: 2010-06-11 15:06:52 +0200;  author: robinseggelmann;  state: dead;  lines: +0 -0;  commitid: CDSNQX7u7u5PylCu;
+Remove DTLS stuff
 ----------------------------
 revision 1.3
-date: 2007/08/19 05:24:06;  author: randall;  state: Exp;  lines: +5 -4
-Michaels latest
+date: 2010-03-19 12:33:23 +0100;  author: robinseggelmann;  state: Exp;  lines: +2 -0;  commitid: IZZRFXBPsCd9Kxru;
+read again bug
 ----------------------------
 revision 1.2
-date: 2007/05/05 15:01:56;  author: randall;  state: Exp;  lines: +3 -2
-Michaels most recent TSCTP.
+date: 2010-03-01 15:58:03 +0100;  author: robinseggelmann;  state: Exp;  lines: +1 -3;  commitid: 3Y3tUmF24o4fsfpu;
+unused variables removed
 ----------------------------
 revision 1.1
-date: 2007/03/29 21:17:08;  author: randall;  state: Exp;
-the tsctp that Michael had at ietf in prague
+date: 2010-03-01 15:52:01 +0100;  author: robinseggelmann;  state: Exp;  commitid: zcBLjOiZXFgaqfpu;
+separate tsctp version for dtls
+=============================================================================
+
+RCS file: /usr/local/cvsroot/tsctp/Attic/server-cert.pem,v
+Working file: server-cert.pem
+head: 1.2
+branch:
+locks: strict
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 2;	selected revisions: 2
+description:
+----------------------------
+revision 1.2
+date: 2010-06-11 15:06:52 +0200;  author: robinseggelmann;  state: dead;  lines: +0 -0;  commitid: CDSNQX7u7u5PylCu;
+Remove DTLS stuff
+----------------------------
+revision 1.1
+date: 2008-12-12 11:20:18 +0100;  author: robinseggelmann;  state: Exp;  commitid: MixQJZ7MeHqNbaut;
+dtls support
+=============================================================================
+
+RCS file: /usr/local/cvsroot/tsctp/Attic/server-key.pem,v
+Working file: server-key.pem
+head: 1.2
+branch:
+locks: strict
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 2;	selected revisions: 2
+description:
+----------------------------
+revision 1.2
+date: 2010-06-11 15:06:52 +0200;  author: robinseggelmann;  state: dead;  lines: +0 -0;  commitid: CDSNQX7u7u5PylCu;
+Remove DTLS stuff
+----------------------------
+revision 1.1
+date: 2008-12-12 11:20:18 +0100;  author: robinseggelmann;  state: Exp;  commitid: MixQJZ7MeHqNbaut;
+dtls support
+=============================================================================
+
+RCS file: /usr/local/cvsroot/tsctp/tsctp.c,v
+Working file: tsctp.c
+head: 1.88
+branch:
+locks: strict
+access list:
+symbolic names:
+	start: 1.1.1.1
+	tuexen: 1.1.1
+keyword substitution: kv
+total revisions: 89;	selected revisions: 89
+description:
+----------------------------
+revision 1.88
+date: 2011-11-22 14:42:14 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;  commitid: eQK9Di2sQXSFKkIv;
+Add \n.
+----------------------------
+revision 1.87
+date: 2011-11-20 10:57:58 +0100;  author: tuexen;  state: Exp;  lines: +6 -8;  commitid: 6Zv9n8bzSFyBz3Iv;
+Set the remote UDP encapsualtion port in any case, not only when acting
+as a client.
+----------------------------
+revision 1.86
+date: 2011-11-20 02:51:53 +0100;  author: tuexen;  state: Exp;  lines: +30 -6;  commitid: Eke0GAvTqcpWS0Iv;
+Add option for UDP encapsulation.
+----------------------------
+revision 1.85
+date: 2011-04-16 22:07:47 +0200;  author: tuexen;  state: Exp;  lines: +8 -6;  commitid: KXgYl8AVESwlX5gv;
+Fix ipv6only handling.
+----------------------------
+revision 1.84
+date: 2011-04-03 14:06:32 +0200;  author: tuexen;  state: Exp;  lines: +16 -23;  commitid: I3Du8Z36PIobInev;
+Some more cleanups.
+----------------------------
+revision 1.83
+date: 2011-04-03 13:59:12 +0200;  author: tuexen;  state: Exp;  lines: +3 -0;  commitid: l5Ijkl99YXmDFnev;
+Improve IPv6 handling.
+----------------------------
+revision 1.82
+date: 2010-12-07 20:48:48 +0100;  author: tuexen;  state: Exp;  lines: +48 -49;  commitid: VfdfFnEuPI5U1oZu;
+Some cleanups and bug fixes.
+----------------------------
+revision 1.81
+date: 2010-11-11 21:43:06 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;  commitid: Z7PBEP8RKwrma3Wu;
+Time for up to 10 paths...
+----------------------------
+revision 1.80
+date: 2010-09-01 12:07:05 +0200;  author: robinseggelmann;  state: Exp;  lines: +147 -22;  commitid: zJLocMFC6UkJVRMu;
+IPv6 support for tsctp
+----------------------------
+revision 1.79
+date: 2010-06-27 21:17:04 +0200;  author: tuexen;  state: Exp;  lines: +11 -14;  commitid: YP1MRAeT4q5U5rEu;
+Some more cleanups.
+----------------------------
+revision 1.78
+date: 2010-06-27 21:10:27 +0200;  author: tuexen;  state: Exp;  lines: +28 -102;  commitid: 3XZuP1MYaXDC3rEu;
+Some cleanups.
+----------------------------
+revision 1.77
+date: 2010-03-17 11:12:01 +0100;  author: robinseggelmann;  state: Exp;  lines: +1 -1;  commitid: ltptVSEwgWbemhru;
+no division by 1024
+----------------------------
+revision 1.76
+date: 2010-03-01 15:52:01 +0100;  author: robinseggelmann;  state: Exp;  lines: +25 -164;  commitid: zcBLjOiZXFgaqfpu;
+separate tsctp version for dtls
+----------------------------
+revision 1.75
+date: 2009-12-08 17:17:13 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;  commitid: UUMO9KtaeoqEyAeu;
+Bugfix from Irene: Use correct length when initializing local_addr[i].
+----------------------------
+revision 1.74
+date: 2009-10-13 09:05:44 +0200;  author: robinseggelmann;  state: Exp;  lines: +2 -4;  commitid: 34Mbfehr2oHdjl7u;
+DTLS compatibility
+----------------------------
+revision 1.73
+date: 2009-04-15 13:25:13 +0200;  author: tuexen;  state: Exp;  lines: +6 -3;  commitid: Dp3kQ9lj4kkUy6Kt;
+Cleanup.
+----------------------------
+revision 1.72
+date: 2009-04-15 12:50:29 +0200;  author: tuexen;  state: Exp;  lines: +20 -23;  commitid: PrJkB6sfN68Zm6Kt;
+Whitespace changes.
+----------------------------
+revision 1.71
+date: 2009-03-29 21:41:45 +0200;  author: tuexen;  state: Exp;  lines: +1 -1;  commitid: 3l7ywWqPNbt7RXHt;
+Fix unit.
+----------------------------
+revision 1.70
+date: 2009-03-23 18:56:37 +0100;  author: tuexen;  state: Exp;  lines: +5 -2;  commitid: x0CBNfv5FVHTsbHt;
+- Fix issue with binding.
+- Print bytes/second.
+----------------------------
+revision 1.69
+date: 2009-03-23 02:06:09 +0100;  author: tuexen;  state: Exp;  lines: +4 -4;  commitid: 1eoV0gl2AnJmS5Ht;
+unordered.
+----------------------------
+revision 1.68
+date: 2009-03-23 01:08:25 +0100;  author: tuexen;  state: Exp;  lines: +18 -11;  commitid: lMt1M7mO3Xdyy5Ht;
+Bind mulitple local addresses.
+----------------------------
+revision 1.67
+date: 2008-12-16 11:25:01 +0100;  author: robinseggelmann;  state: Exp;  lines: +6 -1;  commitid: s6nnVhXNbFRr5Gut;
+close bug workaround
+----------------------------
+revision 1.66
+date: 2008-12-12 12:52:23 +0100;  author: robinseggelmann;  state: Exp;  lines: +2 -0;  commitid: DMC8T56ybCvoHaut;
+bugfix
+----------------------------
+revision 1.65
+date: 2008-12-12 11:20:18 +0100;  author: robinseggelmann;  state: Exp;  lines: +233 -28;  commitid: MixQJZ7MeHqNbaut;
+dtls support
+----------------------------
+revision 1.64
+date: 2008-11-26 19:57:05 +0100;  author: tuexen;  state: Exp;  lines: +9 -4;  commitid: 3DlkqmrPvFuTy9st;
+Add support for sending unordered messages using the -u flag.
+----------------------------
+revision 1.63
+date: 2008-09-23 12:05:40 +0200;  author: tuexen;  state: Exp;  lines: +0 -11;  commitid: Wli6MLgPfZY6GSjt;
+Out with the workaround. FreeBSD and Mac OS X are fixed.
+----------------------------
+revision 1.62
+date: 2008-09-22 19:55:21 +0200;  author: tuexen;  state: Exp;  lines: +11 -0;  commitid: CwMmikJj54YbjNjt;
+Add a workaround for inheritage bug in kernels.
+----------------------------
+revision 1.61
+date: 2008-09-22 19:19:36 +0200;  author: tuexen;  state: Exp;  lines: +10 -10;  commitid: pCV1CQjIlzUW6Njt;
+Fix the application. Still not working due to kernel bugs...
+----------------------------
+revision 1.60
+date: 2008-09-16 12:29:15 +0200;  author: tuexen;  state: Exp;  lines: +0 -1;  commitid: FZ9THqJ662kc2Zit;
+Get rid of unused variable.
+----------------------------
+revision 1.59
+date: 2008-09-16 09:08:12 +0200;  author: tuexen;  state: Exp;  lines: +1 -0;  commitid: VCtLbe5JvKGdVXit;
+Fix off by one error.
+----------------------------
+revision 1.58
+date: 2008-09-15 17:53:41 +0200;  author: tuexen;  state: Exp;  lines: +19 -13;  commitid: OUPUHa9UwXsjRSit;
+Use sctp_sendmsg and indicate the end of transmission using SCTP_EOF.
+Add option to configure the adaptation layer indication.
+----------------------------
+revision 1.57
+date: 2008-01-09 09:29:00 +0100;  author: ruengeler;  state: Exp;  lines: +11 -0;
+printf peer_addr_change
+----------------------------
+revision 1.56
+date: 2007-11-23 11:09:26 +0100;  author: ruengeler;  state: Exp;  lines: +6 -2;
+Work around Randalls bug...
+----------------------------
+revision 1.55
+date: 2007-09-16 12:56:18 +0200;  author: tuexen;  state: Exp;  lines: +3 -1;
+Improve handling when running out of fds.
+----------------------------
+revision 1.54
+date: 2007-05-24 11:04:33 +0200;  author: ruengeler;  state: Exp;  lines: +4 -3;
+Do not print error message when send() call is interupted.
+Stop sending loop on first error of send() call.
+----------------------------
+revision 1.53
+date: 2007-03-19 17:52:14 +0100;  author: tuexen;  state: Exp;  lines: +12 -5;
+Initiialize the flags variable...
+----------------------------
+revision 1.52
+date: 2007-03-04 22:52:22 +0100;  author: tuexen;  state: Exp;  lines: +0 -4;
+No debug ciode...
+----------------------------
+revision 1.51
+date: 2007-03-04 22:50:01 +0100;  author: tuexen;  state: Exp;  lines: +9 -4;
+Fix help.
+----------------------------
+revision 1.50
+date: 2007-01-30 00:17:39 +0100;  author: tuexen;  state: Exp;  lines: +28 -17;
+Get it compiling on Linux.
+----------------------------
+revision 1.49
+date: 2006-11-22 21:15:25 +0100;  author: tuexen;  state: Exp;  lines: +16 -2;
+Add support for SCTP-AUTH. Needs config stuff.
+----------------------------
+revision 1.48
+date: 2006-10-27 11:55:05 +0200;  author: tuexen;  state: Exp;  lines: +5 -2;
+Handle large messages correctly.
+----------------------------
+revision 1.47
+date: 2006-10-19 21:39:11 +0200;  author: tuexen;  state: Exp;  lines: +10 -3;
+Handle signal correctly on the sender side.
+----------------------------
+revision 1.46
+date: 2006-10-01 17:13:10 +0200;  author: tuexen;  state: Exp;  lines: +40 -16;
+batch file uses timeout.
+tsctp provides -T timeou parameter.
+----------------------------
+revision 1.45
+date: 2006-08-18 10:32:56 +0200;  author: tuexen;  state: Exp;  lines: +18 -16;
+cleanup.
+----------------------------
+revision 1.44
+date: 2006-08-16 20:03:28 +0200;  author: becke;  state: Exp;  lines: +12 -1;
+insert a f flag for SCTP_MAXSEG
+----------------------------
+revision 1.43
+date: 2006-08-16 15:41:21 +0200;  author: tuexen;  state: Exp;  lines: +23 -11;
+use sctp_recvmsg
+----------------------------
+revision 1.42
+date: 2006-08-16 13:27:04 +0200;  author: tuexen;  state: Exp;  lines: +9 -4;
+enable-disable always NAGLE.
+----------------------------
+revision 1.41
+date: 2006-07-26 22:29:52 +0200;  author: tuexen;  state: Exp;  lines: +5 -5;
+Do not set the buffer while printing it.
+----------------------------
+revision 1.40
+date: 2006-07-21 12:47:30 +0200;  author: tuexen;  state: Exp;  lines: +12 -3;
+Print snd/rcv buffer size.
+----------------------------
+revision 1.39
+date: 2006-06-10 12:54:31 +0200;  author: tuexen;  state: Exp;  lines: +2 -9;
+Free buffer after usage.
+----------------------------
+revision 1.38
+date: 2006-06-04 11:04:29 +0200;  author: tuexen;  state: Exp;  lines: +19 -5;
+More int->double conversions.
+----------------------------
+revision 1.37
+date: 2006-03-29 21:05:55 +0200;  author: tuexen;  state: Exp;  lines: +26 -3;
+Make snd/rcv buffer configurable.
+----------------------------
+revision 1.36
+date: 2006-02-02 23:41:53 +0100;  author: tuexen;  state: Exp;  lines: +21 -35;
+Some cleanups.
+----------------------------
+revision 1.35
+date: 2006-01-19 13:39:39 +0100;  author: tuexen;  state: Exp;  lines: +10 -6;
+Add unlimited sending.
+----------------------------
+revision 1.34
+date: 2006-01-19 10:15:37 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;
+Get it really running....
+----------------------------
+revision 1.33
+date: 2006-01-19 10:04:43 +0100;  author: ruengeler;  state: Exp;  lines: +18 -13;
+Add local address support (only one...)
+----------------------------
+revision 1.32
+date: 2006-01-05 08:30:19 +0100;  author: ruengeler;  state: Exp;  lines: +10 -9;
+fix computation of throughput
+----------------------------
+revision 1.31
+date: 2005-12-20 11:51:09 +0100;  author: ruengeler;  state: Exp;  lines: +2 -2;
+ add start and stop time to output
+----------------------------
+revision 1.30
+date: 2005-12-19 17:16:52 +0100;  author: ruengeler;  state: Exp;  lines: +6 -6;
+ with fflush
+----------------------------
+revision 1.29
+date: 2005-12-19 16:20:23 +0100;  author: ruengeler;  state: Exp;  lines: +3 -5;
+*** empty log message ***
+----------------------------
+revision 1.28
+date: 2005-12-19 14:51:13 +0100;  author: ruengeler;  state: Exp;  lines: +3 -2;
+*** empty log message ***
+----------------------------
+revision 1.27
+date: 2005-12-19 14:49:18 +0100;  author: ruengeler;  state: Exp;  lines: +28 -9;
+prepare output
+----------------------------
+revision 1.26
+date: 2005-12-19 12:53:12 +0100;  author: ruengeler;  state: Exp;  lines: +0 -7;
+make it nicer
+----------------------------
+revision 1.25
+date: 2005-12-19 12:49:15 +0100;  author: ruengeler;  state: Exp;  lines: +1 -22;
+*** empty log message ***
+----------------------------
+revision 1.24
+date: 2005-12-19 11:38:51 +0100;  author: ruengeler;  state: Exp;  lines: +1 -1;
+*** empty log message ***
+----------------------------
+revision 1.23
+date: 2005-12-19 11:34:22 +0100;  author: ruengeler;  state: Exp;  lines: +12 -13;
+*** empty log message ***
+----------------------------
+revision 1.22
+date: 2005-12-19 11:06:12 +0100;  author: ruengeler;  state: Exp;  lines: +3 -5;
+*** empty log message ***
+----------------------------
+revision 1.21
+date: 2005-12-19 10:56:26 +0100;  author: ruengeler;  state: Exp;  lines: +1 -1;
+*** empty log message ***
+----------------------------
+revision 1.20
+date: 2005-12-19 10:55:03 +0100;  author: ruengeler;  state: Exp;  lines: +1 -0;
+*** empty log message ***
+----------------------------
+revision 1.19
+date: 2005-12-19 10:51:17 +0100;  author: ruengeler;  state: Exp;  lines: +1 -0;
+*** empty log message ***
+----------------------------
+revision 1.18
+date: 2005-12-19 10:44:51 +0100;  author: ruengeler;  state: Exp;  lines: +1 -1;
+*** empty log message ***
+----------------------------
+revision 1.17
+date: 2005-12-19 10:43:14 +0100;  author: ruengeler;  state: Exp;  lines: +3 -2;
+*** empty log message ***
+----------------------------
+revision 1.16
+date: 2005-12-19 10:40:12 +0100;  author: ruengeler;  state: Exp;  lines: +3 -1;
+*** empty log message ***
+----------------------------
+revision 1.15
+date: 2005-12-19 10:36:30 +0100;  author: ruengeler;  state: Exp;  lines: +4 -0;
+*** empty log message ***
+----------------------------
+revision 1.14
+date: 2005-12-19 09:24:30 +0100;  author: ruengeler;  state: Exp;  lines: +0 -4;
+*** empty log message ***
+----------------------------
+revision 1.13
+date: 2005-12-19 09:13:57 +0100;  author: ruengeler;  state: Exp;  lines: +7 -6;
+*** empty log message ***
+----------------------------
+revision 1.12
+date: 2005-12-19 08:58:04 +0100;  author: ruengeler;  state: Exp;  lines: +4 -0;
+*** empty log message ***
+----------------------------
+revision 1.11
+date: 2005-12-19 08:25:43 +0100;  author: ruengeler;  state: Exp;  lines: +6 -3;
+change filename
+----------------------------
+revision 1.10
+date: 2005-12-16 13:18:49 +0100;  author: ruengeler;  state: Exp;  lines: +93 -26;
+server with threads
+----------------------------
+revision 1.9
+date: 2005-12-16 11:28:39 +0100;  author: ruengeler;  state: Exp;  lines: +13 -3;
+enter os in list
+----------------------------
+revision 1.8
+date: 2005-12-16 10:05:14 +0100;  author: ruengeler;  state: Exp;  lines: +7 -1;
+
+write in file
+----------------------------
+revision 1.7
+date: 2005-12-15 13:14:42 +0100;  author: ruengeler;  state: Exp;  lines: +2 -2;
+include Nagle option
+----------------------------
+revision 1.6
+date: 2005-12-15 13:08:58 +0100;  author: ruengeler;  state: Exp;  lines: +20 -9;
+*** empty log message ***
+----------------------------
+revision 1.5
+date: 2005-12-13 17:13:15 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;
+It runs on Linux now...
+----------------------------
+revision 1.4
+date: 2005-12-13 17:09:33 +0100;  author: tuexen;  state: Exp;  lines: +3 -0;
+Get it running on Linux (hopefully).
+----------------------------
+revision 1.3
+date: 2005-12-13 15:34:17 +0100;  author: tuexen;  state: Exp;  lines: +12 -0;
+Add timersub.
+----------------------------
+revision 1.2
+date: 2005-12-13 15:31:27 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;
+Get it running on Solaris.
+----------------------------
+revision 1.1
+date: 2005-12-13 14:59:03 +0100;  author: tuexen;  state: Exp;
+branches:  1.1.1;
+Initial revision
+----------------------------
+revision 1.1.1.1
+date: 2005-12-13 14:59:03 +0100;  author: tuexen;  state: Exp;  lines: +0 -0;
+SCTP performance test tool
 =============================================================================
