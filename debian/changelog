@@ -1,4 +1,4 @@
-tsctp (0.5.1~beta2.0-1ubuntu1) quantal; urgency=low
+tsctp (0.5.1~beta2.1-1ubuntu1) quantal; urgency=low
 
   * New upstream release.
   * Initial Debian release (Closes: #xxxxxx).
