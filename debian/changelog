@@ -1,6 +1,6 @@
-tsctp (0.5.1~beta2.1-1ubuntu1) quantal; urgency=low
+tsctp (0.5.2~rc1-1ubuntu1) saucy; urgency=low
 
   * New upstream release.
   * Initial Debian release (Closes: #xxxxxx).
 
- -- Thomas Dreibholz <dreibh@iem.uni-due.de>  Sun, 26 Aug 2012 08:08:08 +0800
+ -- Thomas Dreibholz <dreibh@iem.uni-due.de>  Sun, 26 May 2013 08:08:08 +0800

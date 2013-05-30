@@ -6,7 +6,7 @@ Homepage: http://www.iem.uni-due.de/~dreibh/tsctp/
 Build-Depends: autotools-dev,
                debhelper (>= 7.0.50~),
                libsctp-dev (>= 1.0.5)
-Standards-Version: 3.9.3
+Standards-Version: 3.9.4
 
 Package: tsctp
 Architecture: any
