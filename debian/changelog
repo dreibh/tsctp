@@ -1,6 +1,6 @@
-tsctp (0.5.2~rc1-1ubuntu1) saucy; urgency=low
+tsctp (0.5.3~rc1-1ubuntu1) trusty; urgency=low
 
   * New upstream release.
   * Initial Debian release (Closes: #xxxxxx).
 
- -- Thomas Dreibholz <dreibh@iem.uni-due.de>  Sun, 26 May 2013 08:08:08 +0800
+ -- Thomas Dreibholz <dreibh@iem.uni-due.de>  Fri, 25 Oct 2013 08:08:08 +0800

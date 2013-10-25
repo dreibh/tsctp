@@ -1,8 +1,6 @@
-AC_INIT(tsctp.c)
-AC_CONFIG_AUX_DIR(admin)
-AC_CONFIG_MACRO_DIR([m4])
+AC_INIT([TSCTP], [0.5.3~rc1], [dreib@iem.uni-due.de])
+AM_INIT_AUTOMAKE
 AC_CANONICAL_HOST
-AM_INIT_AUTOMAKE(tsctp, 0.5.2~rc1)
 AC_PREFIX_DEFAULT(/usr/local)
 if test "x$prefix" = "xNONE"; then
   prefix=$ac_default_prefix
