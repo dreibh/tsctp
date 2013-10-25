@@ -152,9 +152,9 @@ static void* handle_connection(void *arg)
 
 int main(int argc, char **argv)
 {
-	int fd, *cfdptr;
+	int fd, *cfdptr, c;
 	size_t intlen;
-	char c, *buffer;
+	char *buffer;
 	socklen_t addr_len;
 	union sock_union{
 		struct sockaddr sa;
