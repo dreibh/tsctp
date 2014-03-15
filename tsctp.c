@@ -68,6 +68,7 @@ char Usage[] =
 "        -p      port number\n"
 "        -R      socket recv buffer\n"
 "        -S      socket send buffer\n"
+"        -t      time to live for messages\n"
 "        -T      time to send messages\n"
 "        -u      use unordered user messages\n"
 #if defined(SCTP_REMOTE_UDP_ENCAPS_PORT)
@@ -181,6 +182,7 @@ int main(int argc, char **argv)
 	int rcvbufsize=0, sndbufsize=0, myrcvbufsize, mysndbufsize;
 	struct linger linger;
 	int fragpoint = 0;
+	unsigned int timetolive = 0;
 	unsigned int runtime = 0;
 	struct sctp_setadaptation ind = {0};
 #ifdef SCTP_AUTH_CHUNK
@@ -206,7 +208,7 @@ int main(int argc, char **argv)
 #ifdef SCTP_AUTH_CHUNK
 	                               "A:"
 #endif
-	                               "Df:l:L:n:p:R:S:T:u"
+	                               "Df:l:L:n:p:R:S:t:T:u"
 #ifdef SCTP_REMOTE_UDP_ENCAPS_PORT 
                                    "U:"
 #endif
@@ -270,6 +272,9 @@ int main(int argc, char **argv)
 				break;
 			case 'S':
 				sndbufsize = atoi(optarg);
+				break;
+			case 't':
+				timetolive = atoi(optarg);
 				break;
 			case 'T':
 				runtime = atoi(optarg);
@@ -381,8 +386,10 @@ int main(int argc, char **argv)
 			perror("setsockopt");
 	}
 #endif
-	if (setsockopt(fd, IPPROTO_SCTP, SCTP_ADAPTATION_LAYER, (const void*)&ind, (socklen_t)sizeof(struct sctp_setadaptation)) < 0) {
-		perror("setsockopt");
+	if (ind.ssb_adaptation_ind > 0) {
+		if (setsockopt(fd, IPPROTO_SCTP, SCTP_ADAPTATION_LAYER, (const void*)&ind, (socklen_t)sizeof(struct sctp_setadaptation)) < 0) {
+			perror("setsockopt");
+		}
 	}
 	if (!client) {
 		setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, (const void*)&on, (socklen_t)sizeof(on));
@@ -540,13 +547,13 @@ int main(int argc, char **argv)
 			if (very_verbose) {
 				printf("Sending message number %lu.\n", i);
 			}
-			if (sctp_sendmsg(fd, buffer, length, NULL, 0, 0, unordered?SCTP_UNORDERED:0, 0, 0, 0) < 0) {
+			if (sctp_sendmsg(fd, buffer, length, NULL, 0, 0, unordered?SCTP_UNORDERED:0, 0, timetolive, 0) < 0) {
 				perror("sctp_sendmsg");
 				break;
 			}
 			i++;
 		}
-		if (sctp_sendmsg(fd, buffer, length, NULL, 0, 0, unordered?SCTP_EOF|SCTP_UNORDERED:SCTP_EOF, 0, 0, 0) < 0) {
+		if (sctp_sendmsg(fd, buffer, length, NULL, 0, 0, unordered?SCTP_EOF|SCTP_UNORDERED:SCTP_EOF, 0, timetolive, 0) < 0) {
 			perror("sctp_sendmsg");
 		}
 		i++;
