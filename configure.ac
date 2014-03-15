@@ -1,4 +1,4 @@
-AC_INIT([TSCTP], [0.6.0~rc1], [dreib@iem.uni-due.de])
+AC_INIT([TSCTP], [0.6.0~rc1.1], [dreib@iem.uni-due.de])
 AM_INIT_AUTOMAKE
 AC_CANONICAL_HOST
 AC_PREFIX_DEFAULT(/usr/local)

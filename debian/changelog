@@ -1,4 +1,4 @@
-tsctp (0.6.0~rc1-1ubuntu1) trusty; urgency=low
+tsctp (0.6.0~rc1.1-1ubuntu1) trusty; urgency=low
 
   * New upstream release.
   * Initial Debian release (Closes: #xxxxxx).
