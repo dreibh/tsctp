@@ -22,6 +22,8 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-build
 %setup -q
 
 %build
+autoreconf -if
+
 %configure
 make %{?_smp_mflags}
 
