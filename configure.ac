@@ -1,6 +1,8 @@
 AC_INIT([TSCTP], [0.6.0~rc1.1], [dreib@iem.uni-due.de])
+
 AM_INIT_AUTOMAKE
 AC_CANONICAL_HOST
+
 AC_PREFIX_DEFAULT(/usr/local)
 if test "x$prefix" = "xNONE"; then
   prefix=$ac_default_prefix
