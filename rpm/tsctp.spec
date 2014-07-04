@@ -8,6 +8,8 @@ URL: http://www.iem.uni-due.de/~dreibh/tsctp/
 Source: http://www.iem.uni-due.de/~dreibh/tsctp/download/%{name}-%{version}.tar.gz
 
 AutoReqProv: on
+BuildRequires: autoconf
+BuildRequires: automake
 BuildRequires: lksctp-tools-devel
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 
