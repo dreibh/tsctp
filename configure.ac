@@ -1,4 +1,4 @@
-AC_INIT([TSCTP], [0.6.0~rc1.2], [dreib@iem.uni-due.de])
+AC_INIT([TSCTP], [0.6.0], [tuexen@fh-muenster.de])
 AM_INIT_AUTOMAKE
 
 AC_PROG_CC_C99

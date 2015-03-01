@@ -1,5 +1,5 @@
 Name: tsctp
-Version: 0.6.0~rc1.1
+Version: 0.6.0
 Release: 1
 Summary: SCTP test tool
 Group: Applications/Internet
