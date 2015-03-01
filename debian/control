@@ -6,7 +6,7 @@ Homepage: http://www.iem.uni-due.de/~dreibh/tsctp/
 Build-Depends: autotools-dev,
                debhelper (>= 7.0.50~),
                libsctp-dev (>= 1.0.5)
-Standards-Version: 3.9.4
+Standards-Version: 3.9.6
 
 Package: tsctp
 Architecture: any
@@ -15,8 +15,10 @@ Depends: ${misc:Depends},
 Recommends: iputils-ping,
             iputils-tracepath,
             rsplib-tools,
+            subnetcalc,
             traceroute,
             whois
+Suggests: wireshark
 Description: SCTP Test Tool
  TSCTP is an SCTP test tool. Its purpose is to perform basic SCTP
  functionality tests to check implementations interoperability and
