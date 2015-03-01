@@ -1,0 +1,17 @@
+Begin4
+Title:          tsctp
+Version:        0.6.0
+Entered-date:   2015-03-01
+Description:    TSCTP is an SCTP test tool. Its purpose is to perform basic
+                SCTP functionality tests to check implementations
+                interoperability and to verify that the SCTP stack is
+                working.
+Keywords:       Network, SCTP, Test
+Author:         tuexen@fh-muenster.de (Michael Tüxen)
+Maintained-by:  dreibh@iem.uni-due.de (Thomas Dreibholz)
+Primary-site:   http://www.iem.uni-due.de/~dreibh/tsctp
+                120 kB download/tsctp-0.6.0.tar.gz
+Original-site:  http://www.iem.uni-due.de/~dreibh/tsctp
+Platforms:      Linux, FreeBSD, MacOS, Solaris
+Copying-policy: GPL
+End
