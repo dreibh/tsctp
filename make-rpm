@@ -1,5 +1,5 @@
 #!/bin/bash -e
-# $Id$
+# $Id: make-rpm 1849 2014-06-24 09:54:13Z dreibh $
 #
 # Packaging Scripts
 # Copyright (C) 2013 by Thomas Dreibholz

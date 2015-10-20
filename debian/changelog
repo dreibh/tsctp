@@ -1,6 +1,6 @@
-tsctp (0.6.0-1ubuntu1) vivid; urgency=low
+tsctp (0.6.1-1ubuntu1) vivid; urgency=low
 
   * New upstream release.
   * Initial Debian release (Closes: #xxxxxx).
 
- -- Thomas Dreibholz <dreibh@iem.uni-due.de>  Sun, 1 Mar 2015 08:08:08 +0800
+ -- Thomas Dreibholz <dreibh@iem.uni-due.de>  Tue, 20 Oct 2015 08:08:08 +0800

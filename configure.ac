@@ -1,4 +1,4 @@
-AC_INIT([TSCTP], [0.6.0], [tuexen@fh-muenster.de])
+AC_INIT([TSCTP], [0.6.1], [tuexen@fh-muenster.de])
 AM_INIT_AUTOMAKE
 
 AC_PROG_CC_C99
@@ -21,9 +21,9 @@ esac
 AC_CHECK_TYPE(size_t)
 AC_CHECK_TYPE(ssize_t)
 
-AC_CHECK_FUNCS(socket, , AC_CHECK_LIB(socket, socket))
-AC_CHECK_FUNCS(inet_addr, , AC_CHECK_LIB(nsl, inet_addr))
-AC_CHECK_FUNCS(sctp_recvmsg, , AC_CHECK_LIB(sctp, sctp_recvmsg))
+AC_CHECK_FUNCS(socket, , [AC_CHECK_LIB(socket, socket)])
+AC_CHECK_FUNCS(inet_addr, , [AC_CHECK_LIB(nsl, inet_addr)])
+AC_CHECK_FUNCS(sctp_recvmsg, , [AC_CHECK_LIB(sctp, sctp_recvmsg)])
 AC_CHECK_LIB(pthread,pthread_create)
 
 AC_CHECK_HEADERS(sys/types.h)
@@ -42,6 +42,6 @@ AC_TRY_COMPILE([#ifdef HAVE_SYS_TYPES_H
                [socklen_t x = 1; return 0;],
                [AC_MSG_RESULT(yes)],
                [AC_MSG_RESULT(int)
-                AC_DEFINE(socklen_t, int, [Define a type for socklen_t.])]) 
+                AC_DEFINE(socklen_t, int, [Define a type for socklen_t.])])
 
 AC_OUTPUT(Makefile)
