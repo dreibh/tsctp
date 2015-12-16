@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# $Id$
+# $Id: filter-empty-entries 1120 2011-11-21 09:10:05Z dreibh $
 #
 # Debian Packaging Scripts
 # Copyright (C) 2002-2011 by Thomas Dreibholz

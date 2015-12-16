@@ -1,5 +1,5 @@
 #!/bin/bash -e
-# $Id$
+# $Id: make-deb 1649 2013-05-30 12:33:25Z dreibh $
 #
 # Debian Packaging Scripts
 # Copyright (C) 2002-2013 by Thomas Dreibholz
