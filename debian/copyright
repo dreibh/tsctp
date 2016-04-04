@@ -4,7 +4,7 @@ Upstream-Contact: Michael Tüxen <tuexen@fh-muenster.de>
 Source: http://www.iem.uni-due.de/~dreibh/tsctp/
 
 Files: *
-Copyright: Copyright (C) 2005-2015 Michael Tüxen <tuexen@fh-muenster.de>
+Copyright: Copyright (C) 2005-2016 Michael Tüxen <tuexen@fh-muenster.de>
 License: BSD-3-clause
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions
@@ -22,7 +22,7 @@ License: BSD-3-clause
  in `/usr/share/common-licenses/BSD'.
 
 Files: debian/*
-Copyright: Copyright (C) 2009-2015 Thomas Dreibholz <dreibh@iem.uni-due.de>
+Copyright: Copyright (C) 2009-2016 Thomas Dreibholz <dreibh@iem.uni-due.de>
 License: GPL-3+
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
