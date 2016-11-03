@@ -1,3 +1,9 @@
+tsctp (0.6.3~rc1-1ubuntu1) zesty; urgency=low
+
+  * New upstream version.
+
+ -- Thomas Dreibholz <dreibh@iem.uni-due.de>  Thu, 03 Nov 2016 08:08:08 +0200
+
 tsctp (0.6.2-1ubuntu1) xenial; urgency=low
 
   * New upstream version.
