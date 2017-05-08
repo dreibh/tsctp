@@ -1,4 +1,4 @@
-AC_INIT([TSCTP], [0.6.4~rc1], [tuexen@fh-muenster.de])
+AC_INIT([TSCTP], [0.6.4~rc1.1], [tuexen@fh-muenster.de])
 AM_INIT_AUTOMAKE
 
 AC_PROG_CC_C99
