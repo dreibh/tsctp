@@ -1,680 +1,493 @@
-? ChangeLog
+commit c06b09b9dabc0ad2686ee708817a6eb4fb1a391a
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Mon May 8 15:16:50 2017 +0200
 
-RCS file: /usr/local/cvsroot/tsctp/.cvsignore,v
-Working file: .cvsignore
-head: 1.4
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 4;	selected revisions: 4
-description:
-----------------------------
-revision 1.4
-date: 2005-12-13 15:04:13 +0100;  author: tuexen;  state: Exp;  lines: +1 -0;
-Add even more generated files.
-----------------------------
-revision 1.3
-date: 2005-12-13 15:03:30 +0100;  author: tuexen;  state: Exp;  lines: +1 -0;
-Add another generated file.
-----------------------------
-revision 1.2
-date: 2005-12-13 15:02:55 +0100;  author: tuexen;  state: Exp;  lines: +4 -1;
-Add more generated files.
-----------------------------
-revision 1.1
-date: 2005-12-13 15:01:52 +0100;  author: tuexen;  state: Exp;
-Ignore generated files.
-=============================================================================
+    Script update.
 
-RCS file: /usr/local/cvsroot/tsctp/Makefile.am,v
-Working file: Makefile.am
-head: 1.5
-branch:
-locks: strict
-access list:
-symbolic names:
-	start: 1.1.1.1
-	tuexen: 1.1.1
-keyword substitution: kv
-total revisions: 6;	selected revisions: 6
-description:
-----------------------------
-revision 1.5
-date: 2010-06-11 15:06:52 +0200;  author: robinseggelmann;  state: Exp;  lines: +1 -2;  commitid: CDSNQX7u7u5PylCu;
-Remove DTLS stuff
-----------------------------
-revision 1.4
-date: 2010-03-01 15:52:01 +0100;  author: robinseggelmann;  state: Exp;  lines: +3 -2;  commitid: zcBLjOiZXFgaqfpu;
-separate tsctp version for dtls
-----------------------------
-revision 1.3
-date: 2006-02-01 21:37:16 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;
-Include batch files in dist.
-----------------------------
-revision 1.2
-date: 2005-12-13 15:31:27 +0100;  author: tuexen;  state: Exp;  lines: +1 -0;
-Get it running on Solaris.
-----------------------------
-revision 1.1
-date: 2005-12-13 14:59:03 +0100;  author: tuexen;  state: Exp;
-branches:  1.1.1;
-Initial revision
-----------------------------
-revision 1.1.1.1
-date: 2005-12-13 14:59:03 +0100;  author: tuexen;  state: Exp;  lines: +0 -0;
-SCTP performance test tool
-=============================================================================
+ configure.ac     |  2 +-
+ debian/changelog |  4 ++--
+ make-ppa         | 35 ++++++++++++++++++++++++++++++-----
+ rpm/tsctp.spec   |  2 +-
+ 4 files changed, 34 insertions(+), 9 deletions(-)
 
-RCS file: /usr/local/cvsroot/tsctp/batch,v
-Working file: batch
-head: 1.9
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 9;	selected revisions: 9
-description:
-----------------------------
-revision 1.9
-date: 2010-03-19 12:33:23 +0100;  author: robinseggelmann;  state: Exp;  lines: +2 -2;  commitid: IZZRFXBPsCd9Kxru;
-read again bug
-----------------------------
-revision 1.8
-date: 2006-10-01 17:13:10 +0200;  author: tuexen;  state: Exp;  lines: +21 -7;
-batch file uses timeout.
-tsctp provides -T timeou parameter.
-----------------------------
-revision 1.7
-date: 2006-05-09 15:43:53 +0200;  author: tuexen;  state: Exp;  lines: +1 -1;
-.le instead of .lt
-----------------------------
-revision 1.6
-date: 2006-01-20 09:00:23 +0100;  author: ruengeler;  state: Exp;  lines: +1 -1;
-set local address
-----------------------------
-revision 1.5
-date: 2005-12-19 17:18:06 +0100;  author: ruengeler;  state: Exp;  lines: +2 -1;
-get batch running on solaris
-----------------------------
-revision 1.4
-date: 2005-12-19 12:35:51 +0100;  author: ruengeler;  state: Exp;  lines: +4 -3;
-change input variables
-----------------------------
-revision 1.3
-date: 2005-12-19 12:29:33 +0100;  author: ruengeler;  state: Exp;  lines: +5 -6;
-*** empty log message ***
-----------------------------
-revision 1.2
-date: 2005-12-19 08:50:26 +0100;  author: ruengeler;  state: Exp;  lines: +1 -1;
-*** empty log message ***
-----------------------------
-revision 1.1
-date: 2005-12-19 08:43:44 +0100;  author: ruengeler;  state: Exp;
-batch file to test automatically
-=============================================================================
+commit e3eed68f292b16d6c66a5340fabf2fa04e844844
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Mar 23 14:28:42 2017 +0100
 
-RCS file: /usr/local/cvsroot/tsctp/batchLoop,v
-Working file: batchLoop
-head: 1.3
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 3;	selected revisions: 3
-description:
-----------------------------
-revision 1.3
-date: 2008-01-30 17:44:03 +0100;  author: ruengeler;  state: Exp;  lines: +1 -0;  commitid: zAY1rVRj5qrbvsPs;
-*** empty log message ***
-----------------------------
-revision 1.2
-date: 2008-01-30 17:13:31 +0100;  author: ruengeler;  state: Exp;  lines: +10 -13;  commitid: BFPBcXphH7WEksPs;
-change batchLoop
-----------------------------
-revision 1.1
-date: 2006-01-25 09:11:49 +0100;  author: ruengeler;  state: Exp;
-batch file for loopback
-=============================================================================
+    Script updates.
 
-RCS file: /usr/local/cvsroot/tsctp/bootstrap,v
-Working file: bootstrap
-head: 1.1
-branch: 1.1.1
-locks: strict
-access list:
-symbolic names:
-	start: 1.1.1.1
-	tuexen: 1.1.1
-keyword substitution: kv
-total revisions: 2;	selected revisions: 2
-description:
-----------------------------
-revision 1.1
-date: 2005-12-13 14:59:03 +0100;  author: tuexen;  state: Exp;
-branches:  1.1.1;
-Initial revision
-----------------------------
-revision 1.1.1.1
-date: 2005-12-13 14:59:03 +0100;  author: tuexen;  state: Exp;  lines: +0 -0;
-SCTP performance test tool
-=============================================================================
+ configure.ac     | 2 +-
+ debian/changelog | 6 ++++++
+ make-deb         | 2 +-
+ make-ppa         | 2 +-
+ rpm/tsctp.spec   | 2 +-
+ 5 files changed, 10 insertions(+), 4 deletions(-)
 
-RCS file: /usr/local/cvsroot/tsctp/configure.in,v
-Working file: configure.in
-head: 1.13
-branch:
-locks: strict
-access list:
-symbolic names:
-	start: 1.1.1.1
-	tuexen: 1.1.1
-keyword substitution: kv
-total revisions: 14;	selected revisions: 14
-description:
-----------------------------
-revision 1.13
-date: 2010-12-07 20:48:48 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;  commitid: VfdfFnEuPI5U1oZu;
-Some cleanups and bug fixes.
-----------------------------
-revision 1.12
-date: 2010-06-11 15:08:55 +0200;  author: robinseggelmann;  state: Exp;  lines: +1 -1;  commitid: QNmaDXLjmfKwzlCu;
-Remove lib/incude paths for OpenSSL
-----------------------------
-revision 1.11
-date: 2010-06-11 15:06:52 +0200;  author: robinseggelmann;  state: Exp;  lines: +1 -5;  commitid: CDSNQX7u7u5PylCu;
-Remove DTLS stuff
-----------------------------
-revision 1.10
-date: 2008-12-12 11:20:17 +0100;  author: robinseggelmann;  state: Exp;  lines: +5 -1;  commitid: MixQJZ7MeHqNbaut;
-dtls support
-----------------------------
-revision 1.9
-date: 2007-11-23 16:20:10 +0100;  author: tuexen;  state: Exp;  lines: +5 -7;
-Check for gcc instead of platform.
-----------------------------
-revision 1.8
-date: 2007-11-23 11:27:55 +0100;  author: tuexen;  state: Exp;  lines: +0 -2;
-Second try...CVS: ----------------------------------------------------------------------
-----------------------------
-revision 1.7
-date: 2007-11-23 11:20:57 +0100;  author: tuexen;  state: Exp;  lines: +7 -1;
-Handle Sun C compiler correctly.
-----------------------------
-revision 1.6
-date: 2006-08-16 16:17:58 +0200;  author: tuexen;  state: Exp;  lines: +1 -1;
-Bump version.
-----------------------------
-revision 1.5
-date: 2006-08-16 15:41:21 +0200;  author: tuexen;  state: Exp;  lines: +2 -2;
-use sctp_recvmsg
-----------------------------
-revision 1.4
-date: 2005-12-16 13:18:49 +0100;  author: ruengeler;  state: Exp;  lines: +2 -0;
-server with threads
-----------------------------
-revision 1.3
-date: 2005-12-13 17:09:33 +0100;  author: tuexen;  state: Exp;  lines: +3 -0;
-Get it running on Linux (hopefully).
-----------------------------
-revision 1.2
-date: 2005-12-13 15:39:17 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;
-It runs now on Solaris 10.
-----------------------------
-revision 1.1
-date: 2005-12-13 14:59:03 +0100;  author: tuexen;  state: Exp;
-branches:  1.1.1;
-Initial revision
-----------------------------
-revision 1.1.1.1
-date: 2005-12-13 14:59:03 +0100;  author: tuexen;  state: Exp;  lines: +0 -0;
-SCTP performance test tool
-=============================================================================
+commit 9c91b66971689793444423d83028c54572ade183
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Nov 3 16:47:58 2016 +0100
 
-RCS file: /usr/local/cvsroot/tsctp/Attic/dtls_tsctp.c,v
-Working file: dtls_tsctp.c
-head: 1.4
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 4;	selected revisions: 4
-description:
-----------------------------
-revision 1.4
-date: 2010-06-11 15:06:52 +0200;  author: robinseggelmann;  state: dead;  lines: +0 -0;  commitid: CDSNQX7u7u5PylCu;
-Remove DTLS stuff
-----------------------------
-revision 1.3
-date: 2010-03-19 12:33:23 +0100;  author: robinseggelmann;  state: Exp;  lines: +2 -0;  commitid: IZZRFXBPsCd9Kxru;
-read again bug
-----------------------------
-revision 1.2
-date: 2010-03-01 15:58:03 +0100;  author: robinseggelmann;  state: Exp;  lines: +1 -3;  commitid: 3Y3tUmF24o4fsfpu;
-unused variables removed
-----------------------------
-revision 1.1
-date: 2010-03-01 15:52:01 +0100;  author: robinseggelmann;  state: Exp;  commitid: zcBLjOiZXFgaqfpu;
-separate tsctp version for dtls
-=============================================================================
+    Updated LSM entry.
 
-RCS file: /usr/local/cvsroot/tsctp/Attic/server-cert.pem,v
-Working file: server-cert.pem
-head: 1.2
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 2;	selected revisions: 2
-description:
-----------------------------
-revision 1.2
-date: 2010-06-11 15:06:52 +0200;  author: robinseggelmann;  state: dead;  lines: +0 -0;  commitid: CDSNQX7u7u5PylCu;
-Remove DTLS stuff
-----------------------------
-revision 1.1
-date: 2008-12-12 11:20:18 +0100;  author: robinseggelmann;  state: Exp;  commitid: MixQJZ7MeHqNbaut;
-dtls support
-=============================================================================
+ configure.ac     | 2 +-
+ debian/changelog | 2 +-
+ rpm/tsctp.spec   | 2 +-
+ tsctp.lsm        | 6 +++---
+ 4 files changed, 6 insertions(+), 6 deletions(-)
 
-RCS file: /usr/local/cvsroot/tsctp/Attic/server-key.pem,v
-Working file: server-key.pem
-head: 1.2
-branch:
-locks: strict
-access list:
-symbolic names:
-keyword substitution: kv
-total revisions: 2;	selected revisions: 2
-description:
-----------------------------
-revision 1.2
-date: 2010-06-11 15:06:52 +0200;  author: robinseggelmann;  state: dead;  lines: +0 -0;  commitid: CDSNQX7u7u5PylCu;
-Remove DTLS stuff
-----------------------------
-revision 1.1
-date: 2008-12-12 11:20:18 +0100;  author: robinseggelmann;  state: Exp;  commitid: MixQJZ7MeHqNbaut;
-dtls support
-=============================================================================
+commit 1055e0115a236ef7322772007478552e73f00e31
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Nov 3 15:55:53 2016 +0100
 
-RCS file: /usr/local/cvsroot/tsctp/tsctp.c,v
-Working file: tsctp.c
-head: 1.88
-branch:
-locks: strict
-access list:
-symbolic names:
-	start: 1.1.1.1
-	tuexen: 1.1.1
-keyword substitution: kv
-total revisions: 89;	selected revisions: 89
-description:
-----------------------------
-revision 1.88
-date: 2011-11-22 14:42:14 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;  commitid: eQK9Di2sQXSFKkIv;
-Add \n.
-----------------------------
-revision 1.87
-date: 2011-11-20 10:57:58 +0100;  author: tuexen;  state: Exp;  lines: +6 -8;  commitid: 6Zv9n8bzSFyBz3Iv;
-Set the remote UDP encapsualtion port in any case, not only when acting
-as a client.
-----------------------------
-revision 1.86
-date: 2011-11-20 02:51:53 +0100;  author: tuexen;  state: Exp;  lines: +30 -6;  commitid: Eke0GAvTqcpWS0Iv;
-Add option for UDP encapsulation.
-----------------------------
-revision 1.85
-date: 2011-04-16 22:07:47 +0200;  author: tuexen;  state: Exp;  lines: +8 -6;  commitid: KXgYl8AVESwlX5gv;
-Fix ipv6only handling.
-----------------------------
-revision 1.84
-date: 2011-04-03 14:06:32 +0200;  author: tuexen;  state: Exp;  lines: +16 -23;  commitid: I3Du8Z36PIobInev;
-Some more cleanups.
-----------------------------
-revision 1.83
-date: 2011-04-03 13:59:12 +0200;  author: tuexen;  state: Exp;  lines: +3 -0;  commitid: l5Ijkl99YXmDFnev;
-Improve IPv6 handling.
-----------------------------
-revision 1.82
-date: 2010-12-07 20:48:48 +0100;  author: tuexen;  state: Exp;  lines: +48 -49;  commitid: VfdfFnEuPI5U1oZu;
-Some cleanups and bug fixes.
-----------------------------
-revision 1.81
-date: 2010-11-11 21:43:06 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;  commitid: Z7PBEP8RKwrma3Wu;
-Time for up to 10 paths...
-----------------------------
-revision 1.80
-date: 2010-09-01 12:07:05 +0200;  author: robinseggelmann;  state: Exp;  lines: +147 -22;  commitid: zJLocMFC6UkJVRMu;
-IPv6 support for tsctp
-----------------------------
-revision 1.79
-date: 2010-06-27 21:17:04 +0200;  author: tuexen;  state: Exp;  lines: +11 -14;  commitid: YP1MRAeT4q5U5rEu;
-Some more cleanups.
-----------------------------
-revision 1.78
-date: 2010-06-27 21:10:27 +0200;  author: tuexen;  state: Exp;  lines: +28 -102;  commitid: 3XZuP1MYaXDC3rEu;
-Some cleanups.
-----------------------------
-revision 1.77
-date: 2010-03-17 11:12:01 +0100;  author: robinseggelmann;  state: Exp;  lines: +1 -1;  commitid: ltptVSEwgWbemhru;
-no division by 1024
-----------------------------
-revision 1.76
-date: 2010-03-01 15:52:01 +0100;  author: robinseggelmann;  state: Exp;  lines: +25 -164;  commitid: zcBLjOiZXFgaqfpu;
-separate tsctp version for dtls
-----------------------------
-revision 1.75
-date: 2009-12-08 17:17:13 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;  commitid: UUMO9KtaeoqEyAeu;
-Bugfix from Irene: Use correct length when initializing local_addr[i].
-----------------------------
-revision 1.74
-date: 2009-10-13 09:05:44 +0200;  author: robinseggelmann;  state: Exp;  lines: +2 -4;  commitid: 34Mbfehr2oHdjl7u;
-DTLS compatibility
-----------------------------
-revision 1.73
-date: 2009-04-15 13:25:13 +0200;  author: tuexen;  state: Exp;  lines: +6 -3;  commitid: Dp3kQ9lj4kkUy6Kt;
-Cleanup.
-----------------------------
-revision 1.72
-date: 2009-04-15 12:50:29 +0200;  author: tuexen;  state: Exp;  lines: +20 -23;  commitid: PrJkB6sfN68Zm6Kt;
-Whitespace changes.
-----------------------------
-revision 1.71
-date: 2009-03-29 21:41:45 +0200;  author: tuexen;  state: Exp;  lines: +1 -1;  commitid: 3l7ywWqPNbt7RXHt;
-Fix unit.
-----------------------------
-revision 1.70
-date: 2009-03-23 18:56:37 +0100;  author: tuexen;  state: Exp;  lines: +5 -2;  commitid: x0CBNfv5FVHTsbHt;
-- Fix issue with binding.
-- Print bytes/second.
-----------------------------
-revision 1.69
-date: 2009-03-23 02:06:09 +0100;  author: tuexen;  state: Exp;  lines: +4 -4;  commitid: 1eoV0gl2AnJmS5Ht;
-unordered.
-----------------------------
-revision 1.68
-date: 2009-03-23 01:08:25 +0100;  author: tuexen;  state: Exp;  lines: +18 -11;  commitid: lMt1M7mO3Xdyy5Ht;
-Bind mulitple local addresses.
-----------------------------
-revision 1.67
-date: 2008-12-16 11:25:01 +0100;  author: robinseggelmann;  state: Exp;  lines: +6 -1;  commitid: s6nnVhXNbFRr5Gut;
-close bug workaround
-----------------------------
-revision 1.66
-date: 2008-12-12 12:52:23 +0100;  author: robinseggelmann;  state: Exp;  lines: +2 -0;  commitid: DMC8T56ybCvoHaut;
-bugfix
-----------------------------
-revision 1.65
-date: 2008-12-12 11:20:18 +0100;  author: robinseggelmann;  state: Exp;  lines: +233 -28;  commitid: MixQJZ7MeHqNbaut;
-dtls support
-----------------------------
-revision 1.64
-date: 2008-11-26 19:57:05 +0100;  author: tuexen;  state: Exp;  lines: +9 -4;  commitid: 3DlkqmrPvFuTy9st;
-Add support for sending unordered messages using the -u flag.
-----------------------------
-revision 1.63
-date: 2008-09-23 12:05:40 +0200;  author: tuexen;  state: Exp;  lines: +0 -11;  commitid: Wli6MLgPfZY6GSjt;
-Out with the workaround. FreeBSD and Mac OS X are fixed.
-----------------------------
-revision 1.62
-date: 2008-09-22 19:55:21 +0200;  author: tuexen;  state: Exp;  lines: +11 -0;  commitid: CwMmikJj54YbjNjt;
-Add a workaround for inheritage bug in kernels.
-----------------------------
-revision 1.61
-date: 2008-09-22 19:19:36 +0200;  author: tuexen;  state: Exp;  lines: +10 -10;  commitid: pCV1CQjIlzUW6Njt;
-Fix the application. Still not working due to kernel bugs...
-----------------------------
-revision 1.60
-date: 2008-09-16 12:29:15 +0200;  author: tuexen;  state: Exp;  lines: +0 -1;  commitid: FZ9THqJ662kc2Zit;
-Get rid of unused variable.
-----------------------------
-revision 1.59
-date: 2008-09-16 09:08:12 +0200;  author: tuexen;  state: Exp;  lines: +1 -0;  commitid: VCtLbe5JvKGdVXit;
-Fix off by one error.
-----------------------------
-revision 1.58
-date: 2008-09-15 17:53:41 +0200;  author: tuexen;  state: Exp;  lines: +19 -13;  commitid: OUPUHa9UwXsjRSit;
-Use sctp_sendmsg and indicate the end of transmission using SCTP_EOF.
-Add option to configure the adaptation layer indication.
-----------------------------
-revision 1.57
-date: 2008-01-09 09:29:00 +0100;  author: ruengeler;  state: Exp;  lines: +11 -0;
-printf peer_addr_change
-----------------------------
-revision 1.56
-date: 2007-11-23 11:09:26 +0100;  author: ruengeler;  state: Exp;  lines: +6 -2;
-Work around Randalls bug...
-----------------------------
-revision 1.55
-date: 2007-09-16 12:56:18 +0200;  author: tuexen;  state: Exp;  lines: +3 -1;
-Improve handling when running out of fds.
-----------------------------
-revision 1.54
-date: 2007-05-24 11:04:33 +0200;  author: ruengeler;  state: Exp;  lines: +4 -3;
-Do not print error message when send() call is interupted.
-Stop sending loop on first error of send() call.
-----------------------------
-revision 1.53
-date: 2007-03-19 17:52:14 +0100;  author: tuexen;  state: Exp;  lines: +12 -5;
-Initiialize the flags variable...
-----------------------------
-revision 1.52
-date: 2007-03-04 22:52:22 +0100;  author: tuexen;  state: Exp;  lines: +0 -4;
-No debug ciode...
-----------------------------
-revision 1.51
-date: 2007-03-04 22:50:01 +0100;  author: tuexen;  state: Exp;  lines: +9 -4;
-Fix help.
-----------------------------
-revision 1.50
-date: 2007-01-30 00:17:39 +0100;  author: tuexen;  state: Exp;  lines: +28 -17;
-Get it compiling on Linux.
-----------------------------
-revision 1.49
-date: 2006-11-22 21:15:25 +0100;  author: tuexen;  state: Exp;  lines: +16 -2;
-Add support for SCTP-AUTH. Needs config stuff.
-----------------------------
-revision 1.48
-date: 2006-10-27 11:55:05 +0200;  author: tuexen;  state: Exp;  lines: +5 -2;
-Handle large messages correctly.
-----------------------------
-revision 1.47
-date: 2006-10-19 21:39:11 +0200;  author: tuexen;  state: Exp;  lines: +10 -3;
-Handle signal correctly on the sender side.
-----------------------------
-revision 1.46
-date: 2006-10-01 17:13:10 +0200;  author: tuexen;  state: Exp;  lines: +40 -16;
-batch file uses timeout.
-tsctp provides -T timeou parameter.
-----------------------------
-revision 1.45
-date: 2006-08-18 10:32:56 +0200;  author: tuexen;  state: Exp;  lines: +18 -16;
-cleanup.
-----------------------------
-revision 1.44
-date: 2006-08-16 20:03:28 +0200;  author: becke;  state: Exp;  lines: +12 -1;
-insert a f flag for SCTP_MAXSEG
-----------------------------
-revision 1.43
-date: 2006-08-16 15:41:21 +0200;  author: tuexen;  state: Exp;  lines: +23 -11;
-use sctp_recvmsg
-----------------------------
-revision 1.42
-date: 2006-08-16 13:27:04 +0200;  author: tuexen;  state: Exp;  lines: +9 -4;
-enable-disable always NAGLE.
-----------------------------
-revision 1.41
-date: 2006-07-26 22:29:52 +0200;  author: tuexen;  state: Exp;  lines: +5 -5;
-Do not set the buffer while printing it.
-----------------------------
-revision 1.40
-date: 2006-07-21 12:47:30 +0200;  author: tuexen;  state: Exp;  lines: +12 -3;
-Print snd/rcv buffer size.
-----------------------------
-revision 1.39
-date: 2006-06-10 12:54:31 +0200;  author: tuexen;  state: Exp;  lines: +2 -9;
-Free buffer after usage.
-----------------------------
-revision 1.38
-date: 2006-06-04 11:04:29 +0200;  author: tuexen;  state: Exp;  lines: +19 -5;
-More int->double conversions.
-----------------------------
-revision 1.37
-date: 2006-03-29 21:05:55 +0200;  author: tuexen;  state: Exp;  lines: +26 -3;
-Make snd/rcv buffer configurable.
-----------------------------
-revision 1.36
-date: 2006-02-02 23:41:53 +0100;  author: tuexen;  state: Exp;  lines: +21 -35;
-Some cleanups.
-----------------------------
-revision 1.35
-date: 2006-01-19 13:39:39 +0100;  author: tuexen;  state: Exp;  lines: +10 -6;
-Add unlimited sending.
-----------------------------
-revision 1.34
-date: 2006-01-19 10:15:37 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;
-Get it really running....
-----------------------------
-revision 1.33
-date: 2006-01-19 10:04:43 +0100;  author: ruengeler;  state: Exp;  lines: +18 -13;
-Add local address support (only one...)
-----------------------------
-revision 1.32
-date: 2006-01-05 08:30:19 +0100;  author: ruengeler;  state: Exp;  lines: +10 -9;
-fix computation of throughput
-----------------------------
-revision 1.31
-date: 2005-12-20 11:51:09 +0100;  author: ruengeler;  state: Exp;  lines: +2 -2;
- add start and stop time to output
-----------------------------
-revision 1.30
-date: 2005-12-19 17:16:52 +0100;  author: ruengeler;  state: Exp;  lines: +6 -6;
- with fflush
-----------------------------
-revision 1.29
-date: 2005-12-19 16:20:23 +0100;  author: ruengeler;  state: Exp;  lines: +3 -5;
-*** empty log message ***
-----------------------------
-revision 1.28
-date: 2005-12-19 14:51:13 +0100;  author: ruengeler;  state: Exp;  lines: +3 -2;
-*** empty log message ***
-----------------------------
-revision 1.27
-date: 2005-12-19 14:49:18 +0100;  author: ruengeler;  state: Exp;  lines: +28 -9;
-prepare output
-----------------------------
-revision 1.26
-date: 2005-12-19 12:53:12 +0100;  author: ruengeler;  state: Exp;  lines: +0 -7;
-make it nicer
-----------------------------
-revision 1.25
-date: 2005-12-19 12:49:15 +0100;  author: ruengeler;  state: Exp;  lines: +1 -22;
-*** empty log message ***
-----------------------------
-revision 1.24
-date: 2005-12-19 11:38:51 +0100;  author: ruengeler;  state: Exp;  lines: +1 -1;
-*** empty log message ***
-----------------------------
-revision 1.23
-date: 2005-12-19 11:34:22 +0100;  author: ruengeler;  state: Exp;  lines: +12 -13;
-*** empty log message ***
-----------------------------
-revision 1.22
-date: 2005-12-19 11:06:12 +0100;  author: ruengeler;  state: Exp;  lines: +3 -5;
-*** empty log message ***
-----------------------------
-revision 1.21
-date: 2005-12-19 10:56:26 +0100;  author: ruengeler;  state: Exp;  lines: +1 -1;
-*** empty log message ***
-----------------------------
-revision 1.20
-date: 2005-12-19 10:55:03 +0100;  author: ruengeler;  state: Exp;  lines: +1 -0;
-*** empty log message ***
-----------------------------
-revision 1.19
-date: 2005-12-19 10:51:17 +0100;  author: ruengeler;  state: Exp;  lines: +1 -0;
-*** empty log message ***
-----------------------------
-revision 1.18
-date: 2005-12-19 10:44:51 +0100;  author: ruengeler;  state: Exp;  lines: +1 -1;
-*** empty log message ***
-----------------------------
-revision 1.17
-date: 2005-12-19 10:43:14 +0100;  author: ruengeler;  state: Exp;  lines: +3 -2;
-*** empty log message ***
-----------------------------
-revision 1.16
-date: 2005-12-19 10:40:12 +0100;  author: ruengeler;  state: Exp;  lines: +3 -1;
-*** empty log message ***
-----------------------------
-revision 1.15
-date: 2005-12-19 10:36:30 +0100;  author: ruengeler;  state: Exp;  lines: +4 -0;
-*** empty log message ***
-----------------------------
-revision 1.14
-date: 2005-12-19 09:24:30 +0100;  author: ruengeler;  state: Exp;  lines: +0 -4;
-*** empty log message ***
-----------------------------
-revision 1.13
-date: 2005-12-19 09:13:57 +0100;  author: ruengeler;  state: Exp;  lines: +7 -6;
-*** empty log message ***
-----------------------------
-revision 1.12
-date: 2005-12-19 08:58:04 +0100;  author: ruengeler;  state: Exp;  lines: +4 -0;
-*** empty log message ***
-----------------------------
-revision 1.11
-date: 2005-12-19 08:25:43 +0100;  author: ruengeler;  state: Exp;  lines: +6 -3;
-change filename
-----------------------------
-revision 1.10
-date: 2005-12-16 13:18:49 +0100;  author: ruengeler;  state: Exp;  lines: +93 -26;
-server with threads
-----------------------------
-revision 1.9
-date: 2005-12-16 11:28:39 +0100;  author: ruengeler;  state: Exp;  lines: +13 -3;
-enter os in list
-----------------------------
-revision 1.8
-date: 2005-12-16 10:05:14 +0100;  author: ruengeler;  state: Exp;  lines: +7 -1;
+    Updated build scripts.
 
-write in file
-----------------------------
-revision 1.7
-date: 2005-12-15 13:14:42 +0100;  author: ruengeler;  state: Exp;  lines: +2 -2;
-include Nagle option
-----------------------------
-revision 1.6
-date: 2005-12-15 13:08:58 +0100;  author: ruengeler;  state: Exp;  lines: +20 -9;
-*** empty log message ***
-----------------------------
-revision 1.5
-date: 2005-12-13 17:13:15 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;
-It runs on Linux now...
-----------------------------
-revision 1.4
-date: 2005-12-13 17:09:33 +0100;  author: tuexen;  state: Exp;  lines: +3 -0;
-Get it running on Linux (hopefully).
-----------------------------
-revision 1.3
-date: 2005-12-13 15:34:17 +0100;  author: tuexen;  state: Exp;  lines: +12 -0;
-Add timersub.
-----------------------------
-revision 1.2
-date: 2005-12-13 15:31:27 +0100;  author: tuexen;  state: Exp;  lines: +1 -1;
-Get it running on Solaris.
-----------------------------
-revision 1.1
-date: 2005-12-13 14:59:03 +0100;  author: tuexen;  state: Exp;
-branches:  1.1.1;
-Initial revision
-----------------------------
-revision 1.1.1.1
-date: 2005-12-13 14:59:03 +0100;  author: tuexen;  state: Exp;  lines: +0 -0;
-SCTP performance test tool
-=============================================================================
+ configure.ac     | 2 +-
+ debian/changelog | 6 ++++++
+ make-ppa         | 2 +-
+ 3 files changed, 8 insertions(+), 2 deletions(-)
+
+commit c35828ef6ab98ba33dd645689f52064b314af2ec
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Mon Apr 4 15:49:17 2016 +0200
+
+    Updated LSM entry.
+
+ tsctp.lsm | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 05c93c54f485b8f48eac2055b6b9dc0a869f98c1
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Mon Apr 4 15:48:00 2016 +0200
+
+    Build script updates.
+
+ configure.ac     |  2 +-
+ debian/changelog | 10 ++++++++++
+ debian/compat    |  2 +-
+ debian/control   |  6 ++++--
+ debian/copyright |  4 ++--
+ debian/rules     |  5 +++++
+ rpm/tsctp.spec   |  2 +-
+ 7 files changed, 24 insertions(+), 7 deletions(-)
+
+commit a3d06a91359b2a69ba320ffebc7980a51c48257e
+Merge: 6fc2ba5 3c19e7d
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Dec 16 20:36:23 2015 +0100
+
+    Merge branch 'master' of github.com:dreibh/tsctp
+
+commit 6fc2ba5b5d145b7ed206c68c4998f983d0ccca32
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Dec 16 20:35:48 2015 +0100
+
+    Script update.
+
+ make-ppa | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 3c19e7dc8f92d7cff0ed86550aa3a258858da0ad
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Oct 20 14:36:02 2015 +0200
+
+    Packaging fixes.
+
+ build-deb                    |  2 +-
+ clean-deb                    |  2 +-
+ configure.ac                 | 10 +++++-----
+ debian/changelog             |  4 ++--
+ filter-empty-entries         |  2 +-
+ freebsd/tsctp/make-diff      |  2 +-
+ freebsd/tsctp/test-packaging |  2 +-
+ make-deb                     |  2 +-
+ make-ppa                     |  2 +-
+ make-rpm                     |  2 +-
+ rpm/tsctp.spec               |  2 +-
+ tsctp.1                      |  2 +-
+ 12 files changed, 17 insertions(+), 17 deletions(-)
+
+commit c23f0691b6f37741862c4801b75a0cb6bafb6625
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Sun Mar 1 13:45:38 2015 +0000
+
+    Added LSM entry.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1984 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ tsctp.lsm | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+commit b17120277752b058c674cebce0fc2a7b2f49187f
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Sun Mar 1 13:12:13 2015 +0000
+
+    Packaging update.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1983 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ configure.ac     | 2 +-
+ debian/changelog | 2 +-
+ rpm/tsctp.spec   | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+commit e9b6cebf009daf935dbd32e535360761cd456b9c
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Sun Mar 1 12:48:03 2015 +0000
+
+    Packaging updates.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1981 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ configure.ac                    |  18 +-
+ debian/changelog                |   4 +-
+ debian/control                  |   4 +-
+ debian/copyright                |  93 ++++-----
+ debian/upstream/signing-key.asc | 405 ++++++++++++++++++++++++++++++++++++++++
+ debian/watch                    |   1 +
+ make-ppa                        |   2 +-
+ 7 files changed, 458 insertions(+), 69 deletions(-)
+
+commit 3b90d23af914c97e55d1a3c3f7b33849fe6af430
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Fri Jul 4 16:38:55 2014 +0000
+
+    F20 build script updates.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1867 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ rpm.conf | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+commit e15e1e39a3be7ee41f14b23f304f1e44694999ff
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Fri Jul 4 15:05:55 2014 +0000
+
+    Updated BuildRequires in RPM spec file.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1866 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ rpm/tsctp.spec | 2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 7e474161c9f90e642d17dc0722f6ea8dc26a927a
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Tue Jun 24 09:54:13 2014 +0000
+
+    Removed debug output.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1849 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ make-rpm | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+commit ff795f5cd772d7a434cdb95d6678001d1d7aecc6
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Tue Mar 18 13:13:23 2014 +0000
+
+    Specfile update.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1791 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ rpm/tsctp.spec | 2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 220842c948d30373fce44dbfd2ac17feb16fb749
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Tue Mar 18 12:28:16 2014 +0000
+
+    Removed separate "m4" directory from build process.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1788 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ configure.ac | 2 ++
+ 1 file changed, 2 insertions(+)
+
+commit d26b64478c3f0f1b4e37b95b0a1837b900321fc7
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Sat Mar 15 08:12:42 2014 +0000
+
+    Build script update.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1785 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ configure.ac     | 2 +-
+ debian/changelog | 2 +-
+ rpm/tsctp.spec   | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+commit a0a4e6b67cebccca8169a1520599a289f7e588f5
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Sat Mar 15 08:10:36 2014 +0000
+
+    Updated manpage.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1784 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ tsctp.1 | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit c77bf2ca9ff787baee0b4b4cf5283a344d956c95
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Sat Mar 15 07:59:27 2014 +0000
+
+    Updated to latest version.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1783 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ configure.ac     |  2 +-
+ debian/changelog |  4 ++--
+ tsctp.c          | 17 ++++++++++++-----
+ 3 files changed, 15 insertions(+), 8 deletions(-)
+
+commit 9b6e4fc48597cc7b008c2e33fa4ad760a9f6ef57
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Mon Nov 11 08:44:44 2013 +0000
+
+    Updated make-rpm.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1743 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ make-rpm | 109 +++++++++++++++++++++++++++++++++++++--------------------------
+ 1 file changed, 65 insertions(+), 44 deletions(-)
+
+commit 1d3b0bb0f03744e6cbed07f254249e6ce11bd93b
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Tue Nov 5 15:57:51 2013 +0000
+
+    Added RPM packaging files.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1737 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ make-rpm       | 148 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ rpm/tsctp.spec |  39 +++++++++++++++
+ 2 files changed, 187 insertions(+)
+
+commit a29b37a426d64215c009de81af2b890a975e7614
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Fri Oct 25 11:28:04 2013 +0000
+
+    Updated packaging files.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1708 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ configure.ac     | 53 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ configure.in     | 55 -------------------------------------------------------
+ debian/changelog |  4 ++--
+ make-ppa         |  2 +-
+ 4 files changed, 56 insertions(+), 58 deletions(-)
+
+commit 429a0e6e993f977e8fa91d9e9bc6f8f28f1a6037
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Fri Oct 25 11:27:55 2013 +0000
+
+    Updated upstream source.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1707 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ tsctp.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit db8c58918a77fb5e7e754fe0fec690849112fc62
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Fri Oct 18 21:52:07 2013 +0000
+
+    Updated make-ppa.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1671 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ make-ppa | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit b75329c22048d3e22b8205a009a8b68ea0755e87
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Thu May 30 12:33:25 2013 +0000
+
+    Build script updates.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1649 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ build-deb        |  99 ++++++++++++++++++++++----
+ clean-deb        |   2 +-
+ configure.in     |   2 +-
+ debian/changelog |   4 +-
+ debian/control   |   2 +-
+ make-deb         | 209 +++++++++++++++++++++++++++++++++----------------------
+ make-ppa         |   2 +-
+ 7 files changed, 215 insertions(+), 105 deletions(-)
+
+commit 3dad2954c01a09273d716e5278024faa9b5b3896
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Tue Jan 15 10:31:45 2013 +0000
+
+    Build script updates.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1613 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ configure.in     | 2 +-
+ debian/changelog | 2 +-
+ make-ppa         | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+commit a275cb16d8551fc2c25e7a5d411e2623276cc390
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Sat Aug 25 21:57:55 2012 +0000
+
+    Build script updates.
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1506 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ build-deb        | 45 +++++++++++++++++++++++++++++++++++++++++++++
+ configure.in     |  2 +-
+ debian.conf      |  1 +
+ debian/changelog |  4 ++--
+ make-ppa         |  2 +-
+ 5 files changed, 50 insertions(+), 4 deletions(-)
+
+commit 4eea4ecbd431ad898c0d936e0313e1f004b5d842
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Sat Apr 21 20:56:23 2012 +0000
+
+    Packaging script update.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1369 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ configure.in     | 2 +-
+ debian/changelog | 5 ++---
+ debian/control   | 2 +-
+ 3 files changed, 4 insertions(+), 5 deletions(-)
+
+commit 8520d5da674b11f1769aebefb316b945e04903a9
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Tue Nov 22 14:44:09 2011 +0000
+
+    Updated to latest version.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1137 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ AUTHORS               |   3 +-
+ ChangeLog             | 755 +++++++++++++++++++++++++++++++++++---------------
+ Makefile.am           |   2 +-
+ configure.in          |   2 +-
+ debian/changelog      |   4 +-
+ debian/tsctp.manpages |   2 +-
+ tsctp.1               |  58 ++++
+ tsctp.8               |  58 ----
+ tsctp.c               |  37 ++-
+ 9 files changed, 621 insertions(+), 300 deletions(-)
+
+commit fa6526b7f2e01bf658782fa52158b5e22e16228b
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Mon Nov 21 10:10:02 2011 +0000
+
+    Fixed Debian file.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1124 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ debian/copyright | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 6ff5bd4f128d5283ba4f3ce8e627ed53b3de2da3
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Mon Nov 21 09:58:10 2011 +0000
+
+    Updated FreeBSD packaging files.
+    
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1122 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ freebsd/tsctp/Makefile | 2 +-
+ freebsd/tsctp/distinfo | 5 ++---
+ 2 files changed, 3 insertions(+), 4 deletions(-)
+
+commit ba2fc22cfa843ef60cb339eb92a30ec9e6bd7bc2
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Mon Nov 21 09:52:54 2011 +0000
+
+    Added FreeBSD packaging files.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1121 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ README                       |  3 +++
+ freebsd/tsctp/Makefile       | 29 +++++++++++++++++++++
+ freebsd/tsctp/distinfo       |  3 +++
+ freebsd/tsctp/make-diff      | 51 ++++++++++++++++++++++++++++++++++++
+ freebsd/tsctp/make-shar      |  3 +++
+ freebsd/tsctp/pkg-descr      |  5 ++++
+ freebsd/tsctp/test-packaging | 61 ++++++++++++++++++++++++++++++++++++++++++++
+ 7 files changed, 155 insertions(+)
+
+commit 5ec6fb6d364d652c101abeaa5a3836af338880ac
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Mon Nov 21 09:10:05 2011 +0000
+
+    Packaging file updates.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1120 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ ChangeLog             | 383 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ NEWS                  |   0
+ README                |   0
+ batch                 |  24 ++++
+ batchLoop             |  22 +++
+ bootstrap             |   0
+ clean-deb             |  28 ++++
+ configure.in          |   2 +-
+ debian.conf           |   9 ++
+ debian/changelog      |   7 +
+ debian/compat         |   1 +
+ debian/control        |  23 +++
+ debian/copyright      |  52 +++++++
+ debian/rules          |   8 ++
+ debian/source/format  |   1 +
+ debian/tsctp.install  |   1 +
+ debian/tsctp.manpages |   1 +
+ debian/watch          |   2 +
+ filter-empty-entries  |  61 ++++++++
+ make-deb              | 288 +++++++++++++++++++++++++++++++++++++
+ make-ppa              |   6 +
+ 21 files changed, 918 insertions(+), 1 deletion(-)
+
+commit 712c2f6ddc1ce5e1bf754805c3e55685db55391a
+Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
+Date:   Mon Nov 21 07:56:30 2011 +0000
+
+    Started tsctp packaging.
+    
+    
+    git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1119 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
+
+ AUTHORS      |   3 +
+ BUGS         |   0
+ COPYING      |  23 +++
+ ChangeLog    |   0
+ INSTALL      | 237 ++++++++++++++++++++++++++
+ Makefile.am  |   4 +
+ bootstrap    |   5 +
+ configure.in |  55 ++++++
+ tsctp.8      |  58 +++++++
+ tsctp.c      | 547 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 10 files changed, 932 insertions(+)
