@@ -1,3 +1,39 @@
+commit 921198cc5156ccbe7fde2a8eb62a42dca63079d0
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Aug 9 12:22:54 2017 +0200
+
+    Fixed URL. Version bump.
+
+ build-deb                    | 2 +-
+ clean-deb                    | 2 +-
+ configure.ac                 | 2 +-
+ debian/changelog             | 8 ++++++++
+ debian/control               | 2 +-
+ debian/copyright             | 4 ++--
+ debian/watch                 | 2 +-
+ filter-empty-entries         | 2 +-
+ freebsd/tsctp/Makefile       | 2 +-
+ freebsd/tsctp/make-diff      | 2 +-
+ freebsd/tsctp/pkg-descr      | 2 +-
+ freebsd/tsctp/test-packaging | 2 +-
+ make-deb                     | 2 +-
+ make-rpm                     | 2 +-
+ rpm/tsctp.spec               | 8 ++++----
+ tsctp.lsm                    | 8 ++++----
+ 16 files changed, 30 insertions(+), 22 deletions(-)
+
+commit d784fb05befb6e8c50f9e106e28337bc3437f77d
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Mon May 8 15:26:23 2017 +0200
+
+    Version bump.
+
+ ChangeLog        | 11 +++++++++++
+ configure.ac     |  2 +-
+ debian/changelog |  2 +-
+ rpm/tsctp.spec   |  2 +-
+ 4 files changed, 14 insertions(+), 3 deletions(-)
+
 commit 91718e9eeba6feaf1ca66bc5f9aa9e4221b8f5d0
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Mon May 8 15:24:53 2017 +0200
