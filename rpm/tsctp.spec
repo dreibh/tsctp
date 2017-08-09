@@ -1,11 +1,11 @@
 Name: tsctp
-Version: 0.6.4
+Version: 0.6.5
 Release: 1
 Summary: SCTP test tool
 Group: Applications/Internet
 License: GPLv3
-URL: http://www.iem.uni-due.de/~dreibh/tsctp/
-Source: http://www.iem.uni-due.de/~dreibh/tsctp/download/%{name}-%{version}.tar.gz
+URL: https://www.uni-due.de/~be0001/tsctp/
+Source: https://www.uni-due.de/~be0001/tsctp/download/%{name}-%{version}.tar.gz
 
 AutoReqProv: on
 BuildRequires: autoconf
@@ -39,5 +39,5 @@ make DESTDIR=%{buildroot} install
 %doc
 
 %changelog
-* Tue Nov 05 2013 Thomas Dreibholz <dreibh@iem.uni-due.de> - 0.5.3~rc1
+* Tue Nov 05 2017 Thomas Dreibholz <dreibh@iem.uni-due.de> - 0.5.3~rc1
 - Created RPM package.

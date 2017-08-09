@@ -2,7 +2,7 @@ Source: tsctp
 Section: net
 Priority: optional
 Maintainer: Thomas Dreibholz <dreibh@iem.uni-due.de>
-Homepage: http://www.iem.uni-due.de/~dreibh/tsctp/
+Homepage: https://www.uni-due.de/~be0001/tsctp/
 Build-Depends: autotools-dev,
                debhelper (>= 9),
                dpkg-dev (>= 1.16.1~),

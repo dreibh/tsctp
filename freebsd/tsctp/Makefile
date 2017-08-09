@@ -8,7 +8,7 @@
 PORTNAME=	tsctp
 PORTVERSION=	0.5.0
 CATEGORIES=	net
-MASTER_SITES=	http://www.iem.uni-due.de/~dreibh/tsctp/download/ \
+MASTER_SITES=	https://www.uni-due.de/~be0001/tsctp/download/ \
 		http://www.exp-math.uni-essen.de/~dreibh/tsctp/download/
 
 MAINTAINER=	dreibh@iem.uni-due.de
