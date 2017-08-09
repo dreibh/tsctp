@@ -1,4 +1,4 @@
-tsctp (0.6.5-1ubuntu1) zesty; urgency=low
+tsctp (0.6.5-1ubuntu1) artful; urgency=low
 
   * New upstream version.
   * debian/watch: URL update
