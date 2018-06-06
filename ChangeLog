@@ -1,3 +1,60 @@
+commit ed691b831eb8c0bb9883e576ae2d5134f1879bf1
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Jun 6 10:17:48 2018 +0200
+
+    Build script updates for Debian Cosmic.
+
+ configure.ac     | 2 +-
+ debian/changelog | 7 +++++++
+ debian/control   | 2 +-
+ debian/copyright | 2 +-
+ 4 files changed, 10 insertions(+), 3 deletions(-)
+
+commit 4b5c4ff960b5383edc54a76f1d2ed227277d0f9b
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Jun 6 10:06:29 2018 +0200
+
+    Script updates.
+
+ build-deb |  8 ++++----
+ clean-deb |  9 ++++++---
+ make-deb  | 60 ++++++++++++++++++++++++++++++------------------------------
+ make-ppa  |  2 +-
+ 4 files changed, 41 insertions(+), 38 deletions(-)
+
+commit 7911d5ea69d728775d23431936ff1e69add1bcc4
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Mon Oct 30 22:01:54 2017 +0100
+
+    Updated FreeBSD port.
+
+ freebsd/tsctp/Makefile       | 26 +++++++-------------------
+ freebsd/tsctp/distinfo       |  4 ++--
+ freebsd/tsctp/make-diff      |  4 ++--
+ freebsd/tsctp/make-shar      |  2 +-
+ freebsd/tsctp/pkg-plist      |  2 ++
+ freebsd/tsctp/test-packaging | 36 +++++++++++++++++++++++-------------
+ 6 files changed, 37 insertions(+), 37 deletions(-)
+
+commit 078db7b12f90eb68408e5afd08398aeb66fe5efa
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Aug 9 12:24:16 2017 +0200
+
+    Script updates.
+
+ debian/changelog | 2 +-
+ make-ppa         | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit 447af99d50a18b18533f493dd221e88648df23ca
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Aug 9 12:23:02 2017 +0200
+
+    Updated ChangeLog.
+
+ ChangeLog | 36 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+
 commit 921198cc5156ccbe7fde2a8eb62a42dca63079d0
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Wed Aug 9 12:22:54 2017 +0200
