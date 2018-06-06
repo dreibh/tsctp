@@ -1,4 +1,4 @@
-Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: TSCTP
 Upstream-Contact: Michael Tüxen <tuexen@fh-muenster.de>
 Source: https://www.uni-due.de/~be0001/tsctp/
