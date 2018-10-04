@@ -3,17 +3,31 @@ language: c
 matrix:
   include:
 
-    # ====== Ubuntu 18.04 (Bionic Beaver) ===================================
+      # ====== Fedora 29 ====================================================
     - os: linux
       dist: xenial
       group: travis_latest
-      env: DOCKER="ubuntu:bionic" COMPILER_C="clang" COMPILER_CXX="clang++"
+      env: DOCKER="fedora:29" VARIANT="fedora" COMPILER_C="gcc" COMPILER_CXX="g++"
 
-    # ====== Ubuntu 16.04 (Xenial Xerus) ====================================
-    - os: linux
-      dist: xenial
-      group: travis_latest
-      env: DOCKER="ubuntu:xenial" COMPILER_C="gcc" COMPILER_CXX="g++"
+    ## ====== Ubuntu 18.04 (Bionic Beaver) ===================================
+    #- os: linux
+      #dist: xenial
+      #group: travis_latest
+      #env: DOCKER="ubuntu:xenial" VARIANT="ubuntu" COMPILER_C="gcc" COMPILER_CXX="g++"
+    #- os: linux
+      #dist: xenial
+      #group: travis_latest
+      #env: DOCKER="ubuntu:bionic" VARIANT="ubuntu" COMPILER_C="clang" COMPILER_CXX="clang++"
+
+    ## ====== Ubuntu 16.04 (Xenial Xerus) ====================================
+    #- os: linux
+      #dist: xenial
+      #group: travis_latest
+      #env: DOCKER="ubuntu:xenial" VARIANT="ubuntu" COMPILER_C="gcc" COMPILER_CXX="g++"
+    #- os: linux
+      #dist: xenial
+      #group: travis_latest
+      #env: DOCKER="ubuntu:bionic" VARIANT="ubuntu" COMPILER_C="clang" COMPILER_CXX="clang++"
 
     # ====== MacOS X ========================================================
     #- os: osx
@@ -36,8 +50,12 @@ before_install:
 install:
   - |
     if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
-       sudo docker exec -t ubuntu-test bash -c "apt-get update"
-       sudo docker exec -t ubuntu-test bash -c "apt-get install -y autoconf automake gcc g++ clang make libsctp-dev"
+       if [ "$VARIANT" = "ubuntu" ] ; then
+          sudo docker exec -t ubuntu-test bash -c "apt-get update"
+          sudo docker exec -t ubuntu-test bash -c "apt-get install -y autoconf automake gcc g++ clang make libsctp-dev"
+       elif [ "$VARIANT" = "fedora" ] ; then
+          sudo docker exec -t ubuntu-test bash -c "dnf install -y autoconf automake gcc g++ clang make lksctp-devel"
+       fi
     fi
 
 
