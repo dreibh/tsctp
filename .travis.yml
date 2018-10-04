@@ -7,13 +7,13 @@ matrix:
     - os: linux
       dist: xenial
       group: travis_latest
-      env: DOCKER="ubuntu:bionic" CC=clang CXX=clang++
+      env: DOCKER="ubuntu:bionic" COMPILER_C=clang COMPILER_CXX=clang++
 
     # ====== Ubuntu 16.04 (Xenial Xerus) ====================================
     - os: linux
       dist: xenial
       group: travis_latest
-      env: DOCKER="ubuntu:xenial" CC=gcc CXX=g++
+      env: DOCKER="ubuntu:xenial" COMPILER_C=gcc COMPILER_CXX=g++
 
     # ====== MacOS X ========================================================
     #- os: osx
@@ -45,7 +45,7 @@ script:
   - |
     if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
        sudo docker exec -t ubuntu-test bash -c "./bootstrap"
-       sudo docker exec -t ubuntu-test bash -c "echo OPTIONS: CC=$CC CXX=$CXX"
+       sudo docker exec -t ubuntu-test bash -c "echo OPTIONS: CC=$COMPILER_C CXX=$COMPILER_CXX"
        sudo docker exec -t ubuntu-test bash -c "env CC=$CC CXX=$CXX ./configure"
        sudo docker exec -t ubuntu-test bash -c "make VERBOSE=1"
     fi
