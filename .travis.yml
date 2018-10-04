@@ -2,12 +2,20 @@ language: c
 
 matrix:
   include:
+
+    # ====== Ubuntu 18.04 (Bionic Beaver) ===================================
     - os: linux
       dist: xenial
       group: travis_latest
-      env:
-       - DOCKER="ubuntu:xenial"
-       - DOCKER="ubuntu:bionic"
+      env: DOCKER="ubuntu:bionic"
+
+    # ====== Ubuntu 16.04 (Xenial Xerus) ====================================
+    - os: linux
+      dist: xenial
+      group: travis_latest
+      env: DOCKER="ubuntu:xenial"
+
+    # ====== MacOS X ========================================================
     #- os: osx
     #  osx_image: xcode9.4
     #  compiler: clang
@@ -21,7 +29,7 @@ before_install:
        sudo docker ps
     elif [ "$TRAVIS_OS_NAME" = "osx" ] ; then
        brew update
-       brew install bzip2 qt glib
+       brew install ...
     fi
 
 
