@@ -31,10 +31,7 @@ before_install:
 install:
   - |
     if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
-       sudo docker exec -t ubuntu-test bash -c   apt-get update
-    fi
-    if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
-       sudo docker exec -t ubuntu-test bash -c   apt-get install -y autoconf automake libsctp-dev
+       sudo docker exec -t ubuntu-test bash -c apt-get install -y autoconf automake libsctp-dev
     fi
 
 
