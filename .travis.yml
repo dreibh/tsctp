@@ -3,14 +3,11 @@ language: c
 matrix:
   include:
     - os: linux
-      dist: trusty
-      compiler: gcc
+      dist: xenial
       group: travis_latest
-      env: DOCKER="ubuntu:xenial"
-    #- os: linux
-    #  dist: trusty
-    #  compiler: clang
-    #  group: travis_latest
+      env:
+       - DOCKER="ubuntu:xenial"
+       - DOCKER="ubuntu:bionic"
     #- os: osx
     #  osx_image: xcode9.4
     #  compiler: clang
@@ -32,7 +29,7 @@ install:
   - |
     if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
        sudo docker exec -t ubuntu-test bash -c "apt-get update"
-       sudo docker exec -t ubuntu-test bash -c "apt-get install -y autoconf automake libsctp-dev gcc make"
+       sudo docker exec -t ubuntu-test bash -c "apt-get install -y autoconf automake gcc make libsctp-dev"
     fi
 
 
