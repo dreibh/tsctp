@@ -7,13 +7,13 @@ matrix:
     - os: linux
       dist: xenial
       group: travis_latest
-      env: DOCKER="ubuntu:bionic"
+      env: DOCKER="ubuntu:bionic" CC=clang CXX=clang++
 
     # ====== Ubuntu 16.04 (Xenial Xerus) ====================================
     - os: linux
       dist: xenial
       group: travis_latest
-      env: DOCKER="ubuntu:xenial"
+      env: DOCKER="ubuntu:xenial" CC=gcc CXX=g++
 
     # ====== MacOS X ========================================================
     #- os: osx
@@ -37,7 +37,7 @@ install:
   - |
     if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
        sudo docker exec -t ubuntu-test bash -c "apt-get update"
-       sudo docker exec -t ubuntu-test bash -c "apt-get install -y autoconf automake gcc make libsctp-dev"
+       sudo docker exec -t ubuntu-test bash -c "apt-get install -y autoconf automake gcc g++ clang clang++ make libsctp-dev"
     fi
 
 
