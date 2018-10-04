@@ -3,7 +3,7 @@ language: c
 matrix:
   include:
 
-      # ====== Fedora 29 ====================================================
+    # ====== Fedora 29 ======================================================
     - os: linux
       dist: xenial
       group: travis_latest
@@ -54,7 +54,7 @@ install:
           sudo docker exec -t ubuntu-test bash -c "apt-get update"
           sudo docker exec -t ubuntu-test bash -c "apt-get install -y autoconf automake gcc g++ clang make libsctp-dev"
        elif [ "$VARIANT" = "fedora" ] ; then
-          sudo docker exec -t ubuntu-test bash -c "dnf install -y autoconf automake gcc g++ clang make lksctp-devel"
+          sudo docker exec -t ubuntu-test bash -c "dnf install -y autoconf automake gcc gcc-g++ clang make lksctp-tools-devel"
        fi
     fi
 
