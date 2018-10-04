@@ -3,13 +3,9 @@ language: c
 matrix:
   include:
 
-    # ====== Fedora 29 ======================================================
-    - os: linux
-      dist: xenial
-      group: travis_latest
-      env: DOCKER="fedora:29" VARIANT="fedora" COMPILER_C="gcc" COMPILER_CXX="g++"
+    # ###### Ubuntu Linux ###################################################
 
-    ## ====== Ubuntu 18.04 (Bionic Beaver) ===================================
+     ## ====== Ubuntu 18.04 (Bionic Beaver) ===================================
     #- os: linux
       #dist: xenial
       #group: travis_latest
@@ -28,6 +24,27 @@ matrix:
       #dist: xenial
       #group: travis_latest
       #env: DOCKER="ubuntu:bionic" VARIANT="ubuntu" COMPILER_C="clang" COMPILER_CXX="clang++"
+
+
+    # ###### Debian Linux ###################################################
+
+     # ====== Debian Testing ================================================
+    - os: linux
+      dist: xenial
+      group: travis_latest
+      env: DOCKER="debian:testing" VARIANT="ubuntu" COMPILER_C="gcc" COMPILER_CXX="g++"
+
+    # ###### Fedora Linux ###################################################
+
+    # ====== Fedora 29 ======================================================
+    - os: linux
+      dist: xenial
+      group: travis_latest
+      env: DOCKER="fedora:29" VARIANT="fedora" COMPILER_C="gcc" COMPILER_CXX="g++"
+    - os: linux
+      dist: xenial
+      group: travis_latest
+      env: DOCKER="fedora:29" VARIANT="fedora" COMPILER_C="clang" COMPILER_CXX="clang++"
 
     # ====== MacOS X ========================================================
     #- os: osx
