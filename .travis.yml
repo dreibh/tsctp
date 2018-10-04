@@ -45,6 +45,7 @@ script:
   - |
     if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
        sudo docker exec -t ubuntu-test bash -c "./bootstrap"
+       sudo docker exec -t ubuntu-test bash -c "echo OPTIONS: CC=$CC CXX=$CXX"
        sudo docker exec -t ubuntu-test bash -c "env CC=$CC CXX=$CXX ./configure"
        sudo docker exec -t ubuntu-test bash -c "make VERBOSE=1"
     fi
