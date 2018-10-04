@@ -54,7 +54,7 @@ install:
           sudo docker exec -t ubuntu-test bash -c "apt-get update"
           sudo docker exec -t ubuntu-test bash -c "apt-get install -y autoconf automake gcc g++ clang make libsctp-dev"
        elif [ "$VARIANT" = "fedora" ] ; then
-          sudo docker exec -t ubuntu-test bash -c "dnf install -y autoconf automake gcc gcc-g++ clang make lksctp-tools-devel"
+          sudo docker exec -t ubuntu-test bash -c "dnf install -y autoconf automake gcc gcc-c++ clang make lksctp-tools-devel"
        fi
     fi
 
