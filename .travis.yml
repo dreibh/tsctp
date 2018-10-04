@@ -141,4 +141,8 @@ script:
        sudo docker exec -t ubuntu-test bash -c "echo OPTIONS: CC=$COMPILER_C CXX=$COMPILER_CXX"
        sudo docker exec -t ubuntu-test bash -c "env CC=$COMPILER_C CXX=$COMPILER_CXX ./configure"
        sudo docker exec -t ubuntu-test bash -c "make VERBOSE=1"
+    elif [ "$TRAVIS_OS_NAME" = "osx" ] ; then
+       ./bootstrap
+       ./configure
+       make VERBOSE=1
     fi
