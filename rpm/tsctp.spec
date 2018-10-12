@@ -16,15 +16,15 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-build
 %define _unpackaged_files_terminate_build 0
 
 %description
- TSCTP is an SCTP test tool. Its purpose is to perform basic SCTP
- functionality tests to check implementations interoperability and
- to verify that the SCTP stack is working.
+TSCTP is an SCTP test tool. Its purpose is to perform basic SCTP
+functionality tests to check implementations interoperability and
+to verify that the SCTP stack is working.
 
- %prep
+%prep
 %setup -q
 
 %build
-%cmake .
+%cmake -DCMAKE_INSTALL_PREFIX=/usr .
 make %{?_smp_mflags}
 
 %install
