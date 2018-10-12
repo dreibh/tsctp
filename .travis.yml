@@ -127,9 +127,9 @@ install:
     if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
        if [ "$VARIANT" = "ubuntu" ] ; then
           sudo docker exec -t ubuntu-test bash -c "apt-get update"
-          sudo docker exec -t ubuntu-test bash -c "apt-get install -y autoconf automake gcc g++ clang make libsctp-dev"
+          sudo docker exec -t ubuntu-test bash -c "apt-get install -y cmake gcc g++ clang make libsctp-dev"
        elif [ "$VARIANT" = "fedora" ] ; then
-          sudo docker exec -t ubuntu-test bash -c "dnf install -y autoconf automake gcc gcc-c++ clang make lksctp-tools-devel"
+          sudo docker exec -t ubuntu-test bash -c "dnf install -y cmake gcc gcc-c++ clang make lksctp-tools-devel"
        fi
     fi
 
@@ -137,7 +137,7 @@ install:
 script:
   - |
     if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
-       sudo docker exec -t ubuntu-test bash -c "./bootstrap"
+       sudo docker exec -t ubuntu-test bash -c "cmake ."
        sudo docker exec -t ubuntu-test bash -c "echo OPTIONS: CC=$COMPILER_C CXX=$COMPILER_CXX"
        sudo docker exec -t ubuntu-test bash -c "env CC=$COMPILER_C CXX=$COMPILER_CXX ./configure"
        sudo docker exec -t ubuntu-test bash -c "make VERBOSE=1"
