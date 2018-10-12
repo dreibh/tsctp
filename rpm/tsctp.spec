@@ -1,5 +1,5 @@
 Name: tsctp
-Version: 0.6.6
+Version: 0.7.0~rc1
 Release: 1
 Summary: SCTP test tool
 Group: Applications/Internet
@@ -8,8 +8,8 @@ URL: https://www.uni-due.de/~be0001/tsctp/
 Source: https://www.uni-due.de/~be0001/tsctp/download/%{name}-%{version}.tar.gz
 
 AutoReqProv: on
-BuildRequires: autoconf
-BuildRequires: automake
+BuildRequires: cmake
+BuildRequires: gcc
 BuildRequires: lksctp-tools-devel
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 
@@ -20,13 +20,11 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-build
  functionality tests to check implementations interoperability and
  to verify that the SCTP stack is working.
 
-%prep
+ %prep
 %setup -q
 
 %build
-autoreconf -if
-
-%configure
+%cmake .
 make %{?_smp_mflags}
 
 %install
