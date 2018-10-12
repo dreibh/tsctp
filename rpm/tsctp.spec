@@ -10,6 +10,7 @@ Source: https://www.uni-due.de/~be0001/tsctp/download/%{name}-%{version}.tar.gz
 AutoReqProv: on
 BuildRequires: autoconf
 BuildRequires: automake
+BuildRequires: gcc
 BuildRequires: lksctp-tools-devel
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 
@@ -39,5 +40,5 @@ make DESTDIR=%{buildroot} install
 %doc
 
 %changelog
-* Tue Nov 05 2017 Thomas Dreibholz <dreibh@iem.uni-due.de> - 0.5.3~rc1
+* Sun Nov 05 2017 Thomas Dreibholz <dreibh@iem.uni-due.de> - 0.5.3~rc1
 - Created RPM package.
