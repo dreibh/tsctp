@@ -14,5 +14,6 @@ LICENSE_FILE=   ${WRKSRC}/COPYING
 
 GNU_CONFIGURE=	yes
 USES=           cmake
+CMAKE_ARGS+=    -DCMAKE_INSTALL_MANDIR=${PREFIX}/man
 
 .include <bsd.port.mk>
