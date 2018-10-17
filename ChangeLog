@@ -1,14 +1,304 @@
+commit f45e3cc96354b3db5597d93eec30f36787696d4e
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Oct 17 17:29:12 2018 +0200
+
+    Updated LSM entry.
+
+commit b8452b0f7e468712192d2b85d92fd7e2bc2e9ab3
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Oct 17 17:24:20 2018 +0200
+
+    Updated FreeBSD packaging files.
+
+commit 06738b53ca28db00e1e4d23f87e92b83910f2c6f
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Oct 17 16:23:29 2018 +0200
+
+    A fix.
+
+commit 5de99212e9b364a16fe20d02f3f361630d015884
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Oct 17 15:39:06 2018 +0200
+
+    Version bump.
+
+commit 72bdc1f0863718d83ef48de5758ba807c42dd17c
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Oct 17 15:08:56 2018 +0200
+
+    Added test control file.
+
+commit 8014606896fc219c0615ddc07fa930c73bffb8f1
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Oct 17 15:08:50 2018 +0200
+
+    Added metadata file.
+
+commit bb030ca79ba903f9e7100ce9660bdb41af4db3ca
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Oct 17 14:38:33 2018 +0200
+
+    Packaging script updates.
+
+commit 42cb1636c7f09dd1f44f680b11cccb075aa09575
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Oct 17 14:33:53 2018 +0200
+
+    More clean-ups for CMakeLists.txt.
+
+commit 1a1a64e54fa2a7e7b6a7ab51a2226ec05a475a20
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Oct 17 14:25:28 2018 +0200
+
+    Cleaned up CMakeLists.txt.
+
+commit c0f8a2c754d3851089a93fd2036f914153e7cb0c
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Oct 17 14:25:09 2018 +0200
+
+    Added helper script.
+
+commit a70435b167ae6891a8637a4bf11573d5906cbe14
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Oct 12 15:39:32 2018 +0200
+
+    Changed the build system from autoconf/automake to CMake.
+
+commit 95be3688706874300aa025d3fc0d89d3d14f78a4
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Oct 12 15:23:18 2018 +0200
+
+    A fix for the RPM packaging file.
+
+commit 18476fb70222ea5cefd0f88d7c1eea5523622fb7
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Oct 12 15:00:45 2018 +0200
+
+    Removed obsolete file.
+
+commit 0156f349038e433f4373d1883f013ced7ba19bcc
+Merge: f2806db 6890bef
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Oct 12 14:55:24 2018 +0200
+
+    Merge branch 'master' into dreibh/cmake
+
+commit f2806db6245ddf7dfd7bb3617fad528e0a6ef5d9
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Oct 12 14:52:13 2018 +0200
+
+    Updated Travis CI configuration.
+
+commit 26d2ae4c5380b04a13011abdc198295abb34b217
+Merge: b0f7233 ea86755
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Oct 12 14:51:13 2018 +0200
+
+    Merge remote-tracking branch 'remotes/origin/dreibh/travis-ci' into dreibh/cmake
+
+commit b0f72335f357db83dcda6580cf97345256ee7d16
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Oct 12 14:50:42 2018 +0200
+
+    Updated packaging files.
+
+commit 025ce4b4ced3b62ec6c43fc29a5326f64a352d18
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Oct 12 14:38:35 2018 +0200
+
+    Build with CMake.
+
+commit 6890bef3ec9ae0b9821f96ef3032143e6cac885b
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Oct 12 14:26:44 2018 +0200
+
+    RPM packaging fix.
+
+commit 0661f4eaa687b23be31ddb508a41fe880a3a82c2
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 17:56:36 2018 +0100
+
+    Minor update.
+
+commit ea867551f3a293584406e8bf2c3760917b98ab71
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 16:23:31 2018 +0100
+
+    More Travis CI testing.
+
+commit 07b838794160ff70a739cecca367e2533041a377
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 15:43:45 2018 +0100
+
+    More Travis CI testing.
+
+commit 69ea39f8082ccefc2fc8ebccd1068fac8c323b5a
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 15:28:45 2018 +0100
+
+    More Travis CI testing.
+
+commit 202664324395164371c4a2886658afc5627cb005
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 15:21:47 2018 +0100
+
+    More Travis CI testing.
+
+commit 82abd5eee59b51bb5d084dd44f6e6a92bb78a431
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 15:20:05 2018 +0100
+
+    More Travis CI testing.
+
+commit 9424955787bb09e3d16b70676b692071114274a5
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 15:09:08 2018 +0100
+
+    More Travis CI testing.
+
+commit beb6c694fe24e2622d1d6131295cf89f2b5ace7a
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 15:06:46 2018 +0100
+
+    Updated script.
+
+commit 11dbf9a2af6d9b01982d44d388780e248fa12f3b
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 15:01:59 2018 +0100
+
+    More Travis CI testing.
+
+commit 299dd52b0f659a102d34f14dbf0e8f5832bcb423
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 14:56:52 2018 +0100
+
+    More Travis CI testing.
+
+commit c972387db3d69c7873c4a9050a1b02ceefed0b9c
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 13:33:44 2018 +0100
+
+    More Travis CI testing.
+
+commit 4f9af7e778582dc4fc94240e84c54b8b86c43809
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 13:29:56 2018 +0100
+
+    More Travis CI testing.
+
+commit b455cfbade186d144c94c66bfbfcf6f01ae79492
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 13:25:08 2018 +0100
+
+    More Travis CI testing.
+
+commit 1a0b6850fa1bfe33ea633a65eed2e50f6e77294a
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 13:08:13 2018 +0100
+
+    More Travis CI testing.
+
+commit 514cd66e350f28bf415c150477fc67f5f864ad47
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 13:05:04 2018 +0100
+
+    More Travis CI testing.
+
+commit 0a0f5ef37e5e9bebe98093b9c47a8741fa784302
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 13:00:41 2018 +0100
+
+    More Travis CI testing.
+
+commit a9266c4405a1660088ffa1be63c3bb76645705cc
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 12:52:19 2018 +0100
+
+    More Travis CI testing.
+
+commit b0dbbed0b78f37a9b535f98da3cc8901b0908e91
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 12:48:46 2018 +0100
+
+    More Travis CI testing.
+
+commit c7f20126a44e92ece1b2f6552d001ce270c25ce0
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 12:41:57 2018 +0100
+
+    More Travis CI testing.
+
+commit 54f50dbdb106a432038cb4e44f48e711c83dd1a0
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 12:36:26 2018 +0100
+
+    More Travis CI testing.
+
+commit 2d2bcd9208f4951ce39557d31dc8b74128f4a7f7
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 12:26:05 2018 +0100
+
+    More Travis CI testing.
+
+commit 6e31b558f015395c33f2f8b21f6b8ad07a34f632
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 12:14:02 2018 +0100
+
+    More Travis CI testing.
+
+commit 9a5414a200999b64353671d33c78e0bbf766ced0
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 12:07:26 2018 +0100
+
+    More Travis CI testing.
+
+commit d9c4e45ba049cbe5fd4fad41dc647e385815c036
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 12:00:22 2018 +0100
+
+    More Travis CI testing.
+
+commit e644b0f4195d297d0a710033d6dd53b24a58eca4
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 11:01:39 2018 +0100
+
+    Another test with Travis CI.
+
+commit 02a80e1b65ae24871ed4594d1708d7bf7f6fed1c
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 10:38:53 2018 +0100
+
+    Another test with Travis CI.
+
+commit d22b6da3c9b59b7f44d4ac7d3d8f6e79f16965d0
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 10:23:41 2018 +0100
+
+    Another test with Travis CI.
+
+commit ec8bce9f81155a1427e8381f261394e6fa426de4
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 4 10:17:50 2018 +0100
+
+    Added Travis CI configuration.
+
+commit c72e58b73cb7a4a9324a214ea249c18920c5f8c9
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Mon Jun 11 13:12:43 2018 +0200
+
+    Updated LSM entry.
+
+commit 94d8f5e420cde99119dedb6378cb1ee1ca671846
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Jun 6 12:31:28 2018 +0200
+
+    Version bump.
+
 commit ed691b831eb8c0bb9883e576ae2d5134f1879bf1
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Wed Jun 6 10:17:48 2018 +0200
 
     Build script updates for Debian Cosmic.
-
- configure.ac     | 2 +-
- debian/changelog | 7 +++++++
- debian/control   | 2 +-
- debian/copyright | 2 +-
- 4 files changed, 10 insertions(+), 3 deletions(-)
 
 commit 4b5c4ff960b5383edc54a76f1d2ed227277d0f9b
 Author: Thomas Dreibholz <dreibh@simula.no>
@@ -16,25 +306,11 @@ Date:   Wed Jun 6 10:06:29 2018 +0200
 
     Script updates.
 
- build-deb |  8 ++++----
- clean-deb |  9 ++++++---
- make-deb  | 60 ++++++++++++++++++++++++++++++------------------------------
- make-ppa  |  2 +-
- 4 files changed, 41 insertions(+), 38 deletions(-)
-
 commit 7911d5ea69d728775d23431936ff1e69add1bcc4
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Mon Oct 30 22:01:54 2017 +0100
 
     Updated FreeBSD port.
-
- freebsd/tsctp/Makefile       | 26 +++++++-------------------
- freebsd/tsctp/distinfo       |  4 ++--
- freebsd/tsctp/make-diff      |  4 ++--
- freebsd/tsctp/make-shar      |  2 +-
- freebsd/tsctp/pkg-plist      |  2 ++
- freebsd/tsctp/test-packaging | 36 +++++++++++++++++++++++-------------
- 6 files changed, 37 insertions(+), 37 deletions(-)
 
 commit 078db7b12f90eb68408e5afd08398aeb66fe5efa
 Author: Thomas Dreibholz <dreibh@simula.no>
@@ -42,18 +318,11 @@ Date:   Wed Aug 9 12:24:16 2017 +0200
 
     Script updates.
 
- debian/changelog | 2 +-
- make-ppa         | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
 commit 447af99d50a18b18533f493dd221e88648df23ca
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Wed Aug 9 12:23:02 2017 +0200
 
     Updated ChangeLog.
-
- ChangeLog | 36 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 36 insertions(+)
 
 commit 921198cc5156ccbe7fde2a8eb62a42dca63079d0
 Author: Thomas Dreibholz <dreibh@simula.no>
@@ -61,35 +330,11 @@ Date:   Wed Aug 9 12:22:54 2017 +0200
 
     Fixed URL. Version bump.
 
- build-deb                    | 2 +-
- clean-deb                    | 2 +-
- configure.ac                 | 2 +-
- debian/changelog             | 8 ++++++++
- debian/control               | 2 +-
- debian/copyright             | 4 ++--
- debian/watch                 | 2 +-
- filter-empty-entries         | 2 +-
- freebsd/tsctp/Makefile       | 2 +-
- freebsd/tsctp/make-diff      | 2 +-
- freebsd/tsctp/pkg-descr      | 2 +-
- freebsd/tsctp/test-packaging | 2 +-
- make-deb                     | 2 +-
- make-rpm                     | 2 +-
- rpm/tsctp.spec               | 8 ++++----
- tsctp.lsm                    | 8 ++++----
- 16 files changed, 30 insertions(+), 22 deletions(-)
-
 commit d784fb05befb6e8c50f9e106e28337bc3437f77d
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Mon May 8 15:26:23 2017 +0200
 
     Version bump.
-
- ChangeLog        | 11 +++++++++++
- configure.ac     |  2 +-
- debian/changelog |  2 +-
- rpm/tsctp.spec   |  2 +-
- 4 files changed, 14 insertions(+), 3 deletions(-)
 
 commit 91718e9eeba6feaf1ca66bc5f9aa9e4221b8f5d0
 Author: Thomas Dreibholz <dreibh@simula.no>
@@ -97,22 +342,11 @@ Date:   Mon May 8 15:24:53 2017 +0200
 
     More script updates.
 
- ChangeLog        | 1173 +++++++++++++++++++++++-------------------------------
- make-ppa         |    2 +-
- update-changelog |    4 +
- 3 files changed, 498 insertions(+), 681 deletions(-)
-
 commit c06b09b9dabc0ad2686ee708817a6eb4fb1a391a
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Mon May 8 15:16:50 2017 +0200
 
     Script update.
-
- configure.ac     |  2 +-
- debian/changelog |  4 ++--
- make-ppa         | 35 ++++++++++++++++++++++++++++++-----
- rpm/tsctp.spec   |  2 +-
- 4 files changed, 34 insertions(+), 9 deletions(-)
 
 commit e3eed68f292b16d6c66a5340fabf2fa04e844844
 Author: Thomas Dreibholz <dreibh@simula.no>
@@ -120,24 +354,11 @@ Date:   Thu Mar 23 14:28:42 2017 +0100
 
     Script updates.
 
- configure.ac     | 2 +-
- debian/changelog | 6 ++++++
- make-deb         | 2 +-
- make-ppa         | 2 +-
- rpm/tsctp.spec   | 2 +-
- 5 files changed, 10 insertions(+), 4 deletions(-)
-
 commit 9c91b66971689793444423d83028c54572ade183
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Thu Nov 3 16:47:58 2016 +0100
 
     Updated LSM entry.
-
- configure.ac     | 2 +-
- debian/changelog | 2 +-
- rpm/tsctp.spec   | 2 +-
- tsctp.lsm        | 6 +++---
- 4 files changed, 6 insertions(+), 6 deletions(-)
 
 commit 1055e0115a236ef7322772007478552e73f00e31
 Author: Thomas Dreibholz <dreibh@simula.no>
@@ -145,34 +366,17 @@ Date:   Thu Nov 3 15:55:53 2016 +0100
 
     Updated build scripts.
 
- configure.ac     | 2 +-
- debian/changelog | 6 ++++++
- make-ppa         | 2 +-
- 3 files changed, 8 insertions(+), 2 deletions(-)
-
 commit c35828ef6ab98ba33dd645689f52064b314af2ec
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Mon Apr 4 15:49:17 2016 +0200
 
     Updated LSM entry.
 
- tsctp.lsm | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
 commit 05c93c54f485b8f48eac2055b6b9dc0a869f98c1
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Mon Apr 4 15:48:00 2016 +0200
 
     Build script updates.
-
- configure.ac     |  2 +-
- debian/changelog | 10 ++++++++++
- debian/compat    |  2 +-
- debian/control   |  6 ++++--
- debian/copyright |  4 ++--
- debian/rules     |  5 +++++
- rpm/tsctp.spec   |  2 +-
- 7 files changed, 24 insertions(+), 7 deletions(-)
 
 commit a3d06a91359b2a69ba320ffebc7980a51c48257e
 Merge: 6fc2ba5 3c19e7d
@@ -187,28 +391,11 @@ Date:   Wed Dec 16 20:35:48 2015 +0100
 
     Script update.
 
- make-ppa | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
 commit 3c19e7dc8f92d7cff0ed86550aa3a258858da0ad
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Tue Oct 20 14:36:02 2015 +0200
 
     Packaging fixes.
-
- build-deb                    |  2 +-
- clean-deb                    |  2 +-
- configure.ac                 | 10 +++++-----
- debian/changelog             |  4 ++--
- filter-empty-entries         |  2 +-
- freebsd/tsctp/make-diff      |  2 +-
- freebsd/tsctp/test-packaging |  2 +-
- make-deb                     |  2 +-
- make-ppa                     |  2 +-
- make-rpm                     |  2 +-
- rpm/tsctp.spec               |  2 +-
- tsctp.1                      |  2 +-
- 12 files changed, 17 insertions(+), 17 deletions(-)
 
 commit c23f0691b6f37741862c4801b75a0cb6bafb6625
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
@@ -219,9 +406,6 @@ Date:   Sun Mar 1 13:45:38 2015 +0000
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1984 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
 
- tsctp.lsm | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
-
 commit b17120277752b058c674cebce0fc2a7b2f49187f
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
 Date:   Sun Mar 1 13:12:13 2015 +0000
@@ -230,11 +414,6 @@ Date:   Sun Mar 1 13:12:13 2015 +0000
     
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1983 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
-
- configure.ac     | 2 +-
- debian/changelog | 2 +-
- rpm/tsctp.spec   | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
 
 commit e9b6cebf009daf935dbd32e535360761cd456b9c
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
@@ -245,15 +424,6 @@ Date:   Sun Mar 1 12:48:03 2015 +0000
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1981 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
 
- configure.ac                    |  18 +-
- debian/changelog                |   4 +-
- debian/control                  |   4 +-
- debian/copyright                |  93 ++++-----
- debian/upstream/signing-key.asc | 405 ++++++++++++++++++++++++++++++++++++++++
- debian/watch                    |   1 +
- make-ppa                        |   2 +-
- 7 files changed, 458 insertions(+), 69 deletions(-)
-
 commit 3b90d23af914c97e55d1a3c3f7b33849fe6af430
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
 Date:   Fri Jul 4 16:38:55 2014 +0000
@@ -262,9 +432,6 @@ Date:   Fri Jul 4 16:38:55 2014 +0000
     
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1867 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
-
- rpm.conf | 6 ++++++
- 1 file changed, 6 insertions(+)
 
 commit e15e1e39a3be7ee41f14b23f304f1e44694999ff
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
@@ -275,9 +442,6 @@ Date:   Fri Jul 4 15:05:55 2014 +0000
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1866 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
 
- rpm/tsctp.spec | 2 ++
- 1 file changed, 2 insertions(+)
-
 commit 7e474161c9f90e642d17dc0722f6ea8dc26a927a
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
 Date:   Tue Jun 24 09:54:13 2014 +0000
@@ -286,9 +450,6 @@ Date:   Tue Jun 24 09:54:13 2014 +0000
     
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1849 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
-
- make-rpm | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
 
 commit ff795f5cd772d7a434cdb95d6678001d1d7aecc6
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
@@ -299,9 +460,6 @@ Date:   Tue Mar 18 13:13:23 2014 +0000
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1791 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
 
- rpm/tsctp.spec | 2 ++
- 1 file changed, 2 insertions(+)
-
 commit 220842c948d30373fce44dbfd2ac17feb16fb749
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
 Date:   Tue Mar 18 12:28:16 2014 +0000
@@ -310,9 +468,6 @@ Date:   Tue Mar 18 12:28:16 2014 +0000
     
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1788 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
-
- configure.ac | 2 ++
- 1 file changed, 2 insertions(+)
 
 commit d26b64478c3f0f1b4e37b95b0a1837b900321fc7
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
@@ -323,11 +478,6 @@ Date:   Sat Mar 15 08:12:42 2014 +0000
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1785 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
 
- configure.ac     | 2 +-
- debian/changelog | 2 +-
- rpm/tsctp.spec   | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
-
 commit a0a4e6b67cebccca8169a1520599a289f7e588f5
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
 Date:   Sat Mar 15 08:10:36 2014 +0000
@@ -336,9 +486,6 @@ Date:   Sat Mar 15 08:10:36 2014 +0000
     
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1784 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
-
- tsctp.1 | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
 
 commit c77bf2ca9ff787baee0b4b4cf5283a344d956c95
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
@@ -349,11 +496,6 @@ Date:   Sat Mar 15 07:59:27 2014 +0000
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1783 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
 
- configure.ac     |  2 +-
- debian/changelog |  4 ++--
- tsctp.c          | 17 ++++++++++++-----
- 3 files changed, 15 insertions(+), 8 deletions(-)
-
 commit 9b6e4fc48597cc7b008c2e33fa4ad760a9f6ef57
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
 Date:   Mon Nov 11 08:44:44 2013 +0000
@@ -362,9 +504,6 @@ Date:   Mon Nov 11 08:44:44 2013 +0000
     
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1743 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
-
- make-rpm | 109 +++++++++++++++++++++++++++++++++++++--------------------------
- 1 file changed, 65 insertions(+), 44 deletions(-)
 
 commit 1d3b0bb0f03744e6cbed07f254249e6ce11bd93b
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
@@ -375,10 +514,6 @@ Date:   Tue Nov 5 15:57:51 2013 +0000
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1737 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
 
- make-rpm       | 148 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- rpm/tsctp.spec |  39 +++++++++++++++
- 2 files changed, 187 insertions(+)
-
 commit a29b37a426d64215c009de81af2b890a975e7614
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
 Date:   Fri Oct 25 11:28:04 2013 +0000
@@ -387,12 +522,6 @@ Date:   Fri Oct 25 11:28:04 2013 +0000
     
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1708 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
-
- configure.ac     | 53 +++++++++++++++++++++++++++++++++++++++++++++++++++++
- configure.in     | 55 -------------------------------------------------------
- debian/changelog |  4 ++--
- make-ppa         |  2 +-
- 4 files changed, 56 insertions(+), 58 deletions(-)
 
 commit 429a0e6e993f977e8fa91d9e9bc6f8f28f1a6037
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
@@ -403,9 +532,6 @@ Date:   Fri Oct 25 11:27:55 2013 +0000
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1707 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
 
- tsctp.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
 commit db8c58918a77fb5e7e754fe0fec690849112fc62
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
 Date:   Fri Oct 18 21:52:07 2013 +0000
@@ -414,9 +540,6 @@ Date:   Fri Oct 18 21:52:07 2013 +0000
     
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1671 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
-
- make-ppa | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
 commit b75329c22048d3e22b8205a009a8b68ea0755e87
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
@@ -427,15 +550,6 @@ Date:   Thu May 30 12:33:25 2013 +0000
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1649 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
 
- build-deb        |  99 ++++++++++++++++++++++----
- clean-deb        |   2 +-
- configure.in     |   2 +-
- debian/changelog |   4 +-
- debian/control   |   2 +-
- make-deb         | 209 +++++++++++++++++++++++++++++++++----------------------
- make-ppa         |   2 +-
- 7 files changed, 215 insertions(+), 105 deletions(-)
-
 commit 3dad2954c01a09273d716e5278024faa9b5b3896
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
 Date:   Tue Jan 15 10:31:45 2013 +0000
@@ -445,11 +559,6 @@ Date:   Tue Jan 15 10:31:45 2013 +0000
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1613 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
 
- configure.in     | 2 +-
- debian/changelog | 2 +-
- make-ppa         | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
-
 commit a275cb16d8551fc2c25e7a5d411e2623276cc390
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
 Date:   Sat Aug 25 21:57:55 2012 +0000
@@ -457,13 +566,6 @@ Date:   Sat Aug 25 21:57:55 2012 +0000
     Build script updates.
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1506 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
-
- build-deb        | 45 +++++++++++++++++++++++++++++++++++++++++++++
- configure.in     |  2 +-
- debian.conf      |  1 +
- debian/changelog |  4 ++--
- make-ppa         |  2 +-
- 5 files changed, 50 insertions(+), 4 deletions(-)
 
 commit 4eea4ecbd431ad898c0d936e0313e1f004b5d842
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
@@ -474,11 +576,6 @@ Date:   Sat Apr 21 20:56:23 2012 +0000
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1369 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
 
- configure.in     | 2 +-
- debian/changelog | 5 ++---
- debian/control   | 2 +-
- 3 files changed, 4 insertions(+), 5 deletions(-)
-
 commit 8520d5da674b11f1769aebefb316b945e04903a9
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
 Date:   Tue Nov 22 14:44:09 2011 +0000
@@ -488,17 +585,6 @@ Date:   Tue Nov 22 14:44:09 2011 +0000
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1137 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
 
- AUTHORS               |   3 +-
- ChangeLog             | 755 +++++++++++++++++++++++++++++++++++---------------
- Makefile.am           |   2 +-
- configure.in          |   2 +-
- debian/changelog      |   4 +-
- debian/tsctp.manpages |   2 +-
- tsctp.1               |  58 ++++
- tsctp.8               |  58 ----
- tsctp.c               |  37 ++-
- 9 files changed, 621 insertions(+), 300 deletions(-)
-
 commit fa6526b7f2e01bf658782fa52158b5e22e16228b
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
 Date:   Mon Nov 21 10:10:02 2011 +0000
@@ -507,9 +593,6 @@ Date:   Mon Nov 21 10:10:02 2011 +0000
     
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1124 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
-
- debian/copyright | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
 commit 6ff5bd4f128d5283ba4f3ce8e627ed53b3de2da3
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
@@ -521,10 +604,6 @@ Date:   Mon Nov 21 09:58:10 2011 +0000
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1122 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
 
- freebsd/tsctp/Makefile | 2 +-
- freebsd/tsctp/distinfo | 5 ++---
- 2 files changed, 3 insertions(+), 4 deletions(-)
-
 commit ba2fc22cfa843ef60cb339eb92a30ec9e6bd7bc2
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
 Date:   Mon Nov 21 09:52:54 2011 +0000
@@ -533,15 +612,6 @@ Date:   Mon Nov 21 09:52:54 2011 +0000
     
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1121 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
-
- README                       |  3 +++
- freebsd/tsctp/Makefile       | 29 +++++++++++++++++++++
- freebsd/tsctp/distinfo       |  3 +++
- freebsd/tsctp/make-diff      | 51 ++++++++++++++++++++++++++++++++++++
- freebsd/tsctp/make-shar      |  3 +++
- freebsd/tsctp/pkg-descr      |  5 ++++
- freebsd/tsctp/test-packaging | 61 ++++++++++++++++++++++++++++++++++++++++++++
- 7 files changed, 155 insertions(+)
 
 commit 5ec6fb6d364d652c101abeaa5a3836af338880ac
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
@@ -552,29 +622,6 @@ Date:   Mon Nov 21 09:10:05 2011 +0000
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1120 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
 
- ChangeLog             | 383 ++++++++++++++++++++++++++++++++++++++++++++++++++
- NEWS                  |   0
- README                |   0
- batch                 |  24 ++++
- batchLoop             |  22 +++
- bootstrap             |   0
- clean-deb             |  28 ++++
- configure.in          |   2 +-
- debian.conf           |   9 ++
- debian/changelog      |   7 +
- debian/compat         |   1 +
- debian/control        |  23 +++
- debian/copyright      |  52 +++++++
- debian/rules          |   8 ++
- debian/source/format  |   1 +
- debian/tsctp.install  |   1 +
- debian/tsctp.manpages |   1 +
- debian/watch          |   2 +
- filter-empty-entries  |  61 ++++++++
- make-deb              | 288 +++++++++++++++++++++++++++++++++++++
- make-ppa              |   6 +
- 21 files changed, 918 insertions(+), 1 deletion(-)
-
 commit 712c2f6ddc1ce5e1bf754805c3e55685db55391a
 Author: dreibh <dreibh@acdd8558-d4fd-0310-b0a5-8cf3c1ec824a>
 Date:   Mon Nov 21 07:56:30 2011 +0000
@@ -583,15 +630,3 @@ Date:   Mon Nov 21 07:56:30 2011 +0000
     
     
     git-svn-id: https://svn.tdr.iem.uni-due.de:8443/svn/sctp-misc/trunk/tsctp@1119 acdd8558-d4fd-0310-b0a5-8cf3c1ec824a
-
- AUTHORS      |   3 +
- BUGS         |   0
- COPYING      |  23 +++
- ChangeLog    |   0
- INSTALL      | 237 ++++++++++++++++++++++++++
- Makefile.am  |   4 +
- bootstrap    |   5 +
- configure.in |  55 ++++++
- tsctp.8      |  58 +++++++
- tsctp.c      | 547 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 10 files changed, 932 insertions(+)
