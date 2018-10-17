@@ -10,6 +10,7 @@ Source: https://www.uni-due.de/~be0001/tsctp/download/%{name}-%{version}.tar.gz
 AutoReqProv: on
 BuildRequires: cmake
 BuildRequires: gcc
+BuildRequires: gcc-c++
 BuildRequires: lksctp-tools-devel
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 
