@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# ###### Linux ##############################################################
+if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
+   if [ "$TOOL" = "compile" ] ; then
+      sudo docker exec -t ubuntu-test bash -c "cmake ."
+      sudo docker exec -t ubuntu-test bash -c "echo OPTIONS: CC=$COMPILER_C CXX=$COMPILER_CXX"
+      sudo docker exec -t ubuntu-test bash -c "env CC=$COMPILER_C CXX=$COMPILER_CXX ./configure"
+      sudo docker exec -t ubuntu-test bash -c "make VERBOSE=1"
+
+   elif [ "$TOOL" = "pbuilder" ] ; then
+      sudo docker exec -t ubuntu-test bash -c "./make-deb $DISTRIBUTION"
+
+   elif [ "$TOOL" = "mock" ] ; then
+      sudo docker exec -t ubuntu-test bash -c "./make-rpm"
+
+   else
+      echo >&2 "ERROR: Invalid setting of TOOL=$TOOL"
+      exit 1
+   fi
+
+# ###### Other ##############################################################
+elif [ "$TRAVIS_OS_NAME" = "osx" ] ; then
+   cmake .
+   make VERBOSE=1
+
+# ###### Error ##############################################################
+else
+   echo >&2 "ERROR: Invalid setting of TRAVIS_OS_NAME=$TRAVIS_OS_NAME"
+   exit 1
+fi
