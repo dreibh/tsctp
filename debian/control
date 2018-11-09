@@ -7,7 +7,7 @@ Build-Depends: cmake,
                debhelper (>= 9),
                libfile-fcntllock-perl,
                libsctp-dev (>= 1.0.5)
-Standards-Version: 4.1.4
+Standards-Version: 4.2.1
 
 Package: tsctp
 Architecture: any
