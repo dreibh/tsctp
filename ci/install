@@ -2,12 +2,14 @@
 
 UBUNTU_DEPS="cmake gcc g++ clang make libsctp-dev"
 FEDORA_DEPS="cmake gcc gcc-c++ clang make lksctp-tools-devel"
-DISTRIBUTION=bionic
 
 # ###### Linux ##############################################################
 if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
    # ====== Ubuntu Linux ====================================================
    if [ "$VARIANT" = "ubuntu" ] ; then
+      . /etc/lsb-release
+      echo "Distribution is $DISTRIB_CODENAME"
+
       sudo docker exec -t ubuntu-test bash -c "apt-get update"
       # NOTE: locales is needed, to get UTF-8 support right!
       sudo docker exec -t ubuntu-test bash -c "apt-get install -y locales eatmydata"
@@ -17,7 +19,7 @@ if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
       if [ "$TOOL" = "pbuilder" ] ; then
          sudo docker exec -t ubuntu-test bash -c "eatmydata apt-get install -y devscripts debhelper pbuilder"
          sudo docker exec -t ubuntu-test bash -c "cat >/etc/pbuilderrc <<EOF
-DISTRIBUTION=$DISTRIBUTION
+DISTRIBUTION=$DISTRIB_CODENAME
 COMPONENTS=\"main universe\"
 MIRRORSITE=http://us.archive.ubuntu.com/ubuntu/
 APTCACHEHARDLINK=no
