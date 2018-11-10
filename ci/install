@@ -24,7 +24,7 @@ APTCACHEHARDLINK=no
 EOF
 "
          sudo docker exec -t ubuntu-test bash -c "cat /etc/pbuilderrc"
-#          sudo docker exec -t ubuntu-test bash -c "pbuilder create --debootstrapopts --variant=buildd"
+         sudo docker exec -t ubuntu-test bash -c "pbuilder create --debootstrapopts --variant=buildd"
 
          sudo docker exec -t ubuntu-test bash -c "pbuilder login --save-after-login <<EOF
 apt install -y software-properties-common
