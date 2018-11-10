@@ -39,7 +39,7 @@ EOF
    elif [ "$VARIANT" = "fedora" ] ; then
       sudo docker exec -t ubuntu-test bash -c "dnf install -y ${FEDORA_DEPS}"
       if [ "$TOOL" = "mock" ] ; then
-         sudo docker exec -t ubuntu-test bash -c "dnf install -y findutils mock"
+         sudo docker exec -t ubuntu-test bash -c "dnf install -y findutils rpmdevtools mock"
       fi
 
    # ======Fedora Core Linux ================================================
