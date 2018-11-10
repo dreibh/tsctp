@@ -15,19 +15,19 @@ matrix:
       #group: travis_latest
       #env: DOCKER="ubuntu:latest" VARIANT="ubuntu" TOOL="compile" COMPILER_C="clang" COMPILER_CXX="clang++"
 
-    # ====== Ubuntu 18.04 (Bionic Beaver) ===================================
-    - os: linux
-      dist: xenial
-      group: travis_latest
-      env: DOCKER="ubuntu:bionic" VARIANT="ubuntu" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
-    - os: linux
-      dist: xenial
-      group: travis_latest
-      env: DOCKER="ubuntu:bionic" VARIANT="ubuntu" TOOL="compile" COMPILER_C="clang" COMPILER_CXX="clang++"
-    - os: linux
-      dist: xenial
-      group: travis_latest
-      env: DOCKER="ubuntu:bionic" VARIANT="ubuntu" TOOL="pbuilder"
+    ## ====== Ubuntu 18.04 (Bionic Beaver) ===================================
+    #- os: linux
+      #dist: xenial
+      #group: travis_latest
+      #env: DOCKER="ubuntu:bionic" VARIANT="ubuntu" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
+    #- os: linux
+      #dist: xenial
+      #group: travis_latest
+      #env: DOCKER="ubuntu:bionic" VARIANT="ubuntu" TOOL="compile" COMPILER_C="clang" COMPILER_CXX="clang++"
+    #- os: linux
+      #dist: xenial
+      #group: travis_latest
+      #env: DOCKER="ubuntu:bionic" VARIANT="ubuntu" TOOL="pbuilder"
 
     ## ====== Ubuntu 16.04 (Xenial Xerus) ====================================
     #- os: linux
