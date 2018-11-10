@@ -11,7 +11,7 @@ if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
       sudo docker exec -t ubuntu-test bash -c "apt-get update"
       sudo docker exec -t ubuntu-test bash -c "apt-get install -y ${UBUNTU_DEPS}"
       if [ "$TOOL" = "pbuilder" ] ; then
-         sudo docker exec -t ubuntu-test bash -c "apt-get install -y pbuilder
+         sudo docker exec -t ubuntu-test bash -c "apt-get install -y python devscripts pbuilder
          sudo cat >/etc/pbuilderrc <<EOF
 DISTRIBUTION=$DISTRIBUTION
 COMPONENTS="main universe"
