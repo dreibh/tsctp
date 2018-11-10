@@ -2,7 +2,7 @@
 
 # ###### Linux ##############################################################
 if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
-   sudo docker run -d --name ubuntu-test -v $(pwd):/travis -w /travis $DOCKER tail -f /dev/null
+   sudo docker run -d --name ubuntu-test --cap-add=SYS_ADMIN --security-opt apparmor:unconfined -v $(pwd):/travis -w /travis $DOCKER tail -f /dev/null
    sudo docker ps
 
 # ###### Other ##############################################################

@@ -2,31 +2,37 @@
 
 UBUNTU_DEPS="cmake gcc g++ clang make libsctp-dev"
 FEDORA_DEPS="cmake gcc gcc-c++ clang make lksctp-tools-devel"
-
+DISTRIBUTION=bionic
 
 # ###### Linux ##############################################################
 if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
    # ====== Ubuntu Linux ====================================================
    if [ "$VARIANT" = "ubuntu" ] ; then
       sudo docker exec -t ubuntu-test bash -c "apt-get update"
-      sudo docker exec -t ubuntu-test bash -c "apt-get install -y ${UBUNTU_DEPS}"
+      # NOTE: locales is needed, to get UTF-8 support right!
+      sudo docker exec -t ubuntu-test bash -c "apt-get install -y locales eatmydata"
+      sudo docker exec -t ubuntu-test bash -c "eatmydata apt-get install -y ${UBUNTU_DEPS}"
+      sudo docker exec -t ubuntu-test bash -c "locale-gen en_US.UTF-8"
+      sudo docker exec -t ubuntu-test bash -c "update-locale LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8"
       if [ "$TOOL" = "pbuilder" ] ; then
-         sudo docker exec -t ubuntu-test bash -c "apt-get install -y python devscripts pbuilder
-         sudo cat >/etc/pbuilderrc <<EOF
+         sudo docker exec -t ubuntu-test bash -c "eatmydata apt-get install -y devscripts debhelper pbuilder"
+         sudo docker exec -t ubuntu-test bash -c "cat >/etc/pbuilderrc <<EOF
 DISTRIBUTION=$DISTRIBUTION
-COMPONENTS="main universe"
+COMPONENTS=\"main universe\"
 MIRRORSITE=http://us.archive.ubuntu.com/ubuntu/
 APTCACHEHARDLINK=no
 EOF
+"
          sudo docker exec -t ubuntu-test bash -c "cat /etc/pbuilderrc"
-         sudo docker exec -t ubuntu-test bash -c "pbuilder create --debootstrapopts --variant=buildd
+#          sudo docker exec -t ubuntu-test bash -c "pbuilder create --debootstrapopts --variant=buildd"
+
          sudo docker exec -t ubuntu-test bash -c "pbuilder login --save-after-login <<EOF
 apt install -y software-properties-common
 apt-add-repository -sy ppa:dreibh/ppa
 apt-get update
 EOF
 "
-         sudo docker exec -t ubuntu-test bash -c "sed -e 's/SKIP_PACKAGE_SIGNING=1/SKIP_PACKAGE_SIGNING=0/g' -i debian.conf"
+         sudo docker exec -t ubuntu-test bash -c "sed -e 's/SKIP_PACKAGE_SIGNING=0/SKIP_PACKAGE_SIGNING=1/g' -i debian.conf"
       fi
 
    # ======Fedora Core Linux ================================================
@@ -35,6 +41,11 @@ EOF
       if [ "$TOOL" = "mock" ] ; then
          sudo docker exec -t ubuntu-test bash -c "dnf install -y mock"
       fi
+
+   # ======Fedora Core Linux ================================================
+   else
+      echo >&2 "ERROR: Invalid setting of VARIANT=$VARIANT"
+      exit 1
    fi
 
 # ###### Other ##############################################################
