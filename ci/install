@@ -25,7 +25,7 @@ FEDORA_DEPS="cmake gcc gcc-c++ clang make lksctp-tools-devel"
 # ###### Linux ##############################################################
 if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
    # ====== Ubuntu Linux ====================================================
-   if [ "$VARIANT" = "ubuntu" ] ; then
+   if [ "$VARIANT" = "ubuntu" -o "$VARIANT" = "debian" ] ; then
       . /etc/lsb-release
       echo "Distribution is $DISTRIB_CODENAME"
 
@@ -53,7 +53,6 @@ apt-add-repository -sy ppa:dreibh/ppa
 apt-get update
 EOF
 "
-         sudo docker exec -t ubuntu-test bash -c "sed -e 's/SKIP_PACKAGE_SIGNING=0/SKIP_PACKAGE_SIGNING=1/g' -i debian.conf"
       fi
 
    # ======Fedora Core Linux ================================================
