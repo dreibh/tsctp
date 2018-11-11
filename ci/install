@@ -22,6 +22,7 @@
 UBUNTU_DEPS="cmake gcc g++ clang make libsctp-dev"
 FEDORA_DEPS="cmake gcc gcc-c++ clang make lksctp-tools-devel"
 
+
 # ###### Linux ##############################################################
 if [ "$TRAVIS_OS_NAME" == "linux" ] ; then
    # ====== Ubuntu Linux ====================================================
@@ -29,12 +30,14 @@ if [ "$TRAVIS_OS_NAME" == "linux" ] ; then
       sudo docker exec -t ubuntu-test bash -c "apt-get update"
       # NOTE: locales is needed, to get UTF-8 support right!
       sudo docker exec -t ubuntu-test bash -c "apt-get install -y locales eatmydata"
-      sudo docker exec -t ubuntu-test bash -c "eatmydata apt-get install -y ${UBUNTU_DEPS}"
-#       sudo docker exec -t ubuntu-test bash -c "locale-gen en_US.UTF-8"
       sudo docker exec -t ubuntu-test bash -c "update-locale LANG=C.UTF-8 LC_ALL=C.UTF-8"
 
-         # ====== Ubuntu/Debian: set up pbuilder ============================
-      if [ "$TOOL" == "pbuilder" ] ; then
+      # ====== Ubuntu/Debian: set up compiler ===============================
+      if [ "$TOOL" == "compiler" ] ; then
+         sudo docker exec -t ubuntu-test bash -c "eatmydata apt-get install -y ${UBUNTU_DEPS}"
+
+      # ====== Ubuntu/Debian: set up pbuilder ===============================
+      elif [ "$TOOL" == "pbuilder" ] ; then
          sudo docker exec -t ubuntu-test bash -c "eatmydata apt-get install -y devscripts debhelper pbuilder"
 
          distribution=`sudo docker exec -t ubuntu-test bash -c "lsb_release -cs" | sed -e "s/[^0-9a-zA-Z]//g"`
@@ -81,8 +84,12 @@ EOF
 
    # ======Fedora Core Linux ================================================
    elif [ "$VARIANT" == "fedora" ] ; then
-      sudo docker exec -t ubuntu-test bash -c "dnf install -y ${FEDORA_DEPS}"
-      if [ "$TOOL" == "mock" ] ; then
+      # ====== Fedora: set up compiler ======================================
+      if [ "$TOOL" == "compiler" ] ; then
+         sudo docker exec -t ubuntu-test bash -c "dnf install -y ${FEDORA_DEPS}"
+
+      # ====== Fedora: set up pbuilder ======================================
+      elif [ "$TOOL" == "mock" ] ; then
          sudo docker exec -t ubuntu-test bash -c "dnf install -y findutils rpmdevtools fedora-release mock"
       fi
 
