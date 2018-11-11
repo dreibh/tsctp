@@ -88,7 +88,7 @@ EOF
 
       # ====== Fedora: set up pbuilder ======================================
       elif [ "$TOOL" == "mock" ] ; then
-         sudo docker exec -t ubuntu-test bash -c "dnf install -y findutils rpmdevtools fedora-release mock ${FEDORA_DEPS}"
+         sudo docker exec -t ubuntu-test bash -c "dnf install -y make findutils rpmdevtools fedora-release mock ${FEDORA_DEPS}"
 
       else
          echo >&2 "ERROR: Invalid setting of TOOL=$TOOL"
