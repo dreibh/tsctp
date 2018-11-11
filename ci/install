@@ -30,7 +30,7 @@ if [ "$TRAVIS_OS_NAME" == "linux" ] ; then
 
       # ====== Ubuntu/Debian: set up compiler ===============================
       if [ "$TOOL" == "compile" ] ; then
-         sudo docker exec -t ubuntu-test bash -c "eatmydata apt-get install -y clang ${UBUNTU_DEPS}"
+         sudo docker exec -t ubuntu-test bash -c "eatmydata apt-get install -y clang g++ ${UBUNTU_DEPS}"
 
       # ====== Ubuntu/Debian: set up pbuilder ===============================
       elif [ "$TOOL" == "pbuilder" ] ; then
@@ -84,7 +84,7 @@ EOF
 
       # ====== Fedora: set up compiler ======================================
       if [ "$TOOL" == "compile" ] ; then
-         sudo docker exec -t ubuntu-test bash -c "dnf install -y clang ${FEDORA_DEPS}"
+         sudo docker exec -t ubuntu-test bash -c "dnf install -y clang gcc-c++ ${FEDORA_DEPS}"
 
       # ====== Fedora: set up pbuilder ======================================
       elif [ "$TOOL" == "mock" ] ; then
