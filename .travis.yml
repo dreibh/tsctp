@@ -68,43 +68,43 @@ matrix:
     - os: linux
       dist: xenial
       group: travis_latest
-      env: DOCKER="debian:testing" VARIANT="ubuntu" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
+      env: DOCKER="debian:testing" VARIANT="debian" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
     - os: linux
       dist: xenial
       group: travis_latest
-      env: DOCKER="debian:testing" VARIANT="ubuntu" TOOL="compile" COMPILER_C="clang" COMPILER_CXX="clang++"
+      env: DOCKER="debian:testing" VARIANT="debian" TOOL="compile" COMPILER_C="clang" COMPILER_CXX="clang++"
     - os: linux
       dist: xenial
       group: travis_latest
-      env: DOCKER="ubuntu:testing" VARIANT="ubuntu" TOOL="pbuilder"
+      env: DOCKER="debian:testing" VARIANT="debian" TOOL="pbuilder"
 
     ## ====== Debian Stretch =================================================
     #- os: linux
       #dist: xenial
       #group: travis_latest
-      #env: DOCKER="debian:stretch" VARIANT="ubuntu" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
+      #env: DOCKER="debian:stretch" VARIANT="debian" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
     #- os: linux
       #dist: xenial
       #group: travis_latest
-      #env: DOCKER="debian:stretch" VARIANT="ubuntu" TOOL="compile" COMPILER_C="clang" COMPILER_CXX="clang++"
+      #env: DOCKER="debian:stretch" VARIANT="debian" TOOL="compile" COMPILER_C="clang" COMPILER_CXX="clang++"
     #- os: linux
       #dist: xenial
       #group: travis_latest
-      #env: DOCKER="ubuntu:stretch" VARIANT="ubuntu" TOOL="pbuilder"
+      #env: DOCKER="debian:stretch" VARIANT="debian" TOOL="pbuilder"
 
     ## ====== Debian Sid =====================================================
     #- os: linux
       #dist: xenial
       #group: travis_latest
-      #env: DOCKER="debian:sid" VARIANT="ubuntu" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
+      #env: DOCKER="debian:sid" VARIANT="debian" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
     #- os: linux
       #dist: xenial
       #group: travis_latest
-      #env: DOCKER="debian:sid" VARIANT="ubuntu" TOOL="compile" COMPILER_C="clang" COMPILER_CXX="clang++"
+      #env: DOCKER="debian:sid" VARIANT="debian" TOOL="compile" COMPILER_C="clang" COMPILER_CXX="clang++"
     #- os: linux
       #dist: xenial
       #group: travis_latest
-      #env: DOCKER="ubuntu:sid" VARIANT="ubuntu" TOOL="pbuilder"
+      #env: DOCKER="debian:sid" VARIANT="debian" TOOL="pbuilder"
 
 
     ## ###### Fedora Linux ###################################################
