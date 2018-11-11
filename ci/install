@@ -30,11 +30,11 @@ if [ "$TRAVIS_OS_NAME" == "linux" ] ; then
 
       # ====== Ubuntu/Debian: set up compiler ===============================
       if [ "$TOOL" == "compile" ] ; then
-         sudo docker exec -t ubuntu-test bash -c "eatmydata apt-get install -y make clang ${UBUNTU_DEPS}"
+         sudo docker exec -t ubuntu-test bash -c "eatmydata apt-get install -y clang ${UBUNTU_DEPS}"
 
       # ====== Ubuntu/Debian: set up pbuilder ===============================
       elif [ "$TOOL" == "pbuilder" ] ; then
-         sudo docker exec -t ubuntu-test bash -c "eatmydata apt-get install -y cmake devscripts debhelper pbuilder ${UBUNTU_DEPS}"
+         sudo docker exec -t ubuntu-test bash -c "eatmydata apt-get install -y devscripts pbuilder ${UBUNTU_DEPS}"
 
          distribution=`sudo docker exec -t ubuntu-test bash -c "lsb_release -cs" | sed -e "s/[^0-9a-zA-Z]//g"`
          if [ "$VARIANT" == "debian" ] ; then
