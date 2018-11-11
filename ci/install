@@ -28,9 +28,7 @@ if [ "$TRAVIS_OS_NAME" == "linux" ] ; then
    # ====== Ubuntu Linux ====================================================
    if [ "$VARIANT" == "ubuntu" -o "$VARIANT" == "debian" ] ; then
       sudo docker exec -t ubuntu-test bash -c "apt-get update"
-      # NOTE: locales is needed, to get UTF-8 support right!
-      sudo docker exec -t ubuntu-test bash -c "apt-get install -y eatmydata"   # locales
-      # sudo docker exec -t ubuntu-test bash -c "update-locale LANG=C.UTF-8 LC_ALL=C.UTF-8"
+      sudo docker exec -t ubuntu-test bash -c "apt-get install -y eatmydata"
 
       # ====== Ubuntu/Debian: set up compiler ===============================
       if [ "$TOOL" == "compile" ] ; then
