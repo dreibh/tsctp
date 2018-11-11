@@ -19,10 +19,6 @@
 # Contact: dreibh@iem.uni-due.de
 
 
-UBUNTU_DEPS="cmake gcc g++ clang make libsctp-dev"
-FEDORA_DEPS="cmake gcc gcc-c++ clang make lksctp-tools-devel"
-
-
 # ###### Linux ##############################################################
 if [ "$TRAVIS_OS_NAME" == "linux" ] ; then
    # ====== Ubuntu Linux ====================================================
@@ -32,6 +28,7 @@ if [ "$TRAVIS_OS_NAME" == "linux" ] ; then
 
       # ====== Ubuntu/Debian: set up compiler ===============================
       if [ "$TOOL" == "compile" ] ; then
+         UBUNTU_DEPS="`ci/get-dependencies $VARIANT`"
          sudo docker exec -t ubuntu-test bash -c "eatmydata apt-get install -y ${UBUNTU_DEPS}"
 
       # ====== Ubuntu/Debian: set up pbuilder ===============================
@@ -84,6 +81,7 @@ EOF
    elif [ "$VARIANT" == "fedora" ] ; then
       # ====== Fedora: set up compiler ======================================
       if [ "$TOOL" == "compile" ] ; then
+         FEDORA_DEPS="`ci/get-dependencies $VARIANT`"
          sudo docker exec -t ubuntu-test bash -c "dnf install -y ${FEDORA_DEPS}"
 
       # ====== Fedora: set up pbuilder ======================================
