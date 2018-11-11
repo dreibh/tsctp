@@ -37,7 +37,7 @@ if [ "$TRAVIS_OS_NAME" == "linux" ] ; then
       if [ "$TOOL" == "pbuilder" ] ; then
          sudo docker exec -t ubuntu-test bash -c "eatmydata apt-get install -y devscripts debhelper pbuilder"
 
-         distribution=`sudo docker exec -t ubuntu-test bash -c "lsb_release -cs"`
+         distribution=`sudo docker exec -t ubuntu-test bash -c "lsb_release -cs" | sed -e "s/[^0-9a-zA-Z]//g"`
          if [ "$VARIANT" == "debian" ] ; then
             if [[ "$DOCKER" =~ ^(debian:)(.*)$ ]] ; then
                distribution="${BASH_REMATCH[2]}"
