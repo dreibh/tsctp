@@ -21,7 +21,8 @@
 
 # ###### Linux ##############################################################
 if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
-   sudo docker run -d --name ubuntu-test --cap-add=SYS_ADMIN --security-opt apparmor:unconfined -v $(pwd):/travis -w /travis $DOCKER tail -f /dev/null
+   sudo docker rm -f ubuntu-test || true
+   sudo docker run -d --name ubuntu-test --cap-add=SYS_ADMIN --cap-add=NET_ADMIN --security-opt apparmor:unconfined -v $(pwd):/travis -w /travis $DOCKER tail -f /dev/null
    sudo docker ps
 
 # ###### Other ##############################################################
