@@ -154,10 +154,11 @@ for DISTRIBUTION in $DISTRIBUTIONS ; do
    find /var/lib/mock/$DISTRIBUTION/result -name "$PACKAGE-*.rpm" | xargs --no-run-if-empty rm -f
 
    # Build the binary RPM
-   mock -r $DISTRIBUTION --init
-   mock -r $DISTRIBUTION --installdeps $PACKAGE_SRPM
-   mock -r $DISTRIBUTION --install openssl pesign
-   mock -r $DISTRIBUTION --no-clean --rebuild $PACKAGE_SRPM
+   # NOTE: using old chroot instead of container, to allow running it inside a container!
+   mock -r $DISTRIBUTION --old-chroot --init
+   mock -r $DISTRIBUTION --old-chroot --installdeps $PACKAGE_SRPM
+   mock -r $DISTRIBUTION --old-chroot --install openssl pesign
+   mock -r $DISTRIBUTION --old-chroot --no-clean --rebuild $PACKAGE_SRPM
 
    # Check whether files are at the right location
    PACKAGE_RPMS=`find /var/lib/mock/$DISTRIBUTION/result -name "$PACKAGE-*$PACKAGE_VERSION*-*.rpm" | grep -v "$PACKAGE-*$PACKAGE_VERSION*-*.src.rpm" || true`

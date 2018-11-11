@@ -35,9 +35,6 @@ apt-get update
 EOF
 "
          sudo docker exec -t ubuntu-test bash -c "sed -e 's/SKIP_PACKAGE_SIGNING=0/SKIP_PACKAGE_SIGNING=1/g' -i debian.conf"
-      else
-         echo >&2 "ERROR: Invalid setting of TOOL=$TOOL"
-         exit 1
       fi
 
    # ======Fedora Core Linux ================================================
@@ -45,9 +42,6 @@ EOF
       sudo docker exec -t ubuntu-test bash -c "dnf install -y ${FEDORA_DEPS}"
       if [ "$TOOL" = "mock" ] ; then
          sudo docker exec -t ubuntu-test bash -c "dnf install -y findutils rpmdevtools fedora-release mock"
-      else
-         echo >&2 "ERROR: Invalid setting of TOOL=$TOOL"
-         exit 1
       fi
 
    # ======Fedora Core Linux ================================================
