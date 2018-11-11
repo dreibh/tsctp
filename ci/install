@@ -78,7 +78,7 @@ EOF
 "
          fi
 
-      elif [ "$TOOL" != "compiler" ] ; then
+      elif [ "$TOOL" != "compile" ] ; then
          echo >&2 "ERROR: Invalid setting of TOOL=$TOOL"
          exit 1
       fi
