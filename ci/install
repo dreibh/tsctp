@@ -38,7 +38,7 @@ if [ "$TRAVIS_OS_NAME" == "linux" ] ; then
 
       # ====== Ubuntu/Debian: set up pbuilder ===============================
       elif [ "$TOOL" == "pbuilder" ] ; then
-         sudo docker exec -t ubuntu-test bash -c "eatmydata apt-get install -y devscripts debhelper pbuilder"
+         sudo docker exec -t ubuntu-test bash -c "eatmydata apt-get install -y cmake devscripts debhelper pbuilder ${UBUNTU_DEPS}"
 
          distribution=`sudo docker exec -t ubuntu-test bash -c "lsb_release -cs" | sed -e "s/[^0-9a-zA-Z]//g"`
          if [ "$VARIANT" == "debian" ] ; then
@@ -90,7 +90,7 @@ EOF
 
       # ====== Fedora: set up pbuilder ======================================
       elif [ "$TOOL" == "mock" ] ; then
-         sudo docker exec -t ubuntu-test bash -c "dnf install -y findutils rpmdevtools fedora-release mock"
+         sudo docker exec -t ubuntu-test bash -c "dnf install -y findutils rpmdevtools fedora-release mock ${FEDORA_DEPS}"
       fi
 
    # ======Fedora Core Linux ================================================
