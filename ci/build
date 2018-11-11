@@ -12,9 +12,13 @@ if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
       sudo docker exec -t ubuntu-test bash -c "env LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8 ./build-deb"
 
    elif [ "$TOOL" = "mock" ] ; then
-      cat /etc/fedora-release
-      release=`sudo docker exec -t ubuntu-test bash -c "cat /etc/fedora-release" | sed -e "s/^\(.*\) release \([0-9]*\) (\(.*\))$/\2/g"`
+      sudo docker exec -t ubuntu-test bash -c "cat /etc/fedora-release"
+      release=`sudo docker exec -t ubuntu-test bash -c "cat /etc/fedora-release | sed -e \"s/^\(.*\) release \([0-9]*\) (\(.*\))$/\2/g\""`
+      echo "release=$release."
+      release=`echo "$release" | sed -e "s/[^0-9]//g"`
+      echo "release=$release."
       buildFor="fedora-$release-x86_64"
+      echo "buildFor=$buildFor."
       sudo docker exec -t ubuntu-test bash -c "./make-rpm $buildFor"
 
    else
