@@ -7,9 +7,9 @@ export TRAVIS_OS_NAME="linux"
 # export VARIANT="debian"
 # export TOOL="pbuilder"
 
-export DOCKER="ubuntu:bionic"
+export DOCKER="ubuntu:trusty"
 export VARIANT="ubuntu"
-export TOOL="compile"
+export TOOL="pbuilder"
 
 # export DOCKER="fedora:29"
 # export VARIANT="fedora"
