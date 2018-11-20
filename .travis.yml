@@ -202,3 +202,4 @@ install:
 script:
   - |
     ci/build
+    ci/test
