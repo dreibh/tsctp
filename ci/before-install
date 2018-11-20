@@ -20,7 +20,7 @@
 
 
 # ###### Linux ##############################################################
-if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
+if [ "$TRAVIS_OS_NAME" == "linux" ] ; then
    sudo docker rm -f ubuntu-test || true
    sudo docker run -d \
       --name ubuntu-test \
@@ -33,7 +33,7 @@ if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
    sudo docker ps
 
 # ###### Other ##############################################################
-elif [ "$TRAVIS_OS_NAME" = "osx" ] ; then
+elif [ "$TRAVIS_OS_NAME" == "osx" ] ; then
    brew update
    brew install ...
 
