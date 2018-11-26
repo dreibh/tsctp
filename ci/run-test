@@ -16,8 +16,8 @@ export TOOL="pbuilder"
 # export TOOL="mock"
 
 
-SCRIPTS="before-install install"
-# SCRIPTS=" build test"
+SCRIPTS="before-install install build test"
+# SCRIPTS="install"
 
 for script in $SCRIPTS ; do
    sudo env \
