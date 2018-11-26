@@ -112,7 +112,7 @@ export DEB_BUILD_OPTIONS=\"parallel=\\\${cores}\"
 EOF"
          sudo docker exec ${CONTAINER} env LANG=C.UTF-8 cat /etc/pbuilderrc
          sudo docker exec ${CONTAINER} env LANG=C.UTF-8 \
-            eatmydata pbuilder create --debootstrapopts --variant=buildd
+            pbuilder create --debootstrapopts --variant=buildd
          sudo docker exec ${CONTAINER} env LANG=C.UTF-8 ls -l /var/cache/pbuilder/base.tgz
 
          # ====== Add ppa:dreibh/ppa, updates and backports =================
