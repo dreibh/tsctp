@@ -27,6 +27,8 @@ UBUNTU_MIRROR="se.archive.ubuntu.com"
 if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
    # ====== Ubuntu Linux ====================================================
    if [ "${VARIANT}" == "ubuntu" -o "${VARIANT}" == "debian" ] ; then
+
+      # ====== Prepare package repository sources ===========================
       echo "Installing eatmydata ..."
       sudo docker exec ${CONTAINER} env LANG=C.UTF-8 \
          sed -e "s#http://archive.ubuntu.com/ubuntu/#http://${UBUNTU_MIRROR}/ubuntu/#g" -i /etc/apt/sources.list
@@ -34,43 +36,62 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
          apt-get update
       sudo docker exec ${CONTAINER} env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive \
          apt-get install -y -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" \
-            eatmydata python3
+            eatmydata python3 software-properties-common
+
+      distribution=`sudo docker exec ${CONTAINER} env LANG=C.UTF-8 lsb_release -cs | sed -e "s/[^0-9a-zA-Z]//g"`
+      if [ "${VARIANT}" == "debian" ] ; then
+         if [[ "$DOCKER" =~ ^(debian:)(.*)$ ]] ; then
+            distribution="${BASH_REMATCH[2]}"
+         fi
+      fi
+      echo "distribution=$distribution"
+
+      if [ "${VARIANT}" == "ubuntu" ] ; then
+         mirror="http://${UBUNTU_MIRROR}/ubuntu/"
+      else
+         mirror="http://deb.debian.org/debian"
+      fi
+      echo "mirror=$mirror"
+
+
+      # ====== Ubuntu/Debian: package repositories ==========================
+      if [ "${VARIANT}" == "ubuntu" ] ; then
+         echo "Ubuntu: adding adding ppa:dreibh/ppa and ${distribution}-backports ..."
+         sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-add-repository -y ppa:dreibh/ppa
+         sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-get update
+      fi
+      if [ "${VARIANT}" == "ubuntu" -o "${VARIANT}" == "debian" ] ; then
+         echo "Ubuntu/Debian: adding ${distribution}-backports ..."
+         # NOTE: backports may be unavailable -> ignore error on apt-get update!
+         sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-add-repository "deb ${mirror} ${distribution}-updates main universe"
+         sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-add-repository "deb ${mirror} ${distribution}-backports main universe"
+         sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-get update || true
+         sudo docker exec ${CONTAINER} env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive eatmydata apt-get dist-upgrade -y -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef"
+      fi
+
 
       # ====== Ubuntu/Debian: extract dependencies ==========================
       echo "Extracting dependencies ..."
       UBUNTU_DEPS=`sudo docker exec ${CONTAINER} env LANG=C.UTF-8 ci/get-dependencies ${VARIANT}`
 
+
       # ====== Ubuntu/Debian: set up compiler ===============================
       if [ "${TOOL}" == "compile" ] ; then
-         echo "Installing compiler and dependencies ..."
+         echo "compile: installing compiler and dependencies ..."
          sudo docker exec ${CONTAINER} env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive \
             eatmydata apt-get install -y -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" \
                joe clang ${UBUNTU_DEPS}
 
+
       # ====== Ubuntu/Debian: set up pbuilder ===============================
       elif [ "${TOOL}" == "pbuilder" ] ; then
-         echo "Installing pbuilder and dependencies ..."
+         echo "pbuilder: installing pbuilder and dependencies ..."
          sudo docker exec ${CONTAINER} env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive \
             eatmydata apt-get install -y -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" \
                joe devscripts pbuilder ${UBUNTU_DEPS}
 
-         distribution=`sudo docker exec ${CONTAINER} env LANG=C.UTF-8 lsb_release -cs | sed -e "s/[^0-9a-zA-Z]//g"`
-         if [ "${VARIANT}" == "debian" ] ; then
-            if [[ "$DOCKER" =~ ^(debian:)(.*)$ ]] ; then
-               distribution="${BASH_REMATCH[2]}"
-            fi
-         fi
-         echo "distribution=$distribution"
-
-         if [ "${VARIANT}" == "ubuntu" ] ; then
-            mirror="http://${UBUNTU_MIRROR}/ubuntu/"
-         else
-            mirror="http://deb.debian.org/debian"
-         fi
-         echo "mirror=$mirror"
-
          # ====== pbuilder environment ======================================
-         echo "Creating pbuilder environment ..."
+         echo "pbuilder: creating pbuilder environment ..."
          sudo docker exec ${CONTAINER} bash -c "env LANG=C.UTF-8 cat >/etc/pbuilderrc <<EOF
 DISTRIBUTION=\"${distribution}\"
 COMPONENTS=\"main universe\"
@@ -90,7 +111,7 @@ EOF"
 
          # ====== Add ppa:dreibh/ppa, updates and backports =================
          if [ "${VARIANT}" == "ubuntu" ] ; then
-            echo "Ubuntu: adding adding ppa:dreibh/ppa and ${distribution}-backports ..."
+            echo "pbuilder Ubuntu: adding adding ppa:dreibh/ppa and ${distribution}-backports ..."
             sudo docker exec ${CONTAINER} bash -c "env LANG=C.UTF-8 eatmydata pbuilder login --save-after-login <<EOF
 DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::=\"--force-confold\" -o Dpkg::Options::=\"--force-confdef\" software-properties-common
 apt-add-repository -y ppa:dreibh/ppa
@@ -101,24 +122,25 @@ EOF"
 
             # NOTE: backports may be unavailable -> ignore error on apt-get update!
             sudo docker exec ${CONTAINER} bash -c "env LANG=C.UTF-8 eatmydata pbuilder login --save-after-login <<EOF
-apt-add-repository \"deb http://archive.ubuntu.com/ubuntu/ ${distribution}-updates main universe\"
-apt-add-repository \"deb http://archive.ubuntu.com/ubuntu/ ${distribution}-backports main universe\"
+apt-add-repository \"deb ${mirror} ${distribution}-updates main universe\"
+apt-add-repository \"deb ${mirror} ${distribution}-backports main universe\"
 apt-get update || true
 DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y -o Dpkg::Options::=\"--force-confold\" -o Dpkg::Options::=\"--force-confdef\"
 EOF"
             wait
             sudo docker exec ${CONTAINER} env LANG=C.UTF-8 ls -l /var/cache/pbuilder/base.tgz
+         fi
 
-         elif [ "${VARIANT}" == "debian" ] ; then
-            echo "Debian adding ${distribution}-backports ..."
+         if [ "${VARIANT}" == "ubuntu" -o "${VARIANT}" == "debian" ] ; then
+            echo "pbuilder Ubuntu/Debian: adding ${distribution}-backports ..."
 
             # NOTE: backports may be unavailable -> ignore error on apt-get update!
             sudo docker exec ${CONTAINER} bash -c "env LANG=C.UTF-8 eatmydata pbuilder login --save-after-login <<EOF
 DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::=\"--force-confold\" -o Dpkg::Options::=\"--force-confdef\" software-properties-common
-apt-add-repository \"deb http://deb.debian.org/debian ${distribution}-updates main universe\"
-apt-add-repository \"deb http://deb.debian.org/debian ${distribution}-backports main universe\"
+apt-add-repository \"deb ${mirror} ${distribution}-updates main universe\"
+apt-add-repository \"deb ${mirror} ${distribution}-backports main universe\"
 apt-get update || true
-DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y -o Dpkg::Options::=\"--force-confold\" -o Dpkg::Options::=\"--force-confdef\"
+DEBIAN_FRONTEND=noninteractive eatmydata apt-get dist-upgrade -y -o Dpkg::Options::=\"--force-confold\" -o Dpkg::Options::=\"--force-confdef\"
 EOF"
             wait
             sudo docker exec ${CONTAINER} env LANG=C.UTF-8 ls -l /var/cache/pbuilder/base.tgz
