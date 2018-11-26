@@ -29,11 +29,17 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
    if [ "${VARIANT}" == "ubuntu" -o "${VARIANT}" == "debian" ] ; then
 
       # ====== Prepare package repository sources ===========================
-      echo "Installing eatmydata ..."
+      # Use uncompressed package lists. Necessary to work around
+      # "apt-show-version" problems due to usage of compressed lists in
+      # Docker containers:
+      # https://askubuntu.com/questions/916199/install-apt-show-versions-inside-an-ubuntu-docker-container
       sudo docker exec ${CONTAINER} env LANG=C.UTF-8 \
          sed -e "s#http://archive.ubuntu.com/ubuntu/#http://${UBUNTU_MIRROR}/ubuntu/#g" -i /etc/apt/sources.list
+      sudo docker exec ${CONTAINER} bash -c "find /var/lib/apt/lists/ -maxdepth 1 -type f | xargs rm -f"
       sudo docker exec ${CONTAINER} env LANG=C.UTF-8 \
-         apt-get update
+         apt-get update -o Acquire::GzipIndexes=false
+
+      echo "Installing eatmydata ..."
       sudo docker exec ${CONTAINER} env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive \
          apt-get install -y -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" \
             eatmydata python3 software-properties-common
@@ -58,14 +64,14 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
       if [ "${VARIANT}" == "ubuntu" ] ; then
          echo "Ubuntu: adding adding ppa:dreibh/ppa and ${distribution}-backports ..."
          sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-add-repository -y ppa:dreibh/ppa
-         sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-get update
+         sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-get update -o Acquire::GzipIndexes=false
       fi
       if [ "${VARIANT}" == "ubuntu" -o "${VARIANT}" == "debian" ] ; then
          echo "Ubuntu/Debian: adding ${distribution}-backports ..."
          # NOTE: backports may be unavailable -> ignore error on apt-get update!
          sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-add-repository "deb ${mirror} ${distribution}-updates main universe"
          sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-add-repository "deb ${mirror} ${distribution}-backports main universe"
-         sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-get update || true
+         sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-get update -o Acquire::GzipIndexes=false || true
          sudo docker exec ${CONTAINER} env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive eatmydata apt-get dist-upgrade -y -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef"
       fi
 
