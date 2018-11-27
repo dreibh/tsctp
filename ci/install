@@ -27,8 +27,12 @@ UBUNTU_MIRROR="se.archive.ubuntu.com"
 if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
    # ====== Ubuntu Linux ====================================================
    if [ "${VARIANT}" == "ubuntu" -o "${VARIANT}" == "debian" ] ; then
+      APT_UPDATE='env LANG=C.UTF-8 apt-get update -o Acquire::GzipIndexes=false'
+      APT_INSTALL="env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends"
+      APT_UPGRADE="env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends"
 
-      # ====== Prepare package repository sources ===========================
+      # ====== Prepare container ============================================
+      echo "###### Preparing container ... ########################################"
       # Use uncompressed package lists. Necessary to work around
       # "apt-show-version" problems due to usage of compressed lists in
       # Docker containers:
@@ -36,13 +40,11 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
       sudo docker exec ${CONTAINER} env LANG=C.UTF-8 \
          sed -e "s#http://archive.ubuntu.com/ubuntu/#http://${UBUNTU_MIRROR}/ubuntu/#g" -i /etc/apt/sources.list
       sudo docker exec ${CONTAINER} bash -c "find /var/lib/apt/lists/ -maxdepth 1 -type f | xargs rm -f"
-      sudo docker exec ${CONTAINER} env LANG=C.UTF-8 \
-         apt-get update -o Acquire::GzipIndexes=false
+      sudo docker exec ${CONTAINER} ${APT_UPDATE}
 
       echo "Installing eatmydata ..."
-      sudo docker exec ${CONTAINER} env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive \
-         apt-get install -y -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" \
-            eatmydata python3 software-properties-common
+      echo sudo docker exec ${CONTAINER} ${APT_INSTALL} eatmydata python3 software-properties-common
+      sudo docker exec ${CONTAINER} ${APT_INSTALL} eatmydata python3 software-properties-common
 
       distribution=`sudo docker exec ${CONTAINER} env LANG=C.UTF-8 lsb_release -cs | sed -e "s/[^0-9a-zA-Z]//g"`
       if [ "${VARIANT}" == "debian" ] ; then
@@ -60,44 +62,44 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
       echo "mirror=$mirror"
 
 
-      # ====== Ubuntu/Debian: package repositories ==========================
+      # ====== Ubuntu/Debian: add repositories (dreibh:ppa, backports, updates) ===
+      echo "###### Adding dreibh:ppa, backports, updates to container ... ###############"
       if [ "${VARIANT}" == "ubuntu" ] ; then
          echo "Ubuntu: adding adding ppa:dreibh/ppa and ${distribution}-backports ..."
          sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-add-repository -y ppa:dreibh/ppa
-         sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-get update -o Acquire::GzipIndexes=false
+         sudo docker exec ${CONTAINER} eatmydata ${APT_UPDATE}
       fi
       if [ "${VARIANT}" == "ubuntu" -o "${VARIANT}" == "debian" ] ; then
          echo "Ubuntu/Debian: adding ${distribution}-backports ..."
          # NOTE: backports may be unavailable -> ignore error on apt-get update!
          sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-add-repository "deb ${mirror} ${distribution}-updates main universe"
          sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-add-repository "deb ${mirror} ${distribution}-backports main universe"
-         sudo docker exec ${CONTAINER} env LANG=C.UTF-8 apt-get update -o Acquire::GzipIndexes=false || true
-         sudo docker exec ${CONTAINER} env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive eatmydata apt-get dist-upgrade -y -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef"
+         sudo docker exec ${CONTAINER} eatmydata ${APT_UPDATE} || true
+         sudo docker exec ${CONTAINER} eatmydata ${APT_UPGRADE}
       fi
 
 
       # ====== Ubuntu/Debian: extract dependencies ==========================
+      echo "###### Obtaining build dependencies ... ###############################"
       echo "Extracting dependencies ..."
       UBUNTU_DEPS=`sudo docker exec ${CONTAINER} env LANG=C.UTF-8 ci/get-dependencies ${VARIANT}`
+      echo "Dependencies: ${UBUNTU_DEPS}"
 
 
       # ====== Ubuntu/Debian: set up compiler ===============================
       if [ "${TOOL}" == "compile" ] ; then
-         echo "compile: installing compiler and dependencies ..."
-         sudo docker exec ${CONTAINER} env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive \
-            eatmydata apt-get install -y -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" \
-               joe clang ${UBUNTU_DEPS}
+         echo "###### Installing compile environment ... #############################"
+         sudo docker exec ${CONTAINER} eatmydata ${APT_INSTALL} joe clang ${UBUNTU_DEPS}
 
 
       # ====== Ubuntu/Debian: set up pbuilder ===============================
       elif [ "${TOOL}" == "pbuilder" ] ; then
-         echo "pbuilder: installing pbuilder and dependencies ..."
-         sudo docker exec ${CONTAINER} env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive \
-            eatmydata apt-get install -y -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" \
-               joe devscripts pbuilder ${UBUNTU_DEPS}
+         echo "###### Installing pbuilder environment ... ############################"
+         sudo docker exec ${CONTAINER} eatmydata ${APT_INSTALL} \
+            joe build-essential devscripts fakeroot lintian pbuilder python3-debian sudo ${UBUNTU_DEPS}
 
          # ====== pbuilder environment ======================================
-         echo "pbuilder: creating pbuilder environment ..."
+         echo "###### Setting up pbuilder ... ########################################"
          sudo docker exec ${CONTAINER} bash -c "env LANG=C.UTF-8 cat >/etc/pbuilderrc <<EOF
 DISTRIBUTION=\"${distribution}\"
 COMPONENTS=\"main universe\"
@@ -117,43 +119,36 @@ EOF"
 
          # ====== Add ppa:dreibh/ppa, updates and backports =================
          if [ "${VARIANT}" == "ubuntu" ] ; then
+            echo "###### Adding dreibh:ppa to pbuilder ... ##############################"
             echo "pbuilder Ubuntu: adding adding ppa:dreibh/ppa and ${distribution}-backports ..."
             sudo docker exec ${CONTAINER} bash -c "env LANG=C.UTF-8 eatmydata pbuilder login --save-after-login <<EOF
-DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::=\"--force-confold\" -o Dpkg::Options::=\"--force-confdef\" software-properties-common
+${APT_INSTALL} software-properties-common
 apt-add-repository -y ppa:dreibh/ppa
-apt-get update
-EOF"
-            sudo docker exec ${CONTAINER} env LANG=C.UTF-8 ls -l /var/cache/pbuilder/base.tgz
-
-            # NOTE: backports may be unavailable -> ignore error on apt-get update!
-            sudo docker exec ${CONTAINER} bash -c "env LANG=C.UTF-8 eatmydata pbuilder login --save-after-login <<EOF
-apt-add-repository \"deb ${mirror} ${distribution}-updates main universe\"
-apt-add-repository \"deb ${mirror} ${distribution}-backports main universe\"
-apt-get update || true
-DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y -o Dpkg::Options::=\"--force-confold\" -o Dpkg::Options::=\"--force-confdef\"
+${APT_UPDATE}
 EOF"
             sudo docker exec ${CONTAINER} env LANG=C.UTF-8 ls -l /var/cache/pbuilder/base.tgz
          fi
 
          if [ "${VARIANT}" == "ubuntu" -o "${VARIANT}" == "debian" ] ; then
-            echo "pbuilder Ubuntu/Debian: adding ${distribution}-backports ..."
+            echo "###### Adding backports and updates to pbuilder ... ###################"
 
             # NOTE: backports may be unavailable -> ignore error on apt-get update!
             sudo docker exec ${CONTAINER} bash -c "env LANG=C.UTF-8 eatmydata pbuilder login --save-after-login <<EOF
-DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::=\"--force-confold\" -o Dpkg::Options::=\"--force-confdef\" software-properties-common
+${APT_INSTALL} software-properties-common
 apt-add-repository \"deb ${mirror} ${distribution}-updates main universe\"
 apt-add-repository \"deb ${mirror} ${distribution}-backports main universe\"
-apt-get update || true
-DEBIAN_FRONTEND=noninteractive eatmydata apt-get dist-upgrade -y -o Dpkg::Options::=\"--force-confold\" -o Dpkg::Options::=\"--force-confdef\"
+${APT_UPDATE} || true
+${APT_UPGRADE}
 EOF"
             sudo docker exec ${CONTAINER} env LANG=C.UTF-8 ls -l /var/cache/pbuilder/base.tgz
          fi
-
 
       else
          echo >&2 "ERROR: Invalid setting of TOOL=${TOOL}"
          exit 1
       fi
+
+      echo "###### Finished setup of build environment ############################"
 
 
    # ======Fedora Core Linux ================================================
