@@ -6,13 +6,13 @@ env:
   global:
    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
    #   via the "travis encrypt" command using the project repo's public key
-   - secure: "alBCg3daD4XoQOG8YM+36V1uDVo1PVOOPFN5gUm3c4Q1MIebGIqg/RCiuOnV39dqx4IM+hlBOR/KOzP6IMWfW4Ug9Zfixhtg6B0I4cA9mf41suYAUB23DhovAOU1R8Q6ojw2m+HinYhnTfy9hRzGgGnyoktQFVxVb8B6pXjaizzp78giIqtd+Xp6srWcXOKm6nKwOwacy2TMtakE4kPN68K/cM5NpdYBPewOB6rBmipgYRcjEgpnJSN6kJJtCNvwBiDPddjwk84FAE8KUbrTgfFjcnG8LXUSKeZXPLDhUfIXiHQtWAyKQSjeIt0hAWo0kcNquza644M4oPQOEkzyFItiAh+CjFmk16xnUFvNeVvrLaGnPrWmHE6teO6V1E2FgPK0VN2tLf5B0Pmb9whk82g1AL+fqkTKfIv6nTZQkdq+wCrjpf/DgmAyiE/rgJC5hGsPoBNp2EHMFu8IVE7oinUndOqMXxnCzw1u7xNBLUiYXzpYs9Z0mfa+ywQgp0ydO9eCIpjHa5infM9JLwO+ZDeurjhfGDI4xhq83ptOy8qNfdM2y1A5cU++/nPixp7GWkST8J7UYuA8NoE7luEBiLPAYrsuR4cek/OiWYWqmnhy2VW+G7Mj8VR7xA/apYmilpCGDqy0GrDZZzZvoSvye4zX8W3cTE1S6iGnhQhM/xY="
+   - secure: "jPpqZn1qlQGpOa7T0qZrw/TGH/oT/E2VfuncmuJh7XFp15XfrhEINlyuERUj5fgHy5WNZDPtdPCKsFApcYiIC0TJ2Va60Dzj0bwWj94ahr+DaNmVbohT5xRIhH4ANSz1p0NbUQiAkoZW3MCCwqracrsnfAyZTZcZONLAUgjBh+BXlwU1KHSpoIxznjW42fZBXZ0hEAtu6A8tcHCwIOQQbyDZdJlOZyDJdeKY2gHKBOKTudSfQtJlQK60MqeLscVQAW6vm7PxUpWyhkrpZcVITSMEVTplEWHHhEzVlhW9OYZGoLMGRpyT/n0ng1mMt9qA09OQfoZBY9ep1R3nl+ml1WyCYtHZs77bcHx+mFRv1iuIziVKU0eSAXR0p4m3Cwb8s9JhOa6qCzYwI/n/62Dqv3/JNOD17Vcy7VUzRzOsVhEEQBs2EKUnKo1SYWGGqtQyiskRTauph6Yle3tO5unGa7ZPnLSdXcLZaa2oKsLqn+eleBRDcrfVRL8843O27Z6JtitZeuG/IgJwikAC/qaeQZn5CI6Nm+2QScHnTPmhljrM79NV6sXM/uKrjf4QYF91ezAmTj7MXDRrytOC8gau9MtolddHbn4AwW3BrU++y03thj1RTOhQsHw9oicG+Vnw5gb2+jw7bCwaNon/aje6jUu5pDDJz5MLhI/atC4htMY="
 
 addons:
   coverity_scan:
     project:
-      name: "dreibh/tsctp"
-      description: "tsctp"
+      name: "tsctp"
+      description: "SCTP Test Tool"
     notification_email: dreibh@simula.no
     build_command_prepend: "cmake ."
     build_command: "make -j2"
