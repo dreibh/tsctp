@@ -192,11 +192,11 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
          mkdir coverity
          cd coverity
          wget --no-verbose https://scan.coverity.com/download/linux64 --post-data "token=${COVERITY_SCAN_TOKEN}&project=${COVERITY_PROJECT}" -O coverity_tool.tar.gz
-         if [ $? -ne 0 ]; then
+         if [ $? -ne 0 ] ; then
             echo 2>&1 "ERROR: Download of Coverity Scan analysis tool failed!"
             exit 1
          fi
-         tar xzf coverity_tool.tar.gz
+         tar xzvf coverity_tool.tar.gz
          rm -f coverity_tool.tar.gz
          cd ..
       fi
