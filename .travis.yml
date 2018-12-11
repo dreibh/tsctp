@@ -21,6 +21,7 @@ env:
 
 install:
   - |
+    sudo apt-get update
     sudo ci/get-dependencies ubuntu --install
 
 script:
