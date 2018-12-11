@@ -22,7 +22,7 @@ env:
 
 install:
   - |
-    sudo ci/get-dependencies ubuntu -install
+    sudo ci/get-dependencies ubuntu --install
 
 script:
   - cmake .
