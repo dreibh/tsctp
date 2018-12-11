@@ -14,9 +14,15 @@ env:
 matrix:
   include:
 
-    # ###### Coverity #######################################################
+    # ###### Special ########################################################
 
-    - name: "Coverity Scan"
+    - name: "Travis CI Build"
+      os: linux
+      dist: xenial
+      group: travis_latest
+      env: TOOL="coverity" COVERITY_PROJECT="dreibh%2Ftsctp" COVERITY_EMAIL="dreibh@simula.no" COMPILER_C="gcc" COMPILER_CXX="g++"
+
+    - name: "Coverity Scan Build"
       os: linux
       dist: xenial
       group: travis_latest
@@ -36,4 +42,4 @@ install:
 script:
   - |
     travis_wait 60 ci/build
-    #travis_wait 60 ci/test
+    travis_wait 60 ci/test
