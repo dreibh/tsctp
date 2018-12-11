@@ -12,6 +12,7 @@ env:
     - DOCKER=""
     - TOOL="coverity"
     - COVERITY_PROJECT="dreibh%2Ftsctp"   # <<-- NOTE: %2F instead of "/"!
+    - COVERITY_EMAIL="dreibh@simula.no"
 
 
 #addons:
