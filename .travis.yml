@@ -1,15 +1,10 @@
 language: c
-compiler:
-  - gcc
 sudo: required
-dist: xenial
-
 env:
   global:
     # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
     #   via the "travis encrypt" command using the project repo's public key
     - secure: "BxSZL4Jrpa4BQtEnH/0KfsUppEhCxca+uJE0KvPMdmK0DrYgPjPvzgLnq7+/nvZa8itjZ+/u1pBpP/Nn77jxhFwlGQ+gwSHmLvJ1C7gwUl933KusRaHyoDtqLfvf3S3slQ49L5GRcmghpheiHA4nF7lqCgTnUB4fyme+f0ESE8x2sm4+GJCE92t5ZxFR6G/UkFTpM61oygKwB1D8OdiRA7wW39qZh7j5TIoyXRYJheSp9sr7DiwC6kR6/BUDo4xpaCnwTEp8ddwBrswatm7LzRQOViDI0281PYheXLSo8aXGGCLR6WP8IefuLmbJlnGTIZQotOcsEtAFfCW+tNrd0KyUHEweu7wYRakCqNXYaSsb+2/lfLvwww6VcvhCVqYnZ7dV946mpp6zry3dA5dcjnaEiWYT4OZLDXfe8FF4356fqJeMs2pMSWyJXh6+GFFHCP7Tiuw33W6iNtmLDIBIiTEGAniQFmSBs7bTKAGjp0sGJ43OGUMiql2QM1dU0r6WY6/7XUpMQ+V0vnUEfdxEHF2EIb0USF4rO9SK4IITRJv82abNQ5VQ+Xk1MGWfeA9dmFmc4bvPfqqveL+oEQA9WuuP03+5G8bJXWdV782QHNTmHdrZ96rGZVobS8PV/HAkxzBH1ezKhNYZykzfMeM8wQZcGecwlzbmZE2wtU+toow="
-
 
 matrix:
   include:
