@@ -24,11 +24,6 @@ env:
     #branch_pattern: coverity_scan
 
 
-#install:
-  #- |
-    #sudo apt-get update
-    #sudo ci/get-dependencies ubuntu --install
-
 before_install:
   - |
     travis_wait 60 ci/before-install
@@ -39,7 +34,7 @@ install:
     travis_wait 60 ci/install
 
 
-
 script:
-  - cmake .
-  - make -j2
+  - |
+    travis_wait 60 ci/build
+    #travis_wait 60 ci/test
