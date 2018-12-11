@@ -20,13 +20,13 @@ matrix:
       os: linux
       dist: xenial
       group: travis_latest
-      env: TOOL="coverity" COVERITY_PROJECT="dreibh%2Ftsctp" COVERITY_EMAIL="dreibh@simula.no" COMPILER_C="gcc" COMPILER_CXX="g++"
+      env: TOOL="coverity" COVERITY_PROJECT="dreibh%2Ftsctp" COVERITY_SCAN_NOTIFICATION_EMAIL="dreibh@simula.no" COMPILER_C="gcc" COMPILER_CXX="g++"
 
     - name: "Coverity Scan Build"
       os: linux
       dist: xenial
       group: travis_latest
-      env: TOOL="coverity" COVERITY_PROJECT="dreibh%2Ftsctp" COVERITY_EMAIL="dreibh@simula.no" COMPILER_C="gcc" COMPILER_CXX="g++"
+      env: TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
 
 
 before_install:
