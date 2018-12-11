@@ -96,9 +96,9 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
       # ====== Coverity Scan ================================================
       elif [ "${TOOL}" == "coverity" ] ; then
          # ------ Build -----------------------------------------------------
+         cd coverity
          export PATH="coverity/$(ls -d cov*)/bin:$PATH"
-
-         ls -l coverity/bin
+         cd ..
          ls -R coverity
 
          env MAKEFLAGS=${MAKEFLAGS} cov-build --dir cov-int make
