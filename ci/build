@@ -106,17 +106,21 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
          ls -l coverity-results.tar.gz
 
          # ------ Upload results --------------------------------------------
-         curl --form token=${COVERITY_SCAN_TOKEN} \
-           --form email=${COVERITY_EMAIL} \
-           --form file=@coverity-results.tar.gz \
-           --form version="master branch head" \
-           --form description="$(git log -1|head -1)" \
-           https://scan.coverity.com/builds?project=${COVERITY_PROJECT}
-         CURL_RESULT=$?
-         echo "curl returned ${CURL_RESULT}"
-         if [ $CURL_RESULT -ne 0 ]; then
-            echo >&2 "ERROR: Upload to Coverity Scan failed; curl returned ${CURL_RESULT}!"
-            exit 1
+         if [ ${COVERITY_SCAN_BRANCH} == 1 ] ; then
+            curl --form token=${COVERITY_SCAN_TOKEN} \
+              --form email=${COVERITY_EMAIL} \
+              --form file=@coverity-results.tar.gz \
+              --form version="master branch head" \
+              --form description="$(git log -1|head -1)" \
+              https://scan.coverity.com/builds?project=${COVERITY_PROJECT}
+            CURL_RESULT=$?
+            echo "curl returned ${CURL_RESULT}"
+            if [ $CURL_RESULT -ne 0 ]; then
+               echo >&2 "ERROR: Upload to Coverity Scan failed; curl returned ${CURL_RESULT}!"
+               exit 1
+            fi
+         else
+            echo >&2 "###### NOTE: Not a Coverity scan branch! Skipping upload! ######"
          fi
 
       else

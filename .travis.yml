@@ -16,8 +16,10 @@ matrix:
 
     # ###### Coverity #######################################################
 
-    - os: linux
+    - name: "Coverity Scan"
+      os: linux
       dist: xenial
+      group: travis_latest
       env: TOOL="coverity" COVERITY_PROJECT="dreibh%2Ftsctp" COVERITY_EMAIL="dreibh@simula.no" COMPILER_C="gcc" COMPILER_CXX="g++"
 
 
