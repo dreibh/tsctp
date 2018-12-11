@@ -19,5 +19,6 @@ addons:
     branch_pattern: coverity_scan
 
 script:
+  - apt-get install -y cmake debhelper libfile-fcntllock-perl libsctp-dev
   - cmake .
   - make -j2
