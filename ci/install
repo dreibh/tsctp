@@ -196,7 +196,7 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
             echo 2>&1 "ERROR: Download of Coverity Scan analysis tool failed!"
             exit 1
          fi
-         tar xzvf coverity_tool.tar.gz
+         tar xzf coverity_tool.tar.gz
          rm -f coverity_tool.tar.gz
          cd ..
       fi
