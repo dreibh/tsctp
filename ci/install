@@ -105,17 +105,17 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
             # ====== pbuilder environment ===================================
             echo "###### Setting up pbuilder ... ########################################"
             sudo docker exec ${CONTAINER} bash -c "env LANG=C.UTF-8 cat >/etc/pbuilderrc <<EOF
-   DISTRIBUTION=\"${distribution}\"
-   COMPONENTS=\"main universe\"
-   MIRRORSITE=\"${mirror}\"
-   APTCACHEHARDLINK=no
-   EXTRAPACKAGES=eatmydata
-   EATMYDATA=yes
-   # Multi-core: set concurrency level. The packaging scripts will handle it properly:
-   cores=\\\`getconf _NPROCESSORS_ONLN\\\`
-   export CONCURRENCY_LEVEL=\\\${cores}
-   export DEB_BUILD_OPTIONS=\"parallel=\\\${cores}\"
-   EOF"
+DISTRIBUTION=\"${distribution}\"
+COMPONENTS=\"main universe\"
+MIRRORSITE=\"${mirror}\"
+APTCACHEHARDLINK=no
+EXTRAPACKAGES=eatmydata
+EATMYDATA=yes
+# Multi-core: set concurrency level. The packaging scripts will handle it properly:
+cores=\\\`getconf _NPROCESSORS_ONLN\\\`
+export CONCURRENCY_LEVEL=\\\${cores}
+export DEB_BUILD_OPTIONS=\"parallel=\\\${cores}\"
+EOF"
             sudo docker exec ${CONTAINER} env LANG=C.UTF-8 cat /etc/pbuilderrc
             sudo docker exec ${CONTAINER} env LANG=C.UTF-8 \
                pbuilder create --debootstrapopts --variant=buildd
@@ -126,10 +126,10 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
                echo "###### Adding dreibh:ppa to pbuilder ... ##############################"
                echo "pbuilder Ubuntu: adding adding ppa:dreibh/ppa and ${distribution}-backports ..."
                sudo docker exec ${CONTAINER} bash -c "env LANG=C.UTF-8 eatmydata pbuilder login --save-after-login <<EOF
-   ${APT_INSTALL} software-properties-common
-   apt-add-repository -y ppa:dreibh/ppa
-   ${APT_UPDATE}
-   EOF"
+${APT_INSTALL} software-properties-common
+apt-add-repository -y ppa:dreibh/ppa
+${APT_UPDATE}
+EOF"
                sudo docker exec ${CONTAINER} env LANG=C.UTF-8 ls -l /var/cache/pbuilder/base.tgz
             fi
 
@@ -138,12 +138,12 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
 
                # NOTE: backports may be unavailable -> ignore error on apt-get update!
                sudo docker exec ${CONTAINER} bash -c "env LANG=C.UTF-8 eatmydata pbuilder login --save-after-login <<EOF
-   ${APT_INSTALL} software-properties-common
-   apt-add-repository \"deb ${mirror} ${distribution}-updates main universe\"
-   apt-add-repository \"deb ${mirror} ${distribution}-backports main universe\"
-   ${APT_UPDATE} || true
-   ${APT_UPGRADE}
-   EOF"
+${APT_INSTALL} software-properties-common
+apt-add-repository \"deb ${mirror} ${distribution}-updates main universe\"
+apt-add-repository \"deb ${mirror} ${distribution}-backports main universe\"
+${APT_UPDATE} || true
+${APT_UPGRADE}
+EOF"
                sudo docker exec ${CONTAINER} env LANG=C.UTF-8 ls -l /var/cache/pbuilder/base.tgz
             fi
 
