@@ -105,5 +105,5 @@ if [ ${COPR} -ne 0 ] ; then
    fi
    echo "Using ${COPR_CLI}"
 
-   ${COPR_CLI} build --nowait tsctp ${SRPM}
+   ${COPR_CLI} build --nowait ppa ${SRPM}
 fi
