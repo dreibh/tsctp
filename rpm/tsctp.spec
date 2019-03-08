@@ -32,7 +32,7 @@ make DESTDIR=%{buildroot} install
 
 %files
 %{_bindir}/tsctp
-%{_datadir}/man/man1/tsctp.1.gz
+%{_mandir}/man1/tsctp.1.gz
 
 %doc
 
