@@ -1,3 +1,9 @@
+tsctp (0.7.2-1ubuntu1) disco; urgency=medium
+
+  * New upstream release.
+
+ -- Thomas Dreibholz <dreibh@iem.uni-due.de>  Fri, 26 Jul 2019 13:58:11 +0200
+
 tsctp (0.7.1-1ubuntu1) disco; urgency=medium
 
   * New upstream version.
