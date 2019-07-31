@@ -2,9 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	tsctp
-PORTVERSION=	0.7.0
+PORTVERSION=	0.7.2
 CATEGORIES=	net
 MASTER_SITES=	https://www.uni-due.de/~be0001/tsctp/download/
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	dreibh@iem.uni-due.de
 COMMENT=	SCTP Test Tool
