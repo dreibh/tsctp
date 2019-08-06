@@ -18,8 +18,6 @@ License: BSD-3-clause
     may be used to endorse or promote products derived from this software
     without specific prior written permission.
  .
- On Debian systems, the complete text of the BSD License can be found
- in `/usr/share/common-licenses/BSD'.
 
 Files: debian/*
 Copyright: Copyright (C) 2009-2019 Thomas Dreibholz <dreibh@iem.uni-due.de>

@@ -1,3 +1,9 @@
+tsctp (0.7.3~rc1.0-1ubuntu1) disco; urgency=medium
+
+  * New upstream release.
+
+ -- Thomas Dreibholz <dreibh@iem.uni-due.de>  Tue, 06 Aug 2019 20:19:30 +0200
+
 tsctp (0.7.2-1ubuntu1) disco; urgency=medium
 
   * New upstream release.
@@ -60,6 +66,5 @@ tsctp (0.6.2-1ubuntu1) xenial; urgency=low
 tsctp (0.6.1-1ubuntu1) vivid; urgency=low
 
   * New upstream release.
-  * Initial Debian release (Closes: #xxxxxx).
 
  -- Thomas Dreibholz <dreibh@iem.uni-due.de>  Tue, 20 Oct 2015 08:08:08 +0800

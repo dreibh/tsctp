@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	tsctp
-PORTVERSION=	0.7.2
+PORTVERSION=	0.7.3~rc1.0
 CATEGORIES=	net
 MASTER_SITES=	https://www.uni-due.de/~be0001/tsctp/download/
 EXTRACT_SUFX=	.tar.xz
