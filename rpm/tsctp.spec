@@ -3,7 +3,7 @@ Version: 0.7.3~rc1.0
 Release: 1
 Summary: SCTP test tool
 Group: Applications/Internet
-License: GPLv3
+License: GPL-3+
 URL: https://www.uni-due.de/~be0001/tsctp/
 Source: https://www.uni-due.de/~be0001/tsctp/download/%{name}-%{version}.tar.xz
 

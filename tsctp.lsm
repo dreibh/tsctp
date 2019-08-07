@@ -13,5 +13,5 @@ Primary-site:   https://www.uni-due.de/~be0001/tsctp
                 48 kB download/tsctp-0.7.2.tar.xz
 Original-site:  https://www.uni-due.de/~be0001/tsctp
 Platforms:      Linux, FreeBSD, MacOS, Solaris
-Copying-policy: GPL
+Copying-policy: BSD-3-clause
 End
