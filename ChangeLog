@@ -1,3 +1,81 @@
+commit 411a9dd16bb25a4fd2df32e0a2dbf66279a97697
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Aug 7 10:33:04 2019 +0200
+
+    Fixed some inconsistencies in different packaging files.
+
+commit c9031880d3de6845e12e78e2163d48a8432cf778
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Aug 7 10:04:34 2019 +0200
+
+    Updated build scripts.
+
+commit 6e996502e3f74e478a6d4a3d94d0df0a819b2b91
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Aug 6 23:50:00 2019 +0200
+
+    Simplified CMakeLists.txt.
+
+commit bedabbcc674fd33351074a0e5b5daceaa9d11043
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Aug 6 23:23:15 2019 +0200
+
+    Some clean-ups.
+
+commit 0851a44a233ec615a7d0726c4e2c10397a667a29
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Aug 6 22:40:53 2019 +0200
+
+    Build script updates.
+
+commit 01b7044017eee8aa8c6d9a3337932641bab28dd5
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Aug 6 19:58:25 2019 +0200
+
+    Updated build script.
+
+commit d21fe08a5dbe8274c61392017cf34608b189b7f5
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Mon Aug 5 22:06:50 2019 +0200
+
+    Updated CI scripts.
+
+commit c3a31d73e080d4adfb6f440824f6dd110e3b6bf9
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Mon Aug 5 17:00:41 2019 +0200
+
+    Updated Debian Standards version.
+
+commit b0cb4f04fa5d017b9830cf119588940a99e3259b
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Mon Aug 5 15:11:17 2019 +0200
+
+    Updated Travis CI configuration.
+
+commit 2d6d94fd32e74c494892b8552cc99c7b3df56990
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Mon Aug 5 15:05:27 2019 +0200
+
+    Build script updates.
+
+commit a0d0ad20eac616ec7d7cead7483d418de3ca8e5b
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Jul 31 16:28:56 2019 +0200
+
+    Updated FreeBSD ports files.
+
+commit d4b5c56c4050fd033c2de440a7163156dbaaae0e
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Jul 26 14:09:03 2019 +0200
+
+    Updated LSM entry.
+
+commit 3b1bce5ee3d1a948ce382471003e74088dab468e
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Jul 26 14:07:58 2019 +0200
+
+    New release tsctp-0.7.2.
+
 commit 4914f99bd3d8a9ff50151330ba3fc669d12d7b71
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Thu Jun 27 21:35:43 2019 +0200
