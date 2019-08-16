@@ -226,9 +226,11 @@ EOF\""
    elif [ "${QEMU}" == "FreeBSD" ] ; then
       if [ "${VARIANT}" != "" ] ; then
          # ====== Build fuse-ufs2 ===========================================
-         ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- sudo docker exec ${CONTAINER} apt-add-repository -y "\"deb ${mirror} ${distribution}-updates main universe\""
-         ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- sudo docker exec ${CONTAINER} apt-add-repository -y "\"deb ${mirror} ${distribution}-backports main universe\""
-         ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- sudo docker exec ${CONTAINER} eatmydata ${APT_UPDATE} || true
+         distribution=`env LANG=C.UTF-8 lsb_release -cs | sed -e "s/[^0-9a-zA-Z]//g"`
+         mirror="http://${UBUNTU_MIRROR}/ubuntu/"
+         ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- sudo apt-add-repository -y "\"deb ${mirror} ${distribution}-updates main universe\""
+         ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- sudo apt-add-repository -y "\"deb ${mirror} ${distribution}-backports main universe\""
+         ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- sudo eatmydata apt-get update || true
          env LANG=C.UTF-8 ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} --  sudo eatmydata apt-get install -y \
             build-essential fuse libfuse-dev autoconf automake libtool git libbsd-dev e2fslibs-dev
 
