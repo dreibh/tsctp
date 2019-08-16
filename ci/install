@@ -254,10 +254,10 @@ EOF\""
 elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
 
    if [ "${VARIANT}" != "" ] ; then
-#       env LANG=C.UTF-8 ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- sudo apt-get install -y build-essential fuse libfuse-dev autoconf automake libtool git libbsd-dev e2fslibs-dev
-
-
-      # ====== Build fuse-ufs2 ==============================================
+#       # ====== Build fuse-ufs2 ==============================================
+#       env LANG=C.UTF-8 ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- \
+#          sudo apt-get install -y build-essential fuse libfuse-dev autoconf automake libtool git libbsd-dev e2fslibs-dev
+#
 #       cd qemu-freebsd/fuse-ufs2/
 #       ./autogen.sh
 #       ./configure
@@ -288,7 +288,14 @@ elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
 
       # ~~~~~~ Modify ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       sudo cp ${mountPoint}/etc/rc.conf .
-      sudo bash -c "( echo \"sshd_enable=\\\"YES\\\"\" ; echo \"ifconfig_em0=\\\"DHCP\\\"\" ) >>${mountPoint}/etc/rc.conf"
+      sudo bash -c "(
+            echo \"sshd_enable=\\\"YES\\\"\"
+            echo \"ifconfig_em0=\\\"DHCP\\\"\"
+            echo \"ifconfig_em1=\\\"inet 192.168.100.100 netmask 255.255.255.0\\\"\"
+            echo \"nfs_client_enable=\\\"YES\\\"\"
+            echo \"rpc_lockd_enable=\\\"YES\\\"\"
+            echo \"rpc_statd_enable=\\\"YES\\\"\"
+         ) >>${mountPoint}/etc/rc.conf"
       sudo cat ${mountPoint}/etc/rc.conf
 
       sudo bash -c "echo \"PermitRootLogin prohibit-password\" >>${mountPoint}/etc/ssh/sshd_config"
@@ -304,9 +311,38 @@ elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
       sudo losetup -d ${LOOPDEV}
 
 
+      # ====== Host-only networking =========================================
+      sudo ip link add br0 type bridge || true
+      sudo ip addr flush dev br0
+      sudo ip addr add 192.168.100.1/24 brd 192.168.100.255 dev br0
+      sudo ip tuntap add mode tap
+      sudo ip link set tap0 master br0
+      sudo ip link set dev br0 up
+      sudo ip link set dev tap0 up
+      sudo iptables -A INPUT  -i tap0 -s 192.168.100.1/24 -j ACCEPT
+      sudo iptables -A OUTPUT -o tap0 -d 192.168.100.1/24 -j ACCEPT
+      sudo iptables -A INPUT  -i br0  -s 192.168.100.1/24 -j ACCEPT
+      sudo iptables -A OUTPUT -o br0  -d 192.168.100.1/24 -j ACCEPT
+      # sudo dnsmasq --interface=br0 --bind-interfaces \
+      #   --dhcp-range=192.168.100.2,192.168.100.254 || true
+
+
+      # ====== NFS ==========================================================
+      sudo mkdir -p /travis
+      sudo mount --bind `pwd` /travis
+      sudo bash -c "echo \"/travis 192.168.100.0/24(rw,no_root_squash)\" >/etc/exports"
+      env LANG=C.UTF-8 ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- \
+         sudo apt-get install -y nfs-kernel-server
+      sudo exportfs -v
+
+
       # ====== Start VM =====================================================
       ssh-keygen -R "[localhost]:7722"
-      qemu-system-x86_64 -m 4096 -hda ${imageName} -netdev user,id=mynet0,hostfwd=tcp:127.0.0.1:7722-:22 -device e1000,netdev=mynet0 &
+      qemu-system-x86_64 -m 4096 -cpu host -smp $(nproc) \
+         -hda ${imageName} \
+         -netdev user,id=mynet0,hostfwd=tcp:127.0.0.1:7722-:22 -device e1000,netdev=mynet0 \
+         -netdev tap,id=network0,ifname=tap0,script=no,downscript=no -device e1000,netdev=network0,mac=00:00:00:00:00:00 \
+         &
 
       ready=0
       i=0 ; while [ $i -lt 10 ] ; do
@@ -319,12 +355,13 @@ elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
          echo "not yet booted."
          let i=$i+1
       done
-
       if [ $ready -eq 0 ] ; then
          echo >&2 "VM did not boot properly!"
          exit 1
       fi
 
+      ssh -p 7722 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
+         pkg install -y bash cmake joe
       echo "VM is ready!"
    fi
 
