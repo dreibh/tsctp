@@ -104,4 +104,12 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
       fi
 
    fi
+
+
+# ###### FreeBSD ############################################################
+elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
+
+   # FIXME: TBD!
+   true
+
 fi

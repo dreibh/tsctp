@@ -254,16 +254,16 @@ EOF\""
 elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
 
    if [ "${VARIANT}" != "" ] ; then
-#       # ====== Build fuse-ufs2 ==============================================
-#       env LANG=C.UTF-8 ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- \
-#          sudo apt-get install -y build-essential fuse libfuse-dev autoconf automake libtool git libbsd-dev e2fslibs-dev
-#
-#       pushd /vservers/qemu-freebsd/fuse-ufs2/
-#       ./autogen.sh
-#       ./configure
-#       cores=`getconf _NPROCESSORS_ONLN 2>/dev/null || echo "1"`
-#       make -j${cores}
-#       popd
+      # ====== Build fuse-ufs2 ==============================================
+      env LANG=C.UTF-8 ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- \
+         sudo apt-get install -y build-essential fuse libfuse-dev autoconf automake libtool git libbsd-dev e2fslibs-dev
+
+      pushd /vservers/qemu-freebsd/fuse-ufs2/
+      ./autogen.sh
+      ./configure
+      cores=`getconf _NPROCESSORS_ONLN 2>/dev/null || echo "1"`
+      make -j${cores}
+      popd
 
 
       # ====== Modify FreeBSD image =========================================
@@ -291,8 +291,8 @@ elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
       sudo cp ${mountPoint}/etc/rc.conf .
       sudo bash -c "(
             echo \"sshd_enable=\\\"YES\\\"\"
-            echo \"ifconfig_em0=\\\"DHCP\\\"\"
-            echo \"ifconfig_em1=\\\"inet 192.168.100.100 netmask 255.255.255.0\\\"\"
+            echo \"ifconfig_vtnet0=\\\"DHCP\\\"\"
+            echo \"ifconfig_vtnet1=\\\"inet 192.168.100.100 netmask 255.255.255.0\\\"\"
             echo \"nfs_client_enable=\\\"YES\\\"\"
             echo \"rpc_lockd_enable=\\\"YES\\\"\"
             echo \"rpc_statd_enable=\\\"YES\\\"\"
@@ -308,8 +308,8 @@ elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
       sudo chmod 600 ${mountPoint}/root/.ssh/authorized_keys
 
       sudo mkdir -p ${mountPoint}/travis
-      sudo sed -e "/^.*\/travis.*$/d" -i ${mountPoint}/etc/fstab
-      sudo bash -c "echo \"# 192.168.100.1:/travis /travis   nfs   rw,soft,async,noatime,nfsv3,rsize=65536,wsize=65536   0   0\" >>${mountPoint}/etc/fstab"
+      sudo sed -e "/^.*\/travis.*$/d" -i~ ${mountPoint}/etc/fstab
+      sudo bash -c "echo \"192.168.100.1:/travis /travis   nfs   rw,soft,async,noatime,nfsv3,rsize=65536,wsize=65536   0   0\" >>${mountPoint}/etc/fstab"
       sudo cat ${mountPoint}/etc/fstab
 
       # ~~~~~~ Unmount ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -327,11 +327,11 @@ elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
       sudo ip link set tap0 master br0
       sudo ip link set dev br0 up
       sudo ip link set dev tap0 up
-      sudo iptables -I INPUT  -i tap0 -s 192.168.100.0/24 -j ACCEPT
-      sudo iptables -I OUTPUT -o tap0 -d 192.168.100.0/24 -j ACCEPT
-      sudo iptables -I INPUT  -i br0  -s 192.168.100.0/24 -j ACCEPT
-      sudo iptables -I OUTPUT -o br0  -d 192.168.100.0/24 -j ACCEPT
-      sudo iptables -I FORWARD -s 192.168.100.0/24 -d 192.168.100.0/24
+      sudo iptables -A INPUT  -i tap0 -s 192.168.100.0/24 -j ACCEPT
+      sudo iptables -A OUTPUT -o tap0 -d 192.168.100.0/24 -j ACCEPT
+      sudo iptables -A INPUT  -i br0  -s 192.168.100.0/24 -j ACCEPT
+      sudo iptables -A OUTPUT -o br0  -d 192.168.100.0/24 -j ACCEPT
+      sudo iptables -A FORWARD -s 192.168.100.0/24 -d 192.168.100.0/24
       # sudo dnsmasq --interface=br0 --bind-interfaces \
       #   --dhcp-range=192.168.100.2,192.168.100.254 || true
 
@@ -348,11 +348,12 @@ elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
 
       # ====== Start VM =====================================================
       ssh-keygen -R "[localhost]:8829"
-      # -cpu host
-      qemu-system-x86_64 -m 4096 -smp $(nproc) \
-         -hda /vservers/qemu-freebsd/${imageName} \
-         -netdev user,id=mynet0,hostfwd=tcp:127.0.0.1:8829-:22 -device e1000,netdev=mynet0 \
-         -netdev tap,id=network0,ifname=tap0,script=no,downscript=no -device e1000,netdev=network0,mac=00:00:00:00:00:00 \
+      # Non-KVM execution: qemu-system-x86_64 \
+      sudo qemu-system-x86_64 -machine type=pc,accel=kvm \
+         -m 4096 -cpu host -smp $(nproc) \
+         -drive if=virtio,media=disk,file=/vservers/qemu-freebsd/${imageName},format=raw \
+         -netdev user,id=mynet0,hostfwd=tcp:127.0.0.1:8829-:22 -device virtio-net-pci,netdev=mynet0 \
+         -netdev tap,id=network0,ifname=tap0,script=no,downscript=no -device virtio-net-pci,netdev=network0,mac=00:00:00:00:00:00 \
          &
 
       ready=0
@@ -373,6 +374,8 @@ elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
 
       ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
          pkg install -y bash cmake joe
+      # ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
+      #    portsnap --interactive fetch extract
 
       echo "===== The FreeBSD VM is ready! ====="
    fi
