@@ -286,8 +286,8 @@ EOF\""
 
          sudo mkdir -p ${mountPoint}/root/.ssh
          sudo chmod 700 ${mountPoint}/root/.ssh
-         if [ ! -e ~/.ssh/id_rsa.pub ] ; then
-            ssh-keygen -t rsa -b 4096
+         if [ ! -e ~/.ssh/id_rsa ] ; then
+            ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa
          fi
          sudo cp ~/.ssh/id_rsa.pub ${mountPoint}/root/.ssh/authorized_keys
          sudo chmod 600 ${mountPoint}/root/.ssh/authorized_keys
