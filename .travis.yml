@@ -17,7 +17,24 @@ matrix:
      os: linux
      dist: xenial
      group: travis_latest
-     env: VARIANT="12.0-RELEASE" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
+     env: QEMU="FreeBSD" VARIANT="12.0-RELEASE" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
+   - name: "FreeBSD 12.0-RELEASE with Clang"
+     os: linux
+     dist: xenial
+     group: travis_latest
+     env: QEMU="FreeBSD" VARIANT="12.0-RELEASE" TOOL="compile" COMPILER_C="clang" COMPILER_CXX="clang++"
+
+   # ====== FreeBSD 11.3-RELEASE ============================================
+   - name: "FreeBSD 11.3-RELEASE with GCC"
+     os: linux
+     dist: xenial
+     group: travis_latest
+     env: QEMU="FreeBSD" VARIANT="11.3-RELEASE" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
+   - name: "FreeBSD 11.3-RELEASE with Clang"
+     os: linux
+     dist: xenial
+     group: travis_latest
+     env: QEMU="FreeBSD" VARIANT="11.3-RELEASE" TOOL="compile" COMPILER_C="clang" COMPILER_CXX="clang++"
 
 
    ## ###### Ubuntu Linux ####################################################
@@ -277,22 +294,22 @@ matrix:
 
    # ###### Special #########################################################
 
-   - name: "Default Build"
-     os: linux
-     dist: xenial
-     group: travis_latest
-     env: TOOL="compile"
+   #- name: "Default Build"
+     #os: linux
+     #dist: xenial
+     #group: travis_latest
+     #env: TOOL="compile"
 
-   - name: "Coverity Scan"
-     os: linux
-     dist: xenial
-     group: travis_latest
-     env:
-      - TOOL="coverity"
-      - VARIANT="ubuntu"
-      - COVERITY_PROJECT="dreibh%2Ftsctp"
-      - COVERITY_SCAN_NOTIFICATION_EMAIL="dreibh@simula.no"
-      - COVERITY_SCAN_BRANCH="coverity_scan"
+   #- name: "Coverity Scan"
+     #os: linux
+     #dist: xenial
+     #group: travis_latest
+     #env:
+      #- TOOL="coverity"
+      #- VARIANT="ubuntu"
+      #- COVERITY_PROJECT="dreibh%2Ftsctp"
+      #- COVERITY_SCAN_NOTIFICATION_EMAIL="dreibh@simula.no"
+      #- COVERITY_SCAN_BRANCH="coverity_scan"
 
 
 before_install:
