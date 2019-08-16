@@ -226,10 +226,16 @@ EOF\""
    elif [ "${QEMU}" == "FreeBSD" ] ; then
       if [ "${VARIANT}" != "" ] ; then
          # ====== Build fuse-ufs2 ===========================================
+         # Activate "updates" and "backports" repositories!
+         # This is needed to later install dependencies for fuse-ufs2.
          distribution=`env LANG=C.UTF-8 lsb_release -cs | sed -e "s/[^0-9a-zA-Z]//g"`
          mirror="http://${UBUNTU_MIRROR}/ubuntu/"
-         ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- sudo apt-add-repository -y "\"deb ${mirror} ${distribution}-updates main universe\""
-         ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- sudo apt-add-repository -y "\"deb ${mirror} ${distribution}-backports main universe\""
+         if ! grep -E "^deb .* ${distribution}-updates .*" /etc/apt/sources.list >/dev/null ; then
+            ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- sudo apt-add-repository -y "\"deb ${mirror} ${distribution}-updates main universe\""
+         fi
+         if ! grep -E "^deb .* ${distribution}-backports .*" /etc/apt/sources.list >/dev/null ; then
+            ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- sudo apt-add-repository -y "\"deb ${mirror} ${distribution}-backports main universe\""
+         fi
          ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- sudo eatmydata apt-get update || true
          env LANG=C.UTF-8 ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} --  sudo eatmydata apt-get install -y \
             build-essential fuse libfuse-dev autoconf automake libtool git libbsd-dev e2fslibs-dev
@@ -325,7 +331,7 @@ EOF\""
          # ====== Start VM ==================================================
          ssh-keygen -R "[localhost]:8829"
          # Non-KVM execution: qemu-system-x86_64 \
-         sudo qemu-system-x86_64 -machine type=pc,accel=kvm \
+         sudo qemu-system-x86_64 -machine type=pc,accel=kvm -nographic \
             -m 4096 -cpu host -smp $(nproc) \
             -drive if=virtio,media=disk,file=/vservers/qemu-freebsd/${imageName},format=raw \
             -netdev user,id=mynet0,hostfwd=tcp:127.0.0.1:8829-:22 -device virtio-net-pci,netdev=mynet0 \
