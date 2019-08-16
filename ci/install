@@ -244,7 +244,8 @@ EOF\""
          ./autogen.sh
          ./configure
          cores=`getconf _NPROCESSORS_ONLN 2>/dev/null || echo "1"`
-         make -j${cores}
+         # make -j${cores}
+         make   # !!!! FIXME !!!!
          popd
 
 
