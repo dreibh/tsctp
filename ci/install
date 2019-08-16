@@ -258,17 +258,18 @@ elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
 #       env LANG=C.UTF-8 ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- \
 #          sudo apt-get install -y build-essential fuse libfuse-dev autoconf automake libtool git libbsd-dev e2fslibs-dev
 #
-#       cd qemu-freebsd/fuse-ufs2/
+#       pushd /vservers/qemu-freebsd/fuse-ufs2/
 #       ./autogen.sh
 #       ./configure
 #       cores=`getconf _NPROCESSORS_ONLN 2>/dev/null || echo "1"`
 #       make -j${cores}
-#       cd ../..
+#       popd
 
 
       # ====== Modify FreeBSD image =========================================
+      pushd /vservers/qemu-freebsd/
+
       # ~~~~~~ Mount ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      cd qemu-freebsd/
       imageName="FreeBSD-${VARIANT}-amd64.raw"
       ls -l ${imageName}
       mountPoint=`pwd`/mnt
@@ -296,7 +297,7 @@ elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
             echo \"rpc_lockd_enable=\\\"YES\\\"\"
             echo \"rpc_statd_enable=\\\"YES\\\"\"
          ) >>${mountPoint}/etc/rc.conf"
-      sudo cat ${mountPoint}/etc/rc.conf
+      # sudo cat ${mountPoint}/etc/rc.conf
 
       sudo bash -c "echo \"PermitRootLogin prohibit-password\" >>${mountPoint}/etc/ssh/sshd_config"
       # sudo tail -n 6 ${mountPoint}/etc/ssh/sshd_config
@@ -306,9 +307,16 @@ elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
       sudo cp ~/.ssh/id_rsa.pub ${mountPoint}/root/.ssh/authorized_keys
       sudo chmod 600 ${mountPoint}/root/.ssh/authorized_keys
 
+      sudo mkdir -p ${mountPoint}/travis
+      sudo sed -e "/^.*\/travis.*$/d" -i ${mountPoint}/etc/fstab
+      sudo bash -c "echo \"# 192.168.100.1:/travis /travis   nfs   rw,soft,async,noatime,nfsv3,rsize=65536,wsize=65536   0   0\" >>${mountPoint}/etc/fstab"
+      sudo cat ${mountPoint}/etc/fstab
+
       # ~~~~~~ Unmount ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       sudo umount ${mountPoint}
       sudo losetup -d ${LOOPDEV}
+
+      popd
 
 
       # ====== Host-only networking =========================================
@@ -319,10 +327,11 @@ elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
       sudo ip link set tap0 master br0
       sudo ip link set dev br0 up
       sudo ip link set dev tap0 up
-      sudo iptables -A INPUT  -i tap0 -s 192.168.100.1/24 -j ACCEPT
-      sudo iptables -A OUTPUT -o tap0 -d 192.168.100.1/24 -j ACCEPT
-      sudo iptables -A INPUT  -i br0  -s 192.168.100.1/24 -j ACCEPT
-      sudo iptables -A OUTPUT -o br0  -d 192.168.100.1/24 -j ACCEPT
+      sudo iptables -I INPUT  -i tap0 -s 192.168.100.0/24 -j ACCEPT
+      sudo iptables -I OUTPUT -o tap0 -d 192.168.100.0/24 -j ACCEPT
+      sudo iptables -I INPUT  -i br0  -s 192.168.100.0/24 -j ACCEPT
+      sudo iptables -I OUTPUT -o br0  -d 192.168.100.0/24 -j ACCEPT
+      sudo iptables -I FORWARD -s 192.168.100.0/24 -d 192.168.100.0/24
       # sudo dnsmasq --interface=br0 --bind-interfaces \
       #   --dhcp-range=192.168.100.2,192.168.100.254 || true
 
@@ -334,35 +343,38 @@ elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
       env LANG=C.UTF-8 ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- \
          sudo apt-get install -y nfs-kernel-server
       sudo exportfs -v
+      sudo service nfs-kernel-server restart
 
 
       # ====== Start VM =====================================================
-      ssh-keygen -R "[localhost]:7722"
-      qemu-system-x86_64 -m 4096 -cpu host -smp $(nproc) \
-         -hda ${imageName} \
-         -netdev user,id=mynet0,hostfwd=tcp:127.0.0.1:7722-:22 -device e1000,netdev=mynet0 \
+      ssh-keygen -R "[localhost]:8829"
+      # -cpu host
+      qemu-system-x86_64 -m 4096 -smp $(nproc) \
+         -hda /vservers/qemu-freebsd/${imageName} \
+         -netdev user,id=mynet0,hostfwd=tcp:127.0.0.1:8829-:22 -device e1000,netdev=mynet0 \
          -netdev tap,id=network0,ifname=tap0,script=no,downscript=no -device e1000,netdev=network0,mac=00:00:00:00:00:00 \
          &
 
       ready=0
-      i=0 ; while [ $i -lt 10 ] ; do
-         echo "Waiting for VM to boot ..."
-         sleep 30
-         if ssh -p 7722 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost hostname ; then
+      trials=20 ; sleep=15
+      i=0 ; while [ $i -lt ${trials} ] ; do
+         let i=$i+1
+         echo "${i}/${trials}: Waiting for VM to boot ..."
+         sleep ${sleep}
+         if ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost hostname ; then
             ready=1
             break
          fi
-         echo "not yet booted."
-         let i=$i+1
       done
-      if [ $ready -eq 0 ] ; then
+      if [ ${ready} -eq 0 ] ; then
          echo >&2 "VM did not boot properly!"
          exit 1
       fi
 
-      ssh -p 7722 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
+      ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
          pkg install -y bash cmake joe
-      echo "VM is ready!"
+
+      echo "===== The FreeBSD VM is ready! ====="
    fi
 
 
