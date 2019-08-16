@@ -44,7 +44,8 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
    elif [ "${QEMU}" == "FreeBSD" ] ; then
       if [ "${VARIANT}" != "" ] ; then
 
-         mkdir -p /vservers/qemu-freebsd
+         sudo mkdir -p /vservers/qemu-freebsd
+         sudo chown $USER:$USER /vservers/qemu-freebsd
          mkdir -p /vservers/qemu-freebsd/mnt
          cd /vservers/qemu-freebsd
 
