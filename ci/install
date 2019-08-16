@@ -286,6 +286,9 @@ EOF\""
 
          sudo mkdir -p ${mountPoint}/root/.ssh
          sudo chmod 700 ${mountPoint}/root/.ssh
+         if [ ! -e ~/.ssh/id_rsa.pub ] ; then
+            ssh-keygen -t rsa -b 4096
+         fi
          sudo cp ~/.ssh/id_rsa.pub ${mountPoint}/root/.ssh/authorized_keys
          sudo chmod 600 ${mountPoint}/root/.ssh/authorized_keys
 
@@ -329,6 +332,7 @@ EOF\""
 
 
          # ====== Start VM ==================================================
+         sudo -q killall qemu-system-x86_64 || true
          ssh-keygen -R "[localhost]:8829"
          # Non-KVM execution: qemu-system-x86_64 \
          sudo qemu-system-x86_64 -machine type=pc,accel=kvm -nographic \
