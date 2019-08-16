@@ -70,8 +70,41 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
       fi
 
 
+   # ====== QEMU ============================================================
+   elif [ "${QEMU}" == "FreeBSD" ] ; then
+
+      ssh -p 8829 -i ~/.ssh/id_rsa root@localhost <<EOF
+         cd /travis
+
+         # ====== Configure ====================================================
+         if [ -e CMakeLists.txt ] ; then
+            env CC=${COMPILER_C} CXX=${COMPILER_CXX} cmake . $@
+         elif [ -e configure.ac -o -e configure.in ] ; then
+            if [ -e bootstrap ] ; then
+               env CC=${COMPILER_C} CXX=${COMPILER_CXX} ./bootstrap
+               env CC=${COMPILER_C} CXX=${COMPILER_CXX} ./configure $@
+            elif [ -e autogen.sh ] ; then
+               env CC=${COMPILER_C} CXX=${COMPILER_CXX} ./autogen.sh
+            else
+               env CC=${COMPILER_C} CXX=${COMPILER_CXX} ./configure $@
+            fi
+         else
+            echo >&2 "WARNING: No build system detected. Trying to just call \"make\" ..."
+         fi
+
+         cores=\`sysctl -a | grep 'hw.ncpu' | cut -d ':' -f2 | tr -d ' '\`
+         if [ \${cores} -gt 1 ] ; then
+            MAKEFLAGS="-j\${cores}"
+         fi
+         echo "Running: env MAKEFLAGS=\${MAKEFLAGS} make"
+         env MAKEFLAGS=\${MAKEFLAGS} make   # VERBOSE=1
+
+         echo "Done!"
+EOF
+
+
    # ====== Travis CI standard Ubuntu Linux machine =========================
-   # That is: not using Docker
+   # That is: not using Docker or QEMU
    else
       # ====== Configure ====================================================
       if [ -e CMakeLists.txt ] ; then
@@ -131,24 +164,6 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
          exit 1
       fi
    fi
-
-
-# ###### FreeBSD ############################################################
-elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
-
-   ssh -p 8829 -i ~/.ssh/id_rsa root@localhost <<EOF
-
-cd /travis
-ls -l
-
-# ====== Configure ====================================================
-if [ -e CMakeLists.txt ] ; then
-   echo "CMAKE"
-fi
-
-# ====== Compile ======================================================
-env MAKEFLAGS=${MAKEFLAGS} make   # VERBOSE=1
-EOF
 
 
 # ###### Other ##############################################################

@@ -223,6 +223,137 @@ EOF\""
       fi
 
 
+   # ====== QEMU ============================================================
+   elif [ "${QEMU}" == "FreeBSD" ] ; then
+      if [ "${VARIANT}" != "" ] ; then
+         # ====== Build fuse-ufs2 ===========================================
+         env LANG=C.UTF-8 ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- \
+            sudo apt-get install -y build-essential fuse libfuse-dev autoconf automake libtool git libbsd-dev e2fslibs-dev
+
+         pushd /vservers/qemu-freebsd/fuse-ufs2/
+         ./autogen.sh
+         ./configure
+         cores=`getconf _NPROCESSORS_ONLN 2>/dev/null || echo "1"`
+         make -j${cores}
+         popd
+
+
+         # ====== Modify FreeBSD image ======================================
+         pushd /vservers/qemu-freebsd/
+
+         # ~~~~~~ Mount ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         imageName="FreeBSD-${VARIANT}-amd64.raw"
+         ls -l ${imageName}
+         mountPoint=`pwd`/mnt
+
+         sudo umount ${mountPoint} 2>/dev/null || true
+         LOOPDEVS=`sudo losetup -j ${imageName} | awk '{ print $1 }' | sed -e "s/:$//g"`
+         for loopdev in ${LOOPDEVS} ; do
+            sudo losetup -d ${loopdev} || true
+         done
+
+         sudo losetup -P -f ${imageName}
+         sudo losetup -j ${imageName}
+         LOOPDEV=`sudo losetup -j ${imageName} | awk '{ print $1 }' | sed -e "s/:$//g"`
+
+         echo "sudo fuse-ufs2/fuse-ufs/fuse-ufs ${LOOPDEV}p3 ${mountPoint} -o rw"
+         sudo fuse-ufs2/fuse-ufs/fuse-ufs ${LOOPDEV}p3 ${mountPoint} -o rw
+
+         # ~~~~~~ Modify ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         sudo cp ${mountPoint}/etc/rc.conf .
+         sudo bash -c "(
+               echo \"sshd_enable=\\\"YES\\\"\"
+               echo \"ifconfig_vtnet0=\\\"DHCP\\\"\"
+               echo \"ifconfig_vtnet1=\\\"inet 192.168.100.100 netmask 255.255.255.0\\\"\"
+               echo \"nfs_client_enable=\\\"YES\\\"\"
+               echo \"rpc_lockd_enable=\\\"YES\\\"\"
+               echo \"rpc_statd_enable=\\\"YES\\\"\"
+            ) >>${mountPoint}/etc/rc.conf"
+         # sudo cat ${mountPoint}/etc/rc.conf
+
+         sudo bash -c "echo \"PermitRootLogin prohibit-password\" >>${mountPoint}/etc/ssh/sshd_config"
+         # sudo tail -n 6 ${mountPoint}/etc/ssh/sshd_config
+
+         sudo mkdir -p ${mountPoint}/root/.ssh
+         sudo chmod 700 ${mountPoint}/root/.ssh
+         sudo cp ~/.ssh/id_rsa.pub ${mountPoint}/root/.ssh/authorized_keys
+         sudo chmod 600 ${mountPoint}/root/.ssh/authorized_keys
+
+         sudo mkdir -p ${mountPoint}/travis
+         sudo sed -e "/^.*\/travis.*$/d" -i~ ${mountPoint}/etc/fstab
+         sudo bash -c "echo \"192.168.100.1:/travis /travis   nfs   rw,soft,async,noatime,nfsv3,rsize=65536,wsize=65536   0   0\" >>${mountPoint}/etc/fstab"
+         sudo cat ${mountPoint}/etc/fstab
+
+         # ~~~~~~ Unmount ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         sudo umount ${mountPoint}
+         sudo losetup -d ${LOOPDEV}
+
+         popd
+
+
+         # ====== Host-only networking ======================================
+         sudo ip link add br0 type bridge || true
+         sudo ip addr flush dev br0
+         sudo ip addr add 192.168.100.1/24 brd 192.168.100.255 dev br0
+         sudo ip tuntap add mode tap
+         sudo ip link set tap0 master br0
+         sudo ip link set dev br0 up
+         sudo ip link set dev tap0 up
+         sudo iptables -A INPUT  -i tap0 -s 192.168.100.0/24 -j ACCEPT
+         sudo iptables -A OUTPUT -o tap0 -d 192.168.100.0/24 -j ACCEPT
+         sudo iptables -A INPUT  -i br0  -s 192.168.100.0/24 -j ACCEPT
+         sudo iptables -A OUTPUT -o br0  -d 192.168.100.0/24 -j ACCEPT
+         sudo iptables -A FORWARD -s 192.168.100.0/24 -d 192.168.100.0/24
+         # sudo dnsmasq --interface=br0 --bind-interfaces \
+         #   --dhcp-range=192.168.100.2,192.168.100.254 || true
+
+
+         # ====== NFS =======================================================
+         sudo mkdir -p /travis
+         sudo mount --bind `pwd` /travis
+         sudo bash -c "echo \"/travis 192.168.100.0/24(rw,no_root_squash)\" >/etc/exports"
+         env LANG=C.UTF-8 ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- \
+            sudo apt-get install -y nfs-kernel-server
+         sudo exportfs -v
+         sudo service nfs-kernel-server restart
+
+
+         # ====== Start VM ==================================================
+         ssh-keygen -R "[localhost]:8829"
+         # Non-KVM execution: qemu-system-x86_64 \
+         sudo qemu-system-x86_64 -machine type=pc,accel=kvm \
+            -m 4096 -cpu host -smp $(nproc) \
+            -drive if=virtio,media=disk,file=/vservers/qemu-freebsd/${imageName},format=raw \
+            -netdev user,id=mynet0,hostfwd=tcp:127.0.0.1:8829-:22 -device virtio-net-pci,netdev=mynet0 \
+            -netdev tap,id=network0,ifname=tap0,script=no,downscript=no -device virtio-net-pci,netdev=network0,mac=00:00:00:00:00:00 \
+            &
+
+         ready=0
+         trials=20 ; sleep=15
+         i=0 ; while [ $i -lt ${trials} ] ; do
+            let i=$i+1
+            echo "${i}/${trials}: Waiting for VM to boot ..."
+            sleep ${sleep}
+            if ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost hostname ; then
+               ready=1
+               break
+            fi
+         done
+         if [ ${ready} -eq 0 ] ; then
+            echo >&2 "VM did not boot properly!"
+            exit 1
+         fi
+         ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
+            pkg install -y bash cmake joe
+         ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
+            chsh -s /usr/local/bin/bash
+         # ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
+         #    portsnap --interactive fetch extract
+
+         echo "===== The FreeBSD VM is ready! ====="
+      fi
+
+
    # ====== Travis CI standard Ubuntu Linux machine =========================
    # That is: not using Docker
    else
@@ -247,137 +378,6 @@ EOF\""
          cd ..
       fi
 
-   fi
-
-
-# ###### FreeBSD ############################################################
-elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
-
-   if [ "${VARIANT}" != "" ] ; then
-      # ====== Build fuse-ufs2 ==============================================
-      env LANG=C.UTF-8 ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- \
-         sudo apt-get install -y build-essential fuse libfuse-dev autoconf automake libtool git libbsd-dev e2fslibs-dev
-
-      pushd /vservers/qemu-freebsd/fuse-ufs2/
-      ./autogen.sh
-      ./configure
-      cores=`getconf _NPROCESSORS_ONLN 2>/dev/null || echo "1"`
-      make -j${cores}
-      popd
-
-
-      # ====== Modify FreeBSD image =========================================
-      pushd /vservers/qemu-freebsd/
-
-      # ~~~~~~ Mount ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      imageName="FreeBSD-${VARIANT}-amd64.raw"
-      ls -l ${imageName}
-      mountPoint=`pwd`/mnt
-
-      sudo umount ${mountPoint} 2>/dev/null || true
-      LOOPDEVS=`sudo losetup -j ${imageName} | awk '{ print $1 }' | sed -e "s/:$//g"`
-      for loopdev in ${LOOPDEVS} ; do
-         sudo losetup -d ${loopdev} || true
-      done
-
-      sudo losetup -P -f ${imageName}
-      sudo losetup -j ${imageName}
-      LOOPDEV=`sudo losetup -j ${imageName} | awk '{ print $1 }' | sed -e "s/:$//g"`
-
-      echo "sudo fuse-ufs2/fuse-ufs/fuse-ufs ${LOOPDEV}p3 ${mountPoint} -o rw"
-      sudo fuse-ufs2/fuse-ufs/fuse-ufs ${LOOPDEV}p3 ${mountPoint} -o rw
-
-      # ~~~~~~ Modify ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      sudo cp ${mountPoint}/etc/rc.conf .
-      sudo bash -c "(
-            echo \"sshd_enable=\\\"YES\\\"\"
-            echo \"ifconfig_vtnet0=\\\"DHCP\\\"\"
-            echo \"ifconfig_vtnet1=\\\"inet 192.168.100.100 netmask 255.255.255.0\\\"\"
-            echo \"nfs_client_enable=\\\"YES\\\"\"
-            echo \"rpc_lockd_enable=\\\"YES\\\"\"
-            echo \"rpc_statd_enable=\\\"YES\\\"\"
-         ) >>${mountPoint}/etc/rc.conf"
-      # sudo cat ${mountPoint}/etc/rc.conf
-
-      sudo bash -c "echo \"PermitRootLogin prohibit-password\" >>${mountPoint}/etc/ssh/sshd_config"
-      # sudo tail -n 6 ${mountPoint}/etc/ssh/sshd_config
-
-      sudo mkdir -p ${mountPoint}/root/.ssh
-      sudo chmod 700 ${mountPoint}/root/.ssh
-      sudo cp ~/.ssh/id_rsa.pub ${mountPoint}/root/.ssh/authorized_keys
-      sudo chmod 600 ${mountPoint}/root/.ssh/authorized_keys
-
-      sudo mkdir -p ${mountPoint}/travis
-      sudo sed -e "/^.*\/travis.*$/d" -i~ ${mountPoint}/etc/fstab
-      sudo bash -c "echo \"192.168.100.1:/travis /travis   nfs   rw,soft,async,noatime,nfsv3,rsize=65536,wsize=65536   0   0\" >>${mountPoint}/etc/fstab"
-      sudo cat ${mountPoint}/etc/fstab
-
-      # ~~~~~~ Unmount ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      sudo umount ${mountPoint}
-      sudo losetup -d ${LOOPDEV}
-
-      popd
-
-
-      # ====== Host-only networking =========================================
-      sudo ip link add br0 type bridge || true
-      sudo ip addr flush dev br0
-      sudo ip addr add 192.168.100.1/24 brd 192.168.100.255 dev br0
-      sudo ip tuntap add mode tap
-      sudo ip link set tap0 master br0
-      sudo ip link set dev br0 up
-      sudo ip link set dev tap0 up
-      sudo iptables -A INPUT  -i tap0 -s 192.168.100.0/24 -j ACCEPT
-      sudo iptables -A OUTPUT -o tap0 -d 192.168.100.0/24 -j ACCEPT
-      sudo iptables -A INPUT  -i br0  -s 192.168.100.0/24 -j ACCEPT
-      sudo iptables -A OUTPUT -o br0  -d 192.168.100.0/24 -j ACCEPT
-      sudo iptables -A FORWARD -s 192.168.100.0/24 -d 192.168.100.0/24
-      # sudo dnsmasq --interface=br0 --bind-interfaces \
-      #   --dhcp-range=192.168.100.2,192.168.100.254 || true
-
-
-      # ====== NFS ==========================================================
-      sudo mkdir -p /travis
-      sudo mount --bind `pwd` /travis
-      sudo bash -c "echo \"/travis 192.168.100.0/24(rw,no_root_squash)\" >/etc/exports"
-      env LANG=C.UTF-8 ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- \
-         sudo apt-get install -y nfs-kernel-server
-      sudo exportfs -v
-      sudo service nfs-kernel-server restart
-
-
-      # ====== Start VM =====================================================
-      ssh-keygen -R "[localhost]:8829"
-      # Non-KVM execution: qemu-system-x86_64 \
-      sudo qemu-system-x86_64 -machine type=pc,accel=kvm \
-         -m 4096 -cpu host -smp $(nproc) \
-         -drive if=virtio,media=disk,file=/vservers/qemu-freebsd/${imageName},format=raw \
-         -netdev user,id=mynet0,hostfwd=tcp:127.0.0.1:8829-:22 -device virtio-net-pci,netdev=mynet0 \
-         -netdev tap,id=network0,ifname=tap0,script=no,downscript=no -device virtio-net-pci,netdev=network0,mac=00:00:00:00:00:00 \
-         &
-
-      ready=0
-      trials=20 ; sleep=15
-      i=0 ; while [ $i -lt ${trials} ] ; do
-         let i=$i+1
-         echo "${i}/${trials}: Waiting for VM to boot ..."
-         sleep ${sleep}
-         if ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost hostname ; then
-            ready=1
-            break
-         fi
-      done
-      if [ ${ready} -eq 0 ] ; then
-         echo >&2 "VM did not boot properly!"
-         exit 1
-      fi
-
-      ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
-         pkg install -y bash cmake joe
-      # ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
-      #    portsnap --interactive fetch extract
-
-      echo "===== The FreeBSD VM is ready! ====="
    fi
 
 
