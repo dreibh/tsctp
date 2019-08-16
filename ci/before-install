@@ -41,6 +41,31 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
    fi
 
 
+# ###### FreeBSD ############################################################
+elif [ "${TRAVIS_OS_NAME}" == "freebsd" ] ; then
+
+   if [ "${VARIANT}" != "" ] ; then
+      mkdir -p qemu-freebsd
+      mkdir -p qemu-freebsd/mnt
+      cd qemu-freebsd
+
+      # ====== Download image ===============================================
+      imageName="FreeBSD-${VARIANT}-amd64.raw"
+      if [ ! -e ${imageName}.xz -o ! -e ${imageName} ] ; then
+         imageURL="https://download.freebsd.org/ftp/releases/VM-IMAGES/${VARIANT}/amd64/Latest/${imageName}.xz"
+         echo "Downloading FreeBSD VM image from ${imageURL} ..."
+         curl "${imageURL}" | tee ${imageName}.xz.tmp | xz -T0 -d - >${imageName}
+         mv ${imageName}.xz.tmp ${imageName}.xz
+      fi
+
+      # ====== Download fuse-ufs2 ===========================================
+      if [ ! -d fuse-ufs2/ ] ; then
+         echo "Downloading fuse-ufs2 ..."
+         git clone https://github.com/DanielO/fuse-ufs2
+      fi
+   fi
+
+
 # ###### Other ##############################################################
 elif [ "${TRAVIS_OS_NAME}" == "osx" ] ; then
 
