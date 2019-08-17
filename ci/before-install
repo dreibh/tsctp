@@ -22,8 +22,15 @@
 . `dirname $0`/get-container
 
 
+# ###### Linux as-is ########################################################
+if [ "${TRAVIS_OS_NAME}" == "linux" -a "${DOCKER}" == "" -a "${QEMU}" == "" ] ; then
+
+   # Nothing to be done here.
+   true
+
+
 # ###### Linux via Docker ###################################################
-if [ "${TRAVIS_OS_NAME}" == "linux" -a "${DOCKER}" != "" -a "${QEMU}" == "" ] ; then
+elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${DOCKER}" != "" -a "${QEMU}" == "" ] ; then
 
       # NOTE: Using tmpfs for pbuilder and mock!
       # The build machine therefore needs a sufficient amount of RAM!
@@ -39,13 +46,7 @@ if [ "${TRAVIS_OS_NAME}" == "linux" -a "${DOCKER}" != "" -a "${QEMU}" == "" ] ; 
       sudo docker ps
 
 
-# ###### Linux as-is ########################################################
-elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${DOCKER}" == "" -a "${QEMU}" == "" ] ; then
-
-   true
-
-
-# ###### FreeBSD ############################################################
+# ###### FreeBSD via QEMU ###################################################
 elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${QEMU}" == "FreeBSD" ] ; then
    if [ "${VARIANT}" != "" ] ; then
 
@@ -77,7 +78,8 @@ elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${QEMU}" == "FreeBSD" ] ; then
 # ###### MacOS X ############################################################
 elif [ "${TRAVIS_OS_NAME}" == "osx" ] ; then
 
-   echo "Nothing to be done here."
+   # Nothing to be done here.
+   true
 
 
 # ###### Error ##############################################################
