@@ -359,7 +359,7 @@ EOF\""
             exit 1
          fi
          ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
-            pkg install -y bash cmake joe
+            pkg install -y bash autoconf automake cmake gcc libtool joe
          ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
             chsh -s /usr/local/bin/bash
          # ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
