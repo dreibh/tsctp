@@ -385,12 +385,12 @@ elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${QEMU}" == "FreeBSD" ] ; then
 
       # ====== Install packages =============================================
       ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
-         env ASSUME_ALWAYS_YES=yes pkg install -y bash gcc joe python3
+         env ASSUME_ALWAYS_YES=yes pkg install -y bash gcc joe
       ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
          chsh -s /usr/local/bin/bash
-      FREEBSD_DEPS=`ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost "cd /travis && ci/get-dependencies freebsd"`
       ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
-         env ASSUME_ALWAYS_YES=yes pkg install -y {FREEBSD_DEPS}
+         "cd /travis/freebsd/*/ && ( make build-depends-list && make run-depends-list ) | sed 's/^.*\///g' | xargs -r env ASSUME_ALWAYS_YES=yes pkg install -y"
+
       # ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
       #    portsnap --interactive fetch extract
 
