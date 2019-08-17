@@ -22,11 +22,9 @@
 . `dirname $0`/get-container
 
 
-# ###### Linux ##############################################################
-if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
+# ###### Linux via Docker ###################################################
+if [ "${TRAVIS_OS_NAME}" == "linux" -a "${DOCKER}" != "" -a "${QEMU}" == "" ] ; then
 
-   # ====== Docker ==========================================================
-   if [ "${DOCKER}" != "" ] ; then
       # NOTE: Using tmpfs for pbuilder and mock!
       # The build machine therefore needs a sufficient amount of RAM!
       sudo docker rm -f ${CONTAINER} || true
@@ -40,37 +38,43 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
          $DOCKER tail -f /dev/null
       sudo docker ps
 
-   # ====== QEMU ============================================================
-   elif [ "${QEMU}" == "FreeBSD" ] ; then
-      if [ "${VARIANT}" != "" ] ; then
 
-         sudo mkdir -p /vservers/qemu-freebsd
-         sudo chown $USER:$USER /vservers/qemu-freebsd
-         mkdir -p /vservers/qemu-freebsd/mnt
-         cd /vservers/qemu-freebsd
+# ###### Linux as-is ########################################################
+elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${DOCKER}" == "" -a "${QEMU}" == "" ] ; then
 
-         # ====== Download image ============================================
-         imageName="FreeBSD-${VARIANT}-amd64.raw"
-         if [ -e ${imageName}.xz -a ! -e ${imageName} ] ; then
-            echo "Extracting existing ${imageName}.xz ..."
-            xz -T0 -dk ${imageName}.xz
-         elif [ ! -e ${imageName}.xz -o ! -e ${imageName} ] ; then
-            imageURL="https://download.freebsd.org/ftp/releases/VM-IMAGES/${VARIANT}/amd64/Latest/${imageName}.xz"
-            echo "Downloading FreeBSD VM image from ${imageURL} ..."
-            curl "${imageURL}" | tee ${imageName}.xz.tmp | xz -T0 -d - >${imageName}
-            mv ${imageName}.xz.tmp ${imageName}.xz
-         fi
+   true
 
-         # ====== Download fuse-ufs2 ========================================
-         if [ ! -d fuse-ufs2/ ] ; then
-            echo "Downloading fuse-ufs2 ..."
-            git clone https://github.com/DanielO/fuse-ufs2
-         fi
+
+# ###### FreeBSD ############################################################
+elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${QEMU}" == "FreeBSD" ] ; then
+   if [ "${VARIANT}" != "" ] ; then
+
+      sudo mkdir -p /vservers/qemu-freebsd
+      sudo chown $USER:$USER /vservers/qemu-freebsd
+      mkdir -p /vservers/qemu-freebsd/mnt
+      cd /vservers/qemu-freebsd
+
+      # ====== Download image ============================================
+      imageName="FreeBSD-${VARIANT}-amd64.raw"
+      if [ -e ${imageName}.xz -a ! -e ${imageName} ] ; then
+         echo "Extracting existing ${imageName}.xz ..."
+         xz -T0 -dk ${imageName}.xz
+      elif [ ! -e ${imageName}.xz -o ! -e ${imageName} ] ; then
+         imageURL="https://download.freebsd.org/ftp/releases/VM-IMAGES/${VARIANT}/amd64/Latest/${imageName}.xz"
+         echo "Downloading FreeBSD VM image from ${imageURL} ..."
+         curl "${imageURL}" | tee ${imageName}.xz.tmp | xz -T0 -d - >${imageName}
+         mv ${imageName}.xz.tmp ${imageName}.xz
+      fi
+
+      # ====== Download fuse-ufs2 ========================================
+      if [ ! -d fuse-ufs2/ ] ; then
+         echo "Downloading fuse-ufs2 ..."
+         git clone https://github.com/mkatiyar/fuse-ufs2
       fi
    fi
 
 
-# ###### Other ##############################################################
+# ###### MacOS X ############################################################
 elif [ "${TRAVIS_OS_NAME}" == "osx" ] ; then
 
    echo "Nothing to be done here."
@@ -78,6 +82,6 @@ elif [ "${TRAVIS_OS_NAME}" == "osx" ] ; then
 
 # ###### Error ##############################################################
 else
-   echo >&2 "ERROR: Invalid setting of TRAVIS_OS_NAME=${TRAVIS_OS_NAME}"
+   echo >&2 "ERROR: Invalid setting of TRAVIS_OS_NAME=${TRAVIS_OS_NAME}, DOCKER=${DOCKER}, QEMU=${QEMU}!"
    exit 1
 fi
