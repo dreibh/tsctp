@@ -309,6 +309,8 @@ elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${QEMU}" == "FreeBSD" ] ; then
       sudo bash -c "echo \"PermitRootLogin prohibit-password\" >>${mountPoint}/etc/ssh/sshd_config"
       # sudo tail -n 6 ${mountPoint}/etc/ssh/sshd_config
 
+      sudo mkdir -p ${mountPoint}/usr/ports
+
       sudo mkdir -p ${mountPoint}/root/.ssh
       sudo chmod 700 ${mountPoint}/root/.ssh
       if [ ! -e ~/.ssh/id_rsa ] ; then
@@ -319,7 +321,7 @@ elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${QEMU}" == "FreeBSD" ] ; then
 
       sudo mkdir -p ${mountPoint}/travis
       sudo sed -e "/^.*\/travis.*$/d" -i~ ${mountPoint}/etc/fstab
-      sudo bash -c "echo \"192.168.100.1:/travis /travis   nfs   rw,soft,async,noatime,nfsv3,rsize=65536,wsize=65536   0   0\" >>${mountPoint}/etc/fstab"
+      sudo bash -c "( echo \"192.168.100.1:/travis /travis   nfs   rw,soft,async,noatime,nfsv3,rsize=65536,wsize=65536   0   0\" ; echo "tmpfs /usr/ports tmpfs rw 0 0" ) >>${mountPoint}/etc/fstab"
       sudo cat ${mountPoint}/etc/fstab
 
       # ~~~~~~ Unmount ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
