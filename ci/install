@@ -361,7 +361,7 @@ elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${QEMU}" == "FreeBSD" ] ; then
       ssh-keygen -R "[localhost]:8829"
       # Non-KVM execution: qemu-system-x86_64 \
       sudo qemu-system-x86_64 -machine type=pc,accel=kvm -nographic \
-         -m 4096 -cpu host -smp $(nproc) \
+         -m 6144 -cpu host -smp $(nproc) \
          -drive if=virtio,media=disk,file=/vservers/qemu-freebsd/${imageName},format=raw \
          -netdev user,id=mynet0,hostfwd=tcp:127.0.0.1:8829-:22 -device virtio-net-pci,netdev=mynet0 \
          -netdev tap,id=network0,ifname=tap0,script=no,downscript=no -device virtio-net-pci,netdev=network0,mac=00:00:00:00:00:00 \
@@ -384,16 +384,21 @@ elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${QEMU}" == "FreeBSD" ] ; then
       fi
 
       # ====== Install packages =============================================
+      # Basic dependencies:
       ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
          env ASSUME_ALWAYS_YES=yes pkg install -y bash gcc joe git
       ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
          chsh -s /usr/local/bin/bash
 
-#       ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
-#          "portsnap --interactive fetch extract | grep -v ^/usr/ports"
+      # Ports collection:
+      # This is the slow method via portsnap:
+      # --- ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
+      # ---    "portsnap --interactive fetch extract | grep -v ^/usr/ports"
+      # Using Git is much faster:
       ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
-         "rm -rf /usr/ports/ && git clone --depth 1 --no-checkout --filter=tree:0 https://github.com/freebsd/freebsd-ports /usr/ports && cd /usr/ports/ && git checkout master -- Mk/"
+         "rm -rf /usr/ports && git clone --depth=1 --filter=tree:0 https://github.com/freebsd/freebsd-ports /usr/ports"
 
+      # Package's dependencies:
       ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
          "cd /travis/freebsd/*/ && ( make build-depends-list && make run-depends-list ) | sed 's/^.*\///g' | xargs -r env ASSUME_ALWAYS_YES=yes pkg install -y"
 
