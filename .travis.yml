@@ -328,7 +328,7 @@ before_install:
   - travis_wait 60 travis_retry ci/before-install
 
 install:
-  - ci/install
+  - travis_wait 60 ci/install
 
 script:
   - ci/build
