@@ -95,9 +95,10 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ] ; then
             MAKEFLAGS="-j\${cores}"
          fi
          echo "Running: env MAKEFLAGS=\${MAKEFLAGS} make"
-         env MAKEFLAGS=\${MAKEFLAGS} make   # VERBOSE=1
+         env MAKEFLAGS=\${MAKEFLAGS} make || exit 1
 
          echo "Done!"
+         exit 0
 EOF
 
 
