@@ -382,11 +382,15 @@ elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${QEMU}" == "FreeBSD" ] ; then
          echo >&2 "VM did not boot properly!"
          exit 1
       fi
-      FREEBSD_DEPS=`ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost "cd /travis && ci/get-dependencies freebsd"`
+
+      # ====== Install packages =============================================
       ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
-         env ASSUME_ALWAYS_YES=yes pkg install -y bash gcc joe ${FREEBSD_DEPS}
+         env ASSUME_ALWAYS_YES=yes pkg install -y bash gcc joe
       ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
          chsh -s /usr/local/bin/bash
+      FREEBSD_DEPS=`ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost "cd /travis && ci/get-dependencies freebsd"`
+      ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
+         env ASSUME_ALWAYS_YES=yes pkg install -y {FREEBSD_DEPS}
       # ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
       #    portsnap --interactive fetch extract
 
