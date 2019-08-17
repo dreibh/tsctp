@@ -327,13 +327,13 @@ EOF\""
          sudo mount --bind `pwd` /travis
          sudo bash -c "echo \"/travis 192.168.100.0/24(rw,no_root_squash)\" >/etc/exports"
          env LANG=C.UTF-8 ci/retry -t ${RETRY_MAXTRIALS} -p ${RETRY_PAUSE} -- \
-            sudo apt-get install -y nfs-kernel-server
+            sudo apt-get install -y qemu-kvm nfs-kernel-server
          sudo exportfs -v
          sudo service nfs-kernel-server restart
 
 
          # ====== Start VM ==================================================
-         sudo -q killall qemu-system-x86_64 || true
+         sudo killall -q qemu-system-x86_64 || true
          ssh-keygen -R "[localhost]:8829"
          # Non-KVM execution: qemu-system-x86_64 \
          sudo qemu-system-x86_64 -machine type=pc,accel=kvm -nographic \
