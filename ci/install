@@ -382,8 +382,9 @@ elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${QEMU}" == "FreeBSD" ] ; then
          echo >&2 "VM did not boot properly!"
          exit 1
       fi
+      FREEBSD_DEPS=`ci/get-dependencies freebsd`
       ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
-         env ASSUME_ALWAYS_YES=yes pkg install -y bash autoconf automake cmake gcc libtool joe
+         env ASSUME_ALWAYS_YES=yes pkg install -y bash gcc joe ${FREEBSD_DEPS}
       ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
          chsh -s /usr/local/bin/bash
       # ssh -p 8829 -oStrictHostKeyChecking=no -i ~/.ssh/id_rsa root@localhost \
