@@ -12,7 +12,7 @@ COMMENT=	SCTP Test Tool
 LICENSE=        BSD
 LICENSE_FILE=   ${WRKSRC}/COPYING
 
-USES=           tar:xz cmake
+USES=           cmake tar:xz
 
 CMAKE_ARGS+=    -DCMAKE_INSTALL_MANDIR=${PREFIX}/man
 
