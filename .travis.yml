@@ -233,11 +233,11 @@ matrix:
      dist: bionic
      group: travis_latest
      env: QEMU="FreeBSD" VARIANT="12.1-RELEASE" TOOL="compile" COMPILER_C="clang" COMPILER_CXX="clang++"
-   - name: "FreeBSD 12.1-RELEASE with GCC"
-     os: linux
-     dist: bionic
-     group: travis_latest
-     env: QEMU="FreeBSD" VARIANT="12.1-RELEASE" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
+   #- name: "FreeBSD 12.1-RELEASE with GCC"
+     #os: linux
+     #dist: bionic
+     #group: travis_latest
+     #env: QEMU="FreeBSD" VARIANT="12.1-RELEASE" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
 
    # ====== FreeBSD 12.2-RELEASE ============================================
    - name: "FreeBSD 12.2-RELEASE with Clang"
@@ -245,11 +245,11 @@ matrix:
      dist: bionic
      group: travis_latest
      env: QEMU="FreeBSD" VARIANT="12.2-RELEASE" TOOL="compile" COMPILER_C="clang" COMPILER_CXX="clang++"
-   - name: "FreeBSD 12.2-RELEASE with GCC"
-     os: linux
-     dist: bionic
-     group: travis_latest
-     env: QEMU="FreeBSD" VARIANT="12.2-RELEASE" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
+   #- name: "FreeBSD 12.2-RELEASE with GCC"
+     #os: linux
+     #dist: bionic
+     #group: travis_latest
+     #env: QEMU="FreeBSD" VARIANT="12.2-RELEASE" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
 
    # ====== FreeBSD 11.4-RELEASE ============================================
    - name: "FreeBSD 11.4-RELEASE with Clang"
@@ -257,41 +257,41 @@ matrix:
      dist: bionic
      group: travis_latest
      env: QEMU="FreeBSD" VARIANT="11.4-RELEASE" TOOL="compile" COMPILER_C="clang" COMPILER_CXX="clang++"
-   - name: "FreeBSD 11.4-RELEASE with GCC"
-     os: linux
-     dist: bionic
-     group: travis_latest
-     env: QEMU="FreeBSD" VARIANT="11.4-RELEASE" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
+   #- name: "FreeBSD 11.4-RELEASE with GCC"
+     #os: linux
+     #dist: bionic
+     #group: travis_latest
+     #env: QEMU="FreeBSD" VARIANT="11.4-RELEASE" TOOL="compile" COMPILER_C="gcc" COMPILER_CXX="g++"
 
 
-   # ###### Other ###########################################################
+   ## ###### Other ###########################################################
 
-   # ====== MacOS X ========================================================
-   # - name: "MacOS X"
-   #   os: osx
-   #   osx_image: xcode9.4
-   #   compiler: clang
-   #   group: travis_latest
+   ## ====== MacOS X ========================================================
+   ## - name: "MacOS X"
+   ##   os: osx
+   ##   osx_image: xcode9.4
+   ##   compiler: clang
+   ##   group: travis_latest
 
 
-   # ###### Special #########################################################
+   ## ###### Special #########################################################
 
-   - name: "Default Build"
-     os: linux
-     dist: bionic
-     group: travis_latest
-     env: TOOL="compile"
+   #- name: "Default Build"
+     #os: linux
+     #dist: bionic
+     #group: travis_latest
+     #env: TOOL="compile"
 
-   - name: "Coverity Scan"
-     os: linux
-     dist: bionic
-     group: travis_latest
-     env:
-      - TOOL="coverity"
-      - VARIANT="ubuntu"
-      - COVERITY_PROJECT="dreibh%2Ftsctp"
-      - COVERITY_SCAN_NOTIFICATION_EMAIL="dreibh@simula.no"
-      - COVERITY_SCAN_BRANCH="coverity_scan"
+   #- name: "Coverity Scan"
+     #os: linux
+     #dist: bionic
+     #group: travis_latest
+     #env:
+      #- TOOL="coverity"
+      #- VARIANT="ubuntu"
+      #- COVERITY_PROJECT="dreibh%2Ftsctp"
+      #- COVERITY_SCAN_NOTIFICATION_EMAIL="dreibh@simula.no"
+      #- COVERITY_SCAN_BRANCH="coverity_scan"
 
 
 before_install:
