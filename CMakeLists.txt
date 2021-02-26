@@ -3,7 +3,7 @@ PROJECT(tsctp LANGUAGES C)
 
 SET(BUILD_MAJOR "0")
 SET(BUILD_MINOR "7")
-SET(BUILD_PATCH "3")
+SET(BUILD_PATCH "5")
 SET(BUILD_VERSION ${BUILD_MAJOR}.${BUILD_MINOR}.${BUILD_PATCH})
 
 
@@ -55,14 +55,9 @@ ELSEIF (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 ELSEIF (${CMAKE_SYSTEM_NAME} MATCHES "NetBSD")
     MESSAGE(STATUS ${CMAKE_SYSTEM_NAME} " supported")
-    LIST(APPEND neat_headers neat_bsd.h)
-    LIST(APPEND neat_sources neat_bsd.c)
     SET(CMAKE_REQUIRED_INCLUDES "/usr/pkg/include" "/usr/include" "/usr/local/include")
     SET(CMAKE_LIBRARY_PATH "/usr/local/lib")
     INCLUDE_DIRECTORIES("/usr/pkg/include" "/usr/local/include")
-
-ELSEIF (${CMAKE_SYSTEM_NAME} MATCHES "NetBSD")
-    MESSAGE(STATUS ${CMAKE_SYSTEM_NAME} " supported")
 
 ELSE()
     MESSAGE(FATAL_ERROR ${CMAKE_SYSTEM_NAME} " not supported (yet?)")

@@ -37,7 +37,7 @@
 #include <string.h>
 #include <pthread.h>
 #include <signal.h>
-#ifdef LINUX
+#ifdef __linux__
 #include <getopt.h>
 #endif
 #include <errno.h>
@@ -209,7 +209,7 @@ int main(int argc, char **argv)
 	                               "A:"
 #endif
 	                               "Df:l:L:n:p:R:S:t:T:u"
-#ifdef SCTP_REMOTE_UDP_ENCAPS_PORT 
+#ifdef SCTP_REMOTE_UDP_ENCAPS_PORT
                                    "U:"
 #endif
                                    "vV46")) != -1)

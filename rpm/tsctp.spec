@@ -1,5 +1,5 @@
 Name: tsctp
-Version: 0.7.3
+Version: 0.7.5
 Release: 1
 Summary: SCTP test tool
 Group: Applications/Internet
@@ -25,10 +25,10 @@ to verify that the SCTP stack is working.
 
 %build
 %cmake -DCMAKE_INSTALL_PREFIX=/usr .
-make %{?_smp_mflags}
+%cmake_build
 
 %install
-make DESTDIR=%{buildroot} install
+%cmake_install
 
 %files
 %{_bindir}/tsctp
@@ -37,6 +37,10 @@ make DESTDIR=%{buildroot} install
 %doc
 
 %changelog
+* Fri Nov 13 2020 Thomas Dreibholz <dreibh@iem.uni-due.de> - 0.7.5
+- New upstream release.
+* Fri Feb 07 2020 Thomas Dreibholz <dreibh@iem.uni-due.de> - 0.7.4
+- New upstream release.
 * Wed Aug 07 2019 Thomas Dreibholz <dreibh@iem.uni-due.de> - 0.7.3
 - New upstream release.
 * Fri Jul 26 2019 Thomas Dreibholz <dreibh@iem.uni-due.de> - 0.7.2
