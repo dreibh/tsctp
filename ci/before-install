@@ -35,18 +35,25 @@ if [ "${TRAVIS_OS_NAME}" == "linux" -a "${DOCKER}" == "" -a "${QEMU}" == "" ] ; 
 # ###### Linux via Docker ###################################################
 elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${DOCKER}" != "" -a "${QEMU}" == "" ] ; then
 
-      # NOTE: Using tmpfs for pbuilder and mock!
-      # The build machine therefore needs a sufficient amount of RAM!
-      sudo docker rm -f ${CONTAINER} || true
-      sudo docker run -d \
-         --name ${CONTAINER} \
-         --tmpfs /var/cache/pbuilder:rw,exec,dev,size=4g \
-         --tmpfs /var/lib/mock:rw,exec,dev,size=4g \
-         --cap-add=SYS_ADMIN --cap-add=NET_ADMIN \
-         --security-opt apparmor:unconfined \
-         -v $(pwd):/travis -w /travis \
-         $DOCKER tail -f /dev/null
-      sudo docker ps
+   tmpdaemon=$(mktemp)
+   sudo jq '."registry-mirrors" += ["https://mirror.gcr.io"]' /etc/docker/daemon.json > $tmpdaemon
+   sudo mv $tmpdaemon /etc/docker/daemon.json
+   sudo systemctl daemon-reload
+   sudo systemctl restart docker
+   sudo docker system info
+
+   # NOTE: Using tmpfs for pbuilder and mock!
+   # The build machine therefore needs a sufficient amount of RAM!
+   sudo docker rm -f ${CONTAINER} || true
+   sudo docker run -d \
+      --name ${CONTAINER} \
+      --tmpfs /var/cache/pbuilder:rw,exec,dev,size=4g \
+      --tmpfs /var/lib/mock:rw,exec,dev,size=4g \
+      --cap-add=SYS_ADMIN --cap-add=NET_ADMIN \
+      --security-opt apparmor:unconfined \
+      -v $(pwd):/travis -w /travis \
+      $DOCKER tail -f /dev/null
+   sudo docker ps
 
 
 # ###### FreeBSD via QEMU ###################################################
