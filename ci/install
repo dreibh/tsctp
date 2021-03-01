@@ -19,7 +19,7 @@
 # Contact: dreibh@iem.uni-due.de
 
 # Bash options:
-set -e
+set -ex
 
 
 . `dirname $0`/get-container
@@ -280,14 +280,21 @@ elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${QEMU}" == "FreeBSD" ] ; then
       pushd /vservers/qemu-freebsd/
 
       # ~~~~~ Grow image ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+echo "X1"
       truncate -s 128G ${imageName}
+echo "X2"
       echo -e "w\nY\nY\n" | LANG=C gdisk ${imageName}
+echo "X3"
       parted -s ${imageName} resizepart 3 100%
+echo "X4"
       parted -s ${imageName} print
+echo "X5"
 
       # ~~~~~~ Mount ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       ls -l ${imageName}
+echo "X6"
       mountPoint=`pwd`/mnt
+echo "X7"
 
       sudo umount ${mountPoint} 2>/dev/null || true
       LOOPDEVS=`sudo losetup -j ${imageName} | awk '{ print $1 }' | sed -e "s/:$//g"`
