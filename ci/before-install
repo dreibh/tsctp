@@ -35,9 +35,11 @@ if [ "${TRAVIS_OS_NAME}" == "linux" -a "${DOCKER}" == "" -a "${QEMU}" == "" ] ; 
 # ###### Linux via Docker ###################################################
 elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${DOCKER}" != "" -a "${QEMU}" == "" ] ; then
 
-   tmpdaemon=$(mktemp)
-   sudo jq '."registry-mirrors" += ["https://mirror.gcr.io"]' /etc/docker/daemon.json > $tmpdaemon
-   sudo mv $tmpdaemon /etc/docker/daemon.json
+   # Work-around for DockerHub's download limitation:
+   # Add mirror: https://mirror.gcr.io
+   tmpDaemonConfiguration=$(mktemp)
+   sudo jq '."registry-mirrors" += ["https://mirror.gcr.io"]' /etc/docker/daemon.json >${tmpDaemonConfiguration}
+   sudo mv ${tmpDaemonConfiguration} /etc/docker/daemon.json
    sudo systemctl daemon-reload
    sudo systemctl restart docker
    sudo docker system info
