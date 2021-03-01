@@ -35,12 +35,15 @@ if [ "${TRAVIS_OS_NAME}" == "linux" -a "${DOCKER}" == "" -a "${QEMU}" == "" ] ; 
 # ###### Linux via Docker ###################################################
 elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${DOCKER}" != "" -a "${QEMU}" == "" ] ; then
 
-   tmpdaemon=$(mktemp)
-   sudo jq '."registry-mirrors" += ["https://mirror.gcr.io"]' /etc/docker/daemon.json > $tmpdaemon
-   sudo mv $tmpdaemon /etc/docker/daemon.json
-   sudo systemctl daemon-reload
-   sudo systemctl restart docker
-   sudo docker system info
+   # Work-around for DockerHub's download limitation:
+   echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+#    tmpDaemonConfiguration=$(mktemp)
+#    sudo jq '."registry-mirrors" += ["https://mirror.gcr.io"]' /etc/docker/daemon.json >${tmpDaemonConfiguration}
+#    sudo mv ${tmpDaemonConfiguration} /etc/docker/daemon.json
+#    sudo systemctl daemon-reload
+#    sudo systemctl restart docker
+#    sudo docker system info
 
    # NOTE: Using tmpfs for pbuilder and mock!
    # The build machine therefore needs a sufficient amount of RAM!
