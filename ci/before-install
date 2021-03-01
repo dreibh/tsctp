@@ -38,6 +38,7 @@ elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${DOCKER}" != "" -a "${QEMU}" == "" ] 
    # Work-around for DockerHub's download limitation:
    echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
+
 #    tmpDaemonConfiguration=$(mktemp)
 #    sudo jq '."registry-mirrors" += ["https://mirror.gcr.io"]' /etc/docker/daemon.json >${tmpDaemonConfiguration}
 #    sudo mv ${tmpDaemonConfiguration} /etc/docker/daemon.json
