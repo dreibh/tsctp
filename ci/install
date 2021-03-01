@@ -19,7 +19,7 @@
 # Contact: dreibh@iem.uni-due.de
 
 # Bash options:
-set -ex
+set -e
 
 
 . `dirname $0`/get-container
@@ -280,21 +280,17 @@ elif [ "${TRAVIS_OS_NAME}" == "linux" -a "${QEMU}" == "FreeBSD" ] ; then
       pushd /vservers/qemu-freebsd/
 
       # ~~~~~ Grow image ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-echo "X1"
       truncate -s 128G ${imageName}
-echo "X2"
       echo -e "w\nY\nY\n" | LANG=C gdisk ${imageName}
-echo "X3"
-      parted -s ${imageName} resizepart 3 100%
-echo "X4"
+      # FreeBSD 12.2 uses 4 partitions, earlier versions use 3 partitions. Try
+      # to enlarge 4th partition first. If this fails, try to enlarge the 3rd
+      # partition instead:
+      parted -s ${imageName} resizepart 4 100% || parted -s ${imageName} resizepart 3 100%
       parted -s ${imageName} print
-echo "X5"
 
       # ~~~~~~ Mount ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       ls -l ${imageName}
-echo "X6"
       mountPoint=`pwd`/mnt
-echo "X7"
 
       sudo umount ${mountPoint} 2>/dev/null || true
       LOOPDEVS=`sudo losetup -j ${imageName} | awk '{ print $1 }' | sed -e "s/:$//g"`
