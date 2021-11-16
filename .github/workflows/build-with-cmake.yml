@@ -1,0 +1,41 @@
+name: Build with CMake
+
+on:
+  push:
+    branches:
+      - master
+      - dreibh/github-actions
+
+jobs:
+  build:
+
+    # https://github.com/marketplace/actions/run-on-architecture
+    strategy:
+      matrix:
+        platform:
+          - ubuntu-latest
+          #- ubuntu-18.04
+          #- bullseye
+        cmake_build_type:
+          - RelWithDebInfo
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        path: 'src'
+        submodules: recursive
+
+    - name: Generate CMake project
+      shell: bash
+      run: |
+        cmake -DCMAKE_INSTALL_PREFIX=/usr .
+
+    - name: Build and install project
+      shell: bash
+      run: |
+        cmake --parallel 2 \
+              --config ${{ matrix.cmake_build_type }} \
+              --target install \
+              --clean-first
