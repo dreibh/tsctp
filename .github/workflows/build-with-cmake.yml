@@ -13,9 +13,11 @@ jobs:
     strategy:
       matrix:
         platform:
-          - ubuntu-latest
-          #- ubuntu-18.04
-          #- bullseye
+          - ubuntu-20.04
+          - ubuntu-18.04
+          - buster
+          - bullseye
+          - fedora-latest
 
     runs-on: ${{ matrix.platform }}
 
