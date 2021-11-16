@@ -16,8 +16,6 @@ jobs:
           - ubuntu-latest
           #- ubuntu-18.04
           #- bullseye
-        cmake_build_type:
-          - RelWithDebInfo
 
     runs-on: ${{ matrix.platform }}
 
@@ -27,12 +25,14 @@ jobs:
         #path: 'src'
         #submodules: recursive
 
-    - name: Generate CMake project
+    - name: Install dependencies
       shell: bash
       run: |
         ci/get-dependencies ubuntu --install
-        cmake -DCMAKE_INSTALL_PREFIX=/usr \
-              --parallel 2 \
-              --config ${{ matrix.cmake_build_type }} \
-              --target install \
-              .
+        ./autogen.sh
+
+    - name: Build
+      shell: bash
+      run: |
+        ci/get-dependencies ubuntu --install
+        ./autogen.sh
