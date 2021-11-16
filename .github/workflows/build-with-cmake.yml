@@ -35,5 +35,4 @@ jobs:
               --parallel 2 \
               --config ${{ matrix.cmake_build_type }} \
               --target install \
-              --clean-first \
               .
