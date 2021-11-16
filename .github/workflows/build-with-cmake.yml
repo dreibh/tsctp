@@ -23,9 +23,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        path: 'src'
-        submodules: recursive
+      #with:
+        #path: 'src'
+        #submodules: recursive
 
     - name: Generate CMake project
       shell: bash
