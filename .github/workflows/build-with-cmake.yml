@@ -15,17 +15,11 @@ jobs:
         platform:
           - ubuntu-20.04
           - ubuntu-18.04
-          - buster
-          - bullseye
-          - fedora-latest
 
     runs-on: ${{ matrix.platform }}
 
     steps:
     - uses: actions/checkout@v2
-      #with:
-        #path: 'src'
-        #submodules: recursive
 
     - name: Install dependencies
       shell: bash
