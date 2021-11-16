@@ -30,12 +30,10 @@ jobs:
     - name: Generate CMake project
       shell: bash
       run: |
-        cmake -DCMAKE_INSTALL_PREFIX=/usr .
-
-    - name: Build and install project
-      shell: bash
-      run: |
-        cmake --parallel 2 \
+        ci/get-dependencies ubuntu --install
+        cmake -DCMAKE_INSTALL_PREFIX=/usr \
+              --parallel 2 \
               --config ${{ matrix.cmake_build_type }} \
               --target install \
-              --clean-first
+              --clean-first \
+              .
