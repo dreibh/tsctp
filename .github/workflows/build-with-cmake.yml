@@ -97,9 +97,8 @@ jobs:
           distro: fedora_latest
           run: |
             uname -a
-            apt update -q
-            apt install -y gcc libtool autoconf automake python3
-            ci/get-dependencies ubuntu --install
+            # dnf install -y python3
+            ci/get-dependencies fedora --install
             ./autogen.sh
 
   run-on-arch-buster-ppc64le:
@@ -115,7 +114,7 @@ jobs:
           distro: fedora_latest
           run: |
             uname -a
-            apt update -q
-            apt install -y gcc libtool autoconf automake python3
+            apt-get update -q
+            apt-get install -y gcc libtool autoconf automake python3
             ci/get-dependencies ubuntu --install
             ./autogen.sh
