@@ -66,17 +66,53 @@ jobs:
       #run: |
         #./autogen.sh
 
-  focal-armv8:
-    runs-on: ubuntu-18.04
+  run-on-arch-ubuntu-2004-aarch64:
+    runs-on: ubuntu-latest
     name: Ubuntu 20.04 on ARMv8
     steps:
-      - uses: actions/checkout@v2.1.0
-      - uses: uraimo/run-on-arch-action@v2.0.5
+      - uses: actions/checkout@v2
+      - uses: uraimo/run-on-arch-action@v2.1.1
         name: Run commands
         id: runcmd
         with:
           arch: aarch64
           distro: ubuntu20.04
+          run: |
+            uname -a
+            apt update -q
+            apt install -y gcc libtool autoconf automake python3
+            ci/get-dependencies ubuntu --install
+            ./autogen.sh
+
+  run-on-arch-fedora-aarch64:
+    runs-on: ubuntu-latest
+    name: Fedora on ARMv8
+    steps:
+      - uses: actions/checkout@v2
+      - uses: uraimo/run-on-arch-action@v2.1.1
+        name: Run commands
+        id: runcmd
+        with:
+          arch: aarch64
+          distro: fedora_latest
+          run: |
+            uname -a
+            apt update -q
+            apt install -y gcc libtool autoconf automake python3
+            ci/get-dependencies ubuntu --install
+            ./autogen.sh
+
+  run-on-arch-buster-ppc64le:
+    runs-on: ubuntu-latest
+    name: Debian Buster on PPC64
+    steps:
+      - uses: actions/checkout@v2
+      - uses: uraimo/run-on-arch-action@v2.1.1
+        name: Run commands
+        id: runcmd
+        with:
+          arch: ppc64le
+          distro: fedora_latest
           run: |
             uname -a
             apt update -q
