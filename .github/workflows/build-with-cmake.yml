@@ -7,27 +7,78 @@ on:
       - dreibh/github-actions
 
 jobs:
-  build:
+  #build:
 
-    # https://github.com/marketplace/actions/run-on-architecture
-    # https://github.com/uraimo/run-on-arch-action/blob/master/README.md
-    strategy:
-      matrix:
-        platform:
-          - ubuntu-20.04
-          - ubuntu-18.04
+    ## https://github.com/marketplace/actions/run-on-architecture
+    ## https://github.com/uraimo/run-on-arch-action/blob/master/README.md
+    #strategy:
+      #matrix:
+        #platform:
+          #- ubuntu-20.04
+          #- ubuntu-18.04
 
-    runs-on: ${{ matrix.platform }}
+    #runs-on: ${{ matrix.platform }}
 
+    #steps:
+    #- uses: actions/checkout@v2
+
+    #- name: Install dependencies
+      #shell: bash
+      #run: |
+        #sudo apt update
+        #sudo ci/get-dependencies ubuntu --install
+
+    #- name: Build
+      #shell: bash
+      #run: |
+        #./autogen.sh
+
+
+  #focal:
+    #runs-on: ubuntu-20.04
+    #steps:
+    #- uses: actions/checkout@v2
+
+    #- name: Install dependencies
+      #shell: bash
+      #run: |
+        #sudo apt update
+        #sudo ci/get-dependencies ubuntu --install
+
+    #- name: Build
+      #shell: bash
+      #run: |
+        #./autogen.sh
+
+  #bionic:
+    #runs-on: ubuntu-18.04
+    #steps:
+    #- uses: actions/checkout@v2
+
+    #- name: Install dependencies
+      #shell: bash
+      #run: |
+        #sudo apt update
+        #sudo ci/get-dependencies ubuntu --install
+
+    #- name: Build
+      #shell: bash
+      #run: |
+        #./autogen.sh
+
+  focal-armv8:
+    runs-on: ubuntu-18.04
+    name: Ubuntu 20.04 on ARMv7
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Install dependencies
-      shell: bash
-      run: |
-        sudo ci/get-dependencies ubuntu --install
-
-    - name: Build
-      shell: bash
-      run: |
-        ./autogen.sh
+      - uses: actions/checkout@v2.1.0
+      - uses: uraimo/run-on-arch-action@v2.0.5
+        name: Run commands
+        id: runcmd
+        with:
+          arch: armv7
+          distro: ubuntu20.04
+          run: |
+            uname -a
+            apt update
+            ci/get-dependencies ubuntu --install
+            ./autogen.sh
