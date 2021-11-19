@@ -79,6 +79,7 @@ jobs:
           distro: ubuntu20.04
           run: |
             uname -a
-            apt update
+            apt update -q
+            apt install -y python3
             ci/get-dependencies ubuntu --install
             ./autogen.sh
