@@ -52,8 +52,7 @@ if [ "${UNAME}" == "Linux" ] ; then
 # ###### FreeBSD ############################################################
 elif [ "${UNAME}" == "FreeBSD" ] ; then
 
-   # Nothing to be done here.
-   true
+   env ASSUME_ALWAYS_YES=yes pkg install -y bash gcc
 
 # ###### Unknown ############################################################
 else
