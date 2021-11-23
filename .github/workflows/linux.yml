@@ -15,18 +15,19 @@ jobs:
         include:
 
           # ====== Ubuntu Linux =============================================
-          - label: "Ubuntu 22.04 (Jammy Jellyfish): GCC/x86_64"
+          #- label: "Ubuntu 22.04 (Jammy Jellyfish): GCC/x86_64"
+            #arch: amd64
+            #distro: ubuntu22.04
+            #cc: gcc
+            #cxx: g++
+
+          - label: "Ubuntu 20.04 (Focal Fossa): GCC/x86_64"
             arch: amd64
-            distro: ubuntu22.04
+            distro: ubuntu20.04
             cc: gcc
             cxx: g++
             tools: compile package
 
-          #- label: "Ubuntu 20.04 (Focal Fossa): GCC/x86_64"
-            #arch: amd64
-            #distro: ubuntu20.04
-            #cc: gcc
-            #cxx: g++
           #- label: "Ubuntu 20.04 (Focal Fossa): GCC/ARMv8"
             #arch: aarch64
             #distro: ubuntu20.04
