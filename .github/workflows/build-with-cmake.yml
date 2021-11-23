@@ -110,9 +110,16 @@ jobs:
     strategy:
       matrix:
         include:
-          - label: "Ubuntu 18.04 on x86_64"
+          - label: "Fedora XX on x86_64 with Clang"
+            arch: amd64
+            distro: fedora_latest
+            cc: clang
+            cxx: clang++
+          - label: "Ubuntu 18.04 on x86_64 with GCC"
             arch: amd64
             distro: ubuntu18.04
+            cc: gcc
+            cxx: g++
 
     steps:
       - uses: actions/checkout@v2
@@ -125,4 +132,4 @@ jobs:
           run: |
             ci/ci-setup
             ci/ci-install
-            ./autogen.sh
+            env CC=${{ matrix.cc }} CC=${{ matrix.cxx }} ci/ci-build

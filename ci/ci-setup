@@ -35,12 +35,12 @@ if [ "${UNAME}" == "Linux" ] ; then
       apt update -qq
       # env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt dist-upgrade -qy
       env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt install -qy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
-         lsb-release gcc libtool autoconf automake python3
+         lsb-release build-essential devscripts clang gcc python3
 
    # ====== Fedora ==========================================================
    elif [ -e /usr/bin/dnf ] ; then
       # dnf upgrade -qy
-      dnf install -qy python3
+      dnf install -qy make clang python3
 
    # ====== Unknown =========================================================
    else
