@@ -49,6 +49,7 @@ if [ "${UNAME}" == "Linux" ] ; then
 
 # ###### FreeBSD ############################################################
 elif [ "${UNAME}" == "FreeBSD" ] ; then
+
    ${DIRNAME}/get-dependencies freebsd --install
 
 # ###### Unknown ############################################################

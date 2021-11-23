@@ -117,8 +117,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: dreibh/run-on-arch-action@dreibh/tests
-        name: Run commands
-        id: runcmd
+        name: Build
+        id: build
         with:
           arch: ${{ matrix.arch }}
           distro: ${{ matrix.distro }}

@@ -21,33 +21,30 @@
 # Bash options:
 set -e
 
-
 UNAME=`uname`
-if [ "${UNAME}" == "Linux" ] ; then
-   DISTRIBUTION=`lsb_release -is`
-else
-   DISTRIBUTION="Unknown"
-fi
 
 
 # ###### Linux ##############################################################
 if [ "${UNAME}" == "Linux" ] ; then
 
-   # ====== Ubuntu/Debian ===================================================
-   if [ "${DISTRIBUTION}" == "Ubuntu" -o "${DISTRIBUTION}" == "Debian" ] ; then
+   # NOTE: lsb_release may not be installed, yet!
+   # => Guess distribution by checking for the packaging tool.
+
+   # ====== Ubuntu/Deban ====================================================
+   if [ -e /usr/bin/apt-get ] ; then
       sudo apt update -qq
       # sudo env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt dist-upgrade -qy
       sudo env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt install -qy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
          lsb-release gcc libtool autoconf automake python3
 
    # ====== Fedora ==========================================================
-   elif [ "${DISTRIBUTION}" == "Fedora" ] ; then
+   elif [ -e /usr/bin/dnf ] ; then
       # dnf upgrade -qy
       dnf install -qy python3
 
    # ====== Unknown =========================================================
    else
-      echo >&2 "ERROR: Unknown Linux distribution ${DISTRIBUTION}!"
+      echo >&2 "ERROR: Unknown Linux distribution!"
       exit 1
    fi
 
