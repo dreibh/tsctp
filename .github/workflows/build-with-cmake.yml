@@ -110,9 +110,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - label: "Fedora XX on x86_64 with Clang"
+          - label: "Fedora 35 on x86_64 with Clang"
             arch: amd64
-            distro: fedora_latest
+            distro: fedora35
             cc: clang
             cxx: clang++
           - label: "Ubuntu 18.04 on x86_64 with GCC"

@@ -40,7 +40,8 @@ if [ "${UNAME}" == "Linux" ] ; then
    # ====== Fedora ==========================================================
    elif [ -e /usr/bin/dnf ] ; then
       # dnf upgrade -qy
-      dnf install -qy make clang python3
+      dnf install -qy make clang \
+         redhat-lsb-core python3
 
    # ====== Unknown =========================================================
    else
