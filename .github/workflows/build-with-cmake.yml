@@ -49,21 +49,28 @@ jobs:
             distro: ubuntu22.04
             cc: gcc
             cxx: g++
-          - label: "Ubuntu 22.04 (Jammy Jellyfish) with GCC on ARMv8"
-            arch: aarch64
-            distro: ubuntu22.04
-            cc: gcc
-            cxx: g++
-          - label: "Ubuntu 22.04 (Jammy Jellyfish) with GCC on S390x"
-            arch: s390x
-            distro: ubuntu22.04
-            cc: gcc
-            cxx: g++
+
           - label: "Ubuntu 20.04 (Focal Fossa) with GCC on x86_64"
             arch: amd64
             distro: ubuntu20.04
             cc: gcc
             cxx: g++
+          - label: "Ubuntu 20.04 (Jammy Jellyfish) with GCC on ARMv8"
+            arch: aarch64
+            distro: ubuntu20.04
+            cc: gcc
+            cxx: g++
+          - label: "Ubuntu 20.04 (Jammy Jellyfish) with GCC on S390x"
+            arch: s390x
+            distro: ubuntu20.04
+            cc: gcc
+            cxx: g++
+          - label: "Ubuntu 20.04 (Jammy Jellyfish) with GCC on RISC-V"
+            arch: riscv64
+            distro: ubuntu20.04
+            cc: gcc
+            cxx: g++
+
           - label: "Ubuntu 18.04 (Bionic Beaver) with GCC on x86_64"
             arch: amd64
             distro: ubuntu18.04
