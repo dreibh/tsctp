@@ -132,4 +132,4 @@ jobs:
           run: |
             ci/ci-setup
             ci/ci-install
-            env CC=${{ matrix.cc }} CC=${{ matrix.cxx }} ci/ci-build
+            env CC=${{ matrix.cc }} CC=${{ matrix.cxx }} ci/ci-build compile
