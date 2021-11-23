@@ -52,7 +52,7 @@ if [ "${UNAME}" == "Linux" ] ; then
 # ###### FreeBSD ############################################################
 elif [ "${UNAME}" == "FreeBSD" ] ; then
 
-   env ASSUME_ALWAYS_YES=yes pkg install -y bash gcc
+   env ASSUME_ALWAYS_YES=yes pkg install -y bash gcc python3
 
 # ###### Unknown ############################################################
 else
