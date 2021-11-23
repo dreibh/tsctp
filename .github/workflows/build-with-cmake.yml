@@ -20,6 +20,16 @@ jobs:
             distro: bookworm
             cc: gcc
             cxx: g++
+          - label: "Debian 11 (Bullseye) with GCC on x86_64"
+            arch: amd64
+            distro: bullseye
+            cc: gcc
+            cxx: g++
+          - label: "Debian 10 (Buster) with GCC on x86_64"
+            arch: amd64
+            distro: buster
+            cc: gcc
+            cxx: g++
 
           # ====== Fedora Linux =============================================
           - label: "Fedora 35 with Clang on x86_64"
@@ -39,6 +49,16 @@ jobs:
             distro: ubuntu22.04
             cc: gcc
             cxx: g++
+          - label: "Ubuntu 22.04 (Jammy Jellyfish) with GCC on ARMv8"
+            arch: aarch64
+            distro: ubuntu22.04
+            cc: gcc
+            cxx: g++
+          - label: "Ubuntu 22.04 (Jammy Jellyfish) with GCC on S390x"
+            arch: s390x
+            distro: ubuntu22.04
+            cc: gcc
+            cxx: g++
           - label: "Ubuntu 20.04 (Focal Fossa) with GCC on x86_64"
             arch: amd64
             distro: ubuntu20.04
@@ -47,6 +67,21 @@ jobs:
           - label: "Ubuntu 18.04 (Bionic Beaver) with GCC on x86_64"
             arch: amd64
             distro: ubuntu18.04
+            cc: gcc
+            cxx: g++
+          - label: "Ubuntu 16.04 (Xenial Xerus) with GCC on x86_64"
+            arch: amd64
+            distro: ubuntu16.04
+            cc: gcc
+            cxx: g++
+          - label: "Ubuntu 14.04 (Trusty Tahr) with GCC on x86_64"
+            arch: amd64
+            distro: ubuntu14.04
+            cc: gcc
+            cxx: g++
+          - label: "Ubuntu 12.04 (Precise Pangolin) with GCC on x86_64"
+            arch: amd64
+            distro: ubuntu12.04
             cc: gcc
             cxx: g++
 
