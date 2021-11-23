@@ -6,7 +6,7 @@ on:
       - master
       - dreibh/github-actions
 
-jobs:
+#jobs:
   #build:
 
     ## https://github.com/marketplace/actions/run-on-architecture
@@ -102,17 +102,26 @@ jobs:
             #./autogen.sh
 
 
-  run-test:
+jobs:
+  build_job:
     runs-on: ubuntu-latest
-    name: Ubuntu on x86_64
+    name: Build on ${{ matrix.label }}
+
+    strategy:
+      matrix:
+        include:
+          - label: "Ubuntu 18.04 on x86_64"
+            arch: amd64
+            distro: ubuntu18.04
+
     steps:
       - uses: actions/checkout@v2
       - uses: dreibh/run-on-arch-action@dreibh/tests
         name: Run commands
         id: runcmd
         with:
-          arch: amd64
-          distro: ubuntu22.04
+          arch: ${{ matrix.arch }}
+          distro: ${{ matrix.distro }}
           setup: |
             ci/ci-setup
           run: |
