@@ -113,9 +113,8 @@ jobs:
         with:
           arch: amd64
           distro: ubuntu22.04
+          setup: |
+            ci/ci-setup
           run: |
-            uname -a
-            apt update -q
-            apt install -y gcc libtool autoconf automake python3
-            ci/get-dependencies ubuntu --install
+            ci/ci-install
             ./autogen.sh
