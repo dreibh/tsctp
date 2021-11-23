@@ -24,7 +24,6 @@ jobs:
     # ###### Build commands #################################################
     name: ${{ matrix.label }}
     runs-on: macos-10.15
-    name:
     env:
       MYTOKEN: ${{ secrets.MYTOKEN }}
       MYTOKEN2: "value2"
