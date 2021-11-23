@@ -86,11 +86,6 @@ jobs:
             distro: ubuntu14.04
             cc: gcc
             cxx: g++
-          - label: "Ubuntu 12.04 (Precise Pangolin) with GCC on x86_64"
-            arch: amd64
-            distro: ubuntu12.04
-            cc: gcc
-            cxx: g++
 
 
     # ###### Build commands #################################################
