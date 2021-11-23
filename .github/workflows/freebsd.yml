@@ -36,6 +36,7 @@ jobs:
         envs: 'MYTOKEN MYTOKEN2'
         usesh: true
         run: |
+          env ASSUME_ALWAYS_YES=yes pkg install -y bash
           ci/ci-setup
           ci/ci-install
           env CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ci/ci-build compile
