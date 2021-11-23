@@ -66,7 +66,7 @@ export CONCURRENCY_LEVEL=${cores}
 export DEB_BUILD_OPTIONS="parallel=${cores}"
 EOF
          cat /etc/pbuilderrc
-         eatmydata pbuilder create --debootstrapopts --variant=buildd --compressprog=cat
+         eatmydata pbuilder create --debootstrapopts --variant=buildd
 
          # ====== Add ppa:dreibh/ppa, updates and backports =================
          if [ "${VARIANT}" == "ubuntu" ] ; then
