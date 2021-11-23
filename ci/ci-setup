@@ -22,6 +22,14 @@
 set -e
 
 UNAME=`uname`
+USE_PACKAGING=0
+
+while [ $# -gt 0 ] ; do
+   if [ "$1" == "package" ] ; then
+      USE_PACKAGING=1
+   fi
+   shift
+done
 
 
 # ###### Linux ##############################################################
@@ -32,16 +40,56 @@ if [ "${UNAME}" == "Linux" ] ; then
 
    # ====== Ubuntu/Deban ====================================================
    if [ -e /usr/bin/apt-get ] ; then
+      PACKAGES="clang gcc lsb-release python3"
+      if [ ${USE_PACKAGING} -eq 1 ] ; then
+         # Need to install pbuilder as well:
+         PACKAGES="${PACKAGES} build-essential devscripts eatmydata fakeroot lintian pbuilder"
+      fi
+
       apt update -qq
-      # env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt dist-upgrade -qy
-      env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt install -qy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
-         lsb-release clang gcc python3
+      # DEBIAN_FRONTEND=noninteractive apt dist-upgrade -qy
+      DEBIAN_FRONTEND=noninteractive apt install -qy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
+         ${PACKAGES}
+
+      if [ ${USE_PACKAGING} -eq 1 ] ; then
+         # ====== pbuilder environment ======================================
+         distribution=`lsb_release -cs`
+         cores=`getconf _NPROCESSORS_ONLN 2>/dev/null || true`
+         cat >/etc/pbuilderrc <<EOF
+DISTRIBUTION="${distribution}"
+COMPONENTS="main universe"
+APTCACHEHARDLINK=no
+EXTRAPACKAGES=eatmydata
+EATMYDATA=yes
+# Multi-core: set concurrency level. The packaging scripts will handle it properly:
+export CONCURRENCY_LEVEL=${cores}
+export DEB_BUILD_OPTIONS="parallel=${cores}"
+EOF
+         cat /etc/pbuilderrc
+         eatmydata pbuilder create --debootstrapopts --variant=buildd --compressprog=cat
+
+         # ====== Add ppa:dreibh/ppa, updates and backports =================
+         if [ "${VARIANT}" == "ubuntu" ] ; then
+            # Add PPA dreibh/ppa for Ubuntu:
+            eatmydata pbuilder login --save-after-login <<EOF
+DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
+   software-properties-common
+apt-add-repository -y ppa:dreibh/ppa
+apt update
+EOF
+         fi
+
+      fi
+
 
    # ====== Fedora ==========================================================
    elif [ -e /usr/bin/dnf ] ; then
+      PACKAGES="python3 redhat-lsb-core"
+
       # dnf upgrade -qy
       dnf install -qy make clang \
-         redhat-lsb-core python3
+         ${PACKAGES}
+
 
    # ====== Unknown =========================================================
    else
