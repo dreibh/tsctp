@@ -48,7 +48,7 @@ if [ "${UNAME}" == "Linux" ] ; then
 
       apt update -qq
       # DEBIAN_FRONTEND=noninteractive apt dist-upgrade -qy
-      DEBIAN_FRONTEND=noninteractive apt install -qy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
+      DEBIAN_FRONTEND=noninteractive apt-get install -qy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
          ${PACKAGES}
 
       if [ ${USE_PACKAGING} -eq 1 ] ; then
