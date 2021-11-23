@@ -1,0 +1,24 @@
+name: Generic CI Tests
+
+on:
+  push:
+    branches:
+      - master
+      - dreibh/github-actions
+      - dreibh/github-actions-freebsd
+
+jobs:
+  focal:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - uses: jrl-umi3218/github-actions/setup-pbuilder@master
+      with:
+        dist: xenial
+        arch: amd64
+    - name: Test
+      shell: bash
+      run: |
+        ci/ci-setup compile package
+        ci/ci-install compile package
+        env CC=gcc CXX=g++ ci/ci-build compile package

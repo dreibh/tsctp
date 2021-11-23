@@ -43,16 +43,18 @@ if [ "${UNAME}" == "Linux" ] ; then
       PACKAGES="clang gcc lsb-release python3"
       if [ ${USE_PACKAGING} -eq 1 ] ; then
          # Need to install pbuilder as well:
-         PACKAGES="${PACKAGES} build-essential devscripts eatmydata fakeroot lintian pbuilder"
+         PACKAGES="${PACKAGES} build-essential devscripts eatmydata fakeroot lintian cowbuilder"
       fi
 
       apt update -qq
       # DEBIAN_FRONTEND=noninteractive apt dist-upgrade -qy
-      DEBIAN_FRONTEND=noninteractive apt-get install -qy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
+      DEBIAN_FRONTEND=noninteractive apt-get install -qqy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
          ${PACKAGES}
 
       if [ ${USE_PACKAGING} -eq 1 ] ; then
          # ====== pbuilder environment ======================================
+         # Example for GitHub Actions:
+         # https://github.com/jrl-umi3218/github-actions/tree/master/setup-pbuilder
          distribution=`lsb_release -cs`
          cores=`getconf _NPROCESSORS_ONLN 2>/dev/null || true`
          cat >/etc/pbuilderrc <<EOF
@@ -66,13 +68,25 @@ export CONCURRENCY_LEVEL=${cores}
 export DEB_BUILD_OPTIONS="parallel=${cores}"
 EOF
          cat /etc/pbuilderrc
-         eatmydata pbuilder create --debootstrapopts --variant=buildd
+         echo "X-1"
+# sudo apt-get install -qq \
+#         packaging-dev cowbuilder \
+#         debootstrap devscripts \
+#         git-buildpackage debian-archive-keyring unzip \
+#         pkg-kde-tools dput python3-setuptools
+#          echo "X-2"
+#         sudo eatmydata cowbuilder --create
+         echo "X-3"
+
+# Speed up pbuilder.
+echo "echo \"force-unsafe-io\" > /etc/dpkg/dpkg.cfg.d/02apt-speedup" | \
+    cowbuilder --login --save-after-exec
 
          # ====== Add ppa:dreibh/ppa, updates and backports =================
          if [ "${VARIANT}" == "ubuntu" ] ; then
             # Add PPA dreibh/ppa for Ubuntu:
-            eatmydata pbuilder login --save-after-login <<EOF
-DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
+            eatmydata cowbuilder login --save-after-login <<EOF
+DEBIAN_FRONTEND=noninteractive apt-get install -qqy -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
    software-properties-common
 apt-add-repository -y ppa:dreibh/ppa
 apt update
