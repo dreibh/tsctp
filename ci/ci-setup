@@ -32,9 +32,9 @@ if [ "${UNAME}" == "Linux" ] ; then
 
    # ====== Ubuntu/Deban ====================================================
    if [ -e /usr/bin/apt-get ] ; then
-      sudo apt update -qq
-      # sudo env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt dist-upgrade -qy
-      sudo env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt install -qy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
+      apt update -qq
+      # env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt dist-upgrade -qy
+      env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt install -qy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
          lsb-release gcc libtool autoconf automake python3
 
    # ====== Fedora ==========================================================
