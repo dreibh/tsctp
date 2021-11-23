@@ -24,16 +24,12 @@ jobs:
     # ###### Build commands #################################################
     name: ${{ matrix.label }}
     runs-on: macos-10.15
-    env:
-      MYTOKEN: ${{ secrets.MYTOKEN }}
-      MYTOKEN2: "value2"
     steps:
     - uses: actions/checkout@v2
     - name: Test in FreeBSD
       id: test
       uses: vmactions/freebsd-vm@v0.1.5
       with:
-        envs: 'MYTOKEN MYTOKEN2'
         usesh: true
         run: |
           env ASSUME_ALWAYS_YES=yes pkg install -y bash
