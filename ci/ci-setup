@@ -52,7 +52,14 @@ if [ "${UNAME}" == "Linux" ] ; then
 # ###### FreeBSD ############################################################
 elif [ "${UNAME}" == "FreeBSD" ] ; then
 
-   env ASSUME_ALWAYS_YES=yes pkg install -y bash gcc python3
+   env ASSUME_ALWAYS_YES=yes pkg install -y bash gcc git python3
+
+   # Ports collection:
+   # This is the slow method via portsnap:
+   # portsnap --interactive fetch extract | grep -v ^/usr/ports
+   # Using Git is much faster:
+   rm -rf /usr/ports
+   git clone --depth=1 https://github.com/freebsd/freebsd-ports /usr/ports
 
 # ###### Unknown ############################################################
 else
