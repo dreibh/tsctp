@@ -7,96 +7,115 @@ on:
       - dreibh/github-actions
 
 jobs:
-  build:
+  #build:
 
-    # https://github.com/marketplace/actions/run-on-architecture
-    # https://github.com/uraimo/run-on-arch-action/blob/master/README.md
-    strategy:
-      matrix:
-        platform:
-          - ubuntu-20.04
-          - ubuntu-18.04
+    ## https://github.com/marketplace/actions/run-on-architecture
+    ## https://github.com/uraimo/run-on-arch-action/blob/master/README.md
+    #strategy:
+      #matrix:
+        #platform:
+          #- ubuntu-20.04
+          #- ubuntu-18.04
 
-    runs-on: ${{ matrix.platform }}
+    #runs-on: ${{ matrix.platform }}
 
-    steps:
-    - uses: actions/checkout@v2
+    #steps:
+    #- uses: actions/checkout@v2
 
-    - name: Install dependencies
-      shell: bash
-      run: |
-        sudo apt update
-        sudo ci/get-dependencies ubuntu --install
+    #- name: Install dependencies
+      #shell: bash
+      #run: |
+        #sudo apt update
+        #sudo ci/get-dependencies ubuntu --install
 
-    - name: Build
-      shell: bash
-      run: |
-        ./autogen.sh
+    #- name: Build
+      #shell: bash
+      #run: |
+        #./autogen.sh
 
 
-  focal:
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v2
+  #focal:
+    #runs-on: ubuntu-20.04
+    #steps:
+    #- uses: actions/checkout@v2
 
-    - name: Install dependencies
-      shell: bash
-      run: |
-        sudo apt update
-        sudo ci/get-dependencies ubuntu --install
+    #- name: Install dependencies
+      #shell: bash
+      #run: |
+        #sudo apt update
+        #sudo ci/get-dependencies ubuntu --install
 
-    - name: Build
-      shell: bash
-      run: |
-        ./autogen.sh
+    #- name: Build
+      #shell: bash
+      #run: |
+        #./autogen.sh
 
-  bionic:
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: actions/checkout@v2
+  #bionic:
+    #runs-on: ubuntu-18.04
+    #steps:
+    #- uses: actions/checkout@v2
 
-    - name: Install dependencies
-      shell: bash
-      run: |
-        sudo apt update
-        sudo ci/get-dependencies ubuntu --install
+    #- name: Install dependencies
+      #shell: bash
+      #run: |
+        #sudo apt update
+        #sudo ci/get-dependencies ubuntu --install
 
-    - name: Build
-      shell: bash
-      run: |
-        ./autogen.sh
+    #- name: Build
+      #shell: bash
+      #run: |
+        #./autogen.sh
 
-  run-on-arch-ubuntu-2004-aarch64:
+  #run-on-arch-ubuntu-2004-aarch64:
+    #runs-on: ubuntu-latest
+    #name: Ubuntu 20.04 on ARMv8
+    #steps:
+      #- uses: actions/checkout@v2
+      #- uses: uraimo/run-on-arch-action@v2.1.1
+        #name: Run commands
+        #id: runcmd
+        #with:
+          #arch: aarch64
+          #distro: ubuntu20.04
+          #run: |
+            #uname -a
+            #apt update -q
+            #apt install -y gcc libtool autoconf automake python3
+            #ci/get-dependencies ubuntu --install
+            #./autogen.sh
+
+  #run-on-arch-fedora-aarch64:
+    #runs-on: ubuntu-latest
+    #name: Fedora on ARMv8
+    #steps:
+      #- uses: actions/checkout@v2
+      #- uses: uraimo/run-on-arch-action@v2.1.1
+        #name: Run commands
+        #id: runcmd
+        #with:
+          #arch: aarch64
+          #distro: fedora_latest
+          #run: |
+            #uname -a
+            ## dnf install -y python3
+            #ci/get-dependencies fedora --install
+            #./autogen.sh
+
+
+  run-test:
     runs-on: ubuntu-latest
-    name: Ubuntu 20.04 on ARMv8
+    name: Ubuntu on x86_64
     steps:
       - uses: actions/checkout@v2
-      - uses: uraimo/run-on-arch-action@v2.1.1
+      - uses: dreibh/run-on-arch-action@dreibh/tests
         name: Run commands
         id: runcmd
         with:
-          arch: aarch64
-          distro: ubuntu20.04
+          arch: amd64
+          distro: ubuntu22.04
           run: |
             uname -a
             apt update -q
             apt install -y gcc libtool autoconf automake python3
             ci/get-dependencies ubuntu --install
-            ./autogen.sh
-
-  run-on-arch-fedora-aarch64:
-    runs-on: ubuntu-latest
-    name: Fedora on ARMv8
-    steps:
-      - uses: actions/checkout@v2
-      - uses: uraimo/run-on-arch-action@v2.1.1
-        name: Run commands
-        id: runcmd
-        with:
-          arch: aarch64
-          distro: fedora_latest
-          run: |
-            uname -a
-            # dnf install -y python3
-            ci/get-dependencies fedora --install
             ./autogen.sh
