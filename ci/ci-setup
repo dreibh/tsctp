@@ -35,9 +35,9 @@ if [ "${UNAME}" == "Linux" ] ; then
 
    # ====== Ubuntu/Debian ===================================================
    if [ "${DISTRIBUTION}" == "Ubuntu" -o "${DISTRIBUTION}" == "Debian" ] ; then
-      apt update -qq
-      env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt dist-upgrade -qy
-      env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt install -qy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends gcc libtool autoconf automake python3
+      sudo apt update -qq
+      sudo env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt dist-upgrade -qy
+      sudo env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt install -qy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends gcc libtool autoconf automake python3
 
    # ====== Fedora ==========================================================
    elif [ "${DISTRIBUTION}" == "Fedora" ] ; then
