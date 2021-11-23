@@ -1,4 +1,4 @@
-name: Build with CMake
+name: CI Tests
 
 on:
   push:
@@ -6,120 +6,54 @@ on:
       - master
       - dreibh/github-actions
 
-#jobs:
-  #build:
-
-    ## https://github.com/marketplace/actions/run-on-architecture
-    ## https://github.com/uraimo/run-on-arch-action/blob/master/README.md
-    #strategy:
-      #matrix:
-        #platform:
-          #- ubuntu-20.04
-          #- ubuntu-18.04
-
-    #runs-on: ${{ matrix.platform }}
-
-    #steps:
-    #- uses: actions/checkout@v2
-
-    #- name: Install dependencies
-      #shell: bash
-      #run: |
-        #sudo apt update
-        #sudo ci/get-dependencies ubuntu --install
-
-    #- name: Build
-      #shell: bash
-      #run: |
-        #./autogen.sh
-
-
-  #focal:
-    #runs-on: ubuntu-20.04
-    #steps:
-    #- uses: actions/checkout@v2
-
-    #- name: Install dependencies
-      #shell: bash
-      #run: |
-        #sudo apt update
-        #sudo ci/get-dependencies ubuntu --install
-
-    #- name: Build
-      #shell: bash
-      #run: |
-        #./autogen.sh
-
-  #bionic:
-    #runs-on: ubuntu-18.04
-    #steps:
-    #- uses: actions/checkout@v2
-
-    #- name: Install dependencies
-      #shell: bash
-      #run: |
-        #sudo apt update
-        #sudo ci/get-dependencies ubuntu --install
-
-    #- name: Build
-      #shell: bash
-      #run: |
-        #./autogen.sh
-
-  #run-on-arch-ubuntu-2004-aarch64:
-    #runs-on: ubuntu-latest
-    #name: Ubuntu 20.04 on ARMv8
-    #steps:
-      #- uses: actions/checkout@v2
-      #- uses: uraimo/run-on-arch-action@v2.1.1
-        #name: Run commands
-        #id: runcmd
-        #with:
-          #arch: aarch64
-          #distro: ubuntu20.04
-          #run: |
-            #uname -a
-            #apt update -q
-            #apt install -y gcc libtool autoconf automake python3
-            #ci/get-dependencies ubuntu --install
-            #./autogen.sh
-
-  #run-on-arch-fedora-aarch64:
-    #runs-on: ubuntu-latest
-    #name: Fedora on ARMv8
-    #steps:
-      #- uses: actions/checkout@v2
-      #- uses: uraimo/run-on-arch-action@v2.1.1
-        #name: Run commands
-        #id: runcmd
-        #with:
-          #arch: aarch64
-          #distro: fedora_latest
-          #run: |
-            #uname -a
-            ## dnf install -y python3
-            #ci/get-dependencies fedora --install
-            #./autogen.sh
-
-
 jobs:
   build_job:
-    runs-on: ubuntu-latest
-    name: Build on ${{ matrix.label }}
 
+    # ###### Build matrix ###################################################
     strategy:
       matrix:
         include:
-          - label: "Fedora 35 on x86_64 with Clang"
+
+          # ====== Debian Linux =============================================
+          - label: "Debian 12 (Bookworm) with GCC on x86_64"
+            arch: amd64
+            distro: bookworm
+            cc: gcc
+            cxx: g++
+
+          # ====== Fedora Linux =============================================
+          - label: "Fedora 35 with Clang on x86_64"
             arch: amd64
             distro: fedora35
             cc: clang
             cxx: clang++
-          - label: "Ubuntu 18.04 on x86_64 with GCC"
+          - label: "Fedora 34 with Clang on x86_64"
+            arch: amd64
+            distro: fedora34
+            cc: clang
+            cxx: clang++
+
+          # ====== Ubuntu Linux =============================================
+          - label: "Ubuntu 22.04 (Jammy Jellyfish) with GCC on x86_64"
+            arch: amd64
+            distro: ubuntu22.04
+            cc: gcc
+            cxx: g++
+          - label: "Ubuntu 20.04 (Focal Fossa) with GCC on x86_64"
+            arch: amd64
+            distro: ubuntu20.04
+            cc: gcc
+            cxx: g++
+          - label: "Ubuntu 18.04 (Bionic Beaver) with GCC on x86_64"
             arch: amd64
             distro: ubuntu18.04
             cc: gcc
             cxx: g++
+
+
+    # ###### Build commands #################################################
+    name: Build on ${{ matrix.label }}
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
