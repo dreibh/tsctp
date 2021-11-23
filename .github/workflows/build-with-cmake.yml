@@ -122,7 +122,7 @@ jobs:
         with:
           arch: ${{ matrix.arch }}
           distro: ${{ matrix.distro }}
-          setup: |
+          install: |
             ci/ci-setup
           run: |
             ci/ci-install
