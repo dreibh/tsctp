@@ -39,7 +39,7 @@ jobs:
     name: Fedora Packaging
     runs-on: ubuntu-latest
     container:
-      image: fedora:35
+      image: fedora:latest
       options: "--privileged"
     steps:
       - uses: actions/checkout@v2
