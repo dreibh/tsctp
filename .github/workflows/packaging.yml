@@ -43,7 +43,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Packaging
         shell: bash
-        run:
+        run: |
           sudo CC=clang CXX=clang++ ARCH= ci/ci-setup   package
           sudo CC=clang CXX=clang++ ARCH= ci/ci-install package
           sudo CC=clang CXX=clang++ ARCH= ci/ci-build   package
