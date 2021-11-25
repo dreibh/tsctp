@@ -154,7 +154,7 @@ EOF
       PACKAGES="clang make python3 redhat-lsb-core"
       if [ ${USE_PACKAGING} -eq 1 ] ; then
          # Need to install mock as well:
-         PACKAGES="${PACKAGES} fedora-release findutils mock rpmdevtools"
+         PACKAGES="${PACKAGES} fedora-release findutils mock nosync rpmdevtools"
       fi
 
       # dnf upgrade -qy
