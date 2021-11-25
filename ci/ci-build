@@ -74,7 +74,7 @@ while [ $# -gt 0 ] ; do
 
    # ====== Compile =========================================================
    if [ "${TOOL}" == "compile" ] ; then
-      env MAKEFLAGS=${MAKEFLAGS} make   # VERBOSE=1
+      MAKEFLAGS=${MAKEFLAGS} make   # VERBOSE=1
 
 
 #    # ====== Coverity Scan ===================================================
@@ -84,7 +84,7 @@ while [ $# -gt 0 ] ; do
 #       export PATH="coverity/$(ls -d cov*)/bin:$PATH"
 #       cd ..
 #
-#       env MAKEFLAGS=${MAKEFLAGS} cov-build --dir cov-int make
+#       MAKEFLAGS=${MAKEFLAGS} cov-build --dir cov-int make
 #       tar czf coverity-results.tar.gz cov-int
 #       ls -l coverity-results.tar.gz
 #
@@ -110,7 +110,7 @@ while [ $# -gt 0 ] ; do
    # ====== Package =======================================================
    elif [ "${TOOL}" == "package" ] ; then
       if [ "${DISTRIBUTION}" == "Ubuntu" -o "${DISTRIBUTION}" == "Debian" ] ; then
-        OVERRIDE_SKIP_PACKAGE_SIGNING=1 eatmydata ./build-deb
+        OVERRIDE_SKIP_PACKAGE_SIGNING=1 ./build-deb ${DIST}
 
       # ====== Fedora ==========================================================
       elif [ "${DISTRIBUTION}" == "Fedora" ] ; then

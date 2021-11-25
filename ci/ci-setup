@@ -75,6 +75,7 @@ MIRRORSITE="${mirror}"
 
 APTCACHEHARDLINK=no
 
+USECOLORS=yes
 COMPRESSPROG=cat
 EXTRAPACKAGES=eatmydata
 EATMYDATA=yes
@@ -96,7 +97,7 @@ EOF
          # ====== Add ppa:dreibh/ppa, updates and backports =================
          if [ "${DISTRIBUTION}" == "Ubuntu" ] ; then
             # Add PPA dreibh/ppa for Ubuntu:
-            eatmydata pbuilder login --save-after-login <<EOF
+            pbuilder login --save-after-login <<EOF
 DEBIAN_FRONTEND=noninteractive apt-get install -qqy -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
    software-properties-common
 apt-add-repository -y ppa:dreibh/ppa
@@ -125,7 +126,7 @@ EOF
 # ###### FreeBSD ############################################################
 elif [ "${UNAME}" == "FreeBSD" ] ; then
 
-   env ASSUME_ALWAYS_YES=yes pkg install -y bash gcc git python3
+   ASSUME_ALWAYS_YES=yes pkg install -y bash gcc git python3
 
    # Ports collection:
    # This is the slow method via portsnap:
