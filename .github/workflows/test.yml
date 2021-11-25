@@ -9,17 +9,17 @@ on:
 
 jobs:
   # ====== Ubuntu Linux =====================================================
-  ubuntu-packaging:
-    name: Ubuntu Packaging
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Packaging
-      shell: bash
-      run: |
-        sudo ci/ci-setup compile package
-        sudo ci/ci-install compile package
-        env CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH= ci/ci-build package
+  #ubuntu-packaging:
+    #name: Ubuntu Packaging
+    #runs-on: ubuntu-latest
+    #steps:
+    #- uses: actions/checkout@v2
+    #- name: Packaging
+      #shell: bash
+      #run: |
+        #sudo ci/ci-setup compile package
+        #sudo ci/ci-install compile package
+        #env CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH= ci/ci-build package
 
   # ====== Debian Linux =====================================================
   debian-packaging:
@@ -35,14 +35,14 @@ jobs:
         env CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= ci/ci-build package
 
    # ====== Fedora Linux ====================================================
-
-    #- uses: dreibh/run-on-arch-action@dreibh/tests
-      #name: Ubuntu Packaging
-      #id: build
-      #with:
-        #arch: amd64
-        #distro: ubuntu22.04
-        #run: |
-          #ci/ci-setup compile package
-          #ci/ci-install compile package
-          #env CC=gcc CXX=g++ ci/ci-build package
+  #fedora-packaging:
+    #name: Fedora Packaging
+    #runs-on: ubuntu-latest
+    #steps:
+    #- uses: actions/checkout@v2
+    #- name: Packaging
+      #shell: bash
+      #run: |
+        #sudo ci/ci-setup compile package
+        #sudo ci/ci-install compile package
+        #env CC=clang CXX=clang++ ci/ci-build package

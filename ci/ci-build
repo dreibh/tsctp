@@ -110,7 +110,7 @@ while [ $# -gt 0 ] ; do
    # ====== Package =======================================================
    elif [ "${TOOL}" == "package" ] ; then
       if [ "${DISTRIBUTION}" == "Ubuntu" -o "${DISTRIBUTION}" == "Debian" ] ; then
-        OVERRIDE_SKIP_PACKAGE_SIGNING=1 ./build-deb ${DIST}
+        OS=$OS DIST=$DIST ARCH=$ARCH OVERRIDE_SKIP_PACKAGE_SIGNING=1 ./build-deb ${DIST}
 
       # ====== Fedora ==========================================================
       elif [ "${DISTRIBUTION}" == "Fedora" ] ; then
