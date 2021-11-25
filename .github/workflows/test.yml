@@ -19,7 +19,9 @@ jobs:
       #run: |
         #sudo ci/ci-setup compile package
         #sudo ci/ci-install compile package
-        #env CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH= ci/ci-build package
+        #env CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH= sudo ci/ci-setup   package
+        #env CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH= sudo ci/ci-install package
+        #env CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH= sudo ci/ci-build   package
 
   # ====== Debian Linux =====================================================
   debian-packaging:
@@ -30,9 +32,9 @@ jobs:
     - name: Packaging
       shell: bash
       run: |
-        env CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= ci/ci-setup   package
-        env CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= ci/ci-install package
-        env CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= ci/ci-build   package
+        env CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= sudo ci/ci-setup   package
+        env CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= sudo ci/ci-install package
+        env CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= sudo ci/ci-build   package
 
    # ====== Fedora Linux ====================================================
   #fedora-packaging:
