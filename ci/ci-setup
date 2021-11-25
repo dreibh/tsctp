@@ -82,8 +82,8 @@ export DEB_BUILD_OPTIONS="parallel=${cores}"
 EOF
 
          pbuilder create \
-            --debootstrapopts --variant=buildd \
-            --debootstrapopts --keyring=/etc/apt/trusted.gpg
+            --debootstrapopts --variant=buildd
+         #   --debootstrapopts --keyring=/etc/apt/trusted.gpg
 
          # Speed up pbuilder:
          echo "echo \"force-unsafe-io\" > /etc/dpkg/dpkg.cfg.d/02apt-speedup" | \
