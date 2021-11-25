@@ -50,9 +50,9 @@ jobs:
             cxx: g++
 
           # ====== Debian Linux =============================================
-          - label: "Debian Unstable: GCC/i386"
+          - label: "Debian 12 (Bookworm): GCC/i386"
             arch: i386
-            distro: unstable
+            distro: bookworm
             cc: gcc
             cxx: g++
 
