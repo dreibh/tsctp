@@ -82,6 +82,6 @@ jobs:
           arch: ${{ matrix.arch }}
           distro: ${{ matrix.distro }}
           run: |
-            ci/ci-setup ${{ matrix.tools }}
-            ci/ci-install ${{ matrix.tools }}
-            env CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ci/ci-build compile ${{ matrix.tools }}
+            CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ci/ci-setup   compile
+            CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ci/ci-install compile
+            CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ci/ci-build   compile

@@ -94,7 +94,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ${{ matrix.image }}
-      options: "--privileged"
+      # options: "--privileged"
 
     #steps:
       #- uses: actions/checkout@v2
@@ -105,9 +105,9 @@ jobs:
           #arch: ${{ matrix.arch }}
           #distro: ${{ matrix.distro }}
           #run: |
-            #ci/ci-setup ${{ matrix.tools }}
-            #ci/ci-install ${{ matrix.tools }}
-            #env CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ci/ci-build compile ${{ matrix.tools }}
+            #ci/ci-setup compile
+            #ci/ci-install compile
+            #env CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ci/ci-build compile
     steps:
       - uses: actions/checkout@v2
       - name: Build
