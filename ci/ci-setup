@@ -51,16 +51,17 @@ if [ "${UNAME}" == "Linux" ] ; then
          PACKAGES="${PACKAGES} build-essential debian-archive-keyring debian-ports-archive-keyring devscripts eatmydata fakeroot lintian pbuilder python3-debian qemu-user-static"
       fi
 
-      apt update -qq
-      # DEBIAN_FRONTEND=noninteractive apt dist-upgrade -qy
+      apt-get update -qq
+      # DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -qy
       DEBIAN_FRONTEND=noninteractive apt-get install -qqy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
          ${PACKAGES}
 
       if [ "`lsb_release -is`" == "Ubuntu" ] ; then
          # Add PPA dreibh/ppa for Ubuntu:
          DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
-            software-properties-common gpg-agent
-         apt-add-repository -y ppa:dreibh/ppa
+            software-properties-common
+         apt-add-repository -y ppa:dreibh/ppa || true
+         apt-get update -q
       fi
 
       if [ ${USE_PACKAGING} -eq 1 ] ; then
@@ -154,7 +155,7 @@ EOF
 DEBIAN_FRONTEND=noninteractive apt-get install -qqy -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
    software-properties-common
 apt-add-repository -y ppa:dreibh/ppa
-apt update
+apt-get update -q
 EOF
          fi
 
