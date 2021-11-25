@@ -110,13 +110,14 @@ while [ $# -gt 0 ] ; do
    # ====== Package =======================================================
    elif [ "${TOOL}" == "package" ] ; then
       if [ "${DISTRIBUTION}" == "Ubuntu" -o "${DISTRIBUTION}" == "Debian" ] ; then
-        env LANG=C.UTF-8 OVERRIDE_SKIP_PACKAGE_SIGNING=1 eatmydata ./build-deb
+        # ??? sudo apt instyll -y python3-debian
+        OVERRIDE_SKIP_PACKAGE_SIGNING=1 eatmydata ./build-deb
 
       # ====== Fedora ==========================================================
       elif [ "${DISTRIBUTION}" == "Fedora" ] ; then
          release=`cat /etc/fedora-release | sed -e "s/^\(.*\) release \([0-9]*\) (\(.*\))$/\2/g" | sed -e "s/[^0-9]//g"`
          arch=`uname -m | sed -e "s/[^0-9a-zA-Z_+-]//g"`
-         env LANG=C.UTF-8 LD_PRELOAD=/usr/lib64/nosync/nosync.so OVERRIDE_SKIP_PACKAGE_SIGNING=1 ./build-rpm fedora-${release}-${arch}
+         LD_PRELOAD=/usr/lib64/nosync/nosync.so OVERRIDE_SKIP_PACKAGE_SIGNING=1 ./build-rpm fedora-${release}-${arch}
 
       # ====== Unknown =========================================================
       else
