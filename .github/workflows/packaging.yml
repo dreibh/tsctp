@@ -66,7 +66,7 @@ jobs:
       - name: Packaging
         shell: bash
         run: |
-          sudo CC=clang CXX=clang++ ARCH= ci/ci-setup   package
-          sudo CC=clang CXX=clang++ ARCH= ci/ci-install package
-          sudo CC=clang CXX=clang++ ARCH= ci/ci-build   package
-          sudo ci/ci-test
+          CC=clang CXX=clang++ ARCH= ci/ci-setup   package
+          CC=clang CXX=clang++ ARCH= ci/ci-install package
+          CC=clang CXX=clang++ ARCH= ci/ci-build   package
+          ci/ci-test

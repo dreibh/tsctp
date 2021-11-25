@@ -55,11 +55,6 @@ jobs:
             #distro: unstable
             #cc: gcc
             #cxx: g++
-          #- label: "Debian Unstable: GCC/M68k"
-            #arch: m68k
-            #distro: unstable
-            #cc: gcc
-            #cxx: g++
 
           ## ====== Fedora Linux =============================================
           #- label: "Fedora 35: Clang/ARMv8"
