@@ -35,15 +35,11 @@ if [ "${UNAME}" == "Linux" ] ; then
 
    # ====== Ubuntu ==========================================================
    if [ "${DISTRIBUTION}" == "Ubuntu" ] ; then
-      # Add PPA dreibh/ppa for Ubuntu:
-      env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
-         software-properties-common
-      env LANG=C.UTF-8 apt-add-repository -y ppa:dreibh/ppa
-      env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive ${DIRNAME}/get-dependencies ubuntu --install
+      DEBIAN_FRONTEND=noninteractive ${DIRNAME}/get-dependencies ubuntu --install
 
    # ====== Debian ==========================================================
    elif [ "${DISTRIBUTION}" == "Debian" ] ; then
-      env LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive ${DIRNAME}/get-dependencies ubuntu --install
+      DEBIAN_FRONTEND=noninteractive ${DIRNAME}/get-dependencies debian --install
 
    # ====== Fedora ==========================================================
    elif [ "${DISTRIBUTION}" == "Fedora" ] ; then

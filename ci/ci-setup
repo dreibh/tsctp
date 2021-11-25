@@ -40,7 +40,12 @@ if [ "${UNAME}" == "Linux" ] ; then
 
    # ====== Ubuntu/Deban ====================================================
    if [ -e /usr/bin/apt-get ] ; then
-      PACKAGES="clang gcc lsb-release python3"
+      PACKAGES="lsb-release python3"
+      if [[ "${CC}" =~ .*gcc.* ]] ; then
+          PACKAGES="${PACKAGES} gcc"
+      elif [[ "${CC}" =~ .*clang.* ]] ; then
+          PACKAGES="${PACKAGES} clang"
+      fi
       if [ ${USE_PACKAGING} -eq 1 ] ; then
          # Need to install pbuilder as well:
          PACKAGES="${PACKAGES} build-essential debian-archive-keyring debian-ports-archive-keyring devscripts eatmydata fakeroot lintian pbuilder python3-debian qemu-user-static"
@@ -50,6 +55,13 @@ if [ "${UNAME}" == "Linux" ] ; then
       # DEBIAN_FRONTEND=noninteractive apt dist-upgrade -qy
       DEBIAN_FRONTEND=noninteractive apt-get install -qqy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
          ${PACKAGES}
+
+      if [ "`lsb_release -is`" == "Ubuntu" ] ; then
+         # Add PPA dreibh/ppa for Ubuntu:
+         DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
+            software-properties-common gpg-agent
+         apt-add-repository -y ppa:dreibh/ppa
+      fi
 
       if [ ${USE_PACKAGING} -eq 1 ] ; then
          # ====== pbuilder environment ======================================
