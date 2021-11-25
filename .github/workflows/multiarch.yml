@@ -22,7 +22,7 @@ on:
   push:
     branches:
       - master
-      #- dreibh/github-actions
+      - dreibh/github-actions
 
 jobs:
   build_job:
@@ -38,30 +38,30 @@ jobs:
             distro: ubuntu20.04
             cc: gcc
             cxx: g++
-          #- label: "Ubuntu 20.04 (Focal Fossa): GCC/S390x"
-            #arch: s390x
-            #distro: ubuntu20.04
-            #cc: gcc
-            #cxx: g++
-          #- label: "Ubuntu 20.04 (Focal Fossa): GCC/RISC-V"
-            #arch: riscv64
-            #distro: ubuntu20.04
-            #cc: gcc
-            #cxx: g++
+          - label: "Ubuntu 20.04 (Focal Fossa): GCC/S390x"
+            arch: s390x
+            distro: ubuntu20.04
+            cc: gcc
+            cxx: g++
+          - label: "Ubuntu 20.04 (Focal Fossa): GCC/RISC-V"
+            arch: riscv64
+            distro: ubuntu20.04
+            cc: gcc
+            cxx: g++
 
-          ## ====== Debian Linux =============================================
-          #- label: "Debian Unstable: GCC/i386"
-            #arch: i386
-            #distro: unstable
-            #cc: gcc
-            #cxx: g++
+          # ====== Debian Linux =============================================
+          - label: "Debian Unstable: GCC/i386"
+            arch: i386
+            distro: unstable
+            cc: gcc
+            cxx: g++
 
-          ## ====== Fedora Linux =============================================
-          #- label: "Fedora 35: Clang/ARMv8"
-            #arch: aarch64
-            #distro: fedora35
-            #cc: clang
-            #cxx: clang++
+          # ====== Fedora Linux =============================================
+          - label: "Fedora 35: Clang/ARMv8"
+            arch: aarch64
+            distro: fedora35
+            cc: clang
+            cxx: clang++
 
 
     # ###### Build commands #################################################

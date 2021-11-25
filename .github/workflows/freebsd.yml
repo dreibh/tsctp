@@ -22,8 +22,8 @@ on:
   push:
     branches:
       - master
-      #- dreibh/github-actions
-      #- dreibh/github-actions-freebsd
+      - dreibh/github-actions
+      - dreibh/github-actions-freebsd
 
 jobs:
   build_job:
@@ -50,7 +50,7 @@ jobs:
       with:
         usesh: true
         run: |
-          env ASSUME_ALWAYS_YES=yes pkg install -y bash
-          ci/ci-setup
-          ci/ci-install
-          env CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ci/ci-build compile
+          ASSUME_ALWAYS_YES=yes pkg install -y bash
+          CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ci/ci-setup   compile
+          CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ci/ci-install compile
+          CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ci/ci-build   compile
