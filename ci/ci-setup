@@ -50,28 +50,54 @@ if [ "${UNAME}" == "Linux" ] ; then
       # DEBIAN_FRONTEND=noninteractive apt dist-upgrade -qy
       DEBIAN_FRONTEND=noninteractive apt-get install -qqy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
          ${PACKAGES}
-      DISTRIBUTION=`lsb_release -is`
 
       if [ ${USE_PACKAGING} -eq 1 ] ; then
          # ====== pbuilder environment ======================================
          # Example for GitHub Actions:
          # https://github.com/jrl-umi3218/github-actions/tree/master/setup-pbuilder
 
-         codename=`lsb_release -cs`
-         cores=`getconf _NPROCESSORS_ONLN 2>/dev/null || true`
-         if [ "${DISTRIBUTION}" == "Ubuntu" ] ; then
-            mirror="http://archive.ubuntu.com/ubuntu/"
-         elif [ "${DISTRIBUTION}" == "Debian" ] ; then
-            mirror="http://deb.debian.org/debian"
+         if [ "${OS}" == "" ] ; then
+            OS=`lsb_release -is`
+            OS=${OS,,}
+         fi
+         if [ "${DIST}" == "" ] ; then
+            DIST=`lsb_release -cs`
+         fi
+         if [ "${ARCH}" == "" ] ; then
+            ARCH=`dpkg --print-architecture`
+         fi
+
+         if [ "${OS}" == "ubuntu" ] ; then
+            COMPONENTS="main universe"
+            MIRRORSITE=http://no.archive.ubuntu.com/ubuntu/
+            KEYRING="/usr/share/keyrings/ubuntu-archive-keyring.gpg"
+         elif [ "${OS}" == "debian" ] ; then
+            COMPONENTS="main"
+            if [ "${ARCH}" == "m68k" -o  "${ARCH}" == "riscv64" ] ; then
+               # Debian Ports (special architectures)
+               MIRRORSITE="http://ftp.ports.debian.org/debian-ports/"
+               KEYRING="/usr/share/keyrings/debian-ports-archive-keyring.gpg"
+            else
+               # Debian (supported architectures)
+               MIRRORSITE="http://ftp.no.debian.org/debian/"
+               KEYRING="/usr/share/keyrings/debian-archive-keyring.gpg"
+            fi
          else
-            echo >&2 "ERROR: Unknown Linux distribution ${DISTRIBUTION}!"
+            echo >&2 "ERROR: Unknown Linux distribution ${OS}!"
             exit 1
          fi
 
+         cores=`getconf _NPROCESSORS_ONLN 2>/dev/null || true`
          cat >/etc/pbuilderrc <<EOF
-DISTRIBUTION="${codename}"
-COMPONENTS="main universe"
-MIRRORSITE="${mirror}"
+#!/bin/bash -e
+
+# ====== Settings ===========================================================
+DISTRIBUTION="${DIST}"
+COMPONENTS="${COMPONENTS}"
+MIRRORSITE="${MIRRORSITE}"
+DEBOOTSTRAPOPTS=("\${DEBOOTSTRAPOPTS[@]}" "--keyring=${KEYRING}")
+DEBOOTSTRAPOPTS=("\${DEBOOTSTRAPOPTS[@]}" "--variant=buildd")
+ARCHITECTURE="${ARCH}"
 
 APTCACHEHARDLINK=no
 
@@ -83,7 +109,22 @@ EATMYDATA=yes
 # Multi-core: set concurrency level. The packaging scripts will handle it properly:
 export CONCURRENCY_LEVEL=${cores}
 export DEB_BUILD_OPTIONS="parallel=${cores}"
+
+# ====== Directories ========================================================
+NAME="\${OS}-\${DISTRIBUTION}-\${ARCHITECTURE}"
+BASETGZ="/var/cache/pbuilder/\${NAME}-base.tgz"
+APTCACHE="/var/cache/pbuilder/aptcache/\${NAME}/"
+BUILDPLACE="/var/cache/pbuilder/build/\${NAME}/"
+BUILDRESULT="/var/cache/pbuilder/result/\${NAME}/"
+HOOKDIR="/var/cache/pbuilder/hook.d/"
+
+mkdir -p \${APTCACHE}
+mkdir -p \${BUILDRESULT}
+mkdir -p \${HOOKDIR}
 EOF
+         echo "----- /etc/pbuilderrc: ------------------------------------------------------"
+         cat /etc/pbuilderrc
+         echo "-----------------------------------------------------------------------------"
 
          pbuilder create \
             --debootstrapopts --variant=buildd \
@@ -95,7 +136,7 @@ EOF
             pbuilder login --save-after-exec
 
          # ====== Add ppa:dreibh/ppa, updates and backports =================
-         if [ "${DISTRIBUTION}" == "Ubuntu" ] ; then
+         if [ "${OS}" == "ubuntu" ] ; then
             # Add PPA dreibh/ppa for Ubuntu:
             pbuilder login --save-after-login <<EOF
 DEBIAN_FRONTEND=noninteractive apt-get install -qqy -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \

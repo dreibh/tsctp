@@ -33,10 +33,10 @@ jobs:
       shell: bash
       run: |
         sudo CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= ci/ci-setup   package
-        sudo CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= ci/ci-install package
-        sudo CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= ci/ci-build   package
+        #sudo CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= ci/ci-install package
+        #sudo CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= ci/ci-build   package
 
-   # ====== Fedora Linux ====================================================
+  # ====== Fedora Linux =====================================================
   #fedora-packaging:
     #name: Fedora Packaging
     #runs-on: ubuntu-latest
