@@ -80,10 +80,10 @@ if [ "${UNAME}" == "Linux" ] ; then
       PACKAGE=`grep "^Name:" rpm/*.spec | head -n1 | sed -e "s/Name://g" -e "s/[ \t]*//g"`
       PACKAGE_VERSION=`grep "^Version:" rpm/*.spec | head -n1 | sed -e "s/Version://g" -e "s/[ \t]*//g"`
 
-      release=`sudo docker exec ${CONTAINER} bash -c "LANG=C.UTF-8 ; cat /etc/fedora-release | sed -e \"s/^\(.*\) release \([0-9]*\) (\(.*\))$/\2/g\"" | sed -e "s/[^0-9]//g"`
+      release=`bash -c "LANG=C.UTF-8 ; cat /etc/fedora-release | sed -e \"s/^\(.*\) release \([0-9]*\) (\(.*\))$/\2/g\"" | sed -e "s/[^0-9]//g"`
       arch=`uname -m | sed -e "s/[^0-9a-zA-Z_+-]//g"`
-      if ! sudo docker exec ${CONTAINER} cd /var/lib/mock/fedora-${release}-${arch}/result ; then
-         if sudo docker exec ${CONTAINER} cd /var/lib/mock/fedora-rawhide-${arch}/result ; then
+      if ! cd /var/lib/mock/fedora-${release}-${arch}/result ; then
+         if cd /var/lib/mock/fedora-rawhide-${arch}/result ; then
             release="rawhide"
          else
             echo >&2 "ERROR: No results have been found!"
