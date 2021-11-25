@@ -33,56 +33,56 @@ jobs:
         include:
 
           # ====== Ubuntu Linux =============================================
-          - label: "Ubuntu 22.04 (Jammy Jellyfish): GCC/x86_64"
-            #arch: amd64
-            image: ubuntu:22.04
-            cc: gcc
-            cxx: g++
-          #- label: "Ubuntu 20.04 (Focal Fossa): GCC/x86_64"
-            #arch: amd64
-            #distro: ubuntu20.04
+          #- label: "Ubuntu 22.04 (Jammy Jellyfish) with GCC"
+            ##arch: amd64
+            #image: ubuntu:22.04
             #cc: gcc
             #cxx: g++
-          #- label: "Ubuntu 18.04 (Bionic Beaver): GCC/x86_64"
+          - label: "Ubuntu 20.04 (Focal Fossa) with GCC"
+            arch: amd64
+            distro: ubuntu20.04
+            cc: gcc
+            cxx: g++
+          #- label: "Ubuntu 18.04 (Bionic Beaver) with GCC"
             #arch: amd64
             #distro: ubuntu18.04
             #cc: gcc
             #cxx: g++
-          #- label: "Ubuntu 16.04 (Xenial Xerus): GCC/x86_64"
+          #- label: "Ubuntu 16.04 (Xenial Xerus) with GCC"
             #arch: amd64
             #distro: ubuntu16.04
             #cc: gcc
             #cxx: g++
-          #- label: "Ubuntu 14.04 (Trusty Tahr): GCC/x86_64"
+          #- label: "Ubuntu 14.04 (Trusty Tahr) with GCC"
             #arch: amd64
             #distro: ubuntu14.04
             #cc: gcc
             #cxx: g++
 
           ## ====== Debian Linux =============================================
-          #- label: "Debian 12 (Bookworm): GCC/x86_64"
+          #- label: "Debian 12 (Bookworm) with GCC"
             #arch: amd64
             #distro: bookworm
             #cc: gcc
             #cxx: g++
-          #- label: "Debian 11 (Bullseye): GCC/x86_64"
+          #- label: "Debian 11 (Bullseye) with GCC"
             #arch: amd64
             #distro: bullseye
             #cc: gcc
             #cxx: g++
-          #- label: "Debian 10 (Buster): GCC/x86_64"
+          #- label: "Debian 10 (Buster) with GCC"
             #arch: amd64
             #distro: buster
             #cc: gcc
             #cxx: g++
 
           ## ====== Fedora Linux =============================================
-          #- label: "Fedora 35: Clang/x86_64"
+          #- label: "Fedora 35 with Clang"
             #arch: amd64
             #distro: fedora35
             #cc: clang
             #cxx: clang++
-          #- label: "Fedora 34: Clang/x86_64"
+          #- label: "Fedora 34 with Clang"
             #arch: amd64
             #distro: fedora34
             #cc: clang
@@ -110,7 +110,7 @@ jobs:
             #env CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ci/ci-build compile ${{ matrix.tools }}
     steps:
       - uses: actions/checkout@v2
-      - name: Packaging
+      - name: Build
         shell: bash
         run: |
           sudo CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ARCH= ci/ci-setup   compile
