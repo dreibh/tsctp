@@ -43,7 +43,7 @@ if [ "${UNAME}" == "Linux" ] ; then
       PACKAGES="clang gcc lsb-release python3"
       if [ ${USE_PACKAGING} -eq 1 ] ; then
          # Need to install pbuilder as well:
-         PACKAGES="${PACKAGES} build-essential devscripts eatmydata fakeroot lintian pbuilder python3-debian"
+         PACKAGES="${PACKAGES} build-essential debian-archive-keyring debian-ports-archive-keyring devscripts eatmydata fakeroot lintian pbuilder python3-debian qemu-user-static"
       fi
 
       apt update -qq
