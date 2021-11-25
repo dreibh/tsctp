@@ -8,25 +8,26 @@ on:
       - dreibh/github-actions-freebsd
 
 jobs:
-  focal:
+  packaging:
+    name: Packaging
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
 
-    #- name: Test
-      #shell: bash
-      #run: |
-        #sudo ci/ci-setup compile package
-        #sudo ci/ci-install compile package
-        #env CC=gcc CXX=g++ ci/ci-build compile package
+    - name: Ubuntu Packaging
+      shell: bash
+      run: |
+        sudo ci/ci-setup compile package
+        sudo ci/ci-install compile package
+        env CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH=amd64 ci/ci-build compile package
 
-    - uses: dreibh/run-on-arch-action@dreibh/tests
-      name: Ubuntu Packaging
-      id: build
-      with:
-        arch: amd64
-        distro: ubuntu22.04
-        run: |
-          ci/ci-setup compile package
-          ci/ci-install compile package
-          env CC=gcc CXX=g++ ci/ci-build package
+    #- uses: dreibh/run-on-arch-action@dreibh/tests
+      #name: Ubuntu Packaging
+      #id: build
+      #with:
+        #arch: amd64
+        #distro: ubuntu22.04
+        #run: |
+          #ci/ci-setup compile package
+          #ci/ci-install compile package
+          #env CC=gcc CXX=g++ ci/ci-build package
