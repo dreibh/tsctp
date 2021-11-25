@@ -17,8 +17,6 @@ jobs:
     - name: Packaging
       shell: bash
       run: |
-        ci/ci-setup compile package
-        ci/ci-install compile package
         sudo CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH= ci/ci-setup   package
         sudo CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH= ci/ci-install package
         sudo CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH= ci/ci-build   package
