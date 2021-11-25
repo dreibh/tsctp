@@ -164,7 +164,7 @@ EOF
          # ====== mock environment ==========================================
          groupadd -f mock
 
-         release=`cat /etc/fedora-release | sed -e "s/^\(.*\) release \([0-9]*\) (\(.*\))$/\2/g"" | sed -e  "s/[^0-9]//g"`
+         release=`cat /etc/fedora-release | sed -e "s/^\(.*\) release \([0-9]*\) (\(.*\))$/\2/g" | sed -e  "s/[^0-9]//g"`
          arch=`uname -m | sed -e "s/[^0-9a-zA-Z_+-]//g"`
          if ! grep "^\[copr-dreibh-ppa\]" /etc/mock/fedora-${release}-${arch}.cfg ; then
             shopt -s extglob

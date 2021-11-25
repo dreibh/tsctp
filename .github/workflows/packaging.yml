@@ -35,14 +35,19 @@ jobs:
         sudo CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= ci/ci-build   package
 
   # ====== Fedora Linux =====================================================
-  #fedora-packaging:
-    #name: Fedora Packaging
-    #runs-on: ubuntu-latest
-    #steps:
-    #- uses: actions/checkout@v2
-    #- name: Packaging
-      #shell: bash
-      #run: |
-        #sudo CC=clang CXX=clang++ ci/ci-setup   package
-        #sudo CC=clang CXX=clang++ ci/ci-install package
-        #sudo CC=clang CXX=clang++ ci/ci-build   package
+  fedora-packaging:
+    name: Fedora Packaging
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+      - uses: dreibh/run-on-arch-action@dreibh/tests
+        name: Build
+        id: build
+        with:
+          arch: amd64
+          distro: fedora35
+          run: |
+            CC=clang CXX=clang++ ARCH= ci/ci-setup   package
+            CC=clang CXX=clang++ ARCH= ci/ci-install package
+            CC=clang CXX=clang++ ARCH= ci/ci-build   package
