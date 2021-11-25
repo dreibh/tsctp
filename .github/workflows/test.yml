@@ -30,9 +30,9 @@ jobs:
     - name: Packaging
       shell: bash
       run: |
-        sudo ci/ci-setup compile package
-        sudo ci/ci-install compile package
-        env CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= ci/ci-build package
+        env CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= ci/ci-setup   package
+        env CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= ci/ci-install package
+        env CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= ci/ci-build   package
 
    # ====== Fedora Linux ====================================================
   #fedora-packaging:
