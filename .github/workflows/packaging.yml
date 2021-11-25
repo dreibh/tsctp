@@ -41,13 +41,9 @@ jobs:
     container: fedora:35
     steps:
       - uses: actions/checkout@v2
-      - uses: dreibh/run-on-arch-action@dreibh/tests
-        name: Build
-        id: build
-        with:
-          arch: amd64
-          distro: fedora35
-          run: |
-            CC=clang CXX=clang++ ARCH= ci/ci-setup   package
-            CC=clang CXX=clang++ ARCH= ci/ci-install package
-            CC=clang CXX=clang++ ARCH= ci/ci-build   package
+      - name: Packaging
+        shell: bash
+        run:
+          sudo CC=clang CXX=clang++ ARCH= ci/ci-setup   package
+          sudo CC=clang CXX=clang++ ARCH= ci/ci-install package
+          sudo CC=clang CXX=clang++ ARCH= ci/ci-build   package
