@@ -43,49 +43,56 @@ if [ "${UNAME}" == "Linux" ] ; then
       PACKAGES="clang gcc lsb-release python3"
       if [ ${USE_PACKAGING} -eq 1 ] ; then
          # Need to install pbuilder as well:
-         PACKAGES="${PACKAGES} build-essential devscripts eatmydata fakeroot lintian cowbuilder"
+         PACKAGES="${PACKAGES} build-essential devscripts eatmydata fakeroot lintian pbuilder"
       fi
 
       apt update -qq
       # DEBIAN_FRONTEND=noninteractive apt dist-upgrade -qy
       DEBIAN_FRONTEND=noninteractive apt-get install -qqy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
          ${PACKAGES}
+      DISTRIBUTION=`lsb_release -is`
 
       if [ ${USE_PACKAGING} -eq 1 ] ; then
          # ====== pbuilder environment ======================================
          # Example for GitHub Actions:
          # https://github.com/jrl-umi3218/github-actions/tree/master/setup-pbuilder
-         distribution=`lsb_release -cs`
+
+         codename=`lsb_release -cs`
          cores=`getconf _NPROCESSORS_ONLN 2>/dev/null || true`
+         if [ "${DISTRIBUTION}" == "Ubuntu" ] ; then
+            mirror="http://archive.ubuntu.com/ubuntu/"
+         elif [ "${DISTRIBUTION}" == "Debian" ] ; then
+            mirror="http://deb.debian.org/debian"
+         else
+            echo >&2 "ERROR: Unknown Linux distribution ${DISTRIBUTION}!"
+            exit 1
+         fi
+
          cat >/etc/pbuilderrc <<EOF
-DISTRIBUTION="${distribution}"
+DISTRIBUTION="${codename}"
 COMPONENTS="main universe"
+MIRRORSITE="${mirror}"
 APTCACHEHARDLINK=no
 EXTRAPACKAGES=eatmydata
 EATMYDATA=yes
+COMPRESSPROG=cat
 # Multi-core: set concurrency level. The packaging scripts will handle it properly:
 export CONCURRENCY_LEVEL=${cores}
 export DEB_BUILD_OPTIONS="parallel=${cores}"
 EOF
-         cat /etc/pbuilderrc
-         echo "X-1"
-# sudo apt-get install -qq \
-#         packaging-dev cowbuilder \
-#         debootstrap devscripts \
-#         git-buildpackage debian-archive-keyring unzip \
-#         pkg-kde-tools dput python3-setuptools
-#          echo "X-2"
-#         sudo eatmydata cowbuilder --create
-         echo "X-3"
 
-# Speed up pbuilder.
-echo "echo \"force-unsafe-io\" > /etc/dpkg/dpkg.cfg.d/02apt-speedup" | \
-    cowbuilder --login --save-after-exec
+         pbuilder create \
+            --debootstrapopts --variant=buildd \
+            --debootstrapopts --keyring=/etc/apt/trusted.gpg
+
+         # Speed up pbuilder:
+         echo "echo \"force-unsafe-io\" > /etc/dpkg/dpkg.cfg.d/02apt-speedup" | \
+            pbuilder login --save-after-exec
 
          # ====== Add ppa:dreibh/ppa, updates and backports =================
-         if [ "${VARIANT}" == "ubuntu" ] ; then
+         if [ "${DISTRIBUTION}" == "Ubuntu" ] ; then
             # Add PPA dreibh/ppa for Ubuntu:
-            eatmydata cowbuilder login --save-after-login <<EOF
+            eatmydata pbuilder login --save-after-login <<EOF
 DEBIAN_FRONTEND=noninteractive apt-get install -qqy -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
    software-properties-common
 apt-add-repository -y ppa:dreibh/ppa
