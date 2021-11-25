@@ -22,8 +22,7 @@ on:
   push:
     branches:
       - master
-      #- dreibh/github-actions
-      #- dreibh/github-actions-freebsd
+      - dreibh/github-actions
 
 jobs:
   # ====== Ubuntu Linux =====================================================

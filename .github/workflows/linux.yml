@@ -33,10 +33,10 @@ jobs:
         include:
 
           # ====== Ubuntu Linux =============================================
-          - label: "Ubuntu 22.04 (Jammy Jellyfish) with GCC"
-            image: ubuntu:22.04
-            cc: gcc
-            cxx: g++
+          #- label: "Ubuntu 22.04 (Jammy Jellyfish) with GCC"
+            #image: ubuntu:22.04
+            #cc: gcc
+            #cxx: g++
           - label: "Ubuntu 20.04 (Focal Fossa) with GCC"
             image: ubuntu:20.04
             cc: gcc
