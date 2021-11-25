@@ -8,18 +8,33 @@ on:
       - dreibh/github-actions-freebsd
 
 jobs:
-  packaging:
-    name: Packaging
+  # ====== Ubuntu Linux =====================================================
+  ubuntu-packaging:
+    name: Ubuntu Packaging
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-
-    - name: Ubuntu Packaging
+    - name: Packaging
       shell: bash
       run: |
         sudo ci/ci-setup compile package
         sudo ci/ci-install compile package
-        env CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH=amd64 ci/ci-build compile package
+        env CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH= ci/ci-build package
+
+  # ====== Debian Linux =====================================================
+  debian-packaging:
+    name: Debian Packaging
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Packaging
+      shell: bash
+      run: |
+        sudo ci/ci-setup compile package
+        sudo ci/ci-install compile package
+        env CC=gcc CXX=g++ OS=debian DIST=unstable ARCH= ci/ci-build package
+
+   # ====== Fedora Linux ====================================================
 
     #- uses: dreibh/run-on-arch-action@dreibh/tests
       #name: Ubuntu Packaging
