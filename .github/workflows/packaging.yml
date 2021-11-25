@@ -38,7 +38,9 @@ jobs:
   fedora-packaging:
     name: Fedora Packaging
     runs-on: ubuntu-latest
-    container: fedora:35
+    container:
+      image: fedora:35
+      options: "--privileged"
     steps:
       - uses: actions/checkout@v2
       - name: Packaging
