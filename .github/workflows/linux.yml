@@ -22,7 +22,7 @@ on:
   push:
     branches:
       - master
-      # - dreibh/github-actions
+      - dreibh/github-actions
 
 jobs:
   build_job:
@@ -33,92 +33,86 @@ jobs:
         include:
 
           # ====== Ubuntu Linux =============================================
-          #- label: "Ubuntu 22.04 (Jammy Jellyfish): GCC/x86_64"
+          - label: "Ubuntu 22.04 (Jammy Jellyfish): GCC/x86_64"
             #arch: amd64
-            #distro: ubuntu22.04
+            image: ubuntu:22.04
+            cc: gcc
+            cxx: g++
+          #- label: "Ubuntu 20.04 (Focal Fossa): GCC/x86_64"
+            #arch: amd64
+            #distro: ubuntu20.04
+            #cc: gcc
+            #cxx: g++
+          #- label: "Ubuntu 18.04 (Bionic Beaver): GCC/x86_64"
+            #arch: amd64
+            #distro: ubuntu18.04
+            #cc: gcc
+            #cxx: g++
+          #- label: "Ubuntu 16.04 (Xenial Xerus): GCC/x86_64"
+            #arch: amd64
+            #distro: ubuntu16.04
+            #cc: gcc
+            #cxx: g++
+          #- label: "Ubuntu 14.04 (Trusty Tahr): GCC/x86_64"
+            #arch: amd64
+            #distro: ubuntu14.04
             #cc: gcc
             #cxx: g++
 
-          - label: "Ubuntu 20.04 (Focal Fossa): GCC/x86_64"
-            arch: amd64
-            distro: ubuntu20.04
-            cc: gcc
-            cxx: g++
-          - label: "Ubuntu 20.04 (Focal Fossa): GCC/ARMv8"
-            arch: aarch64
-            distro: ubuntu20.04
-            cc: gcc
-            cxx: g++
-          - label: "Ubuntu 20.04 (Focal Fossa): GCC/S390x"
-            arch: s390x
-            distro: ubuntu20.04
-            cc: gcc
-            cxx: g++
-          - label: "Ubuntu 20.04 (Focal Fossa): GCC/RISC-V"
-            arch: riscv64
-            distro: ubuntu20.04
-            cc: gcc
-            cxx: g++
+          ## ====== Debian Linux =============================================
+          #- label: "Debian 12 (Bookworm): GCC/x86_64"
+            #arch: amd64
+            #distro: bookworm
+            #cc: gcc
+            #cxx: g++
+          #- label: "Debian 11 (Bullseye): GCC/x86_64"
+            #arch: amd64
+            #distro: bullseye
+            #cc: gcc
+            #cxx: g++
+          #- label: "Debian 10 (Buster): GCC/x86_64"
+            #arch: amd64
+            #distro: buster
+            #cc: gcc
+            #cxx: g++
 
-          - label: "Ubuntu 18.04 (Bionic Beaver): GCC/x86_64"
-            arch: amd64
-            distro: ubuntu18.04
-            cc: gcc
-            cxx: g++
-          - label: "Ubuntu 16.04 (Xenial Xerus): GCC/x86_64"
-            arch: amd64
-            distro: ubuntu16.04
-            cc: gcc
-            cxx: g++
-          - label: "Ubuntu 14.04 (Trusty Tahr): GCC/x86_64"
-            arch: amd64
-            distro: ubuntu14.04
-            cc: gcc
-            cxx: g++
-
-          # ====== Debian Linux =============================================
-          - label: "Debian 12 (Bookworm): GCC/x86_64"
-            arch: amd64
-            distro: bookworm
-            cc: gcc
-            cxx: g++
-          - label: "Debian 11 (Bullseye): GCC/x86_64"
-            arch: amd64
-            distro: bullseye
-            cc: gcc
-            cxx: g++
-          - label: "Debian 10 (Buster): GCC/x86_64"
-            arch: amd64
-            distro: buster
-            cc: gcc
-            cxx: g++
-
-          # ====== Fedora Linux =============================================
-          - label: "Fedora 35: Clang/x86_64"
-            arch: amd64
-            distro: fedora35
-            cc: clang
-            cxx: clang++
-          - label: "Fedora 34: Clang/x86_64"
-            arch: amd64
-            distro: fedora34
-            cc: clang
-            cxx: clang++
+          ## ====== Fedora Linux =============================================
+          #- label: "Fedora 35: Clang/x86_64"
+            #arch: amd64
+            #distro: fedora35
+            #cc: clang
+            #cxx: clang++
+          #- label: "Fedora 34: Clang/x86_64"
+            #arch: amd64
+            #distro: fedora34
+            #cc: clang
+            #cxx: clang++
 
 
     # ###### Build commands #################################################
     name: ${{ matrix.label }}
     runs-on: ubuntu-latest
+    container:
+      image: ${{ matrix.image }}
+      options: "--privileged"
 
+    #steps:
+      #- uses: actions/checkout@v2
+      #- uses: dreibh/run-on-arch-action@dreibh/tests
+        #name: Build
+        #id: build
+        #with:
+          #arch: ${{ matrix.arch }}
+          #distro: ${{ matrix.distro }}
+          #run: |
+            #ci/ci-setup ${{ matrix.tools }}
+            #ci/ci-install ${{ matrix.tools }}
+            #env CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ci/ci-build compile ${{ matrix.tools }}
     steps:
       - uses: actions/checkout@v2
-      - uses: dreibh/run-on-arch-action@dreibh/tests
-        name: Build
-        id: build
-        with:
-          arch: ${{ matrix.arch }}
-          distro: ${{ matrix.distro }}
-          run: |
-            ci/ci-setup ${{ matrix.tools }}
-            ci/ci-install ${{ matrix.tools }}
-            env CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ci/ci-build compile ${{ matrix.tools }}
+      - name: Packaging
+        shell: bash
+        run: |
+          sudo CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ARCH= ci/ci-setup   compile
+          sudo CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ARCH= ci/ci-install compile
+          sudo CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} ARCH= ci/ci-build   compile
