@@ -33,32 +33,32 @@ jobs:
         include:
 
           # ====== Ubuntu Linux =============================================
-          - label: "Ubuntu 22.04 (Jammy Jellyfish): GCC/x86_64"
-            arch: amd64
-            distro: ubuntu22.04
-            cc: gcc
-            cxx: g++
+          #- label: "Ubuntu 22.04 (Jammy Jellyfish): GCC/x86_64"
+            #arch: amd64
+            #distro: ubuntu22.04
+            #cc: gcc
+            #cxx: g++
 
           - label: "Ubuntu 20.04 (Focal Fossa): GCC/x86_64"
             arch: amd64
             distro: ubuntu20.04
             cc: gcc
             cxx: g++
-          - label: "Ubuntu 20.04 (Focal Fossa): GCC/ARMv8"
-            arch: aarch64
-            distro: ubuntu20.04
-            cc: gcc
-            cxx: g++
-          - label: "Ubuntu 20.04 (Focal Fossa): GCC/S390x"
-            arch: s390x
-            distro: ubuntu20.04
-            cc: gcc
-            cxx: g++
-          - label: "Ubuntu 20.04 (Focal Fossa): GCC/RISC-V"
-            arch: riscv64
-            distro: ubuntu20.04
-            cc: gcc
-            cxx: g++
+          #- label: "Ubuntu 20.04 (Focal Fossa): GCC/ARMv8"
+            #arch: aarch64
+            #distro: ubuntu20.04
+            #cc: gcc
+            #cxx: g++
+          #- label: "Ubuntu 20.04 (Focal Fossa): GCC/S390x"
+            #arch: s390x
+            #distro: ubuntu20.04
+            #cc: gcc
+            #cxx: g++
+          #- label: "Ubuntu 20.04 (Focal Fossa): GCC/RISC-V"
+            #arch: riscv64
+            #distro: ubuntu20.04
+            #cc: gcc
+            #cxx: g++
 
           - label: "Ubuntu 18.04 (Bionic Beaver): GCC/x86_64"
             arch: amd64
