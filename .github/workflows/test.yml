@@ -1,4 +1,4 @@
-name: Generic CI Tests
+name: Packaging CI Tests
 
 on:
   push:
@@ -9,19 +9,19 @@ on:
 
 jobs:
   # ====== Ubuntu Linux =====================================================
-  #ubuntu-packaging:
-    #name: Ubuntu Packaging
-    #runs-on: ubuntu-latest
-    #steps:
-    #- uses: actions/checkout@v2
-    #- name: Packaging
-      #shell: bash
-      #run: |
-        #ci/ci-setup compile package
-        #ci/ci-install compile package
-        #sudo CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH= ci/ci-setup   package
-        #sudo CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH= ci/ci-install package
-        #sudo CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH= ci/ci-build   package
+  ubuntu-packaging:
+    name: Ubuntu Packaging
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Packaging
+      shell: bash
+      run: |
+        ci/ci-setup compile package
+        ci/ci-install compile package
+        sudo CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH= ci/ci-setup   package
+        sudo CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH= ci/ci-install package
+        sudo CC=gcc CXX=g++ OS=ubuntu DIST=jammy ARCH= ci/ci-build   package
 
   # ====== Debian Linux =====================================================
   debian-packaging:
