@@ -9,13 +9,9 @@ on:
 
 jobs:
   focal:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    #- uses: jrl-umi3218/github-actions/setup-pbuilder@master
-      #with:
-        #dist: xenial
-        #arch: amd64
     - name: Test
       shell: bash
       run: |

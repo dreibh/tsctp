@@ -72,10 +72,13 @@ if [ "${UNAME}" == "Linux" ] ; then
 DISTRIBUTION="${codename}"
 COMPONENTS="main universe"
 MIRRORSITE="${mirror}"
+
 APTCACHEHARDLINK=no
+
+COMPRESSPROG=cat
 EXTRAPACKAGES=eatmydata
 EATMYDATA=yes
-COMPRESSPROG=cat
+
 # Multi-core: set concurrency level. The packaging scripts will handle it properly:
 export CONCURRENCY_LEVEL=${cores}
 export DEB_BUILD_OPTIONS="parallel=${cores}"
@@ -83,7 +86,7 @@ EOF
 
          pbuilder create \
             --debootstrapopts --variant=buildd \
-            | grep -v "^I: Retrieving\|^I: Validating\|^I: Unpacking\|^I: Extracting\|^I: Configuring"
+            | grep -v "^I: Retrieving\|^I: Validating\|^I: Unpacking\|^I: Extracting\|^I: Configuring\|^I: new cache content"
             # --debootstrapopts --keyring=/etc/apt/trusted.gpg
 
          # Speed up pbuilder:

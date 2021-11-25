@@ -110,7 +110,6 @@ while [ $# -gt 0 ] ; do
    # ====== Package =======================================================
    elif [ "${TOOL}" == "package" ] ; then
       if [ "${DISTRIBUTION}" == "Ubuntu" -o "${DISTRIBUTION}" == "Debian" ] ; then
-        # ??? sudo apt instyll -y python3-debian
         OVERRIDE_SKIP_PACKAGE_SIGNING=1 eatmydata ./build-deb
 
       # ====== Fedora ==========================================================
