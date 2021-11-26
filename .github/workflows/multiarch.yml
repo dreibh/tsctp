@@ -56,7 +56,7 @@ jobs:
             cc: gcc
             cxx: g++
           - label: "Debian 12 (Bookworm): Clang/ARMv7"
-            arch: armhf
+            arch: arm32v7
             distro: bookworm
             cc: clang
             cxx: clang++
