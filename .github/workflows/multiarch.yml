@@ -32,34 +32,34 @@ jobs:
       matrix:
         include:
 
-          ## ====== Ubuntu Linux =============================================
-          #- label: "Ubuntu 20.04 (Focal Fossa): GCC/ARMv8"
-            #arch: aarch64
-            #distro: ubuntu20.04
-            #cc: gcc
-            #cxx: g++
-          #- label: "Ubuntu 20.04 (Focal Fossa): Clang/S390x"
-            #arch: s390x
-            #distro: ubuntu20.04
-            #cc: clang
-            #cxx: clang++
-          #- label: "Ubuntu 20.04 (Focal Fossa): GCC/RISC-V"
-            #arch: riscv64
-            #distro: ubuntu20.04
-            #cc: gcc
-            #cxx: g++
+          # ====== Ubuntu Linux =============================================
+          - label: "Ubuntu 20.04 (Focal Fossa): GCC/ARMv8"
+            arch: aarch64
+            distro: ubuntu20.04
+            cc: gcc
+            cxx: g++
+          - label: "Ubuntu 20.04 (Focal Fossa): Clang/S390x"
+            arch: s390x
+            distro: ubuntu20.04
+            cc: clang
+            cxx: clang++
+          - label: "Ubuntu 20.04 (Focal Fossa): GCC/RISC-V"
+            arch: riscv64
+            distro: ubuntu20.04
+            cc: gcc
+            cxx: g++
 
-          ## ====== Debian Linux =============================================
-          #- label: "Debian 12 (Bookworm): GCC/i386"
-            #arch: i386
-            #distro: bookworm
-            #cc: gcc
-            #cxx: g++
-          #- label: "Debian 12 (Bookworm): Clang/ARMv7"
-            #arch: arm32v7
-            #distro: bookworm
-            #cc: clang
-            #cxx: clang++
+          # ====== Debian Linux =============================================
+          - label: "Debian 12 (Bookworm): GCC/i386"
+            arch: i386
+            distro: bookworm
+            cc: gcc
+            cxx: g++
+          - label: "Debian 12 (Bookworm): Clang/ARMv7"
+            arch: arm32v7
+            distro: bookworm
+            cc: clang
+            cxx: clang++
 
           # ====== Fedora Linux =============================================
           - label: "Fedora 35: GCC/PPC64"
@@ -67,11 +67,6 @@ jobs:
             distro: fedora35
             cc: gcc
             cxx: g++
-          - label: "Fedora 35: Clang/x86_64"
-            arch: amd64
-            distro: fedora35
-            cc: clang
-            cxx: clang++
 
 
     # ###### Build commands #################################################
