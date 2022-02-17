@@ -1,9 +1,9 @@
-tsctp (0.7.7~rc0-1ubuntu1) jammy; urgency=medium
+tsctp (0.7.7-1ubuntu1) jammy; urgency=medium
 
   * New upstream release.
   * Closes: #998879 (ITP).
 
- -- Thomas Dreibholz <dreibh@iem.uni-due.de>  Thu, 17 Feb 2022 11:15:39 +0100
+ -- Thomas Dreibholz <dreibh@iem.uni-due.de>  Thu, 17 Feb 2022 12:24:54 +0100
 
 tsctp (0.7.6-1ubuntu1) jammy; urgency=medium
 
