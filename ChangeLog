@@ -1,3 +1,27 @@
+commit 5ea7f8130d6aa7424108299799d2288b8536c25d
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri May 13 13:28:59 2022 +0200
+
+    Updated CI scripts
+
+commit d364802230914b6e2df4169bd16c34adf9d16054
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri May 13 13:28:57 2022 +0200
+
+    Updated build scripts
+
+commit c7c1751228b833b640497875b9c2628da96f4c00
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Feb 17 12:37:43 2022 +0100
+
+    Updated LSM entry.
+
+commit 0ee9c974f0922d9e9a9d39d256c45dd4b3a0e02e
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Feb 17 12:24:57 2022 +0100
+
+    New release tsctp-0.7.7.
+
 commit 7a915ce71234bd894b06d80ac3e94b99f51ae807
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Thu Feb 17 11:30:45 2022 +0100

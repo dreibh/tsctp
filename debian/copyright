@@ -20,7 +20,7 @@ License: BSD-3-clause
  .
 
 Files: debian/*
-Copyright: Copyright (C) 2009-2021 Thomas Dreibholz <dreibh@iem.uni-due.de>
+Copyright: Copyright (C) 2009-2022 Thomas Dreibholz <dreibh@iem.uni-due.de>
 License: GPL-3+
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

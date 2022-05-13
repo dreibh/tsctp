@@ -1,5 +1,5 @@
 Name: tsctp
-Version: 0.7.7
+Version: 0.7.8
 Release: 1
 Summary: SCTP test tool
 Group: Applications/Internet
@@ -37,6 +37,8 @@ to verify that the SCTP stack is working.
 %doc
 
 %changelog
+* Fri May 13 2022 Thomas Dreibholz <dreibh@iem.uni-due.de> - 0.7.8
+- New upstream release.
 * Thu Feb 17 2022 Thomas Dreibholz <dreibh@iem.uni-due.de> - 0.7.7
 - New upstream release.
 * Fri Nov 12 2021 Thomas Dreibholz <dreibh@iem.uni-due.de> - 0.7.6
