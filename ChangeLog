@@ -1,3 +1,15 @@
+commit 6b77781361df09dd69df4b0576cd4f426cc0ad92
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Jun 2 20:12:06 2022 +0200
+
+    Added missing GPLv3 license text.
+
+commit ac90ca58e981f5635916b4317bde5b63356a38a3
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri May 13 13:35:23 2022 +0200
+
+    New release tsctp-0.7.8.
+
 commit 5ea7f8130d6aa7424108299799d2288b8536c25d
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Fri May 13 13:28:59 2022 +0200
