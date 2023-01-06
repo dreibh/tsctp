@@ -1,12 +1,12 @@
-# Created by: Thomas Dreibholz <dreibh@iem.uni-due.de>
+# Created by: Thomas Dreibholz <thomas.dreibholz@gmail.com>
 # $FreeBSD: head/net/tsctp/Makefile 509200 2019-08-18 10:50:13Z pi $
 
 PORTNAME=	tsctp
-PORTVERSION=	0.7.9
+PORTVERSION=	0.7.10~rc0
 CATEGORIES=	net
-MASTER_SITES=	https://www.uni-due.de/~be0001/tsctp/download/
+MASTER_SITES=	https://www.nntb.no/~dreibh/tsctp/download/
 
-MAINTAINER=	dreibh@iem.uni-due.de
+MAINTAINER=	thomas.dreibholz@gmail.com
 COMMENT=	SCTP Test Tool
 
 LICENSE=	BSD

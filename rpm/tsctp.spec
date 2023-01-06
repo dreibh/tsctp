@@ -1,11 +1,11 @@
 Name: tsctp
-Version: 0.7.9
+Version: 0.7.10~rc0
 Release: 1
 Summary: SCTP test tool
 Group: Applications/Internet
 License: GPL-3+
-URL: https://www.uni-due.de/~be0001/tsctp/
-Source: https://www.uni-due.de/~be0001/tsctp/download/%{name}-%{version}.tar.xz
+URL: https://www.nntb.no/~dreibh/tsctp/
+Source: https://www.nntb.no/~dreibh/tsctp/download/%{name}-%{version}.tar.xz
 
 AutoReqProv: on
 BuildRequires: cmake

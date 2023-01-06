@@ -8,10 +8,10 @@ Description:    TSCTP is an SCTP test tool. Its purpose is to perform basic
                 working.
 Keywords:       Network, SCTP, Test
 Author:         tuexen@fh-muenster.de (Michael Tüxen)
-Maintained-by:  dreibh@iem.uni-due.de (Thomas Dreibholz)
-Primary-site:   https://www.uni-due.de/~be0001/tsctp
+Maintained-by:  thomas.dreibholz@gmail.com (Thomas Dreibholz)
+Primary-site:   https://www.nntb.no/~dreibh/tsctp
                 108 kB download/tsctp-0.7.7.tar.xz
-Original-site:  https://www.uni-due.de/~be0001/tsctp
+Original-site:  https://www.nntb.no/~dreibh/tsctp
 Platforms:      Linux, FreeBSD, MacOS, Solaris
 Copying-policy: BSD-3-clause
 End
