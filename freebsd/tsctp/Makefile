@@ -2,7 +2,7 @@
 # $FreeBSD: head/net/tsctp/Makefile 509200 2019-08-18 10:50:13Z pi $
 
 PORTNAME=	tsctp
-PORTVERSION=	0.7.10~rc0
+PORTVERSION=	0.7.10
 CATEGORIES=	net
 MASTER_SITES=	https://www.nntb.no/~dreibh/tsctp/download/
 

@@ -1,3 +1,27 @@
+commit 0bf1477218eb060c27113de9e133904528e8334a
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Jan 6 21:38:01 2023 +1100
+
+    URL change from UDE to NNTB.
+
+commit 42a6fb902c0b75bfcf1f9eaef14351a4fcc411d3
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Jan 6 10:22:09 2023 +1100
+
+    Updated CI scripts
+
+commit 03cad91fe8752c6090d3121eb0df369a7d322a79
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Jan 6 10:21:46 2023 +1100
+
+    Updated build scripts
+
+commit 4dc5ef4f0584c233b6b8604637f20e1880306487
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sun Sep 11 13:05:16 2022 +0200
+
+    New release tsctp-0.7.9.
+
 commit 6b77781361df09dd69df4b0576cd4f426cc0ad92
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Thu Jun 2 20:12:06 2022 +0200
