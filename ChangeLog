@@ -1,3 +1,81 @@
+commit 5fd6b8f29900cdfa464c7c1af74ac2b47a5e7e7d
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Nov 15 11:42:31 2023 +0100
+
+    Dependency improvements.
+
+commit 631ccee47f24ee8bd3c5e2064f584a2088f271b8
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Nov 15 10:53:51 2023 +0100
+
+    Packaging clean-ups.
+
+commit 02d4fc3d17d2cc9114eafb821f47e28a861d40ee
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Nov 15 09:52:38 2023 +0100
+
+    Updated build scripts
+
+commit f24190313c035b3b275e5e3b8b4213404aad3e5e
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Nov 15 09:32:54 2023 +0100
+
+    Updated build scripts
+
+commit b109f7c447529d90fe12f3445f2c5785c588fbc9
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sat Nov 11 17:50:51 2023 +0100
+
+    Workflows update.
+
+commit 43aef5a6bb14aa7feb394d6a067a3be4c20b29fd
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sat Nov 11 16:24:02 2023 +0100
+
+    Removed CVS $Id$ tag.
+
+commit b17d23374387ce88b8457fbc45d371cad7eb2513
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sat Nov 11 16:22:36 2023 +0100
+
+    Header updates.
+
+commit 82ac95ac1b48ae0024ec8ffa7d172d5533e7363c
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sat Nov 11 16:16:07 2023 +0100
+
+    Updated CI scripts
+
+commit 3ec2e7798623029e1e759a947dca92b9295725da
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sat Nov 11 16:15:53 2023 +0100
+
+    Updated build scripts
+
+commit 0055117b9c33a4241b024435f74429a57c85c78d
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Oct 5 16:52:54 2023 +0200
+
+    Updated build scripts
+
+commit 048c5eafffacd6745782ebdef53000864c02330d
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Feb 8 10:48:40 2023 +0100
+
+    URL change from UDE to NNTB.
+
+commit d91e7489a2b52b4db92fbafe7a4eb2a5066188f2
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sat Jan 21 22:02:47 2023 +1100
+
+    Updated build scripts
+
+commit c0949ea09956bbb1ca588fe25d6f3bd77dd36524
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Jan 19 09:01:47 2023 +1100
+
+    New release tsctp-0.7.10.
+
 commit 0bf1477218eb060c27113de9e133904528e8334a
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Fri Jan 6 21:38:01 2023 +1100
