@@ -1,5 +1,3 @@
-# Created by: Thomas Dreibholz <thomas.dreibholz@gmail.com>
-
 PORTNAME=	tsctp
 PORTVERSION=	0.7.11
 CATEGORIES=	net
