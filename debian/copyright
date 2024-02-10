@@ -19,7 +19,11 @@ License: BSD-3-clause
     without specific prior written permission.
  .
 
-Files: debian/*
+Files:
+ autogen.sh
+ debian/*
+ ci/*
+ freebsd/*
 Copyright: Copyright (C) 2009-2024 Thomas Dreibholz <thomas.dreibholz@gmail.com>
 License: GPL-3+
  This program is free software: you can redistribute it and/or modify
