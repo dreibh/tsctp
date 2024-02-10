@@ -1,3 +1,39 @@
+commit f92e4f28a2d136e531fcd5ea36b7d293abe5cf5d
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sat Feb 10 16:13:46 2024 +0100
+
+    Debian packaging updates.
+
+commit 7fd95ed18813fc48ba38950405c9a965d7f7483c
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Mon Dec 18 10:06:46 2023 +0100
+
+    Updated FreeBSD packaging.
+
+commit 4062d51b971085cf0d802bcd983ef2bc2d2c32da
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Dec 7 13:14:07 2023 +0100
+
+    FreeBSD packaging update.
+
+commit 23718df4b442660ebea66fc5ef29b72125a1230b
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Dec 7 12:32:29 2023 +0100
+
+    Improved FreeBSD test script.
+
+commit 1c1bb9228fd349f861804c127ef5507eca9446d2
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Dec 6 17:10:56 2023 +0100
+
+    Updated LSM entry.
+
+commit f38ebbb67f8d12d84409798b4302e0a4a2b45195
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Dec 6 16:54:25 2023 +0100
+
+    New release tsctp-0.7.11.
+
 commit 5fd6b8f29900cdfa464c7c1af74ac2b47a5e7e7d
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Wed Nov 15 11:42:31 2023 +0100

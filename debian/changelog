@@ -1,7 +1,13 @@
-tsctp (0.7.11-1ubuntu1) jammy; urgency=medium
+tsctp (0.7.12-1ubuntu1) jammy; urgency=medium
 
   * New upstream release.
   * Closes: #998879 (ITP).
+
+ -- Thomas Dreibholz <thomas.dreibholz@gmail.com>  Sat, 10 Feb 2024 16:13:58 +0100
+
+tsctp (0.7.11-1ubuntu1) jammy; urgency=medium
+
+  * New upstream release.
 
  -- Thomas Dreibholz <thomas.dreibholz@gmail.com>  Wed, 06 Dec 2023 16:54:23 +0100
 

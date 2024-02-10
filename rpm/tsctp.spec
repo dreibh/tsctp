@@ -1,5 +1,5 @@
 Name: tsctp
-Version: 0.7.11
+Version: 0.7.12
 Release: 1
 Summary: SCTP test tool
 Group: Applications/Internet
@@ -37,6 +37,8 @@ to verify that the SCTP stack is working.
 %doc
 
 %changelog
+* Sat Feb 10 2024 Thomas Dreibholz <thomas.dreibholz@gmail.com> - 0.7.12
+- New upstream release.
 * Wed Dec 06 2023 Thomas Dreibholz <thomas.dreibholz@gmail.com> - 0.7.11
 - New upstream release.
 * Thu Jan 19 2023 Thomas Dreibholz <thomas.dreibholz@gmail.com> - 0.7.10
