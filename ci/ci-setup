@@ -219,7 +219,7 @@ EOF
 # ====== FreeBSD ============================================================
 elif [ "${UNAME}" == "FreeBSD" ] ; then
 
-   ASSUME_ALWAYS_YES=yes pkg install -y bash gcc libtool git python3
+   ASSUME_ALWAYS_YES=yes pkg install -y autoconf automake bash gcc libtool git python3
 
    if [ ! -e /usr/ports/.git ] ; then
       rm -rf /usr/ports/* /usr/ports/.??* || true

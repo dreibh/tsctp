@@ -1171,18 +1171,18 @@ def makeSourceDeb(packageInfo, codenames, skipPackageSigning, summaryFile):
                        packageInfo['debian_version_packaging'] + \
                        ' to ' + newDebianVersionPackaging + '!\n')
 
+
+      # ====== Update changelog =============================================
+      changeLogContents[0] = \
+         packageInfo['debian_package_name'] + \
+         ' (' + packageInfo['debian_version_prefix'] + packageInfo['debian_version_string'] + '-' + newDebianVersionPackaging + ') ' + \
+         codename + '; ' + \
+         'urgency=' + packageInfo['debian_urgency'] + \
+         '\n'
+      sys.stdout.write('Updating changelog header: ' + changeLogContents[0])
+
       # ------- Debian ------------------------------------------------------
       if codename in DebianCodenames:
-
-         # ------ Update changelog ------------------------------------------
-         changeLogContents[0] = \
-            packageInfo['debian_package_name'] + \
-            ' (' + packageInfo['debian_version_string'] + '-' + newDebianVersionPackaging + ') ' + \
-            codename + '; ' + \
-            'urgency=' + packageInfo['debian_urgency'] + \
-            '\n'
-         sys.stdout.write('Updating changelog header: ' + changeLogContents[0])
-
          # Remove Launchpad entries:
          re_launchpad = re.compile(r'^.*\(LP: #[0-9]+')
          changeLogContents = [ line for line in changeLogContents if not re_launchpad.match(line) ]
@@ -1225,15 +1225,6 @@ def makeSourceDeb(packageInfo, codenames, skipPackageSigning, summaryFile):
       # ------- Ubuntu ------------------------------------------------------
       else:
 
-         # ------ Update changelog ------------------------------------------
-         changeLogContents[0] = \
-            packageInfo['debian_package_name'] + \
-            ' (' + packageInfo['debian_version_string'] + '-' + newDebianVersionPackaging + ') ' + \
-            codename + '; ' + \
-            'urgency=' + packageInfo['debian_urgency'] + \
-            '\n'
-         sys.stdout.write('Updating changelog header: ' + changeLogContents[0])
-
          # Remove Debian Bug entries:
          # FIXME: Is this still useful, since Ubuntu is based on Debian?
          # re_launchpad = re.compile(r'^.*\(Closes: #[0-9]+')
@@ -1243,6 +1234,8 @@ def makeSourceDeb(packageInfo, codenames, skipPackageSigning, summaryFile):
          # for i in range(0, len(controlContents)):
          #    # FIXME: Is this still necessary for Ubuntu?
          #    controlContents[i] = re.sub(r'^Maintainer:', 'Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>\nXSBC-Original-Maintainer:', controlContents[i])
+
+         True
 
 
       # ------ Clean up empty lines -----------------------------------------
