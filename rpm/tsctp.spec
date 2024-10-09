@@ -3,7 +3,7 @@ Version: 0.7.12
 Release: 1
 Summary: SCTP test tool
 Group: Applications/Internet
-License: GPL-3+
+License: BSD-3-clause
 URL: https://www.nntb.no/~dreibh/tsctp/
 Source: https://www.nntb.no/~dreibh/tsctp/download/%{name}-%{version}.tar.xz
 
