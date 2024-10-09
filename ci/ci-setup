@@ -44,12 +44,10 @@ fi
 # ====== Linux ==============================================================
 if [ "${UNAME}" == "Linux" ] ; then
 
-   # NOTE: lsb_release may not be installed, yet!
-   # => Guess distribution by checking for the packaging tool.
 
    # ====== Ubuntu/Deban ====================================================
    if [ "${ID}" == "ubuntu" ] || [ "${ID}" == "debian" ] ; then
-      PACKAGES="lsb-release python3"
+      PACKAGES="python3"
       if [ -v CC ] ; then
          if [[ "${CC}" =~ .*gcc.* ]] ; then
             PACKAGES="${PACKAGES} gcc"
@@ -59,7 +57,7 @@ if [ "${UNAME}" == "Linux" ] ; then
       fi
       if [ ${USE_PACKAGING} -eq 1 ] ; then
          # Need to install pbuilder as well:
-         PACKAGES="${PACKAGES} build-essential debian-archive-keyring debian-ports-archive-keyring devscripts eatmydata fakeroot lintian pbuilder python3-debian qemu-user-static"
+         PACKAGES="${PACKAGES} build-essential debian-archive-keyring debian-ports-archive-keyring devscripts eatmydata fakeroot lintian pbuilder python3-debian python3-distro qemu-user-static"
       fi
 
       apt-get update -qq
@@ -81,15 +79,14 @@ if [ "${UNAME}" == "Linux" ] ; then
          # Example for GitHub Actions:
          # https://github.com/jrl-umi3218/github-actions/tree/master/setup-pbuilder
 
-         if [ "${OS}" == "" ] ; then
-            OS=$(lsb_release -is)
-            OS=${OS,,}
+         if [ ! -v OS ] || [ "${OS}" == "" ] ; then
+            OS="${ID}"
          fi
-         if [ "${DIST}" == "" ] ; then
-            DIST=$(lsb_release -cs)
+         if [ ! -v DIST ] ||  [ "${DIST}" == "" ] ; then
+            DIST="${VERSION_CODENAME}"
          fi
-         if [ "${ARCH}" == "" ] ; then
-            ARCH=$(dpkg --print-architecture)
+         if [ ! -v ARCH ] || [ "${ARCH}" == "" ] ; then
+            ARCH="$(dpkg --print-architecture)"
          fi
 
          if [ "${OS}" == "ubuntu" ] ; then
@@ -108,7 +105,7 @@ if [ "${UNAME}" == "Linux" ] ; then
                KEYRING="/usr/share/keyrings/debian-archive-keyring.gpg"
             fi
          else
-            echo >&2 "ERROR: Unknown Linux distribution ${OS}!"
+            echo >&2 "ERROR: Unknown Linux distribution ${ID}!"
             exit 1
          fi
 
@@ -170,13 +167,12 @@ apt-add-repository -y ppa:dreibh/ppa
 apt-get update -q
 EOF
          fi
-
       fi
 
 
    # ====== Fedora ==========================================================
    elif [ "${ID}" == "fedora" ] ; then
-      PACKAGES="clang make python3 redhat-lsb-core"
+      PACKAGES="clang make python3 python3-distro redhat-lsb-core"
       if [ ${USE_PACKAGING} -eq 1 ] ; then
          # Need to install mock as well:
          PACKAGES="${PACKAGES} fedora-release findutils mock nosync rpmdevtools"
@@ -190,14 +186,23 @@ EOF
          # ====== Mock environment ==========================================
          groupadd -f mock
 
-         arch=$(uname -m | sed -e "s/[^0-9a-zA-Z_+-]//g")
-         if ! grep "^\[copr-dreibh-ppa\]" /etc/mock/fedora-"${VERSION_ID}"-"${arch}".cfg ; then
+         if [ ! -v OS ] || [ "${OS}" == "" ] ; then
+            OS="${ID}"
+         fi
+         if [ ! -v DIST ] ||  [ "${DIST}" == "" ] ; then
+            DIST="${VERSION_ID}"
+         fi
+         if [ ! -v ARCH ] || [ "${ARCH}" == "" ] ; then
+            ARCH="$(uname -m)"
+         fi
+
+         if ! grep "^\[copr-dreibh-ppa\]" "/etc/mock/${OS}-${DIST}-${ARCH}.cfg" ; then
             shopt -s extglob
             ppa="config_opts['dnf.conf'] += \"\"\"\n[copr-dreibh-ppa]\nname=Copr repo for ppa owned by dreibh\nbaseurl=https://copr-be.cloud.fedoraproject.org/results/dreibh/ppa/fedora-\$releasever-\$basearch/\ntype=rpm-md\nskip_if_unavailable=True\ngpgcheck=1\ngpgkey=https://copr-be.cloud.fedoraproject.org/results/dreibh/ppa/pubkey.gpg\nrepo_gpgcheck=0\nenabled=1\n\"\"\""
             ppa="${ppa//+( )$/\\n}"
-            echo -e "${ppa}" | tee -a /etc/mock/fedora-"${VERSION_ID}"-"${arch}".cfg
-            if ! grep "^\[copr-dreibh-ppa\]" /etc/mock/fedora-"${VERSION_ID}"-"${arch}".cfg ; then
-               echo >&2 "ERROR: Unable to inject PPA configuration into Mock configuration file /etc/mock/fedora-${VERSION_ID}-${arch}.cfg!"
+            echo -e "${ppa}" | tee -a "/etc/mock/${OS}-${DIST}-${ARCH}.cfg"
+            if ! grep "^\[copr-dreibh-ppa\]" "/etc/mock/${OS}-${DIST}-${ARCH}.cfg" ; then
+               echo >&2 "ERROR: Unable to inject PPA configuration into Mock configuration file /etc/mock/${OS}-${DIST}-${ARCH}.cfg!"
                exit 1
             fi
          fi
@@ -210,19 +215,14 @@ EOF
       exit 1
    fi
 
-# ###### FreeBSD ############################################################
+
+# ====== FreeBSD ============================================================
 elif [ "${UNAME}" == "FreeBSD" ] ; then
 
    ASSUME_ALWAYS_YES=yes pkg install -y bash gcc libtool git python3
 
-   # Ports collection:
-   # This is the slow method via portsnap:
-   # portsnap --interactive fetch extract | grep -v ^/usr/ports
-   # Using Git is much faster:
-   rm -rf /usr/ports
-   git clone --depth=1 https://github.com/freebsd/freebsd-ports /usr/ports
 
-# ###### Unknown ############################################################
+# ====== Unknown ============================================================
 else
 
    echo >&2 "ERROR: Unexpected system ${UNAME}!"
