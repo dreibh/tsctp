@@ -116,12 +116,12 @@ while [ $# -gt 0 ] ; do
    elif [ "${TOOL}" == "package" ] ; then
       if [ ! -v ARCH ] || [ "${ARCH}" == "" ] ; then
          architecture="$(uname -m)"
-         architecture="${architecture//x86_64/amd64}"
       else
          architecture="${ARCH}"
       fi
 
       if [ "${ID}" == "ubuntu" ] || [ "${ID}" == "debian" ] ; then
+         architecture="${architecture//x86_64/amd64}"
          if [ ! -v DIST ] || [ "${DIST}" == "" ] ; then
             distribution="${VERSION_CODENAME}"
          else
@@ -132,7 +132,7 @@ while [ $# -gt 0 ] ; do
       # ====== Fedora ==========================================================
       elif [ "${ID}" == "fedora" ] ; then
          if [ ! -v DIST ] || [ "${DIST}" == "" ] ; then
-            distribution="${VERSION_ID}"
+            distribution="fedora-${VERSION_ID}"
          else
             distribution="${DIST}"
          fi
