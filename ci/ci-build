@@ -123,23 +123,24 @@ while [ $# -gt 0 ] ; do
       fi
 
       if [ "${OS}" == "ubuntu" ] || [ "${OS}" == "debian" ] ; then
-         ARCH="${ARCH//x86_64/amd64}"
+         architecture="${ARCH//x86_64/amd64}"
          if [ ! -v DIST ] || [ "${DIST}" == "" ] ; then
             distribution="${VERSION_CODENAME}"
          else
             distribution="${DIST}"
          fi
-         "${DIRNAME}"/build-tool build-deb "${distribution}" --skip-signing --architecture="${ARCH}"
+         "${DIRNAME}"/build-tool build-deb "${distribution}" --skip-signing --architecture="${architecture}"
 
       # ====== Fedora ==========================================================
       elif [ "${OS}" == "fedora" ] ; then
+         architecture="${ARCH}"
          if [ ! -v DIST ] || [ "${DIST}" == "" ] ; then
             distribution="${VERSION_ID}"
          else
             distribution="${DIST}"
          fi
          LD_PRELOAD=/usr/lib64/nosync/nosync.so \
-            "${DIRNAME}"/build-tool build-rpm "fedora-${DIST}" --skip-signing --architecture="${ARCH}"
+            "${DIRNAME}"/build-tool build-rpm "fedora-${distribution}" --skip-signing --architecture="${architecture}"
 
       # ====== Unknown =========================================================
       else
