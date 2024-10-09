@@ -1643,7 +1643,7 @@ if len(sys.argv) < 2:
    sys.stderr.write('Usage: ' + sys.argv[0] + ' tool [options ...]\n')
    sys.stderr.write('\n* ' + sys.argv[0] + ' info\n')
    sys.stderr.write('\n* ' + sys.argv[0] + ' make-source-tarball [--skip-signing]\n')
-   sys.stderr.write('  ' + sys.argv[0] + ' make-source-deb [--summary=file] [codename ...] [--skip-signing]\n')
+   sys.stderr.write('\n* ' + sys.argv[0] + ' make-source-deb [--summary=file] [codename ...] [--skip-signing]\n')
    sys.stderr.write('  ' + sys.argv[0] + ' build-deb [--summary=file]  [codename ...] [--skip-signing] [--architecture=arch[,...]]\n')
    sys.stderr.write('  ' + sys.argv[0] + ' fetch-debian-changelog [codename]\n')
    sys.stderr.write('\n* ' + sys.argv[0] + ' make-source-rpm [--summary=file]  [release ...] [--skip-signing]\n')
