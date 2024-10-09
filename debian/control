@@ -6,7 +6,7 @@ Homepage: https://www.nntb.no/~dreibh/tsctp/
 Vcs-Git: https://github.com/dreibh/tsctp.git
 Vcs-Browser: https://github.com/dreibh/tsctp
 Build-Depends: cmake,
-               debhelper (>= 12),
+               debhelper (>= 9),
                libsctp-dev (>= 1.0.5)
 Standards-Version: 4.6.2
 Rules-Requires-Root: no
