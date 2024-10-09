@@ -1429,34 +1429,47 @@ def buildDeb(packageInfo, codenames, architectures, skipPackageSigning, summaryF
 
          # ====== Run BLHC ==================================================
          # FIXME: BLHC < 0.14 does not properly handle D_FORTIFY_SOURCE=3!
-         blhcCommand = 'blhc ' + buildlog + ' | grep -v "^CPPFLAGS missing (-D_FORTIFY_SOURCE=2).*-D_FORTIFY_SOURCE=3.*"  | grep -v "^NONVERBOSE BUILD:"'
-         print(blhcCommand)
-         try:
-            subprocess.run(blhcCommand, check=False, shell=True)
-         except Exception as e:
-            sys.stderr.write('ERROR: BLHC run failed: ' + str(e) + '\n')
-            sys.exit(1)
+         if shutil.which('blhc') != None:
+            blhcCommand = 'blhc ' + buildlog + ' | grep -v "^CPPFLAGS missing (-D_FORTIFY_SOURCE=2).*-D_FORTIFY_SOURCE=3.*"  | grep -v "^NONVERBOSE BUILD:"'
+            printSubsection('Running BLHC')
+            print(blhcCommand)
+            try:
+               subprocess.run(blhcCommand, check=False, shell=True)
+            except Exception as e:
+               sys.stderr.write('ERROR: BLHC run failed: ' + str(e) + '\n')
+               sys.exit(1)
+         else:
+            sys.stderr.write('NOTE: BLHC is not installed -> checks skipped!\n')
 
          # ====== Run Lintian ===============================================
-         lintianCommand = [ 'lintian',
-                               '-v', '-i', '-I', '-E', '--pedantic',
-                               '--profile', lintianProfile,
-                               '--suppress-tags', 'malformed-deb-archive,bad-distribution-in-changes-file',
-                               foundChangesFiles[0] ]
-         print(lintianCommand)
-         try:
-            subprocess.run(lintianCommand, check=True)
-         except Exception as e:
-            sys.stderr.write('ERROR: Lintian run failed: ' + str(e) + '\n')
-            sys.exit(1)
+         if shutil.which('lintian') != None:
+            lintianCommand = [ 'lintian',
+                                 '-v', '-i', '-I', '-E', '--pedantic',
+                                 '--profile', lintianProfile,
+                                 '--suppress-tags', 'malformed-deb-archive,bad-distribution-in-changes-file',
+                                 foundChangesFiles[0] ]
+            printSubsection('Running Lintian')
+            print(lintianCommand)
+            try:
+               subprocess.run(lintianCommand, check=True)
+            except Exception as e:
+               sys.stderr.write('ERROR: Lintian run failed: ' + str(e) + '\n')
+               sys.exit(1)
+         else:
+            sys.stderr.write('NOTE: Lintian is not installed -> checks skipped!\n')
 
-         # ====== Run LicenseCheck ==========================================
-         lrcCommand = 'lrc -t'
-         try:
-            subprocess.run(lrcCommand, check=False, shell=True)
-         except Exception as e:
-            sys.stderr.write('ERROR: LicenseCheck run failed: ' + str(e) + '\n')
-            sys.exit(1)
+         # ====== Run LRC ===================================================
+         if shutil.which('lintian') != None:
+            lrcCommand = 'lrc -t'
+            printSubsection('Running LRC')
+            print(lrcCommand)
+            try:
+               subprocess.run(lrcCommand, check=False, shell=True)
+            except Exception as e:
+               sys.stderr.write('ERROR: LRC run failed: ' + str(e) + '\n')
+               sys.exit(1)
+         else:
+            sys.stderr.write('NOTE: LRC is not installed -> checks skipped!\n')
 
    return True
 
