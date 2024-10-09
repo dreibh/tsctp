@@ -1459,7 +1459,7 @@ def buildDeb(packageInfo, codenames, architectures, skipPackageSigning, summaryF
             sys.stderr.write('NOTE: Lintian is not installed -> checks skipped!\n')
 
          # ====== Run LRC ===================================================
-         if shutil.which('lintian') != None:
+         if shutil.which('lrc') != None:
             lrcCommand = 'lrc -t'
             printSubsection('Running LRC')
             print(lrcCommand)
