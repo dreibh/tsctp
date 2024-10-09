@@ -221,6 +221,18 @@ elif [ "${UNAME}" == "FreeBSD" ] ; then
 
    ASSUME_ALWAYS_YES=yes pkg install -y bash gcc libtool git python3
 
+   if [ ! -e /usr/ports/.git ] ; then
+      rm -rf /usr/ports/* /usr/ports/.??* || true
+      mkdir -p /usr/ports
+      cd /usr/ports
+      git init -b main
+      git remote add freebsd https://git.freebsd.org/ports.git
+      git remote set-url --push freebsd ssh://git@gitrepo.freebsd.org/ports.git
+      git config --add remote.freebsd.fetch "+refs/notes/*:refs/notes/*"
+      git config pull.rebase true
+      git pull --depth=1 freebsd main
+      git branch --set-upstream-to=freebsd/main main
+   fi
 
 # ====== Unknown ============================================================
 else
