@@ -100,7 +100,7 @@ if [ "${ID}" == "ubuntu" ] || [ "${ID}" == "debian" ] ; then
             KEYRING="/usr/share/keyrings/debian-archive-keyring.gpg"
          fi
       else
-         echo >&2 "ERROR: Unknown Linux distribution ${ID}!"
+         echo >&2 "ERROR: Unknown distribution ${ID}!"
          exit 1
       fi
 
@@ -225,7 +225,7 @@ elif [ "${ID}" == "freebsd" ] ; then
 # ====== Unknown ============================================================
 else
 
-   echo >&2 "ERROR: Unexpected system ${ID}!"
+   echo >&2 "ERROR: Unknown distribution ${ID}!"
    exit 1
 
 fi
