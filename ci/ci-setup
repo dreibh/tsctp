@@ -33,7 +33,6 @@ done
 
 
 # ====== Check/set environment variables ====================================
-UNAME="$(uname)"
 if [ ! -e /etc/os-release ] ; then
    echo >&2 "ERROR: /etc/os-release does not exist!"
    exit 1
@@ -41,76 +40,72 @@ fi
 . /etc/os-release
 
 
-# ====== Linux ==============================================================
-if [ "${UNAME}" == "Linux" ] ; then
-
-
-   # ====== Ubuntu/Deban ====================================================
-   if [ "${ID}" == "ubuntu" ] || [ "${ID}" == "debian" ] ; then
-      PACKAGES="python3"
-      if [ -v CC ] ; then
-         if [[ "${CC}" =~ .*gcc.* ]] ; then
-            PACKAGES="${PACKAGES} gcc"
-         elif [[ "${CC}" =~ .*clang.* ]] ; then
-            PACKAGES="${PACKAGES} clang"
-         fi
+# ====== Ubuntu/Deban =======================================================
+if [ "${ID}" == "ubuntu" ] || [ "${ID}" == "debian" ] ; then
+   PACKAGES="python3"
+   if [ -v CC ] ; then
+      if [[ "${CC}" =~ .*gcc.* ]] ; then
+         PACKAGES="${PACKAGES} gcc"
+      elif [[ "${CC}" =~ .*clang.* ]] ; then
+         PACKAGES="${PACKAGES} clang"
       fi
-      if [ ${USE_PACKAGING} -eq 1 ] ; then
-         # Need to install pbuilder as well:
-         PACKAGES="${PACKAGES} build-essential debian-archive-keyring debian-ports-archive-keyring devscripts eatmydata fakeroot lintian pbuilder python3-debian python3-distro qemu-user-static"
+   fi
+   if [ ${USE_PACKAGING} -eq 1 ] ; then
+      # Need to install pbuilder as well:
+      PACKAGES="${PACKAGES} build-essential debian-archive-keyring debian-ports-archive-keyring devscripts eatmydata fakeroot lintian pbuilder python3-debian python3-distro qemu-user-static"
+   fi
+
+   apt-get update -qq
+   # DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -qy
+   # shellcheck disable=SC2086
+   DEBIAN_FRONTEND=noninteractive apt-get install -qqy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
+      ${PACKAGES}
+
+   if [ "${ID}" == "ubuntu" ] ; then
+      # Add PPA dreibh/ppa for Ubuntu:
+      DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
+         software-properties-common
+      apt-add-repository -y ppa:dreibh/ppa || true
+      apt-get update -q
+   fi
+
+   if [ ${USE_PACKAGING} -eq 1 ] ; then
+      # ====== pbuilder environment =========================================
+      # Example for GitHub Actions:
+      # https://github.com/jrl-umi3218/github-actions/tree/master/setup-pbuilder
+
+      if [ ! -v OS ] || [ "${OS}" == "" ] ; then
+         OS="${ID}"
+      fi
+      if [ ! -v DIST ] ||  [ "${DIST}" == "" ] ; then
+         DIST="${VERSION_CODENAME}"
+      fi
+      if [ ! -v ARCH ] || [ "${ARCH}" == "" ] ; then
+         ARCH="$(dpkg --print-architecture)"
       fi
 
-      apt-get update -qq
-      # DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -qy
-      # shellcheck disable=SC2086
-      DEBIAN_FRONTEND=noninteractive apt-get install -qqy  -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
-         ${PACKAGES}
-
-      if [ "${ID}" == "ubuntu" ] ; then
-         # Add PPA dreibh/ppa for Ubuntu:
-         DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
-            software-properties-common
-         apt-add-repository -y ppa:dreibh/ppa || true
-         apt-get update -q
-      fi
-
-      if [ ${USE_PACKAGING} -eq 1 ] ; then
-         # ====== pbuilder environment ======================================
-         # Example for GitHub Actions:
-         # https://github.com/jrl-umi3218/github-actions/tree/master/setup-pbuilder
-
-         if [ ! -v OS ] || [ "${OS}" == "" ] ; then
-            OS="${ID}"
-         fi
-         if [ ! -v DIST ] ||  [ "${DIST}" == "" ] ; then
-            DIST="${VERSION_CODENAME}"
-         fi
-         if [ ! -v ARCH ] || [ "${ARCH}" == "" ] ; then
-            ARCH="$(dpkg --print-architecture)"
-         fi
-
-         if [ "${OS}" == "ubuntu" ] ; then
-            COMPONENTS="main universe"
-            MIRRORSITE=http://no.archive.ubuntu.com/ubuntu/
-            KEYRING="/usr/share/keyrings/ubuntu-archive-keyring.gpg"
-         elif [ "${OS}" == "debian" ] ; then
-            COMPONENTS="main"
-            if [ "${ARCH}" == "m68k" ] || [ "${ARCH}" == "riscv64" ] ; then
-               # Debian Ports (special architectures)
-               MIRRORSITE="http://ftp.ports.debian.org/debian-ports/"
-               KEYRING="/usr/share/keyrings/debian-ports-archive-keyring.gpg"
-            else
-               # Debian (supported architectures)
-               MIRRORSITE="http://ftp.no.debian.org/debian/"
-               KEYRING="/usr/share/keyrings/debian-archive-keyring.gpg"
-            fi
+      if [ "${OS}" == "ubuntu" ] ; then
+         COMPONENTS="main universe"
+         MIRRORSITE=http://no.archive.ubuntu.com/ubuntu/
+         KEYRING="/usr/share/keyrings/ubuntu-archive-keyring.gpg"
+      elif [ "${OS}" == "debian" ] ; then
+         COMPONENTS="main"
+         if [ "${ARCH}" == "m68k" ] || [ "${ARCH}" == "riscv64" ] ; then
+            # Debian Ports (special architectures)
+            MIRRORSITE="http://ftp.ports.debian.org/debian-ports/"
+            KEYRING="/usr/share/keyrings/debian-ports-archive-keyring.gpg"
          else
-            echo >&2 "ERROR: Unknown Linux distribution ${ID}!"
-            exit 1
+            # Debian (supported architectures)
+            MIRRORSITE="http://ftp.no.debian.org/debian/"
+            KEYRING="/usr/share/keyrings/debian-archive-keyring.gpg"
          fi
+      else
+         echo >&2 "ERROR: Unknown Linux distribution ${ID}!"
+         exit 1
+      fi
 
-         cores=$(getconf _NPROCESSORS_ONLN 2>/dev/null || true)
-         cat >/etc/pbuilderrc <<EOF
+      cores=$(getconf _NPROCESSORS_ONLN 2>/dev/null || true)
+      cat >/etc/pbuilderrc <<EOF
 #!/bin/bash -e
 
 # ====== Settings ===========================================================
@@ -144,80 +139,73 @@ mkdir -p \${APTCACHE}
 mkdir -p \${BUILDRESULT}
 mkdir -p \${HOOKDIR}
 EOF
-         echo "----- /etc/pbuilderrc: ------------------------------------------------------"
-         cat /etc/pbuilderrc
-         echo "-----------------------------------------------------------------------------"
+      echo "----- /etc/pbuilderrc: ------------------------------------------------------"
+      cat /etc/pbuilderrc
+      echo "-----------------------------------------------------------------------------"
 
-         OS="${OS}" DISTRIBUTION="${DIST}" ARCHITECTURE="${ARCH}" pbuilder create \
-            --debootstrapopts --variant=buildd \
-            | grep -v "^I: Retrieving\|^I: Validating\|^I: Unpacking\|^I: Extracting\|^I: Configuring\|^I: new cache content"
-            # --debootstrapopts --keyring=/etc/apt/trusted.gpg
+      OS="${OS}" DISTRIBUTION="${DIST}" ARCHITECTURE="${ARCH}" pbuilder create \
+         --debootstrapopts --variant=buildd \
+         | grep -v "^I: Retrieving\|^I: Validating\|^I: Unpacking\|^I: Extracting\|^I: Configuring\|^I: new cache content"
+         # --debootstrapopts --keyring=/etc/apt/trusted.gpg
 
-         # Speed up pbuilder:
-         echo "echo \"force-unsafe-io\" > /etc/dpkg/dpkg.cfg.d/02apt-speedup" | \
-            OS="${OS}" DISTRIBUTION="${DIST}" ARCHITECTURE="${ARCH}" pbuilder login --save-after-exec
+      # Speed up pbuilder:
+      echo "echo \"force-unsafe-io\" > /etc/dpkg/dpkg.cfg.d/02apt-speedup" | \
+         OS="${OS}" DISTRIBUTION="${DIST}" ARCHITECTURE="${ARCH}" pbuilder login --save-after-exec
 
-         # ====== Add ppa:dreibh/ppa, updates and backports =================
-         if [ "${OS}" == "ubuntu" ] ; then
-            # Add PPA dreibh/ppa for Ubuntu:
-            OS="${OS}" DISTRIBUTION="${DIST}" ARCHITECTURE="${ARCH}" pbuilder login --save-after-login <<EOF
+      # ====== Add ppa:dreibh/ppa, updates and backports =================
+      if [ "${OS}" == "ubuntu" ] ; then
+         # Add PPA dreibh/ppa for Ubuntu:
+         OS="${OS}" DISTRIBUTION="${DIST}" ARCHITECTURE="${ARCH}" pbuilder login --save-after-login <<EOF
 DEBIAN_FRONTEND=noninteractive apt-get install -qqy -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef --no-install-recommends \
-   software-properties-common
+software-properties-common
 apt-add-repository -y ppa:dreibh/ppa
 apt-get update -q
 EOF
-         fi
+      fi
+   fi
+
+
+# ====== Fedora =============================================================
+elif [ "${ID}" == "fedora" ] ; then
+   PACKAGES="clang make python3 python3-distro redhat-lsb-core"
+   if [ ${USE_PACKAGING} -eq 1 ] ; then
+      # Need to install mock as well:
+      PACKAGES="${PACKAGES} fedora-release findutils mock nosync rpmdevtools"
+   fi
+
+   # dnf upgrade -qy
+   # shellcheck disable=SC2086
+   dnf install -qy ${PACKAGES}
+
+   if [ ${USE_PACKAGING} -eq 1 ] ; then
+      # ====== Mock environment =============================================
+      groupadd -f mock
+
+      if [ ! -v OS ] || [ "${OS}" == "" ] ; then
+         OS="${ID}"
+      fi
+      if [ ! -v DIST ] ||  [ "${DIST}" == "" ] ; then
+         DIST="${VERSION_ID}"
+      fi
+      if [ ! -v ARCH ] || [ "${ARCH}" == "" ] ; then
+         ARCH="$(uname -m)"
       fi
 
-
-   # ====== Fedora ==========================================================
-   elif [ "${ID}" == "fedora" ] ; then
-      PACKAGES="clang make python3 python3-distro redhat-lsb-core"
-      if [ ${USE_PACKAGING} -eq 1 ] ; then
-         # Need to install mock as well:
-         PACKAGES="${PACKAGES} fedora-release findutils mock nosync rpmdevtools"
-      fi
-
-      # dnf upgrade -qy
-      # shellcheck disable=SC2086
-      dnf install -qy ${PACKAGES}
-
-      if [ ${USE_PACKAGING} -eq 1 ] ; then
-         # ====== Mock environment ==========================================
-         groupadd -f mock
-
-         if [ ! -v OS ] || [ "${OS}" == "" ] ; then
-            OS="${ID}"
-         fi
-         if [ ! -v DIST ] ||  [ "${DIST}" == "" ] ; then
-            DIST="${VERSION_ID}"
-         fi
-         if [ ! -v ARCH ] || [ "${ARCH}" == "" ] ; then
-            ARCH="$(uname -m)"
-         fi
-
+      if ! grep "^\[copr-dreibh-ppa\]" "/etc/mock/${OS}-${DIST}-${ARCH}.cfg" ; then
+         shopt -s extglob
+         ppa="config_opts['dnf.conf'] += \"\"\"\n[copr-dreibh-ppa]\nname=Copr repo for ppa owned by dreibh\nbaseurl=https://copr-be.cloud.fedoraproject.org/results/dreibh/ppa/fedora-\$releasever-\$basearch/\ntype=rpm-md\nskip_if_unavailable=True\ngpgcheck=1\ngpgkey=https://copr-be.cloud.fedoraproject.org/results/dreibh/ppa/pubkey.gpg\nrepo_gpgcheck=0\nenabled=1\n\"\"\""
+         ppa="${ppa//+( )$/\\n}"
+         echo -e "${ppa}" | tee -a "/etc/mock/${OS}-${DIST}-${ARCH}.cfg"
          if ! grep "^\[copr-dreibh-ppa\]" "/etc/mock/${OS}-${DIST}-${ARCH}.cfg" ; then
-            shopt -s extglob
-            ppa="config_opts['dnf.conf'] += \"\"\"\n[copr-dreibh-ppa]\nname=Copr repo for ppa owned by dreibh\nbaseurl=https://copr-be.cloud.fedoraproject.org/results/dreibh/ppa/fedora-\$releasever-\$basearch/\ntype=rpm-md\nskip_if_unavailable=True\ngpgcheck=1\ngpgkey=https://copr-be.cloud.fedoraproject.org/results/dreibh/ppa/pubkey.gpg\nrepo_gpgcheck=0\nenabled=1\n\"\"\""
-            ppa="${ppa//+( )$/\\n}"
-            echo -e "${ppa}" | tee -a "/etc/mock/${OS}-${DIST}-${ARCH}.cfg"
-            if ! grep "^\[copr-dreibh-ppa\]" "/etc/mock/${OS}-${DIST}-${ARCH}.cfg" ; then
-               echo >&2 "ERROR: Unable to inject PPA configuration into Mock configuration file /etc/mock/${OS}-${DIST}-${ARCH}.cfg!"
-               exit 1
-            fi
+            echo >&2 "ERROR: Unable to inject PPA configuration into Mock configuration file /etc/mock/${OS}-${DIST}-${ARCH}.cfg!"
+            exit 1
          fi
       fi
-
-
-   # ====== Unknown =========================================================
-   else
-      echo >&2 "ERROR: Unknown Linux distribution!"
-      exit 1
    fi
 
 
 # ====== FreeBSD ============================================================
-elif [ "${UNAME}" == "FreeBSD" ] ; then
+elif [ "${ID}" == "freebsd" ] ; then
 
    ASSUME_ALWAYS_YES=yes pkg install -y autoconf automake bash gcc libtool git python3
 
@@ -237,7 +225,7 @@ elif [ "${UNAME}" == "FreeBSD" ] ; then
 # ====== Unknown ============================================================
 else
 
-   echo >&2 "ERROR: Unexpected system ${UNAME}!"
+   echo >&2 "ERROR: Unexpected system ${ID}!"
    exit 1
 
 fi
