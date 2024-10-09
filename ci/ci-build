@@ -79,6 +79,7 @@ while [ $# -gt 0 ] ; do
 
    # ====== Compile =========================================================
    if [ "${TOOL}" == "compile" ] ; then
+
       MAKEFLAGS=${MAKEFLAGS} make   # VERBOSE=1
 
 
@@ -133,6 +134,7 @@ while [ $# -gt 0 ] ; do
 
       # ====== Fedora ==========================================================
       elif [ "${OS}" == "fedora" ] ; then
+
          architecture="${ARCH}"
          if [ ! -v DIST ] || [ "${DIST}" == "" ] ; then
             distribution="${VERSION_ID}"
@@ -144,7 +146,7 @@ while [ $# -gt 0 ] ; do
 
       # ====== Unknown =========================================================
       else
-         echo >&2 "ERROR: Unknown Linux distribution ${OS}!"
+         echo >&2 "ERROR: Unsupported distribution ${ID} for packaging!"
          exit 1
       fi
 
