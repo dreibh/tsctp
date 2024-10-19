@@ -1,7 +1,14 @@
-tsctp (0.7.12-1ubuntu1) jammy; urgency=medium
+tsctp (0.7.13~rc0-1ubuntu1) noble; urgency=medium
 
   * New upstream release.
   * Closes: #998879 (ITP).
+  * debian/control: Updated standards version to 4.7.0.
+
+ -- Thomas Dreibholz <thomas.dreibholz@gmail.com>  Sat, 19 Oct 2024 16:20:25 +0200
+
+tsctp (0.7.12-1ubuntu1) jammy; urgency=medium
+
+  * New upstream release.
 
  -- Thomas Dreibholz <thomas.dreibholz@gmail.com>  Sat, 10 Feb 2024 16:15:26 +0100
 
