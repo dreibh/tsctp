@@ -119,10 +119,10 @@ def readPackagingConfiguration():
 
    # ====== Initialise ======================================================
    packageInfo = {}
-   packageInfo['packaging_maintainer']      = None
-   packageInfo['packaging_maintainer_key']  = None
-   packageInfo['packaging_make_dist']       = None
-   packageInfo['packaging_config_name']     = 'packaging.conf'
+   packageInfo['packaging_maintainer']     = None
+   packageInfo['packaging_maintainer_key'] = None
+   packageInfo['packaging_make_dist']      = None
+   packageInfo['packaging_config_name']    = 'packaging.conf'
 
    # ====== Obtain package configuration ====================================
    re_package_maintainer     = re.compile(r'^(MAINTAINER=\")(.*)(\".*$)')
@@ -1306,6 +1306,7 @@ def makeSourceDeb(packageInfo, codenames, skipPackageSigning, summaryFile):
       for fileName in [ dscFileName, buildinfoName, changesName, controlTarballName ] :
          shutil.copyfile(workdir + '/' + fileName, fileName)
 
+      # ====== Add files to summary =========================================
       if summaryFile != None:
          summaryFile.write('debSourceDscFile: '            + workdir + '/' + dscFileName        + ' ' + codename + '\n')
          summaryFile.write('debSourceBuildinfoFile: '      + workdir + '/' + buildinfoName      + ' ' + codename + '\n')
@@ -1424,15 +1425,12 @@ def buildDeb(packageInfo, codenames, architectures, skipPackageSigning, summaryF
             sys.stderr.write('Found changes files: ' + str(foundChangesFiles) + '\n')
             sys.exit(1)
 
-         if summaryFile != None:
-            summaryFile.write('debBuildChangesFile: ' + foundChangesFiles[0] + ' ' + codename + ' ' + buildArchitecture + '\n')
-
          # ====== Run BLHC ==================================================
          # FIXME: BLHC < 0.14 does not properly handle D_FORTIFY_SOURCE=3!
          if shutil.which('blhc') != None:
             blhcCommand = 'blhc ' + buildlog + ' | grep -v "^CPPFLAGS missing (-D_FORTIFY_SOURCE=2).*-D_FORTIFY_SOURCE=3.*"  | grep -v "^NONVERBOSE BUILD:"'
             printSubsection('Running BLHC')
-            print(blhcCommand)
+            print('=> ' + blhcCommand)
             try:
                subprocess.run(blhcCommand, check=False, shell=True)
             except Exception as e:
@@ -1443,15 +1441,14 @@ def buildDeb(packageInfo, codenames, architectures, skipPackageSigning, summaryF
 
          # ====== Run Lintian ===============================================
          if shutil.which('lintian') != None:
-            lintianCommand = [ 'lintian',
-                                 '-v', '-i', '-I', '-E', '--pedantic',
-                                 '--profile', lintianProfile,
-                                 '--suppress-tags', 'malformed-deb-archive,bad-distribution-in-changes-file',
-                                 foundChangesFiles[0] ]
+            lintianCommand = 'lintian -v -i -I -E --pedantic' + \
+                                ' --profile ' + lintianProfile + \
+                                ' --suppress-tags malformed-deb-archive,bad-distribution-in-changes-file' + \
+                                ' ' + foundChangesFiles[0]
             printSubsection('Running Lintian')
-            print(lintianCommand)
+            print('=> ' + lintianCommand)
             try:
-               subprocess.run(lintianCommand, check=True)
+               subprocess.run(lintianCommand, check=False, shell=True)
             except Exception as e:
                sys.stderr.write('ERROR: Lintian run failed: ' + str(e) + '\n')
                sys.exit(1)
@@ -1462,7 +1459,7 @@ def buildDeb(packageInfo, codenames, architectures, skipPackageSigning, summaryF
          if shutil.which('lrc') != None:
             lrcCommand = 'lrc -t'
             printSubsection('Running LRC')
-            print(lrcCommand)
+            print('=> ' + lrcCommand)
             try:
                subprocess.run(lrcCommand, check=False, shell=True)
             except Exception as e:
@@ -1470,6 +1467,10 @@ def buildDeb(packageInfo, codenames, architectures, skipPackageSigning, summaryF
                sys.exit(1)
          else:
             sys.stderr.write('NOTE: LRC is not installed -> checks skipped!\n')
+
+         # ====== Add Changes file to summary ===============================
+         if summaryFile != None:
+            summaryFile.write('debBuildChangesFile: ' + foundChangesFiles[0] + ' ' + codename + ' ' + buildArchitecture + '\n')
 
    return True
 
@@ -1547,6 +1548,23 @@ def makeSourceRPM(packageInfo, skipPackageSigning, summaryFile):
          sys.stderr.write('ERROR: RPMSign run failed: ' + str(e) + '\n')
          sys.exit(1)
 
+   # ====== Run RPM Lint ====================================================
+   if shutil.which('rpmlint') != None:
+      rpmlintCommand = 'rpmlint -P ' + srpmFile
+      printSubsection('Running RPM Lint')
+      print('=> ' + rpmlintCommand)
+      try:
+         subprocess.run(rpmlintCommand, check=False, shell=True)
+      except Exception as e:
+         sys.stderr.write('ERROR: RPM Lint run failed: ' + str(e) + '\n')
+         sys.exit(1)
+   else:
+      sys.stderr.write('NOTE: RPM Lint is not installed -> checks skipped!\n')
+
+   # ====== Add SRPM file to summary ========================================
+   if summaryFile != None:
+      summaryFile.write('rpmSourceFile: ' + srpmFile + '\n')
+
 
 # ###### Build RPM binary package ###########################################
 def buildRPM(packageInfo, releases, architectures, skipPackageSigning, summaryFile):
@@ -1595,7 +1613,7 @@ def buildRPM(packageInfo, releases, architectures, skipPackageSigning, summaryFi
          configuration = release + '-' + buildArchitecture
          if not os.path.isfile('/etc/mock/' + configuration + '.cfg'):
             sys.stderr.write('ERROR: Configuration ' + '/etc/mock/' + configuration + '.cfg does not exist!\n')
-            #sys.exit(1)
+            sys.exit(1)
 
          # ====== Delete old RPM ============================================
          rpmFile = '/var/lib/mock/' + configuration + '/result/' + \
@@ -1612,9 +1630,9 @@ def buildRPM(packageInfo, releases, architectures, skipPackageSigning, summaryFi
             # NOTE: using old chroot instead of container, to allow running
             #       mock inside a container!
             commands = [
-                  [ 'mock', '-r', configuration, '--isolation=simple', '--init' ],
-                  [ 'mock', '-r', configuration, '--isolation=simple', '--installdeps', srpmFile ],
-                  [ 'mock', '-r', configuration, '--isolation=simple', '--rebuild', '--no-clean', srpmFile ]
+                  [ 'mock', '-r', configuration, '--isolation=auto', '--init' ],
+                  [ 'mock', '-r', configuration, '--isolation=auto', '--installdeps', srpmFile ],
+                  [ 'mock', '-r', configuration, '--isolation=auto', '--rebuild', '--no-clean', srpmFile ]
                ]
             for command in commands:
                print(command)
@@ -1639,6 +1657,23 @@ def buildRPM(packageInfo, releases, architectures, skipPackageSigning, summaryFi
             except Exception as e:
                sys.stderr.write('ERROR: RPMSign run failed: ' + str(e) + '\n')
                sys.exit(1)
+
+         # ====== Run RPM Lint ==============================================
+         if shutil.which('rpmlint') != None:
+            rpmlintCommand = 'rpmlint -P ' + rpmFile
+            printSubsection('Running RPM Lint')
+            print('=> ' + rpmlintCommand)
+            try:
+               subprocess.run(rpmlintCommand, check=False, shell=True)
+            except Exception as e:
+               sys.stderr.write('ERROR: RPM Lint run failed: ' + str(e) + '\n')
+               sys.exit(1)
+         else:
+            sys.stderr.write('NOTE: RPM Lint is not installed -> checks skipped!\n')
+
+         # ====== Add RPM file to summary ===================================
+         if summaryFile != None:
+            summaryFile.write('rpmFile: ' + rpmFile + ' ' + release + ' ' + buildArchitecture + '\n')
 
 
 
