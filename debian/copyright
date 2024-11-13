@@ -4,7 +4,9 @@ Upstream-Contact: Michael Tüxen <tuexen@fh-muenster.de>
 Source: https://www.nntb.no/~dreibh/tsctp/
 
 Files: *
-Copyright: Copyright (C) 2005-2016 Michael Tüxen <tuexen@fh-muenster.de>
+Copyright:
+ Copyright (C) 2005-2011 Michael Tüxen <tuexen@fh-muenster.de>
+ Copyright (C) 2009-2025 Thomas Dreibholz <thomas.dreibholz@gmail.com>
 License: BSD-3-clause
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions
@@ -24,7 +26,7 @@ Files:
  debian/*
  ci/*
  freebsd/*
-Copyright: Copyright (C) 2009-2024 Thomas Dreibholz <thomas.dreibholz@gmail.com>
+Copyright: Copyright (C) 2009-2025 Thomas Dreibholz <thomas.dreibholz@gmail.com>
 License: GPL-3+
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
