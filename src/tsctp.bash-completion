@@ -1,0 +1,113 @@
+# shellcheck shell=bash
+#
+# TSCTP
+# Copyright (c) 2005 - 2011 Michael Tuexen, tuexen@fh-muenster.de
+# Copyright (C) 2009 - 2025 Thomas Dreibholz, thomas.dreibholz@gmail.com
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+# 1. Redistributions of source code must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+# 3. Neither the name of the University nor the names of its contributors
+#    may be used to endorse or promote products derived from this software
+#    without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+# OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+# SUCH DAMAGE.
+
+# ###### Bash completion for tsctp ##########################################
+_tsctp()
+{
+   # Based on: https://www.benningtons.net/index.php/bash-completion/
+   local cur prev words cword
+   if type -t _comp_initialize >/dev/null; then
+      _comp_initialize || return
+   elif type -t _init_completion >/dev/null; then
+      _init_completion || return
+   else
+      # Manual initialization for older bash completion versions:
+      COMPREPLY=()
+      cur="${COMP_WORDS[COMP_CWORD]}"
+      # shellcheck disable=SC2034
+      prev="${COMP_WORDS[COMP_CWORD-1]}"
+      # shellcheck disable=SC2034,SC2124
+      words="${COMP_WORDS[@]}"
+      # shellcheck disable=SC2034
+      cword="${COMP_CWORD}"
+   fi
+
+   case "${prev}" in
+      #  ====== Generic value ===============================================
+      -a | \
+      -A | \
+      -f | \
+      -l | \
+      -n | \
+      -p | \
+      -R | \
+      -S | \
+      -t | \
+      -T | \
+      -U)
+         return
+         ;;
+      # ====== Special case: local address ==================================
+      -L)
+         # Suggest IP addresses of local machine:
+         local addresses
+         if [ -x /usr/sbin/ip ] ; then
+            addresses="$(/usr/sbin/ip addr show | awk '/[ ]+inet/ { print $2 }' | sed -e 's#/.*$##')"
+         elif [ -x /sbin/ifconfig ] ; then
+            local addressesV4
+            local addressesV6
+            addressesV4="$(/sbin/ifconfig | awk '/[ \t]+inet / { a=$4 ; print $2 }')"
+            addressesV6="$(/sbin/ifconfig | awk '/[ \t]+inet6 / { print $2 }' | sed -e 's#%.*/#/#')"
+            addresses="${addressesV4} ${addressesV6}"
+         fi
+         # shellcheck disable=SC2207
+         COMPREPLY=( $(compgen -W "${addresses}" -- "${cur}") )
+         return
+   esac
+
+   # ====== All options =====================================================
+   local opts="
+-a
+-A
+-D
+-f
+-l
+-L
+-n
+-p
+-R
+-S
+-t
+-T
+-u
+-U
+-v
+-V
+-4
+-6
+"
+   # shellcheck disable=SC2207
+   COMPREPLY=( $( compgen -W "${opts}" -- "${cur}" ) )
+
+   return 0
+}
+
+complete -F _tsctp tsctp

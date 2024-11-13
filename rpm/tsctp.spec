@@ -11,9 +11,16 @@ AutoReqProv: on
 BuildRequires: cmake
 BuildRequires: gcc
 BuildRequires: lksctp-tools-devel
+Recommends: hipercontracer
+Recommends: iproute2
+Recommends: rsplib-tools
+Recommends: subnetcalc
+Recommends: traceroute
+Recommends: wireshark-cli
+Suggests: td-system-info
+Suggests: dynmhs
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 
-%define _unpackaged_files_terminate_build 0
 
 %description
 TSCTP is an SCTP test tool. Its purpose is to perform basic SCTP
@@ -32,6 +39,7 @@ to verify that the SCTP stack is working.
 
 %files
 %{_bindir}/tsctp
+%{_datadir}/bash-completion/completions/tsctp
 %{_mandir}/man1/tsctp.1.gz
 
 %doc

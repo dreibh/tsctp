@@ -78,7 +78,7 @@ char Usage[] =
 "   -T runtime               time to send messages\n"
 "   -u                       use unordered user messages\n"
 #if defined(SCTP_REMOTE_UDP_ENCAPS_PORT)
-"   -U udp_port     use UDP encapsulation with given port\n"
+"   -U udp_port              use UDP encapsulation with given port\n"
 #endif
 "   -v                       verbose\n"
 "   -V                       very verbose\n"

@@ -15,13 +15,17 @@ Package: tsctp
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
-Recommends: iputils-ping,
-            iputils-tracepath,
+Recommends: hipercontracer,
+            iproute2,
             rsplib-tools,
             subnetcalc,
             traceroute,
-            whois
-Suggests: wireshark
+            tshark
+Suggests: dynmhs,
+          iputils-tracepath,
+          ping | iputils-ping,
+          td-system-tools,
+          traceroute | inetutils-traceroute
 Description: SCTP Test Tool
  TSCTP is an SCTP test tool. Its purpose is to perform basic SCTP
  functionality tests to check implementations interoperability and
