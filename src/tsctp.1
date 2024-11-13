@@ -1,5 +1,34 @@
+.\" TSCTP
+.\" Copyright (c) 2005 - 2011 Michael Tuexen, tuexen@fh-muenster.de
+.\" Copyright (C) 2009 - 2025 Thomas Dreibholz, thomas.dreibholz@gmail.com
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of the University nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
 .\" ###### Setup ############################################################
-.Dd March 15, 2014
+.Dd November 13, 2024
 .Dt tsctp 1
 .Os tsctp
 .\" ###### Name #############################################################
@@ -9,8 +38,24 @@
 .\" ###### Synopsis #########################################################
 .Sh SYNOPSIS
 .Nm tsctp
-.Op Options
-.Op Address
+.Op Fl 4
+.Op Fl 6
+.Op Fl a
+.Op Fl A
+.Op Fl D
+.Op Fl f
+.Op Fl l
+.Op Fl L
+.Op Fl n
+.Op Fl p
+.Op Fl R
+.Op Fl S
+.Op Fl t
+.Op Fl T
+.Op Fl u
+.Op Fl v
+.Op Fl V
+.Op address
 .\" ###### Description ######################################################
 .Sh DESCRIPTION
 .Nm tsctp
@@ -22,28 +67,28 @@ The following arguments have to be provided:
 .Bl -tag -width indent
 .It Options
 .Bl -tag -width indent
-.It -4 IPv4 only
-.It -6 IPv6 only
-.It -a set adaptation layer indication
-.It -A chunk type to authenticate
-.It -D turns Nagle off
-.It -f fragmentation point
-.It -l size of send/receive buffer
-.It -L local address
-.It -n number of messages sent (0 means infinite)/received
-.It -p port number
-.It -R socket recv buffer
-.It -S socket send buffer
-.It -t time to live for messages
-.It -T time to send messages
-.It -u use unordered user messages
-.It -v verbose
-.It -V very verbose
+.It Fl 4 IPv4 only
+.It Fl 6 IPv6 only
+.It Fl a set adaptation layer indication
+.It Fl A chunk type to authenticate
+.It Fl D turns Nagle off
+.It Fl f fragmentation point
+.It Fl l size of send/receive buffer
+.It Fl L local address
+.It Fl n number of messages sent (0 means infinite)/received
+.It Fl p port number
+.It Fl R socket recv buffer
+.It Fl S socket send buffer
+.It Fl t time to live for messages
+.It Fl T time to send messages
+.It Fl u use unordered user messages
+.It Fl v verbose
+.It Fl V very verbose
 .El
 .It Address
 Destination address.
 .El
-.\" ###### Arguments ########################################################
+.\" ###### Examples #########################################################
 .Sh EXAMPLES
 .Bl -tag -width indent
 .It tsctp
