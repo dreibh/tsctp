@@ -17,9 +17,9 @@ Depends: ${misc:Depends},
          ${shlibs:Depends}
 Recommends: hipercontracer,
             iproute2,
+            netperfmeter,
             rsplib-tools,
             subnetcalc,
-            traceroute,
             tshark
 Suggests: dynmhs,
           iputils-tracepath,

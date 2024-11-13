@@ -13,12 +13,14 @@ BuildRequires: gcc
 BuildRequires: lksctp-tools-devel
 Recommends: hipercontracer
 Recommends: iproute2
+Recommends: netperfmeter
 Recommends: rsplib-tools
 Recommends: subnetcalc
 Recommends: traceroute
 Recommends: wireshark-cli
-Suggests: td-system-info
 Suggests: dynmhs
+Suggests: td-system-info
+Suggests: traceroute
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 
 
