@@ -38,23 +38,24 @@
 .\" ###### Synopsis #########################################################
 .Sh SYNOPSIS
 .Nm tsctp
-.Op Fl 4
-.Op Fl 6
-.Op Fl a
-.Op Fl A
+.Op Fl a Ar indication
+.Op Fl A Ar type
 .Op Fl D
-.Op Fl f
-.Op Fl l
-.Op Fl L
-.Op Fl n
-.Op Fl p
-.Op Fl R
-.Op Fl S
-.Op Fl t
-.Op Fl T
+.Op Fl f Ar fragmentation_point
+.Op Fl l Ar buffersize
+.Op Fl L Ar local_address
+.Op Fl n Ar number_of_messages
+.Op Fl p Ar port
+.Op Fl R Ar rcvbufsize
+.Op Fl S Ar sndbufsize
+.Op Fl t Ar timetolive
+.Op Fl T Ar runtime
 .Op Fl u
+.Op Fl U Ar udp_port
 .Op Fl v
 .Op Fl V
+.Op Fl 4
+.Op Fl 6
 .Op address
 .\" ###### Description ######################################################
 .Sh DESCRIPTION
@@ -67,26 +68,43 @@ The following arguments have to be provided:
 .Bl -tag -width indent
 .It Options
 .Bl -tag -width indent
-.It Fl 4 IPv4 only
-.It Fl 6 IPv6 only
-.It Fl a set adaptation layer indication
-.It Fl A chunk type to authenticate
-.It Fl D turns Nagle off
-.It Fl f fragmentation point
-.It Fl l size of send/receive buffer
-.It Fl L local address
-.It Fl n number of messages sent (0 means infinite)/received
-.It Fl p port number
-.It Fl R socket recv buffer
-.It Fl S socket send buffer
-.It Fl t time to live for messages
-.It Fl T time to send messages
-.It Fl u use unordered user messages
-.It Fl v verbose
-.It Fl V very verbose
-.El
-.It Address
-Destination address.
+
+.It Fl a Ar indication
+Set adaptation layer indication.
+.It Fl A Ar type
+Set chunk type to authenticate .
+.It Fl D
+Turns Nagle off.
+.It Fl f Ar fragmentation_point
+Set fragmentation point.
+.It Fl l Ar buffersize
+Set size of send/receive buffer.
+.It Fl L Ar local_address
+Set local address.
+.It Fl n Ar number_of_messages
+Set number of messages sent (0 means infinite)/received.
+.It Fl p Ar port
+Set port number.
+.It Fl R Ar rcvbufsize
+Set socket recv buffer.
+.It Fl S Ar sndbufsize
+Set socket send buffer.
+.It Fl t Ar timetolive
+Set time to live for messages.
+.It Fl T Ar runtime
+Set time to send messages.
+.It Fl u
+Set use unordered user messages.
+.It Fl U Ar udp_port
+Use UDP encapsulation with given port.
+.It Fl v
+Enable verbose output.
+.It Fl V
+Enable very verbose output.
+.It Fl 4
+Use IPv4 only.
+.It Fl 6
+Use IPv6 only.
 .El
 .\" ###### Examples #########################################################
 .Sh EXAMPLES
