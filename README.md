@@ -14,15 +14,15 @@ See the manpage of tsctp for details!
 ### Notes
 
 For TSCTP to work, the kernel needs to support SCTP, i.e. sockets with protocol IPPROTO_SCTP. In most cases, this means to load the SCTP kernel module.
-* Linux:
- ```
- echo "sctp" >/etc/modules-load.d/sctp.conf
- ```
- Then, reboot to load the module.
- Note: Ensure that the SCTP module is not blacklisted
- (e.g. /etc/modprobe.d/sctp-blacklist.conf in Fedora Linux)!
+#### Linux
+```
+echo "sctp" >/etc/modules-load.d/sctp.conf
+```
+Then, reboot to load the module.
+Note: Ensure that the SCTP module is not blacklisted
+(e.g. /etc/modprobe.d/sctp-blacklist.conf in Fedora Linux)!
 
-* FreeBSD:
+#### FreeBSD
 ```
 echo 'sctp_load="YES"' >>/boot/loader.conf
 ```
