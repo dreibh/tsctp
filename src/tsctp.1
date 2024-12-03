@@ -28,7 +28,7 @@
 .\" SUCH DAMAGE.
 .\"
 .\" ###### Setup ############################################################
-.Dd November 13, 2024
+.Dd December 03, 2024
 .Dt tsctp 1
 .Os tsctp
 .\" ###### Name #############################################################
@@ -56,19 +56,26 @@
 .Op Fl V
 .Op Fl 4
 .Op Fl 6
-.Op address
+.Op remote_address
 .\" ###### Description ######################################################
 .Sh DESCRIPTION
 .Nm tsctp
-is an SCTP test tool.
+is an SCTP test tool. It can be used to make basic tests with the SCTP
+protocol. For the tool to work, the kernel needs to support SCTP, i.e.
+sockets with protocol IPPROTO_SCTP.
+.Bl -tag -width indent
+.It Linux: echo "sctp" >/etc/modules-load.d/sctp.conf
+Then, reboot to load the module.
+Note: Ensure that the SCTP module is not blacklisted
+(e.g. /etc/modprobe.d/sctp-blacklist.conf in Fedora Linux)!
+.It FreeBSD: echo 'sctp_load="YES"' >>/boot/loader.conf
+Then, reboot to load the module.
+.El
 .Pp
 .\" ###### Arguments ########################################################
 .Sh ARGUMENTS
-The following arguments have to be provided:
+The following arguments may be provided:
 .Bl -tag -width indent
-.It Options
-.Bl -tag -width indent
-
 .It Fl a Ar indication
 Set adaptation layer indication.
 .It Fl A Ar type
@@ -78,11 +85,11 @@ Turns Nagle off.
 .It Fl f Ar fragmentation_point
 Set fragmentation point.
 .It Fl l Ar buffersize
-Set size of send/receive buffer.
+Set size of send/receive buffer. For sending messages, this means the message size!
 .It Fl L Ar local_address
 Set local address.
 .It Fl n Ar number_of_messages
-Set number of messages sent (0 means infinite)/received.
+Set number of messages to be sent (0 means infinite)/received.
 .It Fl p Ar port
 Set port number.
 .It Fl R Ar rcvbufsize
@@ -94,7 +101,7 @@ Set time to live for messages.
 .It Fl T Ar runtime
 Set time to send messages.
 .It Fl u
-Set use unordered user messages.
+Set use of unordered messages.
 .It Fl U Ar udp_port
 Use UDP encapsulation with given port.
 .It Fl v
@@ -105,11 +112,27 @@ Enable very verbose output.
 Use IPv4 only.
 .It Fl 6
 Use IPv6 only.
+.It remote_address
+If a remote address is given, the client mode is used. Then, tsctp connects
+the socket to the given remote address. Otherwise, without given remote address,
+the server mode is used. Then, tsctp listens for incoming connections.
 .El
 .\" ###### Examples #########################################################
 .Sh EXAMPLES
 .Bl -tag -width indent
-.It tsctp
+.It tsctp -l :: -l 0.0.0.0 -p 1234
+Server mode: bind to all IPv4 and IPv6 addresses, listen on port 1234.
+.It tsctp -l :: -l 0.0.0.0 -p 1234 -n 10 -l 1000 127.0.0.1
+Client mode:
+bind to all IPv4 and IPv6 addresses,
+connect to localhost (127.0.0.1) on port 1234,
+send 10 messages of 1000 bytes each.
+.It tsctp -l :: -l 0.0.0.0 -p 1234 -n 0 -T 10 -l 4096 127.0.0.1
+Client mode:
+bind to all IPv4 and IPv6 addresses,
+connect to localhost (127.0.0.1) on port 1234,
+send unlimited number of messages of 4096 bytes each,
+stop after 10 s.
 .El
 .\" ###### Authors ##########################################################
 .Sh AUTHORS
