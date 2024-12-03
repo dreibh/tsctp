@@ -328,10 +328,12 @@ int main(int argc, char **argv)
       }
 
    if (optind == argc) {
+      puts("server mode");
       client      = 0;
       local_port  = port;
       remote_port = 0;
    } else {
+      puts("client mode");
       client      = 1;
       local_port  = 0;
       remote_port = port;
@@ -423,6 +425,7 @@ int main(int argc, char **argv)
    if (!client) {
       struct sctp_event_subscribe event;
 
+      printf("listening on port %d ...\n", local_port);
       if (listen(fd, 100) < 0)
          perror("listen");
       if (rcvbufsize)
@@ -513,6 +516,7 @@ int main(int argc, char **argv)
          }
       }
 
+      printf("connecting to %s:%d ...\n", argv[optind], remote_port);
       if (connect(fd, (struct sockaddr*)&remote_addr, addr_len) < 0) {
          perror("connect");
       }
