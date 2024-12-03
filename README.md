@@ -28,13 +28,13 @@ echo 'sctp_load="YES"' >>/boot/loader.conf
 ```
 Then, reboot to load the module.
 
-### Run in server mode, listen for incoming connections
+### Run TSCTP in server mode, listen for incoming connections
 ```
 tsctp -l :: -l 0.0.0.0 -p 1234
 ```
 Server mode: bind to all IPv4 and IPv6 addresses, listen on port 1234.
 
-### Run in client mode, connect to server and send messages
+### Run TSCTP in client mode, connect to server and send messages
 
 ```
 tsctp -l :: -l 0.0.0.0 -p 1234 -n 10 -l 1000 127.0.0.1
