@@ -51,7 +51,8 @@ tsctp -l :: -l 0.0.0.0 -p 1234 -n 0 -T 10 -l 4096 127.0.0.1
 Client mode:
 bind to all IPv4 and IPv6 addresses,
 connect to localhost (127.0.0.1) on port 1234,
-send 10 messages of 1000 bytes each.
+send unlimited number of messages of 4096 bytes each,
+stop after 10 s.
 
 
 ## Binary Package Installation
