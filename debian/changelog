@@ -1,8 +1,14 @@
+tsctp (0.8.1-1ubuntu1) trixie; urgency=medium
+
+  * New upstream release.
+  * Closes: #998879 (ITP).
+
+ -- Thomas Dreibholz <thomas.dreibholz@gmail.com>  Fri, 13 Dec 2024 21:33:40 +0100
+
 tsctp (0.8.0-1ubuntu1) noble; urgency=medium
 
   * New upstream release.
   * debian/control: Updated standards version to 4.7.0.
-  * Closes: #998879 (ITP).
 
  -- Thomas Dreibholz <thomas.dreibholz@gmail.com>  Tue, 03 Dec 2024 20:56:08 +0100
 

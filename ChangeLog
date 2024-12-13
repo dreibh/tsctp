@@ -1,3 +1,75 @@
+commit 9a81465cd50a2dd931564e9804ae6beabdea5c6d
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Dec 13 20:53:05 2024 +0100
+
+    Minor manpage update.
+
+commit b8ce615b1abf495501902e63ca0927c75dde0e84
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Dec 13 17:02:42 2024 +0100
+
+    Workflow update.
+
+commit 33e2efcdb9bbf4be06c50101d413a21dab7679ec
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Dec 5 16:00:30 2024 +0100
+
+    Updated CI scripts
+
+commit 489b2c6369afa0327bcd4c8d3fe542728a1006ec
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Dec 5 15:57:53 2024 +0100
+
+    Updated CI scripts
+
+commit 574530910bc0ab1b28309f18183725303375f245
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Dec 5 15:57:51 2024 +0100
+
+    Updated build scripts
+
+commit a8508144cdf104c79f59873e3ec98495905c31f3
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Dec 3 21:57:33 2024 +0100
+
+    Workflow updates.
+
+commit 9c6ed859aa6453c6237e7c6d87891ea88b791d9d
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Dec 3 21:17:25 2024 +0100
+
+    Reverted workflow change.
+
+commit 0de0a8e0fb855130e2a07b84db67b833c7b74fbf
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Dec 3 21:15:45 2024 +0100
+
+    Workflow update.
+
+commit efe79445ab3ea6dd566879a98f58dfa9fe5c9ae6
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Dec 3 21:03:19 2024 +0100
+
+    Minor update.
+
+commit f5be20f2dfd1211f3fa602956fa38cccfa7163b6
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Dec 3 20:58:12 2024 +0100
+
+    Updated workflow.
+
+commit c39ce90aec92f2f5227effe93328a46ff39484ae
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Dec 3 20:56:36 2024 +0100
+
+    Updated CI script.
+
+commit b6c84e65c0e1585160e3f6ae44360a8c1589f14e
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Dec 3 20:56:15 2024 +0100
+
+    New release tsctp-0.8.0.
+
 commit 91b8cb16abc497c919eaf33d5c1969384603c6fe
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Tue Dec 3 20:52:52 2024 +0100
