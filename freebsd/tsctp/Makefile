@@ -1,6 +1,5 @@
 PORTNAME=	tsctp
 DISTVERSION=	0.8.1
-PORTREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	https://www.nntb.no/~dreibh/tsctp/download/
 
@@ -14,6 +13,7 @@ LICENSE_FILE=	${WRKSRC}/COPYING-BSD
 USES=		cmake tar:xz
 
 PLIST_FILES=	bin/tsctp \
+		share/bash-completion/completions/tsctp \
 		share/man/man1/tsctp.1.gz
 
 .include <bsd.port.mk>
