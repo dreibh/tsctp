@@ -7,8 +7,6 @@ TSCTP is an SCTP test tool. Its purpose is to perform basic SCTP
 functionality tests to check implementations interoperability and
 to verify that the SCTP stack is working.
 
-See the manpage of tsctp for details!
-
 ## Usage Examples
 
 ### Notes
@@ -57,11 +55,11 @@ stop after 10 s.
 
 ## Binary Package Installation
 
-Please use the issue tracker at https://github.com/dreibh/tsctp/issues to report bugs and issues!
+Please use the issue tracker at [https://github.com/dreibh/tsctp/issues](https://github.com/dreibh/tsctp/issues) to report bugs and issues!
 
 ### Ubuntu Linux
 
-For ready-to-install Ubuntu Linux packages of TSCTP, see Launchpad PPA for Thomas Dreibholz!
+For ready-to-install Ubuntu Linux packages of TSCTP, see [Launchpad PPA for Thomas Dreibholz](https://launchpad.net/~dreibh/+archive/ubuntu/ppa/+packages?field.name_filter=tsctp&field.status_filter=published&field.series_filter=)!
 
 ```
 sudo apt-add-repository -sy ppa:dreibh/ppa
@@ -71,7 +69,7 @@ sudo apt-get install tsctp
 
 ### Fedora Linux
 
-For ready-to-install Fedora Linux packages of TSCTP, see COPR PPA for Thomas Dreibholz!
+For ready-to-install Fedora Linux packages of TSCTP, see [COPR PPA for Thomas Dreibholz](https://copr.fedorainfracloud.org/coprs/dreibh/ppa/package/tsctp/)!
 
 ```
 sudo dnf copr enable -y dreibh/ppa
@@ -80,9 +78,11 @@ sudo dnf install tsctp
 
 ### FreeBSD
 
-For ready-to-install FreeBSD packages of TSCTP, it is included in the ports collection, see Index of /head/net/tsctp/!
+For ready-to-install FreeBSD packages of TSCTP, it is included in the ports collection, see [FreeBSD ports tree index of net/tsctp/](https://cgit.freebsd.org/ports/tree/net/tsctp/)!
 
-   pkg install tsctp
+```
+pkg install tsctp
+```
 
 Alternatively, to compile it from the ports sources:
 
@@ -94,24 +94,33 @@ make install
 
 ## Sources Download
 
-TSCTP is released under the GNU General Public Licence (GPL).
+TSCTP is released under the [https://opensource.org/licenses/BSD-3-Clause](BSD License).
 
-Please use the issue tracker at https://github.com/dreibh/tsctp/issues to report bugs and issues!
+Please use the issue tracker at [https://github.com/dreibh/tsctp/issues](https://github.com/dreibh/tsctp/issues) to report bugs and issues!
 
 ### Development Version
 
-The Git repository of the TSCTP sources can be found at https://github.com/dreibh/tsctp:
+The Git repository of the TSCTP sources can be found at [https://github.com/dreibh/tsctp](https://github.com/dreibh/tsctp):
 
-- Issue tracker: https://github.com/dreibh/tsctp/issues.
+```
+git clone https://github.com/dreibh/tsctp
+cd tsctp
+cmake .
+make
+```
+
+Contributions:
+
+- Issue tracker: [https://github.com/dreibh/tsctp/issues](https://github.com/dreibh/tsctp/issues).
   Please submit bug reports, issues, questions, etc. in the issue tracker!
 
-- Pull Requests for TSCTP: https://github.com/dreibh/tsctp/pulls.
+- Pull Requests for TSCTP: [https://github.com/dreibh/tsctp/pulls](https://github.com/dreibh/tsctp/pulls).
   Your contributions to TSCTP are always welcome!
 
-- CI build tests of TSCTP: https://github.com/dreibh/tsctp/actions.
+- CI build tests of TSCTP: [https://github.com/dreibh/tsctp/actions](https://github.com/dreibh/tsctp/actions).
 
-- Coverity Scan analysis of TSCTP: https://scan.coverity.com/projects/dreibh-tsctp.
+- Coverity Scan analysis of TSCTP: [https://scan.coverity.com/projects/dreibh-tsctp](https://scan.coverity.com/projects/dreibh-tsctp).
 
 ### Current Stable Release
 
-See https://www.nntb.no/~dreibh/tsctp/#Download!
+See [https://www.nntb.no/~dreibh/tsctp/#StableRelease](https://www.nntb.no/~dreibh/tsctp/#StableRelease)!
