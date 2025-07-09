@@ -1,3 +1,57 @@
+commit 1f34c594f39b43e7088403e6f2f349e7dfafd54d
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Jul 9 10:49:27 2025 +0200
+
+    CMakeLists.txt update.
+
+commit 87dd59759a505c1f8c1a67c34c3ecb2edf1257f9
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Jul 9 10:43:35 2025 +0200
+
+    Improved manpage.
+
+commit 3c31a66a6e0e89e8469336625a55b3f201e647e2
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sun Apr 27 21:11:55 2025 +0200
+
+    Updated CI configuration
+
+commit 0631447851f59a182aa26bab163c4934611f5df6
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sun Apr 27 21:11:54 2025 +0200
+
+    Updated CI scripts
+
+commit 1bfbc80ab094a3e0a1018d05d42cf6a42235b2e0
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Mar 5 13:34:44 2025 +0100
+
+    Updated CI scripts
+
+commit d310e597f94e8b2be3998282a41250fbef4c7e80
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Mar 5 13:27:21 2025 +0100
+
+    Updated README.md.
+
+commit cf3fb8238966ec437a318e0921453d836b430995
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Dec 20 16:27:06 2024 +0100
+
+    FreeBSD packaging update.
+
+commit c749d9227fa485a5c483758c6ce5b265046ce61e
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Dec 20 16:11:54 2024 +0100
+
+    Updated test script.
+
+commit a5e037685d2e11bd9bd9df33a1d251bb3e26a67f
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Dec 13 21:33:42 2024 +0100
+
+    New release tsctp-0.8.1.
+
 commit 9a81465cd50a2dd931564e9804ae6beabdea5c6d
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Fri Dec 13 20:53:05 2024 +0100
