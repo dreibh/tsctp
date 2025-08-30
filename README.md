@@ -137,9 +137,9 @@ Contributions:
 
 - Coverity Scan analysis of TSCTP: [https://scan.coverity.com/projects/dreibh-tsctp](https://scan.coverity.com/projects/dreibh-tsctp).
 
-## Stable Versions
+## Release Versions
 
-See [https://www.nntb.no/~dreibh/tsctp/#current-stable-release](https://www.nntb.no/~dreibh/tsctp/#current-stable-release) for the stable release packages!
+See [https://www.nntb.no/~dreibh/tsctp/#current-stable-release](https://www.nntb.no/~dreibh/tsctp/#current-stable-release) for the release packages!
 
 
 # 🔗 Useful Links
