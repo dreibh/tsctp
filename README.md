@@ -1,7 +1,7 @@
 <h1 align="center">
-TSCTP<br />
-<span style="font-size:75%">An SCTP Test Tool</span><br />
-<img width="25%" src="https://www.nntb.no/~dreibh/sctp/images/SCTPProject.svg" alt="The SCTP Project" />
+ TSCTP<br />
+ <span style="font-size:75%">An SCTP Test Tool</span><br />
+ <img width="25%" src="https://www.nntb.no/~dreibh/sctp/images/SCTPProject.svg" alt="The SCTP Project" />
 </h1>
 
 
@@ -41,9 +41,9 @@ kldstat | grep sctp
 
 Server mode: bind to all IPv4 and IPv6 addresses, listen on port&nbsp;1234.
 
-```
+<pre>
 tsctp -l :: -l 0.0.0.0 -p 1234
-```
+</pre>
 
 ## TSCTP Client Mode
 
@@ -53,9 +53,9 @@ tsctp -l :: -l 0.0.0.0 -p 1234
   send unlimited number of messages of 4096&nbsp;bytes each,
   stop after 10 s.
 
-  ```
+  <pre>
   tsctp -l :: -l 0.0.0.0 -p 1234 -n 10 -l 1000 127.0.0.1
-  ```
+  </pre>
 
 * Client mode:
   bind to all IPv4 and IPv6 addresses,
@@ -63,9 +63,9 @@ tsctp -l :: -l 0.0.0.0 -p 1234
   send unlimited number of messages of 4096&nbsp;bytes each,
   stop after 10&nbsp;s.
 
-  ```
+  <pre>
   tsctp -l :: -l 0.0.0.0 -p 1234 -n 0 -T 10 -l 4096 127.0.0.1
-  ```
+  </pre>
 
 
 # 📦 Binary Package Installation
@@ -139,20 +139,19 @@ Contributions:
 
 ## Stable Versions
 
-See [https://www.nntb.no/~dreibh/tsctp/#StableRelease](https://www.nntb.no/~dreibh/tsctp/#StableRelease)!
+See [https://www.nntb.no/~dreibh/tsctp/#current-stable-release](https://www.nntb.no/~dreibh/tsctp/#current-stable-release) for the stable release packages!
 
 
 # 🔗 Useful Links
 
-* [NetPerfMeter – A TCP/MPTCP/UDP/SCTP/DCCP Network Performance Meter Tool](../netperfmeter/index.html)
-* [HiPerConTracer – High-Performance Connectivity Tracer](../hipercontracer/index.html)
-* [SubNetCalc – An IPv4/IPv6 Subnet Calculator](../subnetcalc/index.html)
-* [Michael Tüxen's SCTP Page](http://www.sctp.de/)
-* [Lode Coene's SCTP Page](http://www.sctp.be/)
-* [Thomas Dreibholz's SCTP Page](../sctp/index.html)
-* [Thomas Dreibholz's Reliable Server Pooling Page](../rserpool/index.html)
-* [NetPerfMeter Homepage](../netperfmeter/index.html)
-* [_NorNet_ – A Real-World, Large-Scale Multi-Homing Testbed](https://www.nntb.no/)
-* [_NEAT_ – A New, Evolutive API and Transport-Layer Architecture for the Internet](https://neat.nntb.no/)
-* [OpenSS7](http://www.openss7.org/)
+* [NetPerfMeter – A TCP/MPTCP/UDP/SCTP/DCCP Network Performance Meter Tool](https://www.nntb.no/~dreibh/netperfmeter/index.html)
+* [HiPerConTracer – High-Performance Connectivity Tracer](https://www.nntb.no/~dreibh/hipercontracer/index.html)
+* [SubNetCalc – An IPv4/IPv6 Subnet Calculator](https://www.nntb.no/~dreibh/subnetcalc/index.html)
+* [Thomas Dreibholz's SCTP Page](https://www.nntb.no/~dreibh/sctp/index.html)
+* [Thomas Dreibholz's Reliable Server Pooling Page](https://www.nntb.no/~dreibh/rserpool/index.html)
+* [NorNet – A Real-World, Large-Scale Multi-Homing Testbed](https://www.nntb.no/)
+* [NEAT – A New, Evolutive API and Transport-Layer Architecture for the Internet](https://neat.nntb.no/)
+* [Michael Tüxen's SCTP Page](https://www.sctp.de/)
+* [Lode Coene's SCTP Page](https://web.archive.org/web/20210813064400/http://www.sctp.be/)
+* [OpenSS7](https://web.archive.org/web/20210813195936/http://www.openss7.org/)
 * [Wireshark](https://www.wireshark.org/)
