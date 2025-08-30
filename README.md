@@ -1,113 +1,129 @@
-# TSCTP
-An SCTP test tool
+<h1 align="center">
+TSCTP<br />
+<span style="font-size:75%">An SCTP Test Tool</span><br />
+<img width="25%" src="https://www.nntb.no/~dreibh/sctp/images/SCTPProject.svg" alt="The SCTP Project" />
+</h1>
 
-## Description
+
+# 💡 What is TSCTP?
 
 TSCTP is an SCTP test tool. Its purpose is to perform basic SCTP
 functionality tests to check implementations interoperability and
 to verify that the SCTP stack is working.
 
-## Usage Examples
 
-### Notes
+# 😀 Examples
 
-For TSCTP to work, the kernel needs to support SCTP, i.e. sockets with protocol IPPROTO_SCTP. In most cases, this means to load the SCTP kernel module.
-#### Linux
-```
-echo "sctp" >/etc/modules-load.d/sctp.conf
-```
-Then, reboot to load the module.
-Note: Ensure that the SCTP module is not blacklisted
-(e.g. /etc/modprobe.d/sctp-blacklist.conf in Fedora Linux)!
+## Preparations
 
-#### FreeBSD
-```
-echo 'sctp_load="YES"' >>/boot/loader.conf
-```
-Then, reboot to load the module.
+TSCTP uses the SCTP protocol, i.e. sockets with protocol IPPROTO_SCTP. It may be necessary to allow loading the SCTP kernel module first, if not already enabled. The following code blocks show how to enable it permanently.
 
-### Run TSCTP in server mode, listen for incoming connections
+### SCTP on Linux
+
+<pre>
+echo "sctp" | sudo tee /etc/modules-load.d/sctp.conf
+if [ -e /etc/modprobe.d/sctp-blacklist.conf ] ; then
+   sudo sed -e 's/^blacklist sctp/# blacklist sctp/g' -i /etc/modprobe.d/sctp-blacklist.conf
+fi
+sudo modprobe sctp
+lsmod | grep sctp
+</pre>
+
+### SCTP on FreeBSD
+
+<pre>
+echo 'sctp_load="YES"' | sudo tee --append /boot/loader.conf
+sudo kldload sctp
+kldstat | grep sctp
+</pre>
+
+## TSCTP Server Mode
+
+Server mode: bind to all IPv4 and IPv6 addresses, listen on port&nbsp;1234.
+
 ```
 tsctp -l :: -l 0.0.0.0 -p 1234
 ```
-Server mode: bind to all IPv4 and IPv6 addresses, listen on port 1234.
 
-### Run TSCTP in client mode, connect to server and send messages
+## TSCTP Client Mode
 
-```
-tsctp -l :: -l 0.0.0.0 -p 1234 -n 10 -l 1000 127.0.0.1
-```
-Client mode:
-bind to all IPv4 and IPv6 addresses,
-connect to localhost (127.0.0.1) on port 1234,
-send unlimited number of messages of 4096 bytes each,
-stop after 10 s.
+* Client mode:
+  bind to all IPv4 and IPv6 addresses,
+  connect to localhost (127.0.0.1) on port&nbsp;1234,
+  send unlimited number of messages of 4096&nbsp;bytes each,
+  stop after 10 s.
 
-```
-tsctp -l :: -l 0.0.0.0 -p 1234 -n 0 -T 10 -l 4096 127.0.0.1
-```
-Client mode:
-bind to all IPv4 and IPv6 addresses,
-connect to localhost (127.0.0.1) on port 1234,
-send unlimited number of messages of 4096 bytes each,
-stop after 10 s.
+  ```
+  tsctp -l :: -l 0.0.0.0 -p 1234 -n 10 -l 1000 127.0.0.1
+  ```
+
+* Client mode:
+  bind to all IPv4 and IPv6 addresses,
+  connect to localhost (127.0.0.1) on port&nbsp;1234,
+  send unlimited number of messages of 4096&nbsp;bytes each,
+  stop after 10&nbsp;s.
+
+  ```
+  tsctp -l :: -l 0.0.0.0 -p 1234 -n 0 -T 10 -l 4096 127.0.0.1
+  ```
 
 
-## Binary Package Installation
+# 📦 Binary Package Installation
 
 Please use the issue tracker at [https://github.com/dreibh/tsctp/issues](https://github.com/dreibh/tsctp/issues) to report bugs and issues!
 
-### Ubuntu Linux
+## Ubuntu Linux
 
 For ready-to-install Ubuntu Linux packages of TSCTP, see [Launchpad PPA for Thomas Dreibholz](https://launchpad.net/~dreibh/+archive/ubuntu/ppa/+packages?field.name_filter=tsctp&field.status_filter=published&field.series_filter=)!
 
-```
+<pre>
 sudo apt-add-repository -sy ppa:dreibh/ppa
 sudo apt-get update
 sudo apt-get install tsctp
-```
+</pre>
 
-### Fedora Linux
+## Fedora Linux
 
 For ready-to-install Fedora Linux packages of TSCTP, see [COPR PPA for Thomas Dreibholz](https://copr.fedorainfracloud.org/coprs/dreibh/ppa/package/tsctp/)!
 
-```
+<pre>
 sudo dnf copr enable -y dreibh/ppa
 sudo dnf install tsctp
-```
+</pre>
 
-### FreeBSD
+## FreeBSD
 
-For ready-to-install FreeBSD packages of TSCTP, it is included in the ports collection, see [FreeBSD ports tree index of net/tsctp/](https://cgit.freebsd.org/ports/tree/net/tsctp/)!
+For ready-to-install FreeBSD packages of TSCTP, it is included in the ports collection, see [FreeBSD ports tree index of benchmarks/tsctp/](https://cgit.freebsd.org/ports/tree/benchmarks/tsctp/)!
 
-```
+<pre>
 pkg install tsctp
-```
+</pre>
 
 Alternatively, to compile it from the ports sources:
 
-```
-cd /usr/ports/net/tsctp
+<pre>
+cd /usr/ports/benchmarks/tsctp
 make
 make install
-```
+</pre>
 
-## Sources Download
 
-TSCTP is released under the [https://opensource.org/licenses/BSD-3-Clause](BSD License).
+# 💾 Build from Sources
+
+TSCTP is released under the [BSD License](https://opensource.org/licenses/BSD-3-Clause).
 
 Please use the issue tracker at [https://github.com/dreibh/tsctp/issues](https://github.com/dreibh/tsctp/issues) to report bugs and issues!
 
-### Development Version
+## Development Version
 
 The Git repository of the TSCTP sources can be found at [https://github.com/dreibh/tsctp](https://github.com/dreibh/tsctp):
 
-```
+<pre>
 git clone https://github.com/dreibh/tsctp
 cd tsctp
 cmake .
 make
-```
+</pre>
 
 Contributions:
 
@@ -121,6 +137,22 @@ Contributions:
 
 - Coverity Scan analysis of TSCTP: [https://scan.coverity.com/projects/dreibh-tsctp](https://scan.coverity.com/projects/dreibh-tsctp).
 
-### Current Stable Release
+## Stable Versions
 
 See [https://www.nntb.no/~dreibh/tsctp/#StableRelease](https://www.nntb.no/~dreibh/tsctp/#StableRelease)!
+
+
+# 🔗 Useful Links
+
+* [NetPerfMeter – A TCP/MPTCP/UDP/SCTP/DCCP Network Performance Meter Tool](../netperfmeter/index.html)
+* [HiPerConTracer – High-Performance Connectivity Tracer](../hipercontracer/index.html)
+* [SubNetCalc – An IPv4/IPv6 Subnet Calculator](../subnetcalc/index.html)
+* [Michael Tüxen's SCTP Page](http://www.sctp.de/)
+* [Lode Coene's SCTP Page](http://www.sctp.be/)
+* [Thomas Dreibholz's SCTP Page](../sctp/index.html)
+* [Thomas Dreibholz's Reliable Server Pooling Page](../rserpool/index.html)
+* [NetPerfMeter Homepage](../netperfmeter/index.html)
+* [_NorNet_ – A Real-World, Large-Scale Multi-Homing Testbed](https://www.nntb.no/)
+* [_NEAT_ – A New, Evolutive API and Transport-Layer Architecture for the Internet](https://neat.nntb.no/)
+* [OpenSS7](http://www.openss7.org/)
+* [Wireshark](https://www.wireshark.org/)
