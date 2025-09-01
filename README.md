@@ -1,7 +1,10 @@
 <h1 align="center">
  TSCTP<br />
  <span style="font-size:75%">An SCTP Test Tool</span><br />
- <img width="25%" src="https://www.nntb.no/~dreibh/sctp/images/SCTPProject.svg" alt="The SCTP Project" />
+ <a href="https://www.nntb.no/~dreibh/tsctp/">
+ <img alt="TSCTP Logo" src="https://www.nntb.no/~dreibh/sctp/images/SCTPProject.svg" width="25%" /><br />
+  https://www.nntb.no/~dreibh/tsctp/
+ </a>
 </h1>
 
 
@@ -127,15 +130,15 @@ make
 
 Contributions:
 
-- Issue tracker: [https://github.com/dreibh/tsctp/issues](https://github.com/dreibh/tsctp/issues).
+* Issue tracker: [https://github.com/dreibh/tsctp/issues](https://github.com/dreibh/tsctp/issues).
   Please submit bug reports, issues, questions, etc. in the issue tracker!
 
-- Pull Requests for TSCTP: [https://github.com/dreibh/tsctp/pulls](https://github.com/dreibh/tsctp/pulls).
+* Pull Requests for TSCTP: [https://github.com/dreibh/tsctp/pulls](https://github.com/dreibh/tsctp/pulls).
   Your contributions to TSCTP are always welcome!
 
-- CI build tests of TSCTP: [https://github.com/dreibh/tsctp/actions](https://github.com/dreibh/tsctp/actions).
+* CI build tests of TSCTP: [https://github.com/dreibh/tsctp/actions](https://github.com/dreibh/tsctp/actions).
 
-- Coverity Scan analysis of TSCTP: [https://scan.coverity.com/projects/dreibh-tsctp](https://scan.coverity.com/projects/dreibh-tsctp).
+* Coverity Scan analysis of TSCTP: [https://scan.coverity.com/projects/dreibh-tsctp](https://scan.coverity.com/projects/dreibh-tsctp).
 
 ## Release Versions
 
