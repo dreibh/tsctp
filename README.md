@@ -113,7 +113,7 @@ make install
 
 # 💾 Build from Sources
 
-TSCTP is released under the [BSD License](https://opensource.org/licenses/BSD-3-Clause).
+TSCTP is released under the [BSD License](https://opensource.org/license/BSD-3-Clause).
 
 Please use the issue tracker at [https://github.com/dreibh/tsctp/issues](https://github.com/dreibh/tsctp/issues) to report bugs and issues!
 
