@@ -1,8 +1,10 @@
 <h1 align="center">
- TSCTP\
- <span style="font-size: 75%">An SCTP Test Tool</span>\
- [![](src/figures/SCTPProject-Logo.svg){width=25% alt="SCTP Project Logo"}\
- https://www.nntb.no/~dreibh/tsctp](https://www.nntb.no/~dreibh/tsctp/)
+ Dynamic Multi-Homing Setup&nbsp;(DynMHS)<br />
+ <span style="font-size: 75%;">A Tool for the Dynamic Setup of Multi-Homing IP Routing Rules</span><br />
+ <a href="https://www.nntb.no/~dreibh/tsctp/">
+  <img alt="SCTP Project Logo" src="src/figures/SCTPProject-Logo.svg" width="25%" /><br />
+  <span style="font-size: 75%;">https://www.nntb.no/~dreibh/tsctp</span>
+ </a>
 </h1>
 
 
