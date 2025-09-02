@@ -1,7 +1,7 @@
 <h1 align="center">
  TSCTP\
- <span style="font-size:75%">An SCTP Test Tool</span>\
- [![](src/figures/SCTPProject.svg){width=25% alt="SCTP Project Logo"}\
+ <span style="font-size: 75%">An SCTP Test Tool</span>\
+ [![](src/figures/SCTPProject-Logo.svg){width=25% alt="SCTP Project Logo"}\
  https://www.nntb.no/~dreibh/tsctp](https://www.nntb.no/~dreibh/tsctp/)
 </h1>
 
