@@ -18,25 +18,31 @@
 #
 # Contact: thomas.dreibholz@gmail.com
 
-for figure in SCTPProject ; do
+FIGURES="SCTPProject"
+DENSITY="300x300"
+
+for figure in $FIGURES ; do
    dia -n -t cairo-pdf -e tmp1.pdf $figure.dia
 
    # ====== Make PDF with transparent background ============================
-   epstopdf --outfile=tmp1.eps tmp1.pdf
-   pdfcrop --hires tmp1.eps tmp2.pdf
+   # OLD:
+   # epstopdf --outfile=tmp1.eps tmp1.pdf
+   # pdfcrop --hires tmp1.eps tmp2.pdf
 
-#    pdfcrop --hires tmp1.pdf tmp2.pdf
+   pdfcrop --quiet --hires tmp1.pdf tmp2.pdf
 
+   # The background is specified as something like:
+   # 1 1 1 rg /a0 gs
+   # 0 0 596 843 re f
+   # => Remove the first occurrence only
    qpdf -qdf tmp2.pdf tmp1.qdf
-   sed -e '0,/^.* re$/s/^\(.* re\)$/%% \1/' \
-       -e '0,/^1 1 1 rg.*$/s/^\(1 1 1 rg.*\)$/%% \1/' \
+   sed -e '0,/^.* re\( f\|\)$/s/^\(.* re\)\( f\|\)$/%% \1/' \
+       -e '0,/^1 1 1 rg\( .*|\)$/s/^\(1 1 1 rg\)\( .*|\)$/%% \1/' \
       <tmp1.qdf >tmp2.qdf
-
-   ls -l tmp1.qdf tmp2.qdf
-
    fix-qdf tmp2.qdf >$figure.pdf
 
-   colordiff tmp1.qdf tmp2.qdf || true
+   # ls -l tmp1.qdf tmp2.qdf
+   # colordiff tmp1.qdf tmp2.qdf || true
 
    # ====== Make SVG, with transparent background ===========================
    pdf2svg $figure.pdf tmp1.svg
@@ -45,8 +51,8 @@ for figure in SCTPProject ; do
       <tmp1.svg >$figure.svg
 
    # ====== Make PNG and WebP, with transparent background ==================
-   gm convert -density 300x300 -transparent white $figure.pdf $figure.png
-   gm convert -density 300x300 -transparent white $figure.pdf $figure.webp
+   gm convert -density $DENSITY -transparent white $figure.pdf $figure.png
+   gm convert -density $DENSITY -transparent white $figure.pdf $figure.webp
 
-   rm -f tmp1.pdf tmp1.eps tmp1.svg
+   rm -f tmp1.pdf tmp2.pdf tmp1.eps tmp1.qdf tmp2.qdf tmp1.svg
 done
