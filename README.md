@@ -96,7 +96,7 @@ sudo dnf install tsctp
 
 ## FreeBSD
 
-For ready-to-install FreeBSD packages of TSCTP, it is included in the ports collection, see [FreeBSD ports tree index of benchmarks/tsctp/](https://cgit.freebsd.org/ports/tree/benchmarks/tsctp/)!
+For ready-to-install FreeBSD packages of TSCTP, it is included in the ports collection, see [FreeBSD ports tree index of net/tsctp/](https://cgit.freebsd.org/ports/tree/net/tsctp/)!
 
 <pre>
 pkg install tsctp
@@ -105,7 +105,7 @@ pkg install tsctp
 Alternatively, to compile it from the ports sources:
 
 <pre>
-cd /usr/ports/benchmarks/tsctp
+cd /usr/ports/net/tsctp
 make
 make install
 </pre>
