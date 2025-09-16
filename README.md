@@ -45,7 +45,7 @@ kldstat | grep sctp
 Server mode: bind to all IPv4 and IPv6 addresses, listen on port&nbsp;1234.
 
 <pre>
-tsctp -l :: -l 0.0.0.0 -p 1234
+tsctp -L :: -L 0.0.0.0 -p 1234
 </pre>
 
 ## TSCTP Client Mode
@@ -57,7 +57,7 @@ tsctp -l :: -l 0.0.0.0 -p 1234
   stop after 10 s.
 
   <pre>
-  tsctp -l :: -l 0.0.0.0 -p 1234 -n 10 -l 1000 127.0.0.1
+  tsctp -L :: -L 0.0.0.0 -n 10 -l 1000 -p 1234 127.0.0.1
   </pre>
 
 * Client mode:
@@ -67,7 +67,7 @@ tsctp -l :: -l 0.0.0.0 -p 1234
   stop after 10&nbsp;s.
 
   <pre>
-  tsctp -l :: -l 0.0.0.0 -p 1234 -n 0 -T 10 -l 4096 127.0.0.1
+  tsctp -L :: -L 0.0.0.0 -n 0 -T 10 -l 4096 -p 1234 127.0.0.1
   </pre>
 
 
