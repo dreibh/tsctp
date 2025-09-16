@@ -28,7 +28,7 @@
 .\" SUCH DAMAGE.
 .\"
 .\" ###### Setup ############################################################
-.Dd July 9, 2025
+.Dd September 16, 2025
 .Dt tsctp 1
 .Os tsctp
 .\" ###### Name #############################################################
@@ -120,14 +120,14 @@ the server mode is used. Then, tsctp listens for incoming connections.
 .\" ###### Examples #########################################################
 .Sh EXAMPLES
 .Bl -tag -width indent
-.It tsctp -l :: -l 0.0.0.0 -p 1234
+.It tsctp -L :: -L 0.0.0.0 -p 1234
 Server mode: bind to all IPv4 and IPv6 addresses, listen on port 1234.
-.It tsctp -l :: -l 0.0.0.0 -p 1234 -n 10 -l 1000 127.0.0.1
+.It tsctp -L :: -L 0.0.0.0 -p 1234 -n 10 -l 1000 127.0.0.1
 Client mode:
 bind to all IPv4 and IPv6 addresses,
 connect to localhost (127.0.0.1) on port 1234,
 send 10 messages of 1000 bytes each.
-.It tsctp -l :: -l 0.0.0.0 -p 1234 -n 0 -T 10 -l 4096 127.0.0.1
+.It tsctp -L :: -L 0.0.0.0 -p 1234 -n 0 -T 10 -l 4096 127.0.0.1
 Client mode:
 bind to all IPv4 and IPv6 addresses,
 connect to localhost (127.0.0.1) on port 1234,
