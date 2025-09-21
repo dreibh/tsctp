@@ -1,3 +1,9 @@
+tsctp (0.8.3-1ubuntu1) trixie; urgency=medium
+
+  * New upstream release.
+
+ -- Thomas Dreibholz <thomas.dreibholz@gmail.com>  Sun, 21 Sep 2025 17:59:08 +0200
+
 tsctp (0.8.2-1ubuntu1) trixie; urgency=medium
 
   * New upstream release.
