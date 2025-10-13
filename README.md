@@ -23,30 +23,30 @@ TSCTP uses the SCTP protocol, i.e. sockets with protocol IPPROTO_SCTP. It may be
 
 ### SCTP on Linux
 
-<pre>
+```bash
 echo "sctp" | sudo tee /etc/modules-load.d/sctp.conf
 if [ -e /etc/modprobe.d/sctp-blacklist.conf ] ; then
    sudo sed -e 's/^blacklist sctp/# blacklist sctp/g' -i /etc/modprobe.d/sctp-blacklist.conf
 fi
 sudo modprobe sctp
 lsmod | grep sctp
-</pre>
+```
 
 ### SCTP on FreeBSD
 
-<pre>
+```bash
 echo 'sctp_load="YES"' | sudo tee --append /boot/loader.conf
 sudo kldload sctp
 kldstat | grep sctp
-</pre>
+```
 
 ## TSCTP Server Mode
 
 Server mode: bind to all IPv4 and IPv6 addresses, listen on port&nbsp;1234.
 
-<pre>
+```bash
 tsctp -L :: -L 0.0.0.0 -p 1234
-</pre>
+```
 
 ## TSCTP Client Mode
 
@@ -56,9 +56,9 @@ tsctp -L :: -L 0.0.0.0 -p 1234
   send unlimited number of messages of 4096&nbsp;bytes each,
   stop after 10 s.
 
-  <pre>
+  ```bash
   tsctp -L :: -L 0.0.0.0 -n 10 -l 1000 -p 1234 127.0.0.1
-  </pre>
+  ```
 
 * Client mode:
   bind to all IPv4 and IPv6 addresses,
@@ -66,9 +66,9 @@ tsctp -L :: -L 0.0.0.0 -p 1234
   send unlimited number of messages of 4096&nbsp;bytes each,
   stop after 10&nbsp;s.
 
-  <pre>
+  ```bash
   tsctp -L :: -L 0.0.0.0 -n 0 -T 10 -l 4096 -p 1234 127.0.0.1
-  </pre>
+  ```
 
 
 # 📦 Binary Package Installation
@@ -79,36 +79,36 @@ Please use the issue tracker at [https://github.com/dreibh/tsctp/issues](https:/
 
 For ready-to-install Ubuntu Linux packages of TSCTP, see [Launchpad PPA for Thomas Dreibholz](https://launchpad.net/~dreibh/+archive/ubuntu/ppa/+packages?field.name_filter=tsctp&field.status_filter=published&field.series_filter=)!
 
-<pre>
+```bash
 sudo apt-add-repository -sy ppa:dreibh/ppa
 sudo apt-get update
 sudo apt-get install tsctp
-</pre>
+```
 
 ## Fedora Linux
 
 For ready-to-install Fedora Linux packages of TSCTP, see [COPR PPA for Thomas Dreibholz](https://copr.fedorainfracloud.org/coprs/dreibh/ppa/package/tsctp/)!
 
-<pre>
+```bash
 sudo dnf copr enable -y dreibh/ppa
 sudo dnf install tsctp
-</pre>
+```
 
 ## FreeBSD
 
 For ready-to-install FreeBSD packages of TSCTP, it is included in the ports collection, see [FreeBSD ports tree index of net/tsctp/](https://cgit.freebsd.org/ports/tree/net/tsctp/)!
 
-<pre>
+```bash
 pkg install tsctp
-</pre>
+```
 
 Alternatively, to compile it from the ports sources:
 
-<pre>
+```bash
 cd /usr/ports/net/tsctp
 make
 make install
-</pre>
+```
 
 
 # 💾 Build from Sources
@@ -121,12 +121,12 @@ Please use the issue tracker at [https://github.com/dreibh/tsctp/issues](https:/
 
 The Git repository of the TSCTP sources can be found at [https://github.com/dreibh/tsctp](https://github.com/dreibh/tsctp):
 
-<pre>
+```bash
 git clone https://github.com/dreibh/tsctp
 cd tsctp
 cmake .
 make
-</pre>
+```
 
 Contributions:
 
@@ -147,12 +147,12 @@ See [https://www.nntb.no/~dreibh/tsctp/#current-stable-release](https://www.nntb
 
 # 🔗 Useful Links
 
-* [NetPerfMeter – A TCP/MPTCP/UDP/SCTP/DCCP Network Performance Meter Tool](https://www.nntb.no/~dreibh/netperfmeter/index.html)
-* [HiPerConTracer – High-Performance Connectivity Tracer](https://www.nntb.no/~dreibh/hipercontracer/index.html)
-* [SubNetCalc – An IPv4/IPv6 Subnet Calculator](https://www.nntb.no/~dreibh/subnetcalc/index.html)
-* [System-Tools – Tools for Basic System Management](https://www.nntb.no/~dreibh/system-tools/index.html)
-* [Thomas Dreibholz's SCTP Page](https://www.nntb.no/~dreibh/sctp/index.html)
-* [Thomas Dreibholz's Reliable Server Pooling Page](https://www.nntb.no/~dreibh/rserpool/index.html)
+* [NetPerfMeter – A TCP/MPTCP/UDP/SCTP/DCCP Network Performance Meter Tool](https://www.nntb.no/~dreibh/netperfmeter/)
+* [HiPerConTracer – High-Performance Connectivity Tracer](https://www.nntb.no/~dreibh/hipercontracer/)
+* [SubNetCalc – An IPv4/IPv6 Subnet Calculator](https://www.nntb.no/~dreibh/subnetcalc/)
+* [System-Tools – Tools for Basic System Management](https://www.nntb.no/~dreibh/system-tools/)
+* [Thomas Dreibholz's SCTP Page](https://www.nntb.no/~dreibh/sctp/)
+* [Thomas Dreibholz's Reliable Server Pooling Page](https://www.nntb.no/~dreibh/rserpool/)
 * [NorNet – A Real-World, Large-Scale Multi-Homing Testbed](https://www.nntb.no/)
 * [NEAT – A New, Evolutive API and Transport-Layer Architecture for the Internet](https://neat.nntb.no/)
 * [Michael Tüxen's SCTP Page](https://www.sctp.de/)
