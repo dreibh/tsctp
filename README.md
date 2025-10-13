@@ -121,12 +121,11 @@ Please use the issue tracker at [https://github.com/dreibh/tsctp/issues](https:/
 
 The Git repository of the TSCTP sources can be found at [https://github.com/dreibh/tsctp](https://github.com/dreibh/tsctp):
 
-```bash
-git clone https://github.com/dreibh/tsctp
-cd tsctp
-cmake .
-make
-```
+<pre><code><span class="fu">git</span> clone <a href="https://github.com/dreibh/tsctp">https://github.com/dreibh/tsctp</a>
+<span class="bu">cd</span> tsctp
+<span class="fu">cmake</span> .
+<span class="fu">make</span>
+</code></pre>
 
 Contributions:
 
