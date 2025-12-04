@@ -1,6 +1,6 @@
 # TSCTP
 # Copyright (c) 2005 - 2011 Michael Tuexen, tuexen@fh-muenster.de
-# Copyright (C) 2009 - 2025 Thomas Dreibholz, thomas.dreibholz@gmail.com
+# Copyright (C) 2009 - 2025-2026 Thomas Dreibholz, thomas.dreibholz@gmail.com
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
