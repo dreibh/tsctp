@@ -197,14 +197,18 @@ int main(int argc, char **argv)
    int fragpoint = 0;
    unsigned int timetolive = 0;
    unsigned int runtime = 0;
+#if defined(sctp_setadaptation)
    struct sctp_setadaptation ind = {0};
+#endif
 #ifdef SCTP_AUTH_CHUNK
    unsigned int number_of_chunks_to_auth = 0;
    unsigned int chunk_number;
    unsigned char chunk[256];
    struct sctp_authchunk sac;
 #endif
+#if defined(sctp_assoc_value)
    struct sctp_assoc_value av;
+#endif
    int unordered = 0;
    int ipv4only = 0;
    int ipv6only = 0;
@@ -228,7 +232,12 @@ int main(int argc, char **argv)
                                   "vV46")) != -1)
       switch(c) {
          case 'a':
+#if defined(sctp_setadaptation)
             ind.ssb_adaptation_ind = atoi(optarg);
+#else
+            fputs("SCTP_ADAPTATION_LAYER is not supported!\n", stderr);
+            exit(1);
+#endif
             break;
 #ifdef SCTP_AUTH_CHUNK
          case 'A':
@@ -401,11 +410,13 @@ int main(int argc, char **argv)
          perror("setsockopt");
    }
 #endif
+#if defined(sctp_setadaptation)
    if (ind.ssb_adaptation_ind > 0) {
       if (setsockopt(fd, IPPROTO_SCTP, SCTP_ADAPTATION_LAYER, (const void*)&ind, (socklen_t)sizeof(struct sctp_setadaptation)) < 0) {
          perror("setsockopt");
       }
    }
+#endif
    if (!client) {
       setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, (const void*)&on, (socklen_t)sizeof(on));
    }
@@ -509,12 +520,17 @@ int main(int argc, char **argv)
       }
 
       if (fragpoint) {
+#if defined(sctp_assoc_value)
          av.assoc_id = 0;
          av.assoc_value = fragpoint;
          if (setsockopt(fd, IPPROTO_SCTP, SCTP_MAXSEG, &av, sizeof(av)) < 0) {
             perror("setsockopt: SCTP_MAXSEG");
          }
+#else
+         fputs("SCTP_MAXSEG is not supported!\n", stderr);
+#endif
       }
+
 
       printf("connecting to %s:%d ...\n", argv[optind], remote_port);
       if (connect(fd, (struct sockaddr*)&remote_addr, addr_len) < 0) {
