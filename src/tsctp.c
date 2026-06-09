@@ -390,8 +390,9 @@ int main(int argc, char **argv)
       }
    }
 
-   if ((fd = socket((ipv4only ? AF_INET : AF_INET6), SOCK_STREAM, IPPROTO_SCTP)) < 0)
+   if ((fd = socket((ipv4only ? AF_INET : AF_INET6), SOCK_STREAM, IPPROTO_SCTP)) < 0) {
       perror("socket");
+      exit(1);   }
 
    if (!ipv4only) {
       if (ipv6only) {
