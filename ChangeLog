@@ -1,3 +1,64 @@
+commit 490cef665cde7876de010a90286abcffae12c6c1
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Jun 11 18:28:29 2026 +0200
+
+    Updated build helper script.
+
+commit 9288b502e657da514c6993ead85e1021dc7af9ad
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Jun 11 11:32:12 2026 +0200
+
+    Improved CMakeLists.txt.
+
+commit a602053a7a30a24164ad501115a725b389d91dc7
+Merge: 6822b3e edac1bc
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Jun 9 07:30:33 2026 +0000
+
+    Merge branch 'master' of https://github.com/dreibh/tsctp
+
+commit 6822b3ec07962640ccc4aee64b00b334fe2f2433
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Jun 9 07:29:59 2026 +0000
+
+    Bugfix: return error if socket creation fails.
+
+commit 48648eec795b2a25e7af9620c658e59cdaf52e66
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Jun 9 07:26:48 2026 +0000
+
+    Successfully building under NetBSD.
+
+commit edac1bc9731f117c723e0ebb4df3467cede9e9b2
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Jun 9 08:37:35 2026 +0200
+
+    Updated build script.
+
+commit e7787109f99b281d046c93d5c1fcaf5cb7c3665d
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Jun 9 08:36:55 2026 +0200
+
+    Updated CI scripts
+
+commit 53a73c70b88d8d8b43d6c7f3aa53ae05156c74ef
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Tue Jun 9 08:36:10 2026 +0200
+
+    CMakeLists.txt clean-ups.
+
+commit 7545780739fe120ccb14f85f8229e9b476d1cec2
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sun May 17 20:49:29 2026 +0200
+
+    Improved manpage.
+
+commit 65b1792a27c2b61ed3888a432018dc62c0b075ee
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Wed Apr 29 17:19:15 2026 +0200
+
+    New release tsctp-0.8.5.
+
 commit 45b2a93e6eefe07710f673241969fc4f569101ae
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Mon Apr 27 11:48:43 2026 +0200
