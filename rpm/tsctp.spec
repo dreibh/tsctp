@@ -3,7 +3,7 @@ Version: 0.8.6
 Release: 1
 Summary: SCTP test tool
 Group: Applications/Internet
-License: BSD-3-clause
+License: BSD-3-Clause
 URL: https://www.nntb.no/~dreibh/tsctp/
 Source: https://www.nntb.no/~dreibh/tsctp/download/%{name}-%{version}.tar.xz
 
@@ -21,7 +21,6 @@ Recommends: wireshark-cli
 Suggests: dynmhs
 Suggests: td-system-info
 Suggests: traceroute
-BuildRoot: %{_tmppath}/%{name}-%{version}-build
 
 
 %description
