@@ -32,7 +32,7 @@ to verify that the SCTP stack is working.
 %setup -q
 
 %build
-%cmake -DCMAKE_INSTALL_PREFIX=/usr .
+%cmake -DCMAKE_INSTALL_PREFIX=/usr
 %cmake_build
 
 %install
