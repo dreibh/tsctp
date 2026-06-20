@@ -1,0 +1,27 @@
+# Maintainer: Thomas Dreibholz <thomas.dreibholz@gmail.com>
+pkgname=tsctp
+pkgver=0.8.6
+pkgrel=1
+pkgdesc="SCTP test tool for functionality and interoperability tests"
+url="https://www.nntb.no/~dreibh/tsctp/"
+arch="all"
+license="BSD-3-Clause"
+depends=""
+makedepends="cmake build-base lksctp-tools-dev ninja"
+subpackages="$pkgname-doc"
+source="https://www.nntb.no/~dreibh/tsctp/download/tsctp-$pkgver.tar.xz"
+
+build() {
+	cmake -B build -G Ninja \
+		-DCMAKE_BUILD_TYPE=None \
+		-DCMAKE_INSTALL_PREFIX=/usr
+	cmake --build build
+}
+
+package() {
+	DESTDIR="$pkgdir" cmake --install build
+}
+
+sha512sums="
+dcc0ced0a67dcbc14db629cdc8b903fc628ad8b43a4bcdefb24b951b3b8294e5d1a1e282ff861820876a01dc7ea7622702997c3eaa3d840bc5653d6730767ec9  tsctp-0.8.6.tar.xz
+"
