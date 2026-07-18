@@ -585,14 +585,23 @@ int main(int argc, char **argv)
             printf("Sending message number %lu.\n", i);
          }
          if (sctp_sendmsg(fd, buffer, length, NULL, 0, 0,
-                          unordered ? SCTP_UNORDERED : 0, 0, timetolive, 0) < 0) {
+#if !defined(__sun__)
+                          unordered ? SCTP_UNORDERED : 0,
+#else
+                          unordered ? MSG_UNORDERED : 0,
+#endif
+                          0, timetolive, 0) < 0) {
             perror("sctp_sendmsg");
             break;
          }
          i++;
       }
       if (sctp_sendmsg(fd, buffer, length, NULL, 0, 0,
+#if !defined(__sun__)
                        unordered ? SCTP_EOF|SCTP_UNORDERED : SCTP_EOF,
+#else
+                       unordered ? MSG_EOF|MSG_UNORDERED : MSG_EOF,
+#endif
                        0, timetolive, 0) < 0) {
          perror("sctp_sendmsg");
       }

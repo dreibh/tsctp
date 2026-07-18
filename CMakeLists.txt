@@ -71,6 +71,8 @@ ELSEIF (CMAKE_SYSTEM_NAME MATCHES "NetBSD")
    # SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_FULL_LIBDIR}")
 # ELSEIF (CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
    # OpenBSD does not support SCTP!
+ELSEIF (CMAKE_SYSTEM_NAME MATCHES "SunOS")
+   MESSAGE(STATUS "${CMAKE_SYSTEM_NAME} supported")
 # ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Darwin")
    # Darwin does not support SCTP!
 ELSE()
@@ -110,6 +112,11 @@ ENDIF()
 #############################################################################
 #### REQUIREMENTS                                                        ####
 #############################################################################
+
+IF (CMAKE_SYSTEM_NAME MATCHES "SunOS")
+   FIND_LIBRARY(SOCKET_LIBRARY socket)
+   FIND_LIBRARY(SCTP_LIBRARY   sctp)
+ENDIF()
 
 # ====== Threads ============================================================
 FIND_PACKAGE(Threads REQUIRED)
