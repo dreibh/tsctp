@@ -1,3 +1,87 @@
+commit f7ce433fd2cf767b7a47cb97654ab3e89218c93d
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sat Jul 18 16:44:20 2026 +0200
+
+    Updated build helper script.
+
+commit 3b7514ff60fd51108a8db500333a6209c2cee095
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sat Jul 18 16:19:32 2026 +0200
+
+    Added Solaris support.
+
+commit b6b391aad437e3a938646e1b896fe4a697a35ae8
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sat Jul 18 15:26:54 2026 +0200
+
+    Further NetBSD improvements in CMakeLists.txt.
+
+commit 17f6da3ca40ebee82a58c1fee7a65fb8bc1c281b
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sat Jul 18 15:13:12 2026 +0200
+
+    Updated build helper script.
+
+commit 26f79144de2c6e0fdd579e38d72c7fa37acd6713
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sat Jul 18 15:00:58 2026 +0200
+
+    CMakeLists.txt fix for NetBSD: need to set CMAKE_INSTALL_RPATH_USE_LINK_PATH if necessary.
+
+commit dc8979a0b9338f6668e6dc50d295da3dcc0e7c6c
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Jul 2 12:51:50 2026 +0200
+
+    Updated CMakeLists.txt.
+
+commit cf329e68854cf0a16b9d27870cc07f6cd6396d71
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Mon Jun 29 15:43:16 2026 +0200
+
+    Updated CI configuration
+
+commit e6c8a712342b2f2cbaf9978bc11908049bf2f2cd
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Mon Jun 29 15:43:11 2026 +0200
+
+    Updated CI scripts
+
+commit 3c9a729574b2a6c1c92875c495d603aadd5dc59b
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Mon Jun 29 15:41:44 2026 +0200
+
+    Updated FreeBSD workflow.
+
+commit 29052dd11bd26129a0f30ce0062883007fd7bfd0
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sat Jun 20 17:15:50 2026 +0200
+
+    Improved APKBUILD.
+
+commit 5b3cf6dfd1e9a366ac9166c76f4848b2bda5fea0
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Sat Jun 20 17:04:51 2026 +0200
+
+    Added APKBUILD file.
+
+commit 901c0609772e4fc04fac2b242849b3253d4923b5
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Jun 18 17:51:57 2026 +0200
+
+    Yet another RPM spec update.
+
+commit 213dcc71de4b661cbf1bacf8bf891a133164f1a7
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Thu Jun 18 12:43:42 2026 +0200
+
+    RPM spec clean-ups.
+
+commit 3d949025e0c680b464fcdd869898ba5c153c21ba
+Author: Thomas Dreibholz <dreibh@simula.no>
+Date:   Fri Jun 12 17:58:33 2026 +0200
+
+    New release tsctp-0.8.6.
+
 commit 490cef665cde7876de010a90286abcffae12c6c1
 Author: Thomas Dreibholz <dreibh@simula.no>
 Date:   Thu Jun 11 18:28:29 2026 +0200
