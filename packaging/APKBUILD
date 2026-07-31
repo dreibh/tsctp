@@ -1,6 +1,6 @@
 # Maintainer: Thomas Dreibholz <thomas.dreibholz@gmail.com>
 pkgname=tsctp
-pkgver=0.8.6
+pkgver=0.8.7
 pkgrel=1
 pkgdesc="SCTP test tool for functionality and interoperability tests"
 url="https://www.nntb.no/~dreibh/tsctp/"
@@ -23,5 +23,5 @@ package() {
 }
 
 sha512sums="
-dcc0ced0a67dcbc14db629cdc8b903fc628ad8b43a4bcdefb24b951b3b8294e5d1a1e282ff861820876a01dc7ea7622702997c3eaa3d840bc5653d6730767ec9  tsctp-0.8.6.tar.xz
+40b6ecf7caf6c6f67810c678a15407dea55aef4798b3cb121a041cfa824ca017d610ef0afa1b6ee8a560de9f33fa83401bf9773494254c4219ccf3640a72ad17  tsctp-0.8.7.tar.xz
 "
