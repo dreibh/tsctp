@@ -40,6 +40,15 @@ sudo kldload sctp
 kldstat | grep sctp
 ```
 
+### SCTP on NetBSD
+
+NetBSD provides SCTP support, but it must be compiled into the kernel.
+
+### SCTP on Solaris
+
+Solaris provides out-of-the-box SCTP support.
+
+
 ## TSCTP Server Mode
 
 Server mode: bind to all IPv4 and IPv6 addresses, listen on port&nbsp;1234.
