@@ -1,6 +1,6 @@
 <h1 align="center">
- Dynamic Multi-Homing Setup&nbsp;(DynMHS)<br />
- <span style="font-size: 75%;">A Tool for the Dynamic Setup of Multi-Homing IP Routing Rules</span><br />
+ TSCTP<br />
+ <span style="font-size: 75%;">An SCTP Test Tool</span><br />
  <a href="https://www.nntb.no/~dreibh/tsctp/">
   <img alt="SCTP Project Logo" src="src/figures/SCTPProject-Logo.svg" width="25%" /><br />
   <span style="font-size: 75%;">https://www.nntb.no/~dreibh/tsctp</span>
@@ -19,7 +19,7 @@ to verify that the SCTP stack is working.
 
 ## Preparations
 
-TSCTP uses the SCTP protocol, i.e. sockets with protocol IPPROTO_SCTP. It may be necessary to allow loading the SCTP kernel module first, if not already enabled. The following code blocks show how to enable it permanently.
+TSCTP uses the SCTP protocol, i.e., sockets with protocol IPPROTO_SCTP. It may be necessary to allow loading the SCTP kernel module first, if not already enabled. The following code blocks show how to enable it permanently.
 
 ### SCTP on Linux
 
@@ -77,7 +77,7 @@ Please use the issue tracker at [https://github.com/dreibh/tsctp/issues](https:/
 
 ## Ubuntu Linux
 
-For ready-to-install Ubuntu Linux packages of TSCTP, see [Launchpad PPA for Thomas Dreibholz](https://launchpad.net/~dreibh/+archive/ubuntu/ppa/+packages?field.name_filter=tsctp&field.status_filter=published&field.series_filter=)!
+For ready-to-install [Ubuntu Linux](https://ubuntu.com/) packages of TSCTP, see the [Launchpad PPA for Thomas Dreibholz](https://launchpad.net/~dreibh/+archive/ubuntu/ppa/+packages?field.name_filter=tsctp&field.status_filter=published&field.series_filter=)!
 
 ```bash
 sudo apt-add-repository -sy ppa:dreibh/ppa
@@ -85,18 +85,85 @@ sudo apt-get update
 sudo apt-get install tsctp
 ```
 
+## Debian Linux
+
+For ready-to-install [Debian Linux](https://www.debian.org/) packages of TSCTP, see the [Open Build Service PPA for Thomas Dreibholz](https://build.opensuse.org/project/show/home:dreibh)!
+
+Add the PPA repository:
+
+```bash
+. /etc/os-release
+DISTRIBUTION="Debian_${VERSION_ID:-$([ "${VERSION_CODENAME:-}" = sid ] && echo Unstable || echo Testing)}"
+URL="https://download.opensuse.org/repositories/home:/dreibh/${DISTRIBUTION}"
+KEY="/etc/apt/keyrings/dreibh-obs.gpg"
+
+curl -fsSL "${URL}/Release.key" | sudo gpg --batch --yes --dearmor -o "${KEY}"
+printf "deb [signed-by=%s] %s/ /\ndeb-src [signed-by=%s] %s/ /\n" "${KEY}" "${URL}" "${KEY}" "${URL}" | \
+   sudo tee /etc/apt/sources.list.d/obs-dreibh.list
+sudo apt update
+```
+
+Then, install TSCTP:
+
+```bash
+sudo apt-get install tsctp
+```
+
 ## Fedora Linux
 
-For ready-to-install Fedora Linux packages of TSCTP, see [COPR PPA for Thomas Dreibholz](https://copr.fedorainfracloud.org/coprs/dreibh/ppa/package/tsctp/)!
+For ready-to-install [Fedora Linux](https://fedoraproject.org/) packages of TSCTP, see the [COPR PPA for Thomas Dreibholz](https://copr.fedorainfracloud.org/coprs/dreibh/ppa/package/tsctp/)!
 
 ```bash
 sudo dnf copr enable -y dreibh/ppa
 sudo dnf install tsctp
 ```
 
+## OpenSUSE Linux
+
+For ready-to-install [OpenSUSE Linux](https://www.opensuse.org/) packages of TSCTP, see the [Open Build Service PPA for Thomas Dreibholz](https://build.opensuse.org/project/show/home:dreibh)!
+
+Add the PPA repository:
+
+```bash
+. /etc/os-release
+[[ $VERSION_ID =~ ^[0-9]+\.[0-9]+$ ]] && DISTRIBUTION="${VERSION_ID}" || DISTRIBUTION="${NAME// /_}"
+URL="https://download.opensuse.org/repositories/home:/dreibh/${DISTRIBUTION}"
+rpm --import "${URL}/repodata/repomd.xml.key"
+zypper addrepo -f "${URL}/" dreibh-obs
+```
+
+Then, install TSCTP:
+
+```bash
+sudo zypper install tsctp
+```
+
+## Alpine Linux
+
+For ready-to-install [Alpine Linux](https://alpinelinux.org/) packages of TSCTP, see the [Open Build Service PPA for Thomas Dreibholz](https://build.opensuse.org/project/show/home:dreibh)!
+
+Add the PPA repository:
+
+```bash
+DISTRIBUTION="Alpine_Latest_community"
+URL="https://download.opensuse.org/repositories/home:/dreibh"
+wget -O \
+   /etc/apk/keys/home:dreibh@build.opensuse.org-527a4e72.rsa.pub \
+   "${URL}/${DISTRIBUTION}/x86_64/home:dreibh%40build.opensuse.org-527a4e72.rsa.pub"
+if ! grep -q "^${URL}/${DISTRIBUTION}" /etc/apk/repositories ; then
+   echo "${URL}/${DISTRIBUTION}" | sudo tee -a /etc/apk/repositories
+fi
+```
+
+Then, install TSCTP:
+
+```bash
+sudo apk add tsctp
+```
+
 ## FreeBSD
 
-For ready-to-install FreeBSD packages of TSCTP, it is included in the ports collection, see [FreeBSD ports tree index of net/tsctp/](https://cgit.freebsd.org/ports/tree/net/tsctp/)!
+For ready-to-install [FreeBSD](https://www.freebsd.org/) packages of TSCTP, it is included in the ports collection; see [FreeBSD ports tree index of net/tsctp/](https://cgit.freebsd.org/ports/tree/net/tsctp/)!
 
 ```bash
 sudo pkg install tsctp
@@ -109,6 +176,14 @@ cd /usr/ports/net/tsctp
 make
 sudo make install
 ```
+
+## NetBSD
+
+TSCTP supports [NetBSD](https://netbsd.org/). However, there is no NetBSD packaging yet. Just build from sources!
+
+## Solaris (OpenIndiana)
+
+TSCTP supports [Solaris (OpenIndiana)](https://www.openindiana.org/). However, there is no Solaris packaging yet. Just build from sources!
 
 
 # 💾 Build from Sources
@@ -135,7 +210,12 @@ Optionally, for installation to the standard paths (usually under `/usr/local`):
 sudo make install
 ```
 
-Note: The script [`ci/get-dependencies`](https://github.com/dreibh/tsctp/blob/master/ci/get-dependencies) automatically  installs the build dependencies under Debian/Ubuntu Linux, Fedora Linux, and FreeBSD. For manual handling of the build dependencies, see the packaging configuration in [`debian/control`](https://github.com/dreibh/tsctp/blob/master/debian/control) (Debian/Ubuntu Linux), [`tsctp.spec`](https://github.com/dreibh/tsctp/blob/master/rpm/tsctp.spec) (Fedora Linux), and [`Makefile`](https://github.com/dreibh/tsctp/blob/master/freebsd/tsctp/Makefile) FreeBSD.
+Note: The script [`ci/get-dependencies`](https://github.com/dreibh/tsctp/blob/master/ci/get-dependencies) automatically installs the build dependencies under Debian/Ubuntu Linux, Fedora Linux, OpenSUSE Linux, Alpine Linux, and FreeBSD. For manual handling of the build dependencies, take a look at the packaging configuration files:
+
+* [`debian/control`](https://github.com/dreibh/tsctp/blob/master/debian/control) (Debian/Ubuntu Linux),
+* [`tsctp.spec`](https://github.com/dreibh/tsctp/blob/master/rpm/tsctp.spec) (Fedora Linux, OpenSUSE Linux),
+* [`APKBUILD`](https://github.com/dreibh/tsctp/blob/master/packaging/APKBUILD) (Alpine Linux), and
+* [`Makefile`](https://github.com/dreibh/tsctp/blob/master/freebsd/tsctp/Makefile) (FreeBSD).
 
 Contributions:
 
