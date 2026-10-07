@@ -194,6 +194,23 @@ TSCTP supports [NetBSD](https://netbsd.org/). However, there is no NetBSD packag
 
 TSCTP supports [Solaris (OpenIndiana)](https://www.openindiana.org/). However, there is no Solaris packaging yet. Just build from sources!
 
+## Homebrew (Linux only)
+
+For the [Homebrew](https://brew.sh/) formula of TSCTP, see [Thomas Dreibholz's Homebrew Tap](https://github.com/dreibh/homebrew-tap)!
+
+Add tap:
+
+```bash
+brew tap dreibh/tap
+brew trust dreibh/tap
+```
+
+Then, install TSCTP:
+
+```bash
+brew install tsctp
+```
+
 
 # 💾 Build from Sources
 
@@ -219,12 +236,13 @@ Optionally, for installation to the standard paths (usually under `/usr/local`):
 sudo make install
 ```
 
-Note: The script [`ci/get-dependencies`](https://github.com/dreibh/tsctp/blob/master/ci/get-dependencies) automatically installs the build dependencies under Debian/Ubuntu Linux, Fedora Linux, OpenSUSE Linux, Alpine Linux, and FreeBSD. For manual handling of the build dependencies, take a look at the packaging configuration files:
+Note: The script [`ci/get-dependencies`](https://github.com/dreibh/tsctp/blob/master/ci/get-dependencies) automatically installs the build dependencies under Debian/Ubuntu Linux, Fedora Linux, OpenSUSE Linux, Alpine Linux, FreeBSD, and Homebrew. For manual handling of the build dependencies, take a look at the packaging configuration files:
 
 * [`debian/control`](https://github.com/dreibh/tsctp/blob/master/debian/control) (Debian/Ubuntu Linux),
 * [`tsctp.spec`](https://github.com/dreibh/tsctp/blob/master/rpm/tsctp.spec) (Fedora Linux, OpenSUSE Linux),
-* [`APKBUILD`](https://github.com/dreibh/tsctp/blob/master/packaging/APKBUILD) (Alpine Linux), and
-* [`Makefile`](https://github.com/dreibh/tsctp/blob/master/freebsd/tsctp/Makefile) (FreeBSD).
+* [`APKBUILD`](https://github.com/dreibh/tsctp/blob/master/packaging/APKBUILD) (Alpine Linux),
+* [`Makefile`](https://github.com/dreibh/tsctp/blob/master/freebsd/tsctp/Makefile) (FreeBSD), and
+* [`tsctp.rb`](https://github.com/dreibh/tsctp/blob/master/packaging/tsctp.rb) (Homebrew).
 
 Contributions:
 
@@ -247,6 +265,7 @@ See [https://www.nntb.no/~dreibh/tsctp/#current-stable-release](https://www.nntb
 
 * [NetPerfMeter – A TCP/MPTCP/UDP/SCTP/DCCP Network Performance Meter Tool](https://www.nntb.no/~dreibh/netperfmeter/)
 * [HiPerConTracer – High-Performance Connectivity Tracer](https://www.nntb.no/~dreibh/hipercontracer/)
+* [Dynamic Multi-Homing Setup (DynMHS)](https://www.nntb.no/~dreibh/dynmhs/)
 * [SubNetCalc – An IPv4/IPv6 Subnet Calculator](https://www.nntb.no/~dreibh/subnetcalc/)
 * [System-Tools – Tools for Basic System Management](https://www.nntb.no/~dreibh/system-tools/)
 * [Virtual Machine Image Builder and System Installation Scripts](https://www.nntb.no/~dreibh/vmimage-builder-scripts/)
